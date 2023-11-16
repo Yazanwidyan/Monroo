@@ -7,6 +7,8 @@ import {
   VStack,
   Button,
 } from "@chakra-ui/react";
+import { useState } from "react";
+import UserEventListModal from "../user-event-list-modal/UserEventListModal";
 
 const ServiceProviderCard = ({
   image,
@@ -19,6 +21,20 @@ const ServiceProviderCard = ({
 }) => {
   const handleRequestPrivateEvent = () => {
     console.log(`Requesting private event for ${name}`);
+    openModal();
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [userEvents, setUserEvents] = useState([
+    { title: "test event", date: "11/11/2023", description: "lorem ipsum" },
+  ]);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -61,6 +77,12 @@ const ServiceProviderCard = ({
         <Button mt="3" colorScheme="blue" onClick={handleRequestPrivateEvent}>
           Request Private Event
         </Button>
+
+        <UserEventListModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          events={userEvents}
+        />
       </Box>
     </Box>
   );

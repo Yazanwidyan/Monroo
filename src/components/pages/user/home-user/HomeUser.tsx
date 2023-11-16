@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import CommonService from "../../../../services/commonService";
 import { useSnackBar } from "../../../../contexts/SnackbarContext";
 import ServiceProviderCard from "../../../organisms/service-provider-card/ServiceProviderCard";
 import CreateEvent from "../create-event/CreateEvent";
+import { Button } from "@chakra-ui/button";
 
 const userProfile = {
   image:
@@ -17,6 +18,16 @@ const userProfile = {
 
 const HomeUser = () => {
   const { openSnackBar } = useSnackBar();
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const openDialog = () => {
+    setIsDialogOpen(true);
+  };
+
+  const closeDialog = () => {
+    setIsDialogOpen(false);
+  };
 
   const handleShowSuccess = () => {
     openSnackBar("Operation succeeded!", "success");
@@ -52,7 +63,8 @@ const HomeUser = () => {
         gender={userProfile.gender}
       />
       <br />
-      <CreateEvent />
+      <Button onClick={openDialog}>Create Event</Button>
+      <CreateEvent isOpen={isDialogOpen} onClose={closeDialog} />
       {/* <button onClick={handleShowSuccess}>Show Success</button>
       <button onClick={handleShowError}>Show error</button> */}
     </div>
