@@ -1,220 +1,9 @@
-import { createContext, useMemo } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
+
+import axios from "axios";
 
 import { Category, SubCategory } from "../models/Category";
 import { RegisterServiceProviderLookup } from "../models/RegisterServiceProvider";
-
-const CATEGORIES: Category[] = [
-  {
-    id: "1",
-    name: "Category 1",
-    subCategories: [
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 11",
-        categoryId: "1",
-      },
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 12",
-        categoryId: "1",
-      },
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 13",
-        categoryId: "1",
-      },
-    ],
-  },
-  {
-    id: "2",
-    name: "Category 2",
-    subCategories: [
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 21",
-        categoryId: "2",
-      },
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 22",
-        categoryId: "2",
-      },
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 23",
-        categoryId: "2",
-      },
-    ],
-  },
-  {
-    id: "3",
-    name: "Category 3",
-    subCategories: [
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 31",
-        categoryId: "3",
-      },
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 32",
-        categoryId: "3",
-      },
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 33",
-        categoryId: "3",
-      },
-    ],
-  },
-  {
-    id: "4",
-    name: "Category 4",
-    subCategories: [
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 41",
-        categoryId: "4",
-      },
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 42",
-        categoryId: "4",
-      },
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 43",
-        categoryId: "4",
-      },
-    ],
-  },
-  {
-    id: "5",
-    name: "Category 5",
-    subCategories: [
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 51",
-        categoryId: "5",
-      },
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 52",
-        categoryId: "5",
-      },
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 53",
-        categoryId: "5",
-      },
-    ],
-  },
-  {
-    id: "6",
-    name: "Category 6",
-    subCategories: [
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 61",
-        categoryId: "6",
-      },
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 62",
-        categoryId: "6",
-      },
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 63",
-        categoryId: "6",
-      },
-    ],
-  },
-  {
-    id: "7",
-    name: "Category 7",
-    subCategories: [
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 71",
-        categoryId: "7",
-      },
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 72",
-        categoryId: "7",
-      },
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 73",
-        categoryId: "7",
-      },
-    ],
-  },
-  {
-    id: "8",
-    name: "Category 8",
-    subCategories: [
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 81",
-        categoryId: "8",
-      },
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 82",
-        categoryId: "8",
-      },
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 83",
-        categoryId: "8",
-      },
-    ],
-  },
-  {
-    id: "9",
-    name: "Category 9",
-    subCategories: [
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 91",
-        categoryId: "9",
-      },
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 92",
-        categoryId: "9",
-      },
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 93",
-        categoryId: "9",
-      },
-    ],
-  },
-  {
-    id: "10",
-    name: "Category 10",
-    subCategories: [
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 101",
-        categoryId: "10",
-      },
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 102",
-        categoryId: "10",
-      },
-      {
-        id: crypto.randomUUID().toString(),
-        name: "Sub-Category 103",
-        categoryId: "10",
-      },
-    ],
-  },
-];
 
 const REGISTER_SERVICE_PROVIDER_LOOKUP: RegisterServiceProviderLookup = {
   fname: true,
@@ -265,12 +54,76 @@ type LookupsContextProps = {
 };
 
 export const LookupsContext = createContext<LookupsContextProps>({
-  categories: CATEGORIES,
+  categories: [],
   subCategories: [],
-  registerServiceProviderLookup: REGISTER_SERVICE_PROVIDER_LOOKUP
+  registerServiceProviderLookup: REGISTER_SERVICE_PROVIDER_LOOKUP,
 });
 
 export default function LookupsProvider({ children }) {
+  const [CATEGORIES, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(
+          "https://my-json-server.typicode.com/typicode/demo/posts"
+        );
+        const { data } = response;
+
+        const CATEGORIES: Category[] = [
+          {
+            id: "1",
+            name: "Category 1",
+            subCategories: [
+              {
+                id: crypto.randomUUID().toString(),
+                name: "Sub-Category 11",
+                categoryId: "1",
+              },
+              {
+                id: crypto.randomUUID().toString(),
+                name: "Sub-Category 12",
+                categoryId: "1",
+              },
+              {
+                id: crypto.randomUUID().toString(),
+                name: "Sub-Category 13",
+                categoryId: "1",
+              },
+            ],
+          },
+          {
+            id: "2",
+            name: "Category 2",
+            subCategories: [
+              {
+                id: crypto.randomUUID().toString(),
+                name: "Sub-Category 21",
+                categoryId: "2",
+              },
+              {
+                id: crypto.randomUUID().toString(),
+                name: "Sub-Category 22",
+                categoryId: "2",
+              },
+              {
+                id: crypto.randomUUID().toString(),
+                name: "Sub-Category 23",
+                categoryId: "2",
+              },
+            ],
+          },
+        ];
+
+        setCategories(CATEGORIES);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   const subCategories = useMemo(
     () => CATEGORIES.flatMap((category) => category.subCategories),
     [CATEGORIES]
