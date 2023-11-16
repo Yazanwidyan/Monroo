@@ -11,7 +11,7 @@ import {
   Select,
 } from "@chakra-ui/react";
 
-import { UserTypes } from "../../../models/UserTypes";
+import { UserTypes } from "../../../../models/UserTypes";
 import useRegisterUserPage from "./useRegisterUser";
 
 export default function RegisterUserPage() {

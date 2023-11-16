@@ -1,11 +1,11 @@
-import { Route, Outlet } from "react-router-dom";
+import { Route } from "react-router-dom";
 
-import RegisterUserPage from "./components/pages/register-user/RegisterUser";
-import RegisterEmployerPage from "./components/pages/register-employer/RegisterEmployer";
-import RegisterServiceProvider from "./components/pages/register-service-provider/RegisterServiceProvider";
-import Login from "./components/pages/login/Login";
+import RegisterUserPage from "./components/pages/auth/register-user/RegisterUser";
+import RegisterEmployerPage from "./components/pages/auth/register-employer/RegisterEmployer";
+import RegisterServiceProvider from "./components/pages/auth/register-service-provider/RegisterServiceProvider";
+import Login from "./components/pages/auth/login/Login";
 import PrivateRoutes from "./components/molecules/private-routes/PrivateRoutes";
-import HomeUser from "./components/pages/home-user/HomeUser";
+import HomeUser from "./components/pages/user/home-user/HomeUser";
 import AuthLayout from "./components/layout/auth-layout/AuthLayout";
 import HomeLayout from "./components/layout/home-layout/HomeLayout";
 
