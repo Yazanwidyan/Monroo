@@ -1,0 +1,13 @@
+.categoriesMultiSelect {
+  text-align: start !important;
+
+  div:last-child {
+    div:last-child {
+      background-color: inherit;
+    }
+  }
+
+  hr {
+    display: none !important;
+  }
+}

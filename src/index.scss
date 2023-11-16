@@ -1,0 +1,23 @@
+@use "./variables.scss" as v;
+@import url("https://fonts.googleapis.com/css?family=Poppins");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  transition: all 150ms ease-in-out;
+  font-family: "Poppins";
+}
+
+body {
+  background-color: v.$background-color;
+  margin: 0;
+  font-family: "Poppins";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+}
+
+#root {
+  height: 100%;
+}

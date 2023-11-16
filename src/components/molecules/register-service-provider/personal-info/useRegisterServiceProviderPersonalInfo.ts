@@ -1,0 +1,27 @@
+import { useMemo, useContext } from "react";
+import countryList from "react-select-country-list";
+
+import { RegisterServiceProviderContext } from "../../../../contexts/RegisterServiceProviderContext";
+
+export default function useRegisterServiceProviderPersonalInfo() {
+  const {
+    personalInfo,
+    handlePersonalInfoChange,
+  } = useContext(RegisterServiceProviderContext);
+
+  const countries: { label: string; value: string }[] = useMemo(
+    () =>
+      countryList()
+        .getData()
+        .filter(
+          (country: { label: string; value: string }) => country.value !== "IL"
+        ),
+    []
+  );
+
+  return {
+    countries,
+    personalInfo,
+    handlePersonalInfoChange,
+  };
+}

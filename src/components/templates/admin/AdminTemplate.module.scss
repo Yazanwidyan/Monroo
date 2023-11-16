@@ -1,0 +1,45 @@
+@use "../../../variables" as v;
+
+.body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  padding: 20px;
+  background-color: v.$primary-color;
+}
+
+.nav {
+  display: flex;
+  justify-self: start;
+  justify-content: space-between;
+  width: 40%;
+  min-width: 200px;
+  gap: 10px;
+
+  & > * {
+    color: white;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover {
+      color: v.$border-color;
+    }
+  }
+
+  a[class="active"] {
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  
+}
+
+.main {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,82 @@
+export type RegisterServiceProviderPersonalInfo = {
+  fname: string;
+  lname: string;
+  gender: "Male" | "Female";
+  username: string;
+  password: string;
+  confirmPassword: string;
+  nationality: string;
+  dob: string;
+}
+
+export type RegisterServiceProviderProfessionalInfo = {
+  email: string;
+  phone: string;
+  education: "High School" | "Diploma" | "Bachelors" | "Masters" | "PhD";
+  averageRatePerHour: number;
+  openToWorkInCountry: string;
+  countryOfResidence: string;
+  spokenLanguages: string;
+  experience: number;
+  visaType: string;
+  instagram: string;
+  photos: string;
+  introductionVideoLink: string;
+  youtubeLink: string;
+  bio: string;
+  linkedin: string;
+  workLink: string;
+  height: number;
+  weight: number;
+  resume: string;
+  portfolio: string;
+  isAmodel: boolean;
+  oneMinuteVideo: string;
+  audios: string;
+  musicalInstruments: string;
+  musicGenres: string;
+  specialSkills: string;
+  demoReel: string;
+}
+
+export type RegisterServiceProviderLookup = {
+  fname: boolean;
+  lname: boolean;
+  gender: boolean;
+  isActive: boolean;
+  username: boolean;
+  password: boolean;
+  registerDate: boolean;
+  phone: boolean;
+  email: boolean;
+  dob: boolean;
+  nationality: boolean;
+  education: boolean;
+  averageRatePerHour: boolean;
+  openToWorkInCountry: boolean;
+  countryOfResidence: boolean;
+  spokenLanguage: boolean;
+  experience: boolean;
+  visaType: boolean;
+  instagram: boolean;
+  photos: boolean;
+  introductionVideoLink: boolean;
+  youtubeLink: boolean;
+  videos: boolean;
+  bio: boolean;
+  workLink: boolean;
+  linkedin: boolean;
+  height: boolean;
+  weight: boolean;
+  resume: boolean;
+  portfolio: boolean;
+  isAmodel: boolean;
+  oneMinuteVideo: boolean;
+  audios: boolean;
+  musicalInstruments: boolean;
+  musicGenres: boolean;
+  specialSkills: boolean;
+  demoReel: boolean;
+  token: boolean;
+  fcmToken: boolean;
+}
