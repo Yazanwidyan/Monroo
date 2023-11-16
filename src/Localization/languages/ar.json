@@ -1,0 +1,11 @@
+{
+  "translation": {
+    "login": {
+      "login": "تسجيل الدخول",
+      "username": "اسم المستخدم",
+      "password": "كلمة المرور",
+      "enter_username": "ادخل اسم المستخدم",
+      "enter_password": "ادخل كلمة المرور"
+    }
+  }
+}

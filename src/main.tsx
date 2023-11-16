@@ -6,6 +6,7 @@ import App from "./App.tsx";
 import { themes } from "./ChakraThemes.ts";
 import LookupsProvider from "./contexts/LookupsContext.tsx";
 import "./index.scss";
+import "./Localization/i18next.ts";
 
 const theme = extendTheme(themes);
 

@@ -1,0 +1,11 @@
+{
+    "translation": {
+        "login": {
+            "login": "login",
+            "username": "username",
+            "password": "password",
+            "enter_username": "enter username",
+            "enter_password": "enter password"
+        }
+    }
+}

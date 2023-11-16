@@ -1,0 +1,11 @@
+{
+  "translation": {
+    "login": {
+      "login": "авторизоваться",
+      "username": "имя пользователя",
+      "password": "пароль",
+      "enter_username": "введите имя пользователя",
+      "enter_password": "введите пароль"
+    }
+  }
+}
