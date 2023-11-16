@@ -1,5 +1,17 @@
+import { useNavigate } from "react-router-dom";
+
 import LoginForm from "../../../organisms/login-form/LoginForm";
 
 export default function Login() {
-  return <LoginForm />;
+  const navigate = useNavigate();
+
+  return (
+    <LoginForm
+      handleSubmit={async (i) => {
+        console.log(i);
+
+        navigate("/", { replace: true });
+      }}
+    />
+  );
 }
