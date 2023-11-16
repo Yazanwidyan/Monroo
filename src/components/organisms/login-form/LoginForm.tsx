@@ -12,14 +12,24 @@ import {
 } from "@chakra-ui/react";
 import useLoginForm from "./useLoginForm";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
-type LoginFormProps = {
-  handleSubmit(): Promise<void>;
-};
+const userType = { type: 1, role: "user", name: "yazan user" };
 
-export default function LoginForm(props: LoginFormProps) {
+export default function LoginForm() {
   const state = useLoginForm();
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    console.log("hello");
+
+    if (userType.type == 1) {
+      navigate("/home", { replace: true });
+    } else if (userType.type == 2) {
+      navigate("/timeline", { replace: true });
+    }
+  };
 
   return (
     <Container margin="auto">
@@ -54,7 +64,7 @@ export default function LoginForm(props: LoginFormProps) {
           </FormControl>
         </CardBody>
         <CardFooter display="flex" justifyContent="center">
-          <Button colorScheme="telegram" onClick={props.handleSubmit}>
+          <Button colorScheme="telegram" onClick={handleSubmit}>
             {t("login.login")}
           </Button>
         </CardFooter>

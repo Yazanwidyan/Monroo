@@ -8,6 +8,9 @@ import PrivateRoutes from "./components/molecules/private-routes/PrivateRoutes";
 import HomeUser from "./components/pages/user/home-user/HomeUser";
 import AuthLayout from "./components/layout/auth-layout/AuthLayout";
 import HomeLayout from "./components/layout/home-layout/HomeLayout";
+import Timeline from "./components/pages/service-provider/timeline/Timeline";
+import BookEvent from "./components/pages/user/book-event/BookEvent";
+import Events from "./components/pages/service-provider/events/Events";
 
 export const AppRoutes = () => (
   <>
@@ -20,6 +23,9 @@ export const AppRoutes = () => (
     <Route path="/" element={<HomeLayout />}>
       <Route element={<PrivateRoutes />}>
         <Route path="home" element={<HomeUser />} />
+        <Route path="timeline" element={<Timeline />} />
+        <Route path="book-event" element={<BookEvent />} />
+        <Route path="events" element={<Events />} />
       </Route>
     </Route>
   </>
