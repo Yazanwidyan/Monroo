@@ -40,7 +40,7 @@ const UserEventListModal = ({ isOpen, onClose, events }) => {
           </VStack>
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="blue" onClick={onClose}>
+          <Button colorScheme="primary.500" onClick={onClose}>
             Close
           </Button>
         </ModalFooter>

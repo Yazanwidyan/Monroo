@@ -22,19 +22,20 @@ export default function LoginForm(props: LoginFormProps) {
   const { t } = useTranslation();
 
   return (
-    <Container>
-      <Card margin="auto">
-        <CardHeader as="section" textAlign="center">
-          <Heading as="h2" color="blackAlpha.700" fontSize="19px">
+    <Container maxW="sm" padding="4">
+      <Card boxShadow="md">
+        <CardHeader textAlign="center" bg="primary.500" py="4">
+          <Heading as="h2" color="white" fontSize="xl">
             {t("login.login")}
           </Heading>
         </CardHeader>
-        <CardBody as="section">
+        <CardBody>
           <form onSubmit={state.handleSubmit}>
-            <FormControl>
-              <FormLabel> {t("login.email")}</FormLabel>
+            <FormControl marginBottom="4">
+              <FormLabel htmlFor="email">{t("login.email")}</FormLabel>
               <Input
                 type="text"
+                id="email"
                 name="email"
                 placeholder={t("login.enter_email")}
                 value={state.login.email}
@@ -42,10 +43,11 @@ export default function LoginForm(props: LoginFormProps) {
                 required
               />
             </FormControl>
-            <FormControl>
-              <FormLabel> {t("login.password")}</FormLabel>
+            <FormControl marginBottom="4">
+              <FormLabel htmlFor="password">{t("login.password")}</FormLabel>
               <Input
                 type="password"
+                id="password"
                 name="password"
                 placeholder={t("login.enter_password")}
                 value={state.login.password}
@@ -53,7 +55,12 @@ export default function LoginForm(props: LoginFormProps) {
                 required
               />
             </FormControl>
-            <Button fontSize="14px" colorScheme="telegram" type="submit">
+            <Button
+              fontSize="md"
+              colorScheme="primary"
+              type="submit"
+              width="full"
+            >
               {t("login.login")}
             </Button>
           </form>

@@ -4,17 +4,40 @@ import { useSnackBar } from "../../../../contexts/SnackbarContext";
 import ServiceProviderCard from "../../../organisms/service-provider-card/ServiceProviderCard";
 import CreateEvent from "../create-event/CreateEvent";
 import { Button } from "@chakra-ui/button";
+import { Grid, GridItem } from "@chakra-ui/react";
 
-const userProfile = {
-  image:
-    "https://benmarcum.com/wp-content/uploads/2017/03/Ben-Marcum-Photography_Headshot-Photographer_Louisville_Kentucky_Actor-Headshots_John-Wells_Jan-11-2017_025-1.jpg",
-  title: "Actor",
-  name: "John Doe",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  experience: "5 years",
-  nationality: "American",
-  gender: "Male",
-};
+const userProfiles = [
+  {
+    image:
+      "https://media.istockphoto.com/id/1226217925/photo/portrait-of-focused-building-constructor-in-his-workplace-cranes-in-background.jpg?s=612x612&w=0&k=20&c=InRSmSD3VUepKOJy5htT2I8scJW8Mj_PqUAwCRd_Fx4=",
+    title: "Engineer",
+    name: "Morgan Smith",
+    description: "Passionate about building innovative solutions.",
+    experience: "8 years",
+    nationality: "Canadian",
+    gender: "Female",
+  },
+  {
+    image:
+      "https://foodie.sysco.com/wp-content/uploads/2019/07/MarcusMeansChefProfile_800x850.jpg",
+    title: "Chef",
+    name: "Bob Johnson",
+    description: "Creating culinary experiences that delight the senses.",
+    experience: "12 years",
+    nationality: "Italian",
+    gender: "Male",
+  },
+  {
+    image:
+      "https://previews.123rf.com/images/georgerudy/georgerudy1703/georgerudy170300108/73532351-beautiful-business-lady-is-looking-at-camera-and-smiling-while-working-in-office.jpg",
+    title: "Designer",
+    name: "Eva Martinez",
+    description: "Bringing creativity to life through design.",
+    experience: "6 years",
+    nationality: "Spanish",
+    gender: "Female",
+  },
+];
 
 const HomeUser = () => {
   const { openSnackBar } = useSnackBar();
@@ -52,21 +75,23 @@ const HomeUser = () => {
 
   return (
     <div>
-      HomeUser
-      <ServiceProviderCard
-        image={userProfile.image}
-        title={userProfile.title}
-        name={userProfile.name}
-        description={userProfile.description}
-        experience={userProfile.experience}
-        nationality={userProfile.nationality}
-        gender={userProfile.gender}
-      />
-      <br />
+      <Grid templateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={4}>
+        {userProfiles.map((userProfile, index) => (
+          <GridItem key={index}>
+            <ServiceProviderCard
+              image={userProfile.image}
+              title={userProfile.title}
+              name={userProfile.name}
+              description={userProfile.description}
+              experience={userProfile.experience}
+              nationality={userProfile.nationality}
+              gender={userProfile.gender}
+            />
+          </GridItem>
+        ))}
+      </Grid>
       <Button onClick={openDialog}>Create Event</Button>
       <CreateEvent isOpen={isDialogOpen} onClose={closeDialog} />
-      {/* <button onClick={handleShowSuccess}>Show Success</button>
-      <button onClick={handleShowError}>Show error</button> */}
     </div>
   );
 };

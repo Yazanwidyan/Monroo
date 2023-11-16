@@ -6,6 +6,12 @@ import {
   Heading,
   VStack,
   Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import UserEventListModal from "../user-event-list-modal/UserEventListModal";
@@ -48,22 +54,19 @@ const ServiceProviderCard = ({
       <Image src={image} alt={name} />
 
       <Box p="4">
-        <Box alignItems="baseline">
-          <Badge borderRadius="full" px="2" colorScheme="teal">
-            {title}
-          </Badge>
-        </Box>
+        <Badge borderRadius="full" px="2" colorScheme="teal" mb="2">
+          {title}
+        </Badge>
 
-        <Box mt="2">
-          <Heading size="md" fontWeight="semibold">
-            {name}
-          </Heading>
-          <Text mt="2" color="gray.600">
-            {description}
-          </Text>
-        </Box>
+        <Heading size="md" fontWeight="semibold" mb="2">
+          {name}
+        </Heading>
 
-        <VStack mt="3" alignItems="flex-start" spacing="1">
+        <Text color="gray.600" mb="4">
+          {description}
+        </Text>
+
+        <VStack spacing="1" align="flex-start" mb="4">
           <Text>
             <strong>Experience:</strong> {experience}
           </Text>
@@ -74,7 +77,8 @@ const ServiceProviderCard = ({
             <strong>Gender:</strong> {gender}
           </Text>
         </VStack>
-        <Button mt="3" colorScheme="blue" onClick={handleRequestPrivateEvent}>
+
+        <Button colorScheme="teal" onClick={handleRequestPrivateEvent}>
           Request Private Event
         </Button>
 

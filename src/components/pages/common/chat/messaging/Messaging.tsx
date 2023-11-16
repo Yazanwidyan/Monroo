@@ -46,7 +46,7 @@ const Messaging = () => {
             maxW="70%"
             p={3}
             borderRadius="lg"
-            bg={message.senderId === "user" ? "blue.200" : "gray.200"}
+            bg={message.senderId === "user" ? "primary.500" : "gray.200"}
             color={message.senderId === "user" ? "white" : "black"}
           >
             <Text>{message.text}</Text>
@@ -66,7 +66,7 @@ const Messaging = () => {
             maxW="70%"
             p={3}
             borderRadius="lg"
-            bg={message.senderId === "user" ? "blue.200" : "gray.200"}
+            bg={message.senderId === "user" ? "primary.500" : "gray.200"}
             color={message.senderId === "user" ? "white" : "black"}
           >
             {/* Example of a card with details */}
@@ -101,7 +101,7 @@ const Messaging = () => {
             flex="1"
             mr={2}
           />
-          <Button colorScheme="blue" onClick={sendMessage}>
+          <Button colorScheme="primary" onClick={sendMessage}>
             Send
           </Button>
         </Flex>

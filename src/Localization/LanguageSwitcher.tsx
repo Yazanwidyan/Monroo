@@ -1,3 +1,4 @@
+import { Select } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
 const lngs = {
@@ -8,32 +9,26 @@ const lngs = {
 
 export default function LanguageSwitcher() {
   const { t, i18n } = useTranslation();
-  document.body.dir = i18n.dir();
 
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-    document.body.dir = i18n.dir();
+  const changeLanguage = (event) => {
+    const selectedLanguage = event.target.value;
+    i18n.changeLanguage(selectedLanguage);
+    document.body.dir = i18n.dir(selectedLanguage);
   };
 
   return (
-    <div>
-      <header className="App-header">
-        <div>
-          {Object.keys(lngs).map((lng) => (
-            <button
-              key={lng}
-              style={{
-                fontWeight: i18n.resolvedLanguage === lng ? "bold" : "normal",
-              }}
-              type="submit"
-              onClick={() => changeLanguage(lng)}
-            >
-              {lngs[lng].nativeName}
-            </button>
-          ))}
-        </div>
-      </header>
-      {t("login.login")}
-    </div>
+    <Select
+      variant="outline"
+      size="sm"
+      onChange={changeLanguage}
+      value={i18n.language}
+      width="fit-content"
+    >
+      {Object.keys(lngs).map((lng) => (
+        <option key={lng} value={lng}>
+          {lngs[lng].nativeName}
+        </option>
+      ))}
+    </Select>
   );
 }
