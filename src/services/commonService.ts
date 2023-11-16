@@ -1,7 +1,7 @@
 // apiService.js
 import api from "../utils/api";
 
-const CommonService = {
+const commonService = {
   getUserData: () => {
     return api
       .get(`/posts`)
@@ -25,4 +25,4 @@ const CommonService = {
   },
 };
 
-export default CommonService;
+export default commonService;

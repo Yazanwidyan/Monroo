@@ -5,7 +5,7 @@ export default function useLoginForm(props: {
   onSubmit: (loginInput: LoginInput) => void;
 }) {
   const [login, , handleLoginChange] = useFormFields<LoginInput>({
-    username: "",
+    email: "",
     password: "",
   });
 

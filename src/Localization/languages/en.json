@@ -3,8 +3,10 @@
         "login": {
             "login": "login",
             "username": "username",
+            "email": "email",
             "password": "password",
             "enter_username": "enter username",
+            "enter_email": "enter email",
             "enter_password": "enter password"
         }
     }

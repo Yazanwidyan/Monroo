@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import CommonService from "../../../../services/commonService";
+import commonService from "../../../../services/commonService";
 import { useSnackBar } from "../../../../contexts/SnackbarContext";
 import ServiceProviderCard from "../../../organisms/service-provider-card/ServiceProviderCard";
 import CreateEvent from "../create-event/CreateEvent";
@@ -43,7 +43,7 @@ const HomeUser = () => {
 
   const fetchData = async () => {
     try {
-      const userData = await CommonService.getUserData();
+      const userData = await commonService.getUserData();
       console.log("userData", userData);
     } catch (error) {
       console.log("error", error);

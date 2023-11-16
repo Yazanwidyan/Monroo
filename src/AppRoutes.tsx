@@ -1,4 +1,4 @@
-import { Route } from "react-router-dom";
+import { Navigate, Route } from "react-router-dom";
 
 import RegisterUserPage from "./components/pages/auth/register-user/RegisterUser";
 import RegisterEmployerPage from "./components/pages/auth/register-employer/RegisterEmployer";
@@ -16,6 +16,7 @@ import Messaging from "./components/pages/common/chat/messaging/Messaging";
 export const AppRoutes = () => (
   <>
     <Route path="/" element={<AuthLayout />}>
+      <Route path="/" element={<Navigate to="/login" />} />
       <Route path="register" element={<RegisterUserPage />} />
       <Route path="login" element={<Login />} />
       <Route path="register/employer" element={<RegisterEmployerPage />} />

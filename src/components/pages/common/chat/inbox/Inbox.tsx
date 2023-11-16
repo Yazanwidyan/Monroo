@@ -1,27 +1,24 @@
 import { useEffect, useState } from "react";
-import { Box, Button, Text } from "@chakra-ui/react";
-// import firebase from "firebase/app";
-// import "firebase/firestore"; // Import Firestore (or Realtime Database) from firebase/app
+import { Box, Button, Text, Stack } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const Inbox = () => {
   const [rooms, setRooms] = useState([]);
+  const navigate = useNavigate();
 
   const handleRoomClick = (id) => {
-    console.log(id);
+    navigate(`/inbox/messaging/${id}`);
   };
 
   useEffect(() => {
-    // const unsubscribe = firebase
-    //   .firestore()
-    //   .collection("rooms")
-    //   .onSnapshot((snapshot) => {
-    //     const roomsData = snapshot.docs.map((doc) => ({
-    //       id: doc.id,
-    //       ...doc.data(),
-    //     }));
-    //     setRooms(roomsData);
-    //   });
-    // return () => unsubscribe();
+    // Simulated rooms data
+    const simulatedRooms = [
+      { id: "1", name: "Room 1" },
+      { id: "2", name: "Room 2" },
+      { id: "3", name: "Room 3" },
+    ];
+
+    setRooms(simulatedRooms);
   }, []);
 
   return (
@@ -29,15 +26,17 @@ const Inbox = () => {
       <Text fontSize="xl" fontWeight="bold" mb={4}>
         Inbox
       </Text>
-      {rooms.map((room) => (
-        <Button
-          key={room.id}
-          variant="outline"
-          onClick={() => handleRoomClick(room.id)}
-        >
-          {room.name}
-        </Button>
-      ))}
+      <Stack spacing={4}>
+        {rooms.map((room) => (
+          <Button
+            key={room.id}
+            variant="outline"
+            onClick={() => handleRoomClick(room.id)}
+          >
+            {room.name}
+          </Button>
+        ))}
+      </Stack>
     </Box>
   );
 };

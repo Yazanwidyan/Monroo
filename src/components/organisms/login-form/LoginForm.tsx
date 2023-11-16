@@ -32,12 +32,12 @@ export default function LoginForm(props: LoginFormProps) {
         <CardBody as="section">
           <form onSubmit={state.handleSubmit}>
             <FormControl>
-              <FormLabel> {t("login.username")}</FormLabel>
+              <FormLabel> {t("login.email")}</FormLabel>
               <Input
                 type="text"
-                name="username"
-                placeholder={t("login.enter_username")}
-                value={state.login.username}
+                name="email"
+                placeholder={t("login.enter_email")}
+                value={state.login.email}
                 onChange={state.handleLoginChange}
                 required
               />
