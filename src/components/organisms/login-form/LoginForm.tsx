@@ -8,10 +8,14 @@ import {
   Button,
   Heading,
   Container,
+  CardFooter,
+  Box,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import useLoginForm from "./useLoginForm"; // Update this import path if needed
 import { useTranslation } from "react-i18next";
 import { LoginInput } from "../../../models/LoginInput";
+import { Link as RouterLink } from "react-router-dom";
 
 export type LoginFormProps = {
   handleSubmit(loginInput: LoginInput): void;
@@ -65,6 +69,19 @@ export default function LoginForm(props: LoginFormProps) {
             </Button>
           </form>
         </CardBody>
+        <CardFooter>
+          <Box>
+            <ChakraLink
+              as={RouterLink}
+              to="/register"
+              href="/register"
+              color="blue.500"
+              textDecoration="none"
+            >
+              Register
+            </ChakraLink>
+          </Box>
+        </CardFooter>
       </Card>
     </Container>
   );
