@@ -20,6 +20,21 @@ import {
   Flex,
 } from "@chakra-ui/react";
 
+const getStatusText = (status) => {
+  switch (status) {
+    case 0:
+      return "Pending";
+    case 1:
+      return "Booked";
+    case 2:
+      return "Done";
+    case 3:
+      return "Purchased";
+    default:
+      return "Unknown";
+  }
+};
+
 const Messaging = () => {
   const { roomid } = useParams();
   const [messages, setMessages] = useState([]);
@@ -60,6 +75,22 @@ const Messaging = () => {
         userId: 2,
         createdAt: serverTimestamp(),
         room: roomid,
+        type: "normal",
+        eventObj: {
+          title: "Guitar Lessons",
+          desc: "Learn to play the guitar with expert instructors!",
+          createdDate: "2023-11-19",
+          eventDate: "2023-12-05",
+          userID: "user123",
+          providerID: "provider456",
+          catID: "music123",
+          subCatID: "guitar789",
+          duration: "1 hour/session",
+          averageCost: "$50/session",
+          country: "USA",
+          dealCost: "$40/session",
+          status: 1,
+        },
       });
 
       setNewMessage("");
@@ -67,52 +98,96 @@ const Messaging = () => {
   };
 
   const renderMessage = (message, index) => {
-    return (
-      <Flex
-        key={index}
-        justifyContent={message.userId === 2 ? "flex-end" : "flex-start"}
-      >
-        <Box
-          maxW="70%"
-          p={3}
-          m={3}
-          borderRadius="lg"
-          bg={message.userId === 2 ? "primary.500" : "gray.200"}
-          color={message.userId === 2 ? "white" : "black"}
+    if (message.type === "requestEvent") {
+      return (
+        <Flex
+          key={index}
+          justifyContent={message.userId === 2 ? "flex-end" : "flex-start"}
         >
-          <Text>{message.text}</Text>
-        </Box>
-      </Flex>
-    );
-    //  else if (message.type === "detail") {
-    //   // Render a card with details
-    //   return (
-    //     <Flex
-    //       key={index}
-    //       justifyContent={
-    //         message.senderId === "user" ? "flex-end" : "flex-start"
-    //       }
-    //     >
-    //       <Box
-    //         maxW="70%"
-    //         p={3}
-    //         borderRadius="lg"
-    //         bg={message.senderId === "user" ? "primary.500" : "gray.200"}
-    //         color={message.senderId === "user" ? "white" : "black"}
-    //       >
-    //         {/* Example of a card with details */}
-    //         <Box borderWidth="1px" p={3}>
-    //           <Heading as="h4" size="sm" mb={2}>
-    //             {message.details.title}
-    //           </Heading>
-    //           <Text>{message.details.description}</Text>
-    //           {/* Add more details here */}
-    //         </Box>
-    //       </Box>
-    //     </Flex>
-    //   );
-    // }
-    return null;
+          <Box
+            maxW="70%"
+            p={3}
+            m={3}
+            borderRadius="lg"
+            bg={message.userId === 2 ? "primary.500" : "gray.200"}
+            color={message.userId === 2 ? "white" : "black"}
+          >
+            <Box borderWidth="1px" borderRadius="lg" p="4" m="4">
+              <Text fontSize="xl" fontWeight="bold">
+                {message.eventObj.title}
+              </Text>
+              <Text fontSize="md" mt="2">
+                {message.eventObj.desc}
+              </Text>
+              <Text fontSize="sm" mt="2">
+                Created Date: {message.eventObj.createdDate}
+              </Text>
+              <Text fontSize="sm">
+                Event Date: {message.eventObj.eventDate}
+              </Text>
+              <Text fontSize="sm">User ID: {message.eventObj.userID}</Text>
+              <Text fontSize="sm" mt="2">
+                Status: {getStatusText(message.eventObj.status)}
+              </Text>
+            </Box>
+          </Box>
+        </Flex>
+      );
+    } else if (message.type === "approveEvent") {
+      return (
+        <Flex
+          key={index}
+          justifyContent={message.userId === 2 ? "flex-end" : "flex-start"}
+        >
+          <Box
+            maxW="70%"
+            p={3}
+            m={3}
+            borderRadius="lg"
+            bg={message.userId === 2 ? "primary.500" : "gray.200"}
+            color={message.userId === 2 ? "white" : "black"}
+          >
+            <Box borderWidth="1px" borderRadius="lg" p="4" m="4">
+              <Text fontSize="xl" fontWeight="bold">
+                {message.eventObj.title}
+              </Text>
+              <Text fontSize="md" mt="2">
+                {message.eventObj.desc}
+              </Text>
+              <Text fontSize="sm" mt="2">
+                Created Date: {message.eventObj.createdDate}
+              </Text>
+              <Text fontSize="sm">
+                Event Date: {message.eventObj.eventDate}
+              </Text>
+              <Text fontSize="sm">User ID: {message.eventObj.userID}</Text>
+              <Text fontSize="sm" mt="2">
+                Status: {getStatusText(message.eventObj.status)}
+              </Text>
+              <Button>cancel request</Button>
+            </Box>
+          </Box>
+        </Flex>
+      );
+    } else {
+      return (
+        <Flex
+          key={index}
+          justifyContent={message.userId === 2 ? "flex-end" : "flex-start"}
+        >
+          <Box
+            maxW="70%"
+            p={3}
+            m={3}
+            borderRadius="lg"
+            bg={message.userId === 2 ? "primary.500" : "gray.200"}
+            color={message.userId === 2 ? "white" : "black"}
+          >
+            <Text>{message.text}</Text>
+          </Box>
+        </Flex>
+      );
+    }
   };
 
   return (
