@@ -7,6 +7,8 @@ const HomeLayout = () => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
 
+  console.log("useruseruser", user);
+
   const handleLogout = () => {
     navigate("/login");
     console.log("Logged out!");

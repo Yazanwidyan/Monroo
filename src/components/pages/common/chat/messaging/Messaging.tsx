@@ -71,11 +71,11 @@ const Messaging = () => {
     if (newMessage.trim() !== "") {
       await addDoc(messagesRef, {
         text: newMessage,
-        user: "provider",
-        userId: 2,
+        user: "user",
+        userId: 1,
         createdAt: serverTimestamp(),
         room: roomid,
-        type: "normal",
+        type: "requestEvent",
         eventObj: {
           title: "Guitar Lessons",
           desc: "Learn to play the guitar with expert instructors!",
@@ -89,7 +89,6 @@ const Messaging = () => {
           averageCost: "$50/session",
           country: "USA",
           dealCost: "$40/session",
-          status: 1,
         },
       });
 
@@ -102,15 +101,15 @@ const Messaging = () => {
       return (
         <Flex
           key={index}
-          justifyContent={message.userId === 2 ? "flex-end" : "flex-start"}
+          justifyContent={message.userId === 1 ? "flex-end" : "flex-start"}
         >
           <Box
             maxW="70%"
             p={3}
             m={3}
             borderRadius="lg"
-            bg={message.userId === 2 ? "primary.500" : "gray.200"}
-            color={message.userId === 2 ? "white" : "black"}
+            bg={message.userId === 1 ? "primary.500" : "gray.200"}
+            color={message.userId === 1 ? "white" : "black"}
           >
             <Box borderWidth="1px" borderRadius="lg" p="4" m="4">
               <Text fontSize="xl" fontWeight="bold">

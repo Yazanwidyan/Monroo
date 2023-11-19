@@ -1,15 +1,15 @@
-import { Flex, Box, Center, Heading, Spacer } from "@chakra-ui/react";
+import { Flex, Box, Link, Spacer } from "@chakra-ui/react";
 import LanguageSwitcher from "../../../Localization/LanguageSwitcher";
-import { Outlet } from "react-router-dom";
+import { Outlet, Link as RouterLink } from "react-router-dom";
 
 const AuthLayout = () => {
   return (
     <Flex minHeight="100vh" flexDirection="column">
       <Box bg="primary.500" py="4" px="6">
         <Flex alignItems="center">
-          <Heading as="h1" fontSize="xl" color="white">
+          <Link as={RouterLink} to={"login"} fontSize="xl" fontWeight="bold">
             Monroo
-          </Heading>
+          </Link>
           <Spacer />
           <LanguageSwitcher />
         </Flex>

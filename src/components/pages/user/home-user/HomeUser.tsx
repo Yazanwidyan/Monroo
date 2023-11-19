@@ -7,7 +7,7 @@ import { Button } from "@chakra-ui/button";
 import { Grid, GridItem } from "@chakra-ui/react";
 import { UserContext } from "../../../../contexts/UserContext";
 
-const userProfiles = [
+const userProfilesData = [
   {
     image:
       "https://media.istockphoto.com/id/1226217925/photo/portrait-of-focused-building-constructor-in-his-workplace-cranes-in-background.jpg?s=612x612&w=0&k=20&c=InRSmSD3VUepKOJy5htT2I8scJW8Mj_PqUAwCRd_Fx4=",
@@ -44,6 +44,7 @@ const HomeUser = () => {
   const { openSnackBar } = useSnackBar();
   const { user } = useContext(UserContext);
 
+  const [userProfiles, setUserProfiles] = useState(userProfilesData);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const openDialog = () => {
