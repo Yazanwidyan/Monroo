@@ -7,7 +7,7 @@ export type RegisterServiceProviderPersonalInfo = {
   confirmPassword: string;
   nationality: string;
   dob: string;
-}
+};
 
 export type RegisterServiceProviderProfessionalInfo = {
   email: string;
@@ -37,9 +37,9 @@ export type RegisterServiceProviderProfessionalInfo = {
   musicGenres: string;
   specialSkills: string;
   demoReel: string;
-}
+};
 
-export type RegisterServiceProviderLookup = {
+export type RegisterServiceProviderLookup = Partial<{
   fname: boolean;
   lname: boolean;
   gender: boolean;
@@ -79,4 +79,4 @@ export type RegisterServiceProviderLookup = {
   demoReel: boolean;
   token: boolean;
   fcmToken: boolean;
-}
+}>;

@@ -8,8 +8,10 @@ import RegisterServiceProviderCategories from "../../molecules/register-service-
 import RegisterServiceProviderPersonalInfo from "../../molecules/register-service-provider/personal-info/RegisterServiceProviderPersonalInfo";
 import RegisterServiceProviderProfessionalInfo from "../../molecules/register-service-provider/professional-info/RegisterServiceProviderProfessionalInfo";
 
-export default function RegisterServiceProviderForm() {
-  const state = useRegisterServiceProviderForm();
+export default function RegisterServiceProviderForm(props) {
+  const state = useRegisterServiceProviderForm({
+    handleSubmit: props.handleSubmit,
+  });
 
   function renderContent() {
     const content = {

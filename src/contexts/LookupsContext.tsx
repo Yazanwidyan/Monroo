@@ -5,62 +5,26 @@ import axios from "axios";
 import { Category, SubCategory } from "../models/Category";
 import { RegisterServiceProviderLookup } from "../models/RegisterServiceProvider";
 
-const REGISTER_SERVICE_PROVIDER_LOOKUP: RegisterServiceProviderLookup = {
-  fname: true,
-  lname: true,
-  gender: true,
-  isActive: true,
-  username: true,
-  password: true,
-  registerDate: true,
-  phone: true,
-  email: true,
-  dob: true,
-  nationality: true,
-  education: true,
-  averageRatePerHour: true,
-  openToWorkInCountry: true,
-  countryOfResidence: true,
-  spokenLanguage: true,
-  experience: true,
-  visaType: true,
-  instagram: true,
-  photos: true,
-  introductionVideoLink: true,
-  youtubeLink: true,
-  videos: true,
-  bio: true,
-  workLink: true,
-  linkedin: true,
-  height: false,
-  weight: false,
-  resume: true,
-  portfolio: true,
-  isAmodel: true,
-  oneMinuteVideo: true,
-  audios: true,
-  musicalInstruments: true,
-  musicGenres: true,
-  specialSkills: true,
-  demoReel: true,
-  token: true,
-  fcmToken: true,
-};
-
 type LookupsContextProps = {
   categories: Category[];
   subCategories: SubCategory[];
   registerServiceProviderLookup: RegisterServiceProviderLookup;
+  updateRegisterServiceProviderLookup: (
+    updatedLookup: RegisterServiceProviderLookup
+  ) => void;
 };
 
 export const LookupsContext = createContext<LookupsContextProps>({
   categories: [],
   subCategories: [],
-  registerServiceProviderLookup: REGISTER_SERVICE_PROVIDER_LOOKUP,
+  registerServiceProviderLookup: {},
+  updateRegisterServiceProviderLookup: () => {},
 });
 
 export default function LookupsProvider({ children }) {
   const [CATEGORIES, setCategories] = useState<Category[]>([]);
+  const [registerServiceProviderLookup, setRegisterServiceProviderLookup] =
+    useState<RegisterServiceProviderLookup>({});
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -128,13 +92,19 @@ export default function LookupsProvider({ children }) {
     () => CATEGORIES.flatMap((category) => category.subCategories),
     [CATEGORIES]
   );
+  const updateRegisterServiceProviderLookup = (
+    updatedLookup: RegisterServiceProviderLookup
+  ) => {
+    setRegisterServiceProviderLookup(updatedLookup);
+  };
 
   return (
     <LookupsContext.Provider
       value={{
         categories: CATEGORIES,
         subCategories,
-        registerServiceProviderLookup: REGISTER_SERVICE_PROVIDER_LOOKUP,
+        registerServiceProviderLookup,
+        updateRegisterServiceProviderLookup,
       }}
     >
       {children}
