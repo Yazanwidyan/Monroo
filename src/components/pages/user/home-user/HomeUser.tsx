@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import commonService from "../../../../services/commonService";
 import { useSnackBar } from "../../../../contexts/SnackbarContext";
 import ServiceProviderCard from "../../../organisms/service-provider-card/ServiceProviderCard";
 import CreateEvent from "../create-event/CreateEvent";
 import { Button } from "@chakra-ui/button";
 import { Grid, GridItem } from "@chakra-ui/react";
+import { UserContext } from "../../../../contexts/UserContext";
 
 const userProfiles = [
   {
@@ -41,6 +42,7 @@ const userProfiles = [
 
 const HomeUser = () => {
   const { openSnackBar } = useSnackBar();
+  const { user } = useContext(UserContext);
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -60,6 +62,8 @@ const HomeUser = () => {
   };
 
   useEffect(() => {
+    console.log("userInfo", user);
+
     fetchData();
     return () => {};
   }, []);
@@ -75,6 +79,7 @@ const HomeUser = () => {
 
   return (
     <div>
+      logged email: {user.email} <br /> type: {user.userType}
       <Grid templateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={4}>
         {userProfiles.map((userProfile, index) => (
           <GridItem key={index}>

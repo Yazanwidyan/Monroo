@@ -9,18 +9,21 @@ import "./index.scss";
 import "./Localization/i18next.ts";
 import { SnackBarProvider } from "./contexts/SnackbarContext.tsx";
 import SnackBar from "./components/molecules/snackbar/SnackBar.tsx";
+import { UserProvider } from "./contexts/UserContext.tsx";
 
 const theme = extendTheme(themes);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <SnackBarProvider>
-        <LookupsProvider>
-          <App />
-        </LookupsProvider>
-        <SnackBar />
-      </SnackBarProvider>
+      <UserProvider>
+        <SnackBarProvider>
+          <LookupsProvider>
+            <App />
+          </LookupsProvider>
+          <SnackBar />
+        </SnackBarProvider>
+      </UserProvider>
     </ChakraProvider>
   </React.StrictMode>
 );

@@ -1,10 +1,11 @@
 import { Box, Button, Flex, Link } from "@chakra-ui/react";
+import { useContext } from "react";
 import { Outlet, Link as RouterLink, useNavigate } from "react-router-dom";
-
-const userType = "provider";
+import { UserContext } from "../../../contexts/UserContext";
 
 const HomeLayout = () => {
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
 
   const handleLogout = () => {
     navigate("/login");
@@ -25,7 +26,7 @@ const HomeLayout = () => {
       >
         <Link
           as={RouterLink}
-          to={userType == "provider" ? "/timeline" : "/home"}
+          to={user.userType == "user" ? "/home" : "/timeline"}
           fontSize="xl"
           fontWeight="bold"
         >
