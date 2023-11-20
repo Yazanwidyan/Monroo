@@ -80,7 +80,6 @@ const HomeUser = () => {
 
   return (
     <div>
-      logged email: {user.email} <br /> type: {user.userType}
       <Grid templateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={4}>
         {userProfiles.map((userProfile, index) => (
           <GridItem key={index}>

@@ -1,6 +1,3 @@
-import { RegisterUser } from "./RegisterUser";
-
-export type CreateEvent = RegisterUser & {
-  interestedList: string[];
-  about: string;
+export type CreateEvent = {
+  selectedCategory: string;
 };

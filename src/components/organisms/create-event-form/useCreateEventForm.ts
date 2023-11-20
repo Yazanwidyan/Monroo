@@ -1,22 +1,13 @@
 import { FormEvent, useMemo, useContext, useState } from "react";
-import countryList from "react-select-country-list";
 
 import useFormFields from "../../../hooks/useFormFields";
 import { CreateEvent } from "../../../models/CreateEvent";
 import { CreateEventFormProps } from "./CreateEventForm";
-import { validatePassword } from "../../../utils/FormUtility";
 import { LookupsContext } from "../../../contexts/LookupsContext";
+import { MultiSelectOption } from "../../molecules/register-service-provider/categories/useRegisterServiceProviderCategories";
 
 const DEFAULT_CREATE_EVENT: CreateEvent = {
-  email: "",
-  username: "",
-  password: "",
-  confirmPassword: "",
-  about: "",
-  companyName: "",
-  country: "0",
-  interestedList: [],
-  phone: "",
+  selectedCategory: "",
 };
 
 export default function useCreateEventFormForm(
@@ -24,40 +15,37 @@ export default function useCreateEventFormForm(
 ) {
   const [createEvent, , handleCreateEventChange] =
     useFormFields<CreateEvent>(DEFAULT_CREATE_EVENT);
-  const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<MultiSelectOption>();
+  const [selectedSubCategories, setSelectedSubCategories] = useState<
+    MultiSelectOption[]
+  >([]);
 
-  const { categories } = useContext(LookupsContext);
+  const { categories, subCategories } = useContext(LookupsContext);
 
-  const countries: { label: string; value: string }[] = useMemo(
-    () =>
-      countryList()
-        .getData()
-        .filter(
-          (country: { label: string; value: string }) => country.value !== "IL"
-        ),
-    []
-  );
+  function handleCategoryChange(selectedCategory: MultiSelectOption): void {
+    setSelectedCategory(selectedCategory);
+    console.log("selectedCategory", selectedCategory);
 
-  function handleCategoriesChange(selectedCategoryIds: string[]): void {
-    setSelectedCategoryIds(selectedCategoryIds);
+    setSelectedSubCategories([]);
   }
+
+  function handleSubCategoriesChange(
+    selectedSubCategories: MultiSelectOption[]
+  ): void {
+    setSelectedSubCategories(selectedSubCategories);
+  }
+
+  const filteredSubCategories = useMemo(() => {
+    return subCategories.filter(
+      (subCategory) => subCategory.categoryId === selectedCategory?.value
+    );
+  }, [selectedCategory, subCategories]);
 
   function handleSubmit(e: FormEvent<HTMLFormElement>): void {
     e.preventDefault();
 
-    const isValid = validatePassword(
-      createEvent.password,
-      createEvent.confirmPassword
-    );
-
-    if (!isValid) {
-      alert("Passwords do not match");
-      return;
-    }
-
     props.onSubmit({
       ...createEvent,
-      interestedList: selectedCategoryIds,
     });
   }
 
@@ -65,9 +53,12 @@ export default function useCreateEventFormForm(
     createEvent,
     handleCreateEventChange,
     handleSubmit,
-    countries,
     categories,
-    handleCategoriesChange,
-    selectedCategoryIds,
+    subCategories,
+    selectedCategory,
+    selectedSubCategories,
+    filteredSubCategories,
+    handleCategoryChange,
+    handleSubCategoriesChange,
   };
 }

@@ -25,7 +25,7 @@ export type RegisterEmployerFormProps = {
 
 export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
   const state = useRegisterEmployerForm({ onSubmit: props.onSubmit });
-  
+
   return (
     <Card margin="auto" width="80%">
       <CardHeader as="section" textAlign="center">
@@ -93,8 +93,8 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
                 name="country"
               >
                 {state.countries.map((country) => (
-                  <option key={country.value} value={country.value}>
-                    {country.label}
+                  <option key={country.code} value={country.code}>
+                    {country.name}
                   </option>
                 ))}
               </Select>

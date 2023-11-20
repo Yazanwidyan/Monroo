@@ -1,5 +1,5 @@
 import { FormEvent, useMemo, useContext, useState } from "react";
-import countryList from "react-select-country-list";
+import countryList from "../../../constants/countries.json";
 
 import useFormFields from "../../../hooks/useFormFields";
 import { RegisterEmployer } from "../../../models/RegisterEmployer";
@@ -28,13 +28,8 @@ export default function useRegisterEmployerForm(
 
   const { categories } = useContext(LookupsContext);
 
-  const countries: { label: string; value: string }[] = useMemo(
-    () =>
-      countryList()
-        .getData()
-        .filter(
-          (country: { label: string; value: string }) => country.value !== "IL"
-        ),
+  const countries: { name: string; code: string; flag: string }[] = useMemo(
+    () => countryList.filter((country) => country.code !== "IL"),
     []
   );
 
@@ -55,7 +50,10 @@ export default function useRegisterEmployerForm(
       return;
     }
 
-    props.onSubmit({...registerEmployer, interestedList: selectedCategoryIds});
+    props.onSubmit({
+      ...registerEmployer,
+      interestedList: selectedCategoryIds,
+    });
   }
 
   return {

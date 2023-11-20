@@ -1,5 +1,6 @@
 import { useContext, useMemo } from "react";
-import countryList from "react-select-country-list";
+import countryList from "../../../../constants/countries.json";
+import musicalInstrumentsList from "../../../../constants/instruments.json";
 
 import { RegisterServiceProviderContext } from "../../../../contexts/RegisterServiceProviderContext";
 import { LookupsContext } from "../../../../contexts/LookupsContext";
@@ -24,13 +25,13 @@ export default function useRegisterServiceProviderProfessionalInfo() {
 
   const { registerServiceProviderLookup } = useContext(LookupsContext);
 
-  const countries: { label: string; value: string }[] = useMemo(
-    () =>
-      countryList()
-        .getData()
-        .filter(
-          (country: { label: string; value: string }) => country.value !== "IL"
-        ),
+  const countries: { name: string; code: string }[] = useMemo(
+    () => countryList.filter((country) => country.code !== "IL"),
+    []
+  );
+
+  const musicalInstruments: { name: string; id: number }[] = useMemo(
+    () => musicalInstrumentsList,
     []
   );
 
@@ -38,6 +39,7 @@ export default function useRegisterServiceProviderProfessionalInfo() {
     professionalInfo,
     handleProfessionalInfoChange,
     countries,
+    musicalInstruments,
     resumeError,
     resumeFile,
     resumeInputKey,

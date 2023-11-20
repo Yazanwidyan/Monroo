@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://my-json-server.typicode.com/typicode/demo",
+  baseURL: "http://localhost:4000",
   timeout: 10000,
 });
 
@@ -9,12 +9,12 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     // Retrieve token from wherever it's stored (e.g., localStorage)
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token");
 
     // If a token exists, set it in the request headers
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+    // if (token) {
+    //   config.headers.Authorization = `Bearer ${token}`;
+    // }
 
     return config;
   },

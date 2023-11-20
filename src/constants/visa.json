@@ -1,0 +1,26 @@
+﻿[
+  {
+    "id": 1,
+    "name": "Citizen"
+  },
+  {
+    "id": 2,
+    "name": "Residence"
+  },
+  {
+    "id": 3,
+    "name": "Tourist Visa"
+  },
+  {
+    "id": 4,
+    "name": "Work Visa"
+  },
+  {
+    "id": 5,
+    "name": "Student Visa"
+  },
+  {
+    "id": 6,
+    "name": "Business Visa"
+  }
+]

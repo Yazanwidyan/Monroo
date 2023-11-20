@@ -62,8 +62,8 @@ export default function RegisterServiceProviderProfessionalInfo() {
             name="openToWorkInCountry"
           >
             {state.countries.map((country) => (
-              <option key={country.value} value={country.value}>
-                {country.label}
+              <option key={country.code} value={country.code}>
+                {country.name}
               </option>
             ))}
           </Select>
@@ -79,8 +79,8 @@ export default function RegisterServiceProviderProfessionalInfo() {
             name="openToWorkInCountry"
           >
             {state.countries.map((country) => (
-              <option key={country.value} value={country.value}>
-                {country.label}
+              <option key={country.code} value={country.code}>
+                {country.name}
               </option>
             ))}
           </Select>
@@ -313,14 +313,18 @@ export default function RegisterServiceProviderProfessionalInfo() {
       {state.registerServiceProviderLookup.musicalInstruments && (
         <FormControl>
           <FormLabel>Musical Instruments</FormLabel>
-          <Input
-            type="text"
-            name="musicalInstruments"
-            placeholder="Enter musical instruments"
+          <Select
+            placeholder="Select instrument"
             value={state.professionalInfo.musicalInstruments}
             onChange={state.handleProfessionalInfoChange}
-            required
-          />
+            name="musicalInstruments"
+          >
+            {state.musicalInstruments.map((instrument) => (
+              <option key={instrument.id} value={instrument.id}>
+                {instrument.name}
+              </option>
+            ))}
+          </Select>
         </FormControl>
       )}
       {state.registerServiceProviderLookup.musicGenres && (

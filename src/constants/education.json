@@ -1,0 +1,44 @@
+﻿[
+  {
+    "name": "No schooling",
+    "nameAR": "لا تعليم",
+    "nameRUS": "Нет обучения",
+    "code": "0"
+  },
+  {
+    "name": "Early childhood education",
+    "nameAR": "تعليم ابتدائي",
+    "nameRUS": "Дошкольное образование",
+    "code": "1"
+  },
+  {
+    "name": "Primary education",
+    "nameAR": "تعليم أساسي",
+    "nameRUS": "Начальное образование",
+    "code": "2"
+  },
+  {
+    "name": "Upper secondary education",
+    "nameAR": "التعليم الثانوي العالي",
+    "nameRUS": "Полное среднее образование",
+    "code": "3"
+  },
+  {
+    "name": "Bachelor’s",
+    "nameAR": "بكالوريوس",
+    "nameRUS": "бакалавриат",
+    "code": "4"
+  },
+  {
+    "name": "Master’s",
+    "nameAR": "ماستر",
+    "nameRUS": "Магистр",
+    "code": "5"
+  },
+  {
+    "name": "Doctoral",
+    "nameAR": "دكتوراه",
+    "nameRUS": "Докторантура",
+    "code": "6"
+  }
+]

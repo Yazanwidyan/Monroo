@@ -39,10 +39,10 @@ export default function LoginForm(props: LoginFormProps) {
               <FormLabel htmlFor="email">{t("login.email")}</FormLabel>
               <Input
                 type="text"
-                id="email"
-                name="email"
+                id="username"
+                name="username"
                 placeholder={t("login.enter_email")}
-                value={state.login.email}
+                value={state.login.username}
                 onChange={state.handleLoginChange}
                 required
               />

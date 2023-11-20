@@ -47,8 +47,8 @@ export default function RegisterServiceProviderPersonalInfo() {
           name="gender"
         >
           <Stack gap="20px" direction="row">
-            <Radio value="Male">Male</Radio>
-            <Radio value="Female">Female</Radio>
+            <Radio value="0">Male</Radio>
+            <Radio value="1">Female</Radio>
           </Stack>
         </RadioGroup>
       </FormControl>
@@ -61,8 +61,8 @@ export default function RegisterServiceProviderPersonalInfo() {
           name="nationality"
         >
           {state.countries.map((country) => (
-            <option key={country.value} value={country.value}>
-              {country.label}
+            <option key={country.code} value={country.code}>
+              {country.name}
             </option>
           ))}
         </Select>

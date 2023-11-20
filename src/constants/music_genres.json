@@ -1,0 +1,82 @@
+﻿[
+  {
+    "id": 1,
+    "name": "Rock"
+  },
+  {
+    "id": 2,
+    "name": "Hip-Hop/Rap"
+  },
+  {
+    "id": 3,
+    "name": "Electronic"
+  },
+  {
+    "id": 4,
+    "name": "Jazz"
+  },
+  {
+    "id": 5,
+    "name": "Blues"
+  },
+  {
+    "id": 6,
+    "name": "R&B/Soul"
+  },
+  {
+    "id": 7,
+    "name": "Country"
+  },
+  {
+    "id": 8,
+    "name": "Classical"
+  },
+  {
+    "id": 9,
+    "name": "Reggae"
+  },
+  {
+    "id": 10,
+    "name": "Latin"
+  },
+  {
+    "id": 11,
+    "name": "Folk"
+  },
+  {
+    "id": 12,
+    "name": "World"
+  },
+  {
+    "id": 13,
+    "name": "Gospel"
+  },
+  {
+    "id": 14,
+    "name": "Blues"
+  },
+  {
+    "id": 15,
+    "name": "Punk"
+  },
+  {
+    "id": 16,
+    "name": "Funk"
+  },
+  {
+    "id": 17,
+    "name": "Disco"
+  },
+  {
+    "id": 18,
+    "name": "Swing"
+  },
+  {
+    "id": 19,
+    "name": "Ambient"
+  },
+  {
+    "id": 20,
+    "name": "Grime"
+  }
+]

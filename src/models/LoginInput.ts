@@ -1,6 +1,4 @@
 export type LoginInput = {
-  email: string;
+  username: string;
   password: string;
-  userType: string;
-  userId: number;
 };
