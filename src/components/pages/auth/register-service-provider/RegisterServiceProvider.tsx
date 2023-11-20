@@ -10,6 +10,9 @@ export default function RegisterServiceProvider() {
     <RegisterServiceProviderContextProvider>
       <RegisterServiceProviderForm
         handleSubmit={async (one, two, three) => {
+          console.log("one, two, three", one, two, three);
+
+          return;
           const registerInfo = {
             ...one,
             ...two,

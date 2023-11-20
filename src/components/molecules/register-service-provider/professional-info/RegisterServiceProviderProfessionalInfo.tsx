@@ -113,14 +113,18 @@ export default function RegisterServiceProviderProfessionalInfo() {
       {state.registerServiceProviderLookup.visaType && (
         <FormControl>
           <FormLabel>Visa Type</FormLabel>
-          <Input
-            type="text"
-            name="visaType"
-            placeholder="Enter your visa type"
+          <Select
+            placeholder="Select your visa type"
             value={state.professionalInfo.visaType}
             onChange={state.handleProfessionalInfoChange}
-            required
-          />
+            name="visaType"
+          >
+            {state.visaType.map((visa) => (
+              <option key={visa.id} value={visa.id}>
+                {visa.name}
+              </option>
+            ))}
+          </Select>
         </FormControl>
       )}
       {state.registerServiceProviderLookup.height && (
@@ -330,14 +334,18 @@ export default function RegisterServiceProviderProfessionalInfo() {
       {state.registerServiceProviderLookup.musicGenres && (
         <FormControl>
           <FormLabel>Music Genres</FormLabel>
-          <Input
-            type="text"
-            name="musicGenres"
-            placeholder="Enter music genres"
+          <Select
+            placeholder="Select music genres"
             value={state.professionalInfo.musicGenres}
             onChange={state.handleProfessionalInfoChange}
-            required
-          />
+            name="musicGenres"
+          >
+            {state.musicGenres.map((genre) => (
+              <option key={genre.id} value={genre.id}>
+                {genre.name}
+              </option>
+            ))}
+          </Select>
         </FormControl>
       )}
       {state.registerServiceProviderLookup.specialSkills && (
