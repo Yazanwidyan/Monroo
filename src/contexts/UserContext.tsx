@@ -20,9 +20,15 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
   });
 
   const updateUser = (userInfo: LoginInput | null) => {
-    setUser(userInfo);
+    setUser({ ...userInfo, isMainUser: !userInfo.hasOwnProperty("dob") });
     if (userInfo) {
-      localStorage.setItem("user", JSON.stringify(userInfo));
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          ...userInfo,
+          isMainUser: !userInfo.hasOwnProperty("dob"),
+        })
+      );
     } else {
       localStorage.removeItem("user");
     }

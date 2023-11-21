@@ -8,7 +8,7 @@ const authServices = {
       },
     };
     return api
-      .post(`/monroo/apis/user/login`, payload, config)
+      .post(`/monroo/apis/provider/login`, payload, config)
       .then((response) => {
         return response;
       })

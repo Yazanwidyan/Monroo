@@ -5,9 +5,9 @@ import { UserContext } from "../../../contexts/UserContext";
 
 const HomeLayout = () => {
   const navigate = useNavigate();
-  const { updateUser } = useContext(UserContext);
+  const { user, updateUser } = useContext(UserContext);
   const handleLogout = () => {
-    updateUser(null);
+    updateUser("");
     navigate("/login");
   };
   return (
@@ -23,13 +23,20 @@ const HomeLayout = () => {
         top="0"
         zIndex="sticky"
       >
-        <Link as={RouterLink} to={"/home"} fontSize="xl" fontWeight="bold">
+        <Link
+          as={RouterLink}
+          to={user.isMainUser ? "/home" : "/timeline"}
+          fontSize="xl"
+          fontWeight="bold"
+        >
           Home
         </Link>
         <Flex align="center">
-          <Link as={RouterLink} to="/events" mx="1rem">
-            Booking
-          </Link>
+          {!user.isMainUser && (
+            <Link as={RouterLink} to="/events" mx="1rem">
+              Booking
+            </Link>
+          )}
           <Link as={RouterLink} to="/inbox">
             Inbox
           </Link>

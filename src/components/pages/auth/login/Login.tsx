@@ -19,7 +19,11 @@ export default function Login() {
         try {
           const res = await authServices.login(loginInput);
           updateUser(res);
-          navigate("/home", { replace: true });
+          if (!res.hasOwnProperty("dob")) {
+            navigate("/home", { replace: true });
+          } else {
+            navigate("/timeline", { replace: true });
+          }
         } catch (error) {
           openSnackBar(error, "error");
         }
