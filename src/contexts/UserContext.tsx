@@ -3,7 +3,7 @@ import { LoginInput } from "../models/LoginInput";
 
 type UserContextType = {
   user: any;
-  updateUser: (userInfo: LoginInput | null) => void;
+  updateUser: (userInfo: any | null) => void;
 };
 
 export const UserContext = createContext<UserContextType>({

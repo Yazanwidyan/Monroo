@@ -71,13 +71,10 @@ const HomeUser = () => {
   const fetchData = async () => {
     const requestData = {
       userID: user.id,
-      // Other necessary data if required by the backend
     };
 
     try {
-      const res = await userServices.getListProviders(
-        JSON.stringify(requestData)
-      );
+      const res = await userServices.getListProviders(requestData);
       console.log("list of provider", res);
     } catch (error) {
       console.log("error", error);
@@ -87,7 +84,7 @@ const HomeUser = () => {
       const res = await commonService.getCategories();
       console.log("list of categories", res);
     } catch (error) {
-      console.log("error", error);
+      openSnackBar(error, "error");
     }
   };
 

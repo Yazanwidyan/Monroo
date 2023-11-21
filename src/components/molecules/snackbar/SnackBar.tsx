@@ -46,7 +46,7 @@ const SnackBar: React.FC = () => {
           left="46%"
           transform="translate(-50%, -50%)"
           width="300px"
-          zIndex={999}
+          zIndex={9999}
         >
           <AlertIcon />
           <AlertTitle>{snackBarMessage}</AlertTitle>

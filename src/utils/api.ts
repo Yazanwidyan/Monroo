@@ -3,28 +3,16 @@ import axios from "axios";
 const api = axios.create({
   baseURL: "http://localhost:3000",
 });
-
-api.interceptors.request.use(
-  (config) => {
-    // const user = JSON.parse(localStorage.getItem("user"));
-
-    // if (user) {
-    //   config.headers.Authorization = `Bearer ${user.token}`;
-    // }
-
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
 api.interceptors.response.use(
   (response) => {
-    return response;
+    if (response?.data?.status == 200) {
+      return response?.data?.data;
+    } else {
+      return Promise.reject(response?.data?.data);
+    }
   },
   (error) => {
-    return Promise.reject(error);
+    return Promise.reject(error.message);
   }
 );
 

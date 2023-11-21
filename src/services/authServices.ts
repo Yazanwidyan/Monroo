@@ -10,7 +10,7 @@ const authServices = {
     return api
       .post(`/monroo/apis/user/login`, payload, config)
       .then((response) => {
-        return response.data;
+        return response;
       })
       .catch((error) => {
         throw error;
@@ -25,7 +25,7 @@ const authServices = {
     return api
       .post(`/monroo/apis/user/register`, payload, config)
       .then((response) => {
-        return response.data;
+        return response;
       })
       .catch((error) => {
         throw error;

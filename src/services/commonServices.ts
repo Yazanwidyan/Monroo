@@ -10,7 +10,7 @@ const commonService = {
     return api
       .post(`/monroo/apis/lookups/getCategories`, null, config)
       .then((response) => {
-        return response.data;
+        return response;
       })
       .catch((error) => {
         throw error;

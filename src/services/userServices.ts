@@ -5,13 +5,13 @@ const userServices = {
     const user = JSON.parse(localStorage.getItem("user"));
     const config = {
       headers: {
-        Authorization: "Bearer" + " " + user.token,
+        "x-access-token": user.token,
       },
     };
     return api
       .post(`/monroo/apis/user/ListProviders`, payload, config)
       .then((response) => {
-        return response.data;
+        return response;
       })
       .catch((error) => {
         throw error;

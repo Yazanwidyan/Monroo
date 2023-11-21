@@ -6,8 +6,5 @@ export default function PrivateRoutes() {
   const { user } = useContext(UserContext);
 
   const isLoggedIn = !!user;
-
-  console.log("isLoggedIn", isLoggedIn);
-
   return isLoggedIn ? <Outlet /> : <Navigate to="login" />;
 }
