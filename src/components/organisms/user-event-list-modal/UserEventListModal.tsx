@@ -12,8 +12,28 @@ import {
   Flex,
   Box,
 } from "@chakra-ui/react";
+import { useSnackBar } from "../../../contexts/SnackbarContext";
+import userServices from "../../../services/userServices";
 
-const UserEventListModal = ({ isOpen, onClose, events }) => {
+const UserEventListModal = ({ isOpen, onClose, events, providerID }) => {
+  const { openSnackBar } = useSnackBar();
+
+  const requestPrivateEvent = async (event) => {
+    console.log(event);
+
+    const payload = {
+      userID: event.userID,
+      providerID: providerID,
+      eventID: event.id,
+    };
+    try {
+      const res = await userServices.requestPrivateEvent(payload);
+      console.log("res from message", res);
+    } catch (error) {
+      openSnackBar(error, "error");
+    }
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="lg">
       <ModalOverlay />
@@ -24,6 +44,7 @@ const UserEventListModal = ({ isOpen, onClose, events }) => {
           <VStack spacing={4} align="stretch">
             {events.map((event, index) => (
               <Box
+                onClick={() => requestPrivateEvent(event)}
                 key={index}
                 borderWidth="1px"
                 borderRadius="lg"

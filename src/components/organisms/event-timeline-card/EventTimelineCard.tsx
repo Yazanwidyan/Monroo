@@ -2,17 +2,18 @@ import {
   Box,
   Text,
   Flex,
-  IconButton,
   Stack,
   Divider,
   Image,
+  Button,
 } from "@chakra-ui/react";
-import { FaHeart, FaComment, FaSave } from "react-icons/fa";
 
 const EventTimelineCard = ({
   image,
   title,
   name,
+  duration,
+  posted,
   description,
   onPoke,
   onMessage,
@@ -21,37 +22,25 @@ const EventTimelineCard = ({
   return (
     <Box borderWidth="1px" borderRadius="lg" p={4} boxShadow="base">
       <Image src={image} alt={name} mb={4} width="200px" height="auto" />
-
       <Text fontSize="xl" fontWeight="bold" mb={2}>
         {title}
       </Text>
-      <Text fontSize="md" fontWeight="bold" mb={2}>
-        {name}
-      </Text>
+      {/* Uncomment this section if needed */}
+      {/* <Text fontSize="md" fontWeight="bold" mb={2}>
+      {name}
+    </Text> */}
+
       <Text>{description}</Text>
+      <Text>Event duration: {duration} hrs</Text>
+      <Text>Posted: {posted}</Text>
       <Divider my={3} />
-      <Flex justify="space-between">
+
+      <Flex justifyContent="space-between">
         <Stack direction="row" spacing={4}>
-          <IconButton
-            aria-label="Poke"
-            icon={<FaHeart />}
-            onClick={onPoke}
-            variant="outline"
-          />
-          <IconButton
-            aria-label="Message"
-            icon={<FaComment />}
-            onClick={onMessage}
-            variant="outline"
-          />
-          <IconButton
-            aria-label="Save"
-            icon={<FaSave />}
-            onClick={onSave}
-            variant="outline"
-          />
+          <Button onClick={onPoke}>Poke Author</Button>
+          <Button onClick={onMessage}>Message Author</Button>
+          <Button onClick={onSave}>Save Post</Button>
         </Stack>
-        {/* You can add additional components here */}
       </Flex>
     </Box>
   );

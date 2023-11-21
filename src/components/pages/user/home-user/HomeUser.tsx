@@ -6,13 +6,12 @@ import { Button } from "@chakra-ui/button";
 import { Grid, GridItem } from "@chakra-ui/react";
 import { UserContext } from "../../../../contexts/UserContext";
 import userServices from "../../../../services/userServices";
-import commonService from "../../../../services/commonServices";
 
 const HomeUser = () => {
   const { openSnackBar } = useSnackBar();
   const { user } = useContext(UserContext);
 
-  const [userProfiles, setUserProfiles] = useState<any>([]);
+  const [providersList, setListProviders] = useState<any>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const openDialog = () => {
@@ -21,13 +20,6 @@ const HomeUser = () => {
 
   const closeDialog = () => {
     setIsDialogOpen(false);
-  };
-
-  const handleShowSuccess = () => {
-    openSnackBar("Operation succeeded!", "success");
-  };
-  const handleShowError = () => {
-    openSnackBar("Operation error!", "error");
   };
 
   useEffect(() => {
@@ -41,7 +33,7 @@ const HomeUser = () => {
     };
     try {
       const res = await userServices.getListProviders(payload);
-      setUserProfiles(res);
+      setListProviders(res);
     } catch (error) {
       openSnackBar(error, "error");
     }
@@ -50,7 +42,7 @@ const HomeUser = () => {
   return (
     <div>
       <Grid templateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={4}>
-        {userProfiles.map((userProfile, index) => (
+        {providersList.map((userProfile, index) => (
           <GridItem key={index}>
             <ServiceProviderCard
               image={userProfile.profilePic}
@@ -60,11 +52,13 @@ const HomeUser = () => {
               experience={userProfile.experience}
               nationality={userProfile.nationality}
               gender={userProfile.gender}
+              providerID={userProfile.id}
             />
           </GridItem>
         ))}
       </Grid>
       <Button onClick={openDialog}>Create Event</Button>
+
       <CreateEvent isOpen={isDialogOpen} onClose={closeDialog} />
     </div>
   );

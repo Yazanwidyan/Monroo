@@ -8,7 +8,7 @@ const HomeLayout = () => {
   const { user, updateUser } = useContext(UserContext);
   const handleLogout = () => {
     updateUser("");
-    navigate("/login");
+    navigate("/login-user");
   };
   return (
     <Box>

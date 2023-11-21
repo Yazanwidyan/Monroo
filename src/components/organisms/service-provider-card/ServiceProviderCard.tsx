@@ -21,17 +21,17 @@ const ServiceProviderCard = ({
   experience,
   nationality,
   gender,
+  providerID,
 }) => {
-  const handleRequestPrivateEvent = () => {
-    console.log(`Requesting private event for ${name}`);
-    openModal();
-  };
-
   const { openSnackBar } = useSnackBar();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user } = useContext(UserContext);
 
   const [userEvents, setUserEvents] = useState<any>([]);
+
+  const handleRequestPrivateEvent = () => {
+    openModal();
+  };
 
   const openModal = async () => {
     setIsModalOpen(true);
@@ -91,6 +91,7 @@ const ServiceProviderCard = ({
         </Button>
 
         <UserEventListModal
+          providerID={providerID}
           isOpen={isModalOpen}
           onClose={closeModal}
           events={userEvents}

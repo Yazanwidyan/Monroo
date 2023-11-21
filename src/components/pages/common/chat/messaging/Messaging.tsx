@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   collection,
@@ -19,6 +19,10 @@ import {
   Text,
   Flex,
 } from "@chakra-ui/react";
+import { UserContext } from "../../../../../contexts/UserContext";
+import { useSnackBar } from "../../../../../contexts/SnackbarContext";
+import providerServices from "../../../../../services/providerServices";
+import userServices from "../../../../../services/userServices";
 
 const getStatusText = (status) => {
   switch (status) {
@@ -36,6 +40,8 @@ const getStatusText = (status) => {
 };
 
 const Messaging = () => {
+  const { user } = useContext(UserContext);
+  const { openSnackBar } = useSnackBar();
   const { roomid } = useParams();
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
@@ -48,68 +54,89 @@ const Messaging = () => {
   }, [messages]);
 
   useEffect(() => {
-    const queryMessages = query(
-      messagesRef,
-      where("room", "==", roomid),
-      orderBy("createdAt")
-    );
-    const unsuscribe = onSnapshot(queryMessages, (snapshot) => {
-      let messages = [];
-      snapshot.forEach((doc) => {
-        messages.push({ ...doc.data(), id: doc.id });
-      });
-      console.log(messages);
-      setMessages(messages);
-    });
-
-    return () => unsuscribe();
+    fetchData();
+    return () => {};
   }, []);
 
-  const sendMessage = async (e) => {
-    e.preventDefault();
+  const fetchData = async () => {
+    const userIDMessage = localStorage.getItem("userIDMessage");
+    let payload;
+    if (user.isMainUser) {
+      payload = {
+        providerID: userIDMessage,
+      };
+    } else {
+      payload = {
+        userID: userIDMessage,
+      };
+    }
+    try {
+      let res;
+      if (user.isMainUser) {
+        res = await userServices.getDetailedMessages(payload);
+      } else {
+        res = await providerServices.getDetailedMessages(payload);
+      }
 
-    if (newMessage.trim() !== "") {
-      await addDoc(messagesRef, {
-        text: newMessage,
-        user: "user",
-        userId: 1,
-        createdAt: serverTimestamp(),
-        room: roomid,
-        type: "requestEvent",
-        eventObj: {
-          title: "Guitar Lessons",
-          desc: "Learn to play the guitar with expert instructors!",
-          createdDate: "2023-11-19",
-          eventDate: "2023-12-05",
-          userID: "user123",
-          providerID: "provider456",
-          catID: "music123",
-          subCatID: "guitar789",
-          duration: "1 hour/session",
-          averageCost: "$50/session",
-          country: "USA",
-          dealCost: "$40/session",
-        },
-      });
-
-      setNewMessage("");
+      setMessages(res);
+      console.log("res from messages inbox", res);
+    } catch (error) {
+      openSnackBar(error, "error");
     }
   };
 
+  const sendMessage = async (e, message) => {
+    e.preventDefault();
+    let payload;
+    if (newMessage.trim() !== "") {
+      if (user.isMainUser) {
+        payload = {
+          msg: newMessage,
+          userID: user.id,
+          providerID: message.providerID,
+          senderID: user.id,
+          type: 2,
+        };
+      } else {
+        payload = {
+          msg: newMessage,
+          userID: message.userID,
+          providerID: user.id,
+          senderID: user.id,
+          type: 2,
+        };
+      }
+      try {
+        let res;
+        if (user.isMainUser) {
+          res = await userServices.sendMessage(payload);
+        } else {
+          res = await providerServices.sendMessage(payload);
+        }
+        setNewMessage("");
+        await fetchData();
+        console.log("res from message", res);
+      } catch (error) {
+        openSnackBar(error, "error");
+      }
+    }
+  };
   const renderMessage = (message, index) => {
-    if (message.type === "requestEvent") {
+    if (message.type === 1 && message.providerID !== user.id) {
       return (
         <Flex
           key={index}
-          justifyContent={message.userId === 1 ? "flex-end" : "flex-start"}
+          justifyContent={
+            message.senderID === user.id ? "flex-end" : "flex-start"
+          }
         >
           <Box
             maxW="70%"
             p={3}
             m={3}
             borderRadius="lg"
-            bg={message.userId === 1 ? "primary.500" : "gray.200"}
-            color={message.userId === 1 ? "white" : "black"}
+            bg={message.senderID === user.id ? "primary.500" : "gray.200"}
+            color={message.senderID === user.id ? "white" : "black"}
           >
             <Box borderWidth="1px" borderRadius="lg" p="4" m="4">
               <Text fontSize="xl" fontWeight="bold">
@@ -132,19 +159,21 @@ const Messaging = () => {
           </Box>
         </Flex>
       );
-    } else if (message.type === "approveEvent") {
+    } else if (message.type === 1) {
       return (
         <Flex
           key={index}
-          justifyContent={message.userId === 2 ? "flex-end" : "flex-start"}
+          justifyContent={
+            message.senderID === user.id ? "flex-end" : "flex-start"
+          }
         >
           <Box
             maxW="70%"
             p={3}
             m={3}
             borderRadius="lg"
-            bg={message.userId === 2 ? "primary.500" : "gray.200"}
-            color={message.userId === 2 ? "white" : "black"}
+            bg={message.senderID === user.id ? "primary.500" : "gray.200"}
+            color={message.senderID === user.id ? "white" : "black"}
           >
             <Box borderWidth="1px" borderRadius="lg" p="4" m="4">
               <Text fontSize="xl" fontWeight="bold">
@@ -163,6 +192,7 @@ const Messaging = () => {
               <Text fontSize="sm" mt="2">
                 Status: {getStatusText(message.eventObj.status)}
               </Text>
+              <Button>approve request</Button>
               <Button>cancel request</Button>
             </Box>
           </Box>
@@ -172,17 +202,19 @@ const Messaging = () => {
       return (
         <Flex
           key={index}
-          justifyContent={message.userId === 2 ? "flex-end" : "flex-start"}
+          justifyContent={
+            message.senderID === user.id ? "flex-end" : "flex-start"
+          }
         >
           <Box
             maxW="70%"
             p={3}
             m={3}
             borderRadius="lg"
-            bg={message.userId === 2 ? "primary.500" : "gray.200"}
-            color={message.userId === 2 ? "white" : "black"}
+            bg={message.senderID === user.id ? "primary.500" : "gray.200"}
+            color={message.senderID === user.id ? "white" : "black"}
           >
-            <Text>{message.text}</Text>
+            <Text>{message.msg}</Text>
           </Box>
         </Flex>
       );
@@ -199,7 +231,7 @@ const Messaging = () => {
           {messages.map((message, index) => renderMessage(message, index))}
           <div ref={messagesEndRef} />
         </Box>
-        <form onSubmit={sendMessage}>
+        <form onSubmit={(e) => sendMessage(e, messages[0])}>
           <Flex>
             <Input
               value={newMessage}

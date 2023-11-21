@@ -11,11 +11,12 @@ import {
   CardFooter,
   Box,
   Link as ChakraLink,
+  Flex,
 } from "@chakra-ui/react";
 import useLoginForm from "./useLoginForm"; // Update this import path if needed
 import { useTranslation } from "react-i18next";
 import { LoginInput } from "../../../models/LoginInput";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation, useParams } from "react-router-dom";
 
 export type LoginFormProps = {
   handleSubmit(loginInput: LoginInput): void;
@@ -23,6 +24,8 @@ export type LoginFormProps = {
 
 export default function LoginForm(props: LoginFormProps) {
   const state = useLoginForm({ onSubmit: props.handleSubmit });
+  const { pathname } = useLocation();
+
   const { t } = useTranslation();
 
   return (
@@ -30,7 +33,9 @@ export default function LoginForm(props: LoginFormProps) {
       <Card boxShadow="md">
         <CardHeader textAlign="center" bg="primary.500" py="4">
           <Heading as="h2" color="white" fontSize="xl">
-            {t("login.login")}
+            {pathname === "/login-user"
+              ? t("login.login") + " " + "User"
+              : t("login.login") + " " + "Provider"}
           </Heading>
         </CardHeader>
         <CardBody>
@@ -70,17 +75,32 @@ export default function LoginForm(props: LoginFormProps) {
           </form>
         </CardBody>
         <CardFooter>
-          <Box>
-            <ChakraLink
-              as={RouterLink}
-              to="/register"
-              href="/register"
-              color="blue.500"
-              textDecoration="none"
-            >
-              Register
-            </ChakraLink>
-          </Box>
+          <Flex width={"100%"} justifyContent={"space-between"}>
+            <Box>
+              <ChakraLink
+                as={RouterLink}
+                to="/register"
+                href="/register"
+                color="blue.500"
+                textDecoration="none"
+              >
+                Register
+              </ChakraLink>
+            </Box>
+            <Box>
+              <ChakraLink
+                as={RouterLink}
+                to={
+                  pathname === "/login-user" ? "/login-provider" : "/login-user"
+                }
+                href="/login-provider"
+                color="blue.500"
+                textDecoration="none"
+              >
+                {pathname === "/login-user" ? "Login provider" : "Login user"}
+              </ChakraLink>
+            </Box>
+          </Flex>
         </CardFooter>
       </Card>
     </Container>

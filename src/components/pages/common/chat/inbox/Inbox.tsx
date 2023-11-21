@@ -1,25 +1,44 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Box, Button, Text, Stack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import userServices from "../../../../../services/userServices";
+import { useSnackBar } from "../../../../../contexts/SnackbarContext";
+import { UserContext } from "../../../../../contexts/UserContext";
+import providerServices from "../../../../../services/providerServices";
 
 const Inbox = () => {
   const [rooms, setRooms] = useState([]);
   const navigate = useNavigate();
+  const { openSnackBar } = useSnackBar();
+  const { user } = useContext(UserContext);
 
-  const handleRoomClick = (id) => {
-    navigate(`/inbox/messaging/${id}`);
+  const handleRoomClick = (room) => {
+    localStorage.setItem("userIDMessage", room.senderID);
+    navigate(`/inbox/messaging/${room.messageID}`);
   };
 
   useEffect(() => {
-    // Simulated rooms data
-    const simulatedRooms = [
-      { id: "1", name: "Room 1" },
-      { id: "2", name: "Room 2" },
-      { id: "3", name: "Room 3" },
-    ];
-
-    setRooms(simulatedRooms);
+    fetchData();
+    return () => {};
   }, []);
+
+  const fetchData = async () => {
+    const payload = {
+      userID: user.id,
+    };
+    try {
+      let res;
+      if (user.isMainUser) {
+        res = await userServices.getUserMessages(payload);
+      } else {
+        res = await providerServices.getUserMessages(payload);
+      }
+      setRooms(res);
+      console.log("res from messages inbox", res);
+    } catch (error) {
+      openSnackBar(error, "error");
+    }
+  };
 
   return (
     <Box>
@@ -29,11 +48,11 @@ const Inbox = () => {
       <Stack spacing={4}>
         {rooms.map((room) => (
           <Button
-            key={room.id}
+            key={room.messageID}
             variant="outline"
-            onClick={() => handleRoomClick(room.id)}
+            onClick={() => handleRoomClick(room)}
           >
-            {room.name}
+            {room.senderName}
           </Button>
         ))}
       </Stack>

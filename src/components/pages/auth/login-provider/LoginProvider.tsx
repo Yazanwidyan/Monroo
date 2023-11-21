@@ -7,7 +7,7 @@ import { UserContext } from "../../../../contexts/UserContext";
 import authServices from "../../../../services/authServices";
 import { useSnackBar } from "../../../../contexts/SnackbarContext";
 
-export default function Login() {
+export default function LoginProvider() {
   const navigate = useNavigate();
   const { openSnackBar } = useSnackBar();
 
@@ -17,7 +17,7 @@ export default function Login() {
     <LoginForm
       handleSubmit={async (loginInput: LoginInput) => {
         try {
-          const res = await authServices.login(loginInput);
+          const res = await authServices.loginProvider(loginInput);
           updateUser(res);
           if (!res.hasOwnProperty("dob")) {
             navigate("/home", { replace: true });
