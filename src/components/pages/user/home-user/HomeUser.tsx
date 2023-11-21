@@ -8,44 +8,11 @@ import { UserContext } from "../../../../contexts/UserContext";
 import userServices from "../../../../services/userServices";
 import commonService from "../../../../services/commonServices";
 
-const userProfilesData = [
-  {
-    image:
-      "https://media.istockphoto.com/id/1226217925/photo/portrait-of-focused-building-constructor-in-his-workplace-cranes-in-background.jpg?s=612x612&w=0&k=20&c=InRSmSD3VUepKOJy5htT2I8scJW8Mj_PqUAwCRd_Fx4=",
-    title: "Engineer",
-    name: "Morgan Smith",
-    description: "Passionate about building innovative solutions.",
-    experience: "8 years",
-    nationality: "Canadian",
-    gender: "Female",
-  },
-  {
-    image:
-      "https://foodie.sysco.com/wp-content/uploads/2019/07/MarcusMeansChefProfile_800x850.jpg",
-    title: "Chef",
-    name: "Bob Johnson",
-    description: "Creating culinary experiences that delight the senses.",
-    experience: "12 years",
-    nationality: "Italian",
-    gender: "Male",
-  },
-  {
-    image:
-      "https://previews.123rf.com/images/georgerudy/georgerudy1703/georgerudy170300108/73532351-beautiful-business-lady-is-looking-at-camera-and-smiling-while-working-in-office.jpg",
-    title: "Designer",
-    name: "Eva Martinez",
-    description: "Bringing creativity to life through design.",
-    experience: "6 years",
-    nationality: "Spanish",
-    gender: "Female",
-  },
-];
-
 const HomeUser = () => {
   const { openSnackBar } = useSnackBar();
   const { user } = useContext(UserContext);
 
-  const [userProfiles, setUserProfiles] = useState(userProfilesData);
+  const [userProfiles, setUserProfiles] = useState<any>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const openDialog = () => {
@@ -69,20 +36,12 @@ const HomeUser = () => {
   }, []);
 
   const fetchData = async () => {
-    const requestData = {
+    const payload = {
       userID: user.id,
     };
-
     try {
-      const res = await userServices.getListProviders(requestData);
-      console.log("list of provider", res);
-    } catch (error) {
-      console.log("error", error);
-    }
-
-    try {
-      const res = await commonService.getCategories();
-      console.log("list of categories", res);
+      const res = await userServices.getListProviders(payload);
+      setUserProfiles(res);
     } catch (error) {
       openSnackBar(error, "error");
     }
@@ -94,10 +53,10 @@ const HomeUser = () => {
         {userProfiles.map((userProfile, index) => (
           <GridItem key={index}>
             <ServiceProviderCard
-              image={userProfile.image}
+              image={userProfile.profilePic}
               title={userProfile.title}
-              name={userProfile.name}
-              description={userProfile.description}
+              name={userProfile.username}
+              description={userProfile.bio}
               experience={userProfile.experience}
               nationality={userProfile.nationality}
               gender={userProfile.gender}

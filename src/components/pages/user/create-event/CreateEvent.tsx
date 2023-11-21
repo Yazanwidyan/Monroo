@@ -10,9 +10,11 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
+import userServices from "../../../../services/userServices";
+import { useSnackBar } from "../../../../contexts/SnackbarContext";
 
 export default function CreateEventPage({ isOpen, onClose }) {
-  const navigate = useNavigate();
+  const { openSnackBar } = useSnackBar();
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -23,10 +25,19 @@ export default function CreateEventPage({ isOpen, onClose }) {
         <ModalBody>
           <CreateEventForm
             onSubmit={async (createEvent: CreateEvent) => {
-              console.log({ createEvent });
-              navigate("/login", { replace: true });
+              const payload = {
+                ...createEvent,
+                catID: createEvent.selectedCategory.value,
+                subCatID: createEvent.selectedSubCategories[0].value,
+              };
+              try {
+                const res = await userServices.createEvent(payload);
+                openSnackBar("event created successfully", "success");
+                onClose();
+              } catch (error) {
+                openSnackBar(error, "error");
+              }
             }}
-            onBackClick={() => navigate("/register")}
           />
         </ModalBody>
       </ModalContent>

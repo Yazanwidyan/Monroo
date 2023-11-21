@@ -32,9 +32,9 @@ const UserEventListModal = ({ isOpen, onClose, events }) => {
               >
                 <Flex justify="space-between" align="center">
                   <Text fontWeight="bold">{event.title}</Text>
-                  <Text color="gray.500">{event.date}</Text>
+                  <Text color="gray.500">{event.eventDate}</Text>
                 </Flex>
-                <Text mt={2}>{event.description}</Text>
+                <Text mt={2}>{event.desc}</Text>
               </Box>
             ))}
           </VStack>

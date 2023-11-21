@@ -24,6 +24,7 @@ export default function useRegisterEmployerForm(
 ) {
   const [registerEmployer, , handleRegisterEmployerChange] =
     useFormFields<RegisterEmployer>(DEFAULT_REGISTER_EMPLOYER);
+
   const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>([]);
 
   const { categories } = useContext(LookupsContext);

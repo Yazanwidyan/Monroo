@@ -4,10 +4,20 @@ import useFormFields from "../../../hooks/useFormFields";
 import { CreateEvent } from "../../../models/CreateEvent";
 import { CreateEventFormProps } from "./CreateEventForm";
 import { LookupsContext } from "../../../contexts/LookupsContext";
-import { MultiSelectOption } from "../../molecules/register-service-provider/categories/useRegisterServiceProviderCategories";
+
+export type MultiSelectOption = {
+  label: string;
+  value: string;
+};
 
 const DEFAULT_CREATE_EVENT: CreateEvent = {
-  selectedCategory: "",
+  selectedCategory: null,
+  selectedSubCategories: [],
+  title: "",
+  desc: "",
+  averageCost: "",
+  duration: "",
+  eventDate: "",
 };
 
 export default function useCreateEventFormForm(
@@ -15,6 +25,7 @@ export default function useCreateEventFormForm(
 ) {
   const [createEvent, , handleCreateEventChange] =
     useFormFields<CreateEvent>(DEFAULT_CREATE_EVENT);
+
   const [selectedCategory, setSelectedCategory] = useState<MultiSelectOption>();
   const [selectedSubCategories, setSelectedSubCategories] = useState<
     MultiSelectOption[]
@@ -46,6 +57,8 @@ export default function useCreateEventFormForm(
 
     props.onSubmit({
       ...createEvent,
+      selectedCategory: selectedCategory,
+      selectedSubCategories: selectedSubCategories,
     });
   }
 

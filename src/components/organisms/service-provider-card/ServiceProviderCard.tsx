@@ -6,15 +6,12 @@ import {
   Heading,
   VStack,
   Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import UserEventListModal from "../user-event-list-modal/UserEventListModal";
+import userServices from "../../../services/userServices";
+import { useSnackBar } from "../../../contexts/SnackbarContext";
+import { UserContext } from "../../../contexts/UserContext";
 
 const ServiceProviderCard = ({
   image,
@@ -30,13 +27,24 @@ const ServiceProviderCard = ({
     openModal();
   };
 
+  const { openSnackBar } = useSnackBar();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [userEvents, setUserEvents] = useState([
-    { title: "test event", date: "11/11/2023", description: "lorem ipsum" },
-  ]);
+  const { user } = useContext(UserContext);
 
-  const openModal = () => {
+  const [userEvents, setUserEvents] = useState<any>([]);
+
+  const openModal = async () => {
     setIsModalOpen(true);
+    const payload = {
+      userID: user.id,
+    };
+    try {
+      const res = await userServices.getUserEvents(payload);
+      console.log(res);
+      setUserEvents(res);
+    } catch (error) {
+      openSnackBar(error, "error");
+    }
   };
 
   const closeModal = () => {

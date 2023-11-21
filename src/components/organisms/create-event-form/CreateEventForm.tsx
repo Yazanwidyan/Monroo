@@ -3,14 +3,8 @@ import {
   FormLabel,
   Input,
   SimpleGrid,
-  Card,
-  CardBody,
-  CardHeader,
   Button,
   Flex,
-  Heading,
-  Select,
-  Textarea,
 } from "@chakra-ui/react";
 import { Select as MultiSelect } from "chakra-react-select";
 
@@ -20,7 +14,6 @@ import useCreateEventForm from "./useCreateEventForm";
 
 export type CreateEventFormProps = {
   onSubmit(createEvent: CreateEvent): Promise<void>;
-  onBackClick(): void;
 };
 
 export default function CreateEventForm(props: CreateEventFormProps) {
@@ -37,7 +30,7 @@ export default function CreateEventForm(props: CreateEventFormProps) {
             isSearchable={true}
             onChange={state.handleCategoryChange}
             placeholder="Select category"
-            name="category"
+            name="catID"
             options={state.categories.map((category) => ({
               label: category.name,
               value: category.id,
@@ -54,11 +47,67 @@ export default function CreateEventForm(props: CreateEventFormProps) {
             isMulti={true}
             onChange={state.handleSubCategoriesChange}
             placeholder="Select sub-categories"
-            name="subCategories"
+            name="subCatID"
             options={state.filteredSubCategories.map((category) => ({
               label: category.name,
               value: category.id,
             }))}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>title</FormLabel>
+          <Input
+            type="text"
+            name="title"
+            placeholder="Enter title"
+            value={state.createEvent.title}
+            onChange={state.handleCreateEventChange}
+            required
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>description</FormLabel>
+          <Input
+            type="text"
+            name="desc"
+            placeholder="Enter description"
+            value={state.createEvent.desc}
+            onChange={state.handleCreateEventChange}
+            required
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>cost</FormLabel>
+          <Input
+            type="text"
+            name="averageCost"
+            placeholder="Enter cost"
+            value={state.createEvent.averageCost}
+            onChange={state.handleCreateEventChange}
+            required
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>duration</FormLabel>
+          <Input
+            type="text"
+            name="duration"
+            placeholder="Enter duration"
+            value={state.createEvent.duration}
+            onChange={state.handleCreateEventChange}
+            required
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>date</FormLabel>
+          <Input
+            type="date"
+            name="eventDate"
+            placeholder="Enter date"
+            value={state.createEvent.eventDate}
+            onChange={state.handleCreateEventChange}
+            min={new Date().toISOString().split("T")[0]}
+            required
           />
         </FormControl>
       </SimpleGrid>

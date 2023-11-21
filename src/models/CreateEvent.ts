@@ -1,3 +1,11 @@
+import { MultiSelectOption } from "../components/organisms/create-event-form/useCreateEventForm";
+
 export type CreateEvent = {
-  selectedCategory: string;
+  selectedCategory: MultiSelectOption;
+  selectedSubCategories: MultiSelectOption[];
+  title: string;
+  desc: string;
+  averageCost: string;
+  duration: string;
+  eventDate: string;
 };
