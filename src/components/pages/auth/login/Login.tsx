@@ -4,7 +4,7 @@ import LoginForm from "../../../organisms/login-form/LoginForm";
 import { LoginInput } from "../../../../models/LoginInput";
 import { useContext } from "react";
 import { UserContext } from "../../../../contexts/UserContext";
-import commonService from "../../../../services/commonService";
+import authServices from "../../../../services/authServices";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -13,23 +13,14 @@ export default function Login() {
   return (
     <LoginForm
       handleSubmit={async (loginInput: LoginInput) => {
-        console.log("loginInput", loginInput);
-
         try {
-          const res = await commonService.login(loginInput);
-          console.log("res", res);
+          const res = await authServices.login(loginInput);
+          console.log("res", res.data);
+          updateUser(res.data);
+          navigate("/home", { replace: true });
         } catch (error) {
           console.log("error", error);
         }
-
-        // const loginData = {
-        //   ...loginInput,
-        //   userType: "user",
-        //   userId: 1,
-        // };
-        // updateUser(loginData);
-
-        // navigate("/home", { replace: true });
       }}
     />
   );

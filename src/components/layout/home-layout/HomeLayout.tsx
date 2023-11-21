@@ -5,13 +5,10 @@ import { UserContext } from "../../../contexts/UserContext";
 
 const HomeLayout = () => {
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
-
-  console.log("useruseruser", user);
-
+  const { updateUser } = useContext(UserContext);
   const handleLogout = () => {
+    updateUser(null);
     navigate("/login");
-    console.log("Logged out!");
   };
   return (
     <Box>
@@ -26,12 +23,7 @@ const HomeLayout = () => {
         top="0"
         zIndex="sticky"
       >
-        <Link
-          as={RouterLink}
-          to={user.userType == "user" ? "/home" : "/timeline"}
-          fontSize="xl"
-          fontWeight="bold"
-        >
+        <Link as={RouterLink} to={"/home"} fontSize="xl" fontWeight="bold">
           Home
         </Link>
         <Flex align="center">

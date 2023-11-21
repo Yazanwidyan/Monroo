@@ -1,7 +1,7 @@
 import RegisterServiceProviderForm from "../../../organisms/register-service-provider-form/RegisterServiceProviderForm";
 import RegisterServiceProviderContextProvider from "../../../../contexts/RegisterServiceProviderContext";
 import { useNavigate } from "react-router-dom";
-import commonService from "../../../../services/commonService";
+import authServices from "../../../../services/authServices";
 
 export default function RegisterServiceProvider() {
   const navigate = useNavigate();
@@ -13,23 +13,23 @@ export default function RegisterServiceProvider() {
           console.log("one, two, three", one, two, three);
 
           return;
-          const registerInfo = {
-            ...one,
-            ...two,
-            ...three,
-          };
+          // const registerInfo = {
+          //   ...one,
+          //   ...two,
+          //   ...three,
+          // };
 
-          const data = new FormData();
-          data.append("data", JSON.stringify(registerInfo)); // Stringify the combined data
+          // const data = new FormData();
+          // data.append("data", JSON.stringify(registerInfo)); // Stringify the combined data
 
-          try {
-            const res = await commonService.registerProvider(data);
-            console.log("res", res);
-          } catch (error) {
-            console.log("error", error);
-          }
+          // try {
+          //   const res = await authServices.registerProvider(data);
+          //   console.log("res", res);
+          // } catch (error) {
+          //   console.log("error", error);
+          // }
 
-          console.log("registerInfo", registerInfo);
+          // console.log("registerInfo", registerInfo);
           // navigate("/login", { replace: true });
         }}
       />

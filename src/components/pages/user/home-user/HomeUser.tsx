@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import commonService from "../../../../services/commonService";
 import { useSnackBar } from "../../../../contexts/SnackbarContext";
 import ServiceProviderCard from "../../../organisms/service-provider-card/ServiceProviderCard";
 import CreateEvent from "../create-event/CreateEvent";
 import { Button } from "@chakra-ui/button";
 import { Grid, GridItem } from "@chakra-ui/react";
 import { UserContext } from "../../../../contexts/UserContext";
+import userServices from "../../../../services/userServices";
+import commonService from "../../../../services/commonServices";
 
 const userProfilesData = [
   {
@@ -63,16 +64,28 @@ const HomeUser = () => {
   };
 
   useEffect(() => {
-    console.log("userInfo", user);
-
     fetchData();
     return () => {};
   }, []);
 
   const fetchData = async () => {
+    const requestData = {
+      userID: user.id,
+      // Other necessary data if required by the backend
+    };
+
     try {
-      const userData = await commonService.getUserData();
-      console.log("userData", userData);
+      const res = await userServices.getListProviders(
+        JSON.stringify(requestData)
+      );
+      console.log("list of provider", res);
+    } catch (error) {
+      console.log("error", error);
+    }
+
+    try {
+      const res = await commonService.getCategories();
+      console.log("list of categories", res);
     } catch (error) {
       console.log("error", error);
     }
