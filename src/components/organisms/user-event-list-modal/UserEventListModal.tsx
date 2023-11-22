@@ -28,7 +28,6 @@ const UserEventListModal = ({ isOpen, onClose, events, providerID }) => {
     };
     try {
       const res = await userServices.requestPrivateEvent(payload);
-      console.log("res from message", res);
       onClose();
       openSnackBar("event requested successfuly", "success");
     } catch (error) {

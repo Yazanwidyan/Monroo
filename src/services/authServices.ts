@@ -46,6 +46,22 @@ const authServices = {
         throw error;
       });
   },
+  registerProvider: (payload) => {
+    const config = {
+      headers: {
+        "x-secret": "MonrooHeaders",
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    return api
+      .post(`/monroo/apis/provider/register`, payload, config)
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        throw error;
+      });
+  },
 };
 
 export default authServices;

@@ -7,7 +7,12 @@ const AuthLayout = () => {
     <Flex minHeight="100vh" flexDirection="column">
       <Box bg="primary.500" py="4" px="6">
         <Flex alignItems="center">
-          <Link as={RouterLink} to={"login"} fontSize="xl" fontWeight="bold">
+          <Link
+            as={RouterLink}
+            to={"login-user"}
+            fontSize="xl"
+            fontWeight="bold"
+          >
             Monroo
           </Link>
           <Spacer />

@@ -5,6 +5,8 @@ import useRegisterServiceProviderPersonalInfo from "../../molecules/register-ser
 import useRegisterServiceProviderCategories from "../../molecules/register-service-provider/categories/useRegisterServiceProviderCategories";
 import { useContext } from "react";
 import { LookupsContext } from "../../../contexts/LookupsContext";
+import commonService from "../../../services/commonServices";
+import axios from "axios";
 
 const steps = [
   { title: "First Step", description: "Category" },
@@ -24,54 +26,28 @@ export default function useRegisterServiceProviderForm(props) {
   const state2 = useRegisterServiceProviderPersonalInfo();
   const state3 = useRegisterServiceProviderProfessionalInfo();
 
-  // console.log(state1, state2, state3);
-
   const navigate = useNavigate();
 
-  function handleNextClick(): void {
+  async function handleNextClick(): Promise<void> {
     stepsState.goToNext();
-    const updatedLookup = {
-      fname: true,
-      lname: true,
-      gender: true,
-      isActive: true,
-      username: true,
-      password: true,
-      registerDate: true,
-      phone: true,
-      email: true,
-      dob: true,
-      nationality: true,
-      education: true,
-      averageRatePerHour: true,
-      openToWorkInCountry: true,
-      countryOfResidence: true,
-      spokenLanguage: true,
-      experience: true,
-      visaType: true,
-      instagram: true,
-      photos: true,
-      introductionVideoLink: true,
-      youtubeLink: true,
-      videos: true,
-      bio: true,
-      workLink: true,
-      linkedin: true,
-      height: false,
-      weight: false,
-      resume: true,
-      portfolio: true,
-      isAmodel: true,
-      oneMinuteVideo: true,
-      audios: true,
-      musicalInstruments: true,
-      musicGenres: true,
-      specialSkills: true,
-      demoReel: true,
-      token: true,
-      fcmToken: true,
+
+    const payload = {
+      catID: state1.selectedCategory.value,
+      subCatID: state1.selectedSubCategories[0].value,
     };
-    updateRegisterServiceProviderLookup(updatedLookup);
+    const config = {
+      headers: {
+        "x-secret": "MonrooHeaders",
+      },
+    };
+
+    const response = await axios.post(
+      `http://localhost:3000/monroo/apis/lookups/GetProviderLookups`,
+      payload,
+      config
+    );
+
+    updateRegisterServiceProviderLookup(response.data.data);
   }
 
   function handleBackClick(): void {
@@ -88,8 +64,11 @@ export default function useRegisterServiceProviderForm(props) {
   function handleSubmit(): void {
     props.handleSubmit(
       state1.selectedCategory,
+      state1.selectedSubCategories,
       state2.personalInfo,
-      state3.professionalInfo
+      state3.professionalInfo,
+      state3.resumeFile,
+      state3.imageFiles
     );
   }
 

@@ -1,9 +1,15 @@
 import { createContext, useEffect, useMemo, useState } from "react";
-
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 import { Category, SubCategory } from "../models/Category";
 import { RegisterServiceProviderLookup } from "../models/RegisterServiceProvider";
+import commonService from "../services/commonServices";
+import api from "../utils/api";
+
+interface YourResponseType {
+  id: number;
+  // other properties...
+}
 
 type LookupsContextProps = {
   categories: Category[];
@@ -22,69 +28,64 @@ export const LookupsContext = createContext<LookupsContextProps>({
 });
 
 export default function LookupsProvider({ children }) {
-  const [CATEGORIES, setCategories] = useState<Category[]>([]);
+  const [CATEGORIES, setCategories] = useState<any>([]);
   const [registerServiceProviderLookup, setRegisterServiceProviderLookup] =
     useState<RegisterServiceProviderLookup>({});
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(
-          "https://my-json-server.typicode.com/typicode/demo/posts"
+        const config = {
+          headers: {
+            "x-secret": "MonrooHeaders",
+          },
+        };
+
+        const response = await axios.post(
+          `http://localhost:3000/monroo/apis/lookups/getCategories`,
+          null,
+          config
         );
-        const { data } = response;
 
-        const CATEGORIES: Category[] = [
-          {
-            id: "1",
-            name: "Category 1",
-            subCategories: [
-              {
-                id: crypto.randomUUID().toString(),
-                name: "Sub-Category 11",
-                categoryId: "1",
-              },
-              {
-                id: crypto.randomUUID().toString(),
-                name: "Sub-Category 12",
-                categoryId: "1",
-              },
-              {
-                id: crypto.randomUUID().toString(),
-                name: "Sub-Category 13",
-                categoryId: "1",
-              },
-            ],
-          },
-          {
-            id: "2",
-            name: "Category 2",
-            subCategories: [
-              {
-                id: crypto.randomUUID().toString(),
-                name: "Sub-Category 21",
-                categoryId: "2",
-              },
-              {
-                id: crypto.randomUUID().toString(),
-                name: "Sub-Category 22",
-                categoryId: "2",
-              },
-              {
-                id: crypto.randomUUID().toString(),
-                name: "Sub-Category 23",
-                categoryId: "2",
-              },
-            ],
-          },
-        ];
+        const categoriesData = response.data.data;
+        const categories = [];
 
-        setCategories(CATEGORIES);
+        for (const catID of categoriesData) {
+          const payload = {
+            catID: catID.id,
+          };
+
+          const config = {
+            headers: {
+              "x-secret": "MonrooHeaders",
+            },
+          };
+
+          const response = await axios.post(
+            `http://localhost:3000/monroo/apis/lookups/getSubCategories`,
+            payload,
+            config
+          );
+
+          const subCategories = response.data.data;
+
+          const category = {
+            id: catID.id,
+            name: catID.name, // Change this to the actual property name for category name
+            subCategories: subCategories.map((subCat) => ({
+              id: subCat.id,
+              name: subCat.name, // Change this to the actual property name for subcategory name
+              categoryId: catID.id,
+            })),
+          };
+
+          categories.push(category);
+        }
+        setCategories(categories);
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        throw error;
       }
     };
-
     fetchCategories();
   }, []);
 
