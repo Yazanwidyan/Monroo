@@ -17,7 +17,7 @@ export default function RegisterEmployerPage() {
         }
 
         console.log({ register });
-        navigate("/login", { replace: true });
+        navigate("/login-user", { replace: true });
       }}
       onBackClick={() => navigate("/register")}
     />

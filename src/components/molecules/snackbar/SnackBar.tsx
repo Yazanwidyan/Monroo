@@ -43,7 +43,7 @@ const SnackBar: React.FC = () => {
           textAlign="center"
           position="fixed"
           top="60px"
-          left="46%"
+          left="50%"
           transform="translate(-50%, -50%)"
           width="300px"
           zIndex={9999}

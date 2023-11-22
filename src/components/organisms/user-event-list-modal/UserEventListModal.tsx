@@ -29,6 +29,8 @@ const UserEventListModal = ({ isOpen, onClose, events, providerID }) => {
     try {
       const res = await userServices.requestPrivateEvent(payload);
       console.log("res from message", res);
+      onClose();
+      openSnackBar("event requested successfuly", "success");
     } catch (error) {
       openSnackBar(error, "error");
     }
@@ -44,6 +46,7 @@ const UserEventListModal = ({ isOpen, onClose, events, providerID }) => {
           <VStack spacing={4} align="stretch">
             {events.map((event, index) => (
               <Box
+                cursor="pointer"
                 onClick={() => requestPrivateEvent(event)}
                 key={index}
                 borderWidth="1px"
