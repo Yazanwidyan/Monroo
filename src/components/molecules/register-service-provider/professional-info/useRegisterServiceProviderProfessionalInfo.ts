@@ -2,6 +2,7 @@ import { useContext, useMemo } from "react";
 import countryList from "../../../../constants/countries.json";
 import musicalInstrumentsList from "../../../../constants/instruments.json";
 import musicGenresList from "../../../../constants/music_genres.json";
+import educationList from "../../../../constants/education.json";
 import visaTypeList from "../../../../constants/visa.json";
 
 import { RegisterServiceProviderContext } from "../../../../contexts/RegisterServiceProviderContext";
@@ -50,6 +51,13 @@ export default function useRegisterServiceProviderProfessionalInfo() {
     []
   );
 
+  const education: {
+    name: string;
+    nameAR: string;
+    nameRUS: string;
+    code: string;
+  }[] = useMemo(() => educationList, []);
+
   const visaType: { name: string; id: number }[] = useMemo(
     () => visaTypeList,
     []
@@ -61,6 +69,7 @@ export default function useRegisterServiceProviderProfessionalInfo() {
     countries,
     musicalInstruments,
     musicGenres,
+    education,
     visaType,
     resumeError,
     resumeFile,

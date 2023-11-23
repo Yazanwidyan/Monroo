@@ -10,9 +10,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import useRegisterServiceProviderProfessionalInfo from "./useRegisterServiceProviderProfessionalInfo";
+import { useTranslation } from "react-i18next";
 
 export default function RegisterServiceProviderProfessionalInfo() {
   const state = useRegisterServiceProviderProfessionalInfo();
+  const { i18n } = useTranslation();
 
   return (
     <SimpleGrid columns={{ base: 1, md: 2 }} rowGap="20px" columnGap="20px">
@@ -81,6 +83,27 @@ export default function RegisterServiceProviderProfessionalInfo() {
             {state.countries.map((country) => (
               <option key={country.code} value={country.code}>
                 {country.name}
+              </option>
+            ))}
+          </Select>
+        </FormControl>
+      )}
+      {state.registerServiceProviderLookup.education && (
+        <FormControl>
+          <FormLabel>Education</FormLabel>
+          <Select
+            placeholder="Select education"
+            value={state.professionalInfo.education}
+            onChange={state.handleProfessionalInfoChange}
+            name="education"
+          >
+            {state.education.map((edu) => (
+              <option key={edu.code} value={edu.code}>
+                {i18n.language === "en"
+                  ? edu.name
+                  : i18n.language === "ar"
+                  ? edu.nameAR
+                  : edu.nameRUS}
               </option>
             ))}
           </Select>
@@ -160,6 +183,19 @@ export default function RegisterServiceProviderProfessionalInfo() {
             type="url"
             name="instagram"
             placeholder="Enter your instagram account URL"
+            value={state.professionalInfo.instagram}
+            onChange={state.handleProfessionalInfoChange}
+            required
+          />
+        </FormControl>
+      )}
+      {state.registerServiceProviderLookup.introductionVideoLink && (
+        <FormControl>
+          <FormLabel>introduction video link</FormLabel>
+          <Input
+            type="url"
+            name="introductionVideoLink"
+            placeholder="Enter your introduction video link"
             value={state.professionalInfo.instagram}
             onChange={state.handleProfessionalInfoChange}
             required
