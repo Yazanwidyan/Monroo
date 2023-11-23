@@ -21,8 +21,11 @@ export const AppRoutes = () => (
       <Route path="register" element={<RegisterUserPage />} />
       <Route path="login-user" element={<LoginUser />} />
       <Route path="login-provider" element={<LoginProvider />} />
-      <Route path="register/employer" element={<RegisterEmployerPage />} />
-      <Route path="register/employee" element={<RegisterServiceProvider />} />
+      <Route path="register/user" element={<RegisterEmployerPage />} />
+      <Route
+        path="register/service-provider"
+        element={<RegisterServiceProvider />}
+      />
     </Route>
     <Route path="/" element={<HomeLayout />}>
       <Route element={<PrivateRoutes />}>

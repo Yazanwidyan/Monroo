@@ -59,7 +59,14 @@ const ServiceProviderCard = ({
       overflow="hidden"
       boxShadow="md"
     >
-      <Image src={image} alt={name} />
+      <Image
+        src={
+          image
+            ? image
+            : "https://www.zica.co.zm/wp-content/uploads/2021/02/dummy-profile-image.png"
+        }
+        alt={name}
+      />
 
       <Box p="4">
         <Badge borderRadius="full" px="2" colorScheme="teal" mb="2">

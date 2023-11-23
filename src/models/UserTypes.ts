@@ -1,4 +1,4 @@
 export enum UserTypes {
-  Employer,
-  Employee,
+  User,
+  ServiceProvider,
 }

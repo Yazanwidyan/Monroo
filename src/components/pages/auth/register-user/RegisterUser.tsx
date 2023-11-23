@@ -32,8 +32,10 @@ export default function RegisterUserPage() {
               value={state.userType}
               onChange={state.handleUserTypeChange}
             >
-              <option value={UserTypes.Employer}>Employer</option>
-              <option value={UserTypes.Employee}>Employee</option>
+              <option value={UserTypes.User}>User</option>
+              <option value={UserTypes.ServiceProvider}>
+                Service provider
+              </option>
             </Select>
           </FormControl>
         </CardBody>

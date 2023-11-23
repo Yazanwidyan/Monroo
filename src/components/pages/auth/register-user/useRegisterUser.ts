@@ -6,17 +6,17 @@ export default function useRegisterUserPage() {
   const navigate = useNavigate();
 
   const [userType, , handleUserTypeChange] = useInput<UserTypes>(
-    UserTypes.Employer
+    UserTypes.User
   );
 
   function handleNextClick() {
     console.log(typeof userType);
     switch (+userType) {
-      case UserTypes.Employer:
-        navigate("employer");
+      case UserTypes.User:
+        navigate("user");
         break;
-      case UserTypes.Employee:
-        navigate("employee");
+      case UserTypes.ServiceProvider:
+        navigate("service-provider");
         break;
       default:
         break;

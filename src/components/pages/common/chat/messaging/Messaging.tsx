@@ -47,8 +47,6 @@ const Messaging = () => {
   const [newMessage, setNewMessage] = useState("");
   const messagesEndRef = useRef(null); // Ref to the end of messages container
 
-  const messagesRef = collection(db, "messages");
-
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
