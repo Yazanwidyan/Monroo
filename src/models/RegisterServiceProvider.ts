@@ -16,7 +16,7 @@ export type RegisterServiceProviderProfessionalInfo = {
   averageRatePerHour: number;
   openToWorkInCountry: string;
   countryOfResidence: string;
-  spokenLanguages: string;
+  spokenLanguage: string;
   experience: number;
   visaType: string;
   instagram: string;

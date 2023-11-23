@@ -8,6 +8,7 @@ import { validatePassword } from "../../../utils/FormUtility";
 import { LookupsContext } from "../../../contexts/LookupsContext";
 
 const DEFAULT_REGISTER_EMPLOYER: RegisterEmployer = {
+  name: "",
   email: "",
   username: "",
   password: "",
@@ -15,7 +16,7 @@ const DEFAULT_REGISTER_EMPLOYER: RegisterEmployer = {
   about: "",
   companyName: "",
   country: "0",
-  interestedList: [],
+  intrestedList: [],
   phone: "",
 };
 
@@ -53,7 +54,7 @@ export default function useRegisterEmployerForm(
 
     props.onSubmit({
       ...registerEmployer,
-      interestedList: selectedCategoryIds,
+      intrestedList: selectedCategoryIds,
     });
   }
 

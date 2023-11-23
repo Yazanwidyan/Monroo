@@ -52,6 +52,8 @@ export default function RegisterServiceProvider() {
           data.append("resumeCV", resumeFile[0]);
           data.append("images", imageFiles[0]);
           data.append("onevideo", oneMinuteVideoFile[0]);
+          data.append("videos", videosFile[0]);
+          data.append("audios", audiosFile[0]);
           data.append("data", JSON.stringify(otherData));
 
           try {

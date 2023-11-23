@@ -73,7 +73,7 @@ const PROFESSIONAL_INFO_DEFAULT_VALUE: RegisterServiceProviderProfessionalInfo =
     averageRatePerHour: 0,
     openToWorkInCountry: "",
     countryOfResidence: "",
-    spokenLanguages: "",
+    spokenLanguage: "",
     experience: 0,
     visaType: "",
     instagram: "",

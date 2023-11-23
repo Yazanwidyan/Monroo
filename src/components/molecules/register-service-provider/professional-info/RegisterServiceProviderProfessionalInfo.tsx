@@ -114,9 +114,9 @@ export default function RegisterServiceProviderProfessionalInfo() {
           <FormLabel>Spoken Languages</FormLabel>
           <Input
             type="text"
-            name="spokenLanguages"
+            name="spokenLanguage"
             placeholder="Enter spoken languages"
-            value={state.professionalInfo.spokenLanguages}
+            value={state.professionalInfo.spokenLanguage}
             onChange={state.handleProfessionalInfoChange}
             required
           />

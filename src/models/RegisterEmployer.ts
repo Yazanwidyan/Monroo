@@ -1,6 +1,6 @@
 import { RegisterUser } from "./RegisterUser";
 
 export type RegisterEmployer = RegisterUser & {
-  interestedList: string[];
+  intrestedList: string[];
   about: string;
 };

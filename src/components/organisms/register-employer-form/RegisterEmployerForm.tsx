@@ -17,6 +17,7 @@ import { Select as MultiSelect } from "chakra-react-select";
 import { RegisterEmployer } from "../../../models/RegisterEmployer";
 import useRegisterEmployerForm from "./useRegisterEmployerForm";
 import styles from "./RegisterEmployerForm.module.scss";
+import { useTranslation } from "react-i18next";
 
 export type RegisterEmployerFormProps = {
   onSubmit(registerEmployer: RegisterEmployer): Promise<void>;
@@ -25,6 +26,7 @@ export type RegisterEmployerFormProps = {
 
 export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
   const state = useRegisterEmployerForm({ onSubmit: props.onSubmit });
+  const { i18n } = useTranslation();
 
   return (
     <Card margin="auto" width="80%">
@@ -40,6 +42,17 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
             rowGap="20px"
             columnGap="20px"
           >
+            <FormControl>
+              <FormLabel>First & last name</FormLabel>
+              <Input
+                type="text"
+                name="name"
+                placeholder="Enter First & last name"
+                value={state.registerEmployer.name}
+                onChange={state.handleRegisterEmployerChange}
+                required
+              />
+            </FormControl>
             <FormControl>
               <FormLabel>Username</FormLabel>
               <Input
@@ -137,8 +150,17 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
                 placeholder="Select categories"
                 name="categories"
                 options={state.categories.map((category) => ({
-                  label: category.name,
+                  label:
+                    i18n.language == "en"
+                      ? category.name
+                      : i18n.language == "ar"
+                      ? category.nameAR
+                      : category.nameRUS,
                   value: category.id,
+                  catID: category.id,
+                  name: category.name,
+                  nameAR: category.nameAR,
+                  nameRUS: category.nameRUS,
                 }))}
               />
             </FormControl>

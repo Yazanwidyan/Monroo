@@ -82,7 +82,7 @@ const ServiceProviderCard = ({
             <strong>Nationality:</strong> {nationality}
           </Text>
           <Text>
-            <strong>Gender:</strong> {gender}
+            <strong>Gender:</strong> {gender === 0 ? "Male" : "Femail"}
           </Text>
         </VStack>
 
