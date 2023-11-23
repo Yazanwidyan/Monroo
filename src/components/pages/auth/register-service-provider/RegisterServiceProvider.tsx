@@ -9,28 +9,57 @@ export default function RegisterServiceProvider() {
   return (
     <RegisterServiceProviderContextProvider>
       <RegisterServiceProviderForm
-        handleSubmit={async (one, two, three) => {
-          console.log("one, two, three", one, two, three);
+        handleSubmit={async (
+          selectedCategory,
+          selectedSubCategories,
+          personalInfo,
+          professionalInfo,
+          resumeFile,
+          imageFiles,
+          oneMinuteVideoFile,
+          videosFile,
+          audiosFile
+        ) => {
+          console.log(
+            "selectedCategory:",
+            selectedCategory,
+            "selectedSubCategories:",
+            selectedSubCategories,
+            "personalInfo:",
+            personalInfo,
+            "professionalInfo:",
+            professionalInfo,
+            "resumeFile:",
+            resumeFile,
+            "imageFiles:",
+            imageFiles,
+            "oneMinuteVideoFile:",
+            oneMinuteVideoFile,
+            "videosFile:",
+            videosFile,
+            "audiosFile:",
+            audiosFile
+          );
+          const data = new FormData();
 
-          return;
-          // const registerInfo = {
-          //   ...one,
-          //   ...two,
-          //   ...three,
-          // };
+          const otherData = {
+            ...personalInfo,
+            ...professionalInfo,
+            catID: selectedCategory.value,
+            subCatID: selectedSubCategories,
+          };
 
-          // const data = new FormData();
-          // data.append("data", JSON.stringify(registerInfo)); // Stringify the combined data
+          data.append("resumeCV", resumeFile[0]);
+          data.append("images", imageFiles[0]);
+          data.append("onevideo", oneMinuteVideoFile[0]);
+          data.append("data", JSON.stringify(otherData));
 
-          // try {
-          //   const res = await authServices.registerProvider(data);
-          //   console.log("res", res);
-          // } catch (error) {
-          //   console.log("error", error);
-          // }
-
-          // console.log("registerInfo", registerInfo);
-          // navigate("/login", { replace: true });
+          try {
+            const res = await authServices.registerProvider(data);
+            console.log("res", res);
+          } catch (error) {
+            console.log("error", error);
+          }
         }}
       />
     </RegisterServiceProviderContextProvider>

@@ -68,7 +68,10 @@ export default function useRegisterServiceProviderForm(props) {
       state2.personalInfo,
       state3.professionalInfo,
       state3.resumeFile,
-      state3.imageFiles
+      state3.imageFiles,
+      state3.oneMinuteVideoFile,
+      state3.videosFile,
+      state3.audiosFile
     );
   }
 

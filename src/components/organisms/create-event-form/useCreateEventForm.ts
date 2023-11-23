@@ -8,6 +8,7 @@ import { LookupsContext } from "../../../contexts/LookupsContext";
 export type MultiSelectOption = {
   label: string;
   value: string;
+  catID: string;
 };
 
 const DEFAULT_CREATE_EVENT: CreateEvent = {
@@ -35,7 +36,6 @@ export default function useCreateEventFormForm(
 
   function handleCategoryChange(selectedCategory: MultiSelectOption): void {
     setSelectedCategory(selectedCategory);
-    console.log("selectedCategory", selectedCategory);
 
     setSelectedSubCategories([]);
   }

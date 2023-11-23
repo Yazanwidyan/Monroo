@@ -1,12 +1,13 @@
 import { Flex, FormControl, FormLabel } from "@chakra-ui/react";
 import { Select as MultiSelect } from "chakra-react-select";
 
-import useRegisterServiceProviderCategories, {
-} from "./useRegisterServiceProviderCategories";
+import useRegisterServiceProviderCategories from "./useRegisterServiceProviderCategories";
 import styles from "./RegisterServiceProviderCategories.module.scss";
+import { useTranslation } from "react-i18next";
 
 export default function RegisterServiceProviderCategories() {
   const state = useRegisterServiceProviderCategories();
+  const { i18n } = useTranslation();
 
   return (
     <Flex flexDirection="column" gap="12px">
@@ -20,8 +21,17 @@ export default function RegisterServiceProviderCategories() {
           placeholder="Select category"
           name="category"
           options={state.categories.map((category) => ({
-            label: category.name,
+            label:
+              i18n.language == "en"
+                ? category.name
+                : i18n.language == "ar"
+                ? category.nameAR
+                : category.nameRUS,
             value: category.id,
+            catID: category.id,
+            name: category.name,
+            nameAR: category.nameAR,
+            nameRUS: category.nameRUS,
           }))}
         />
       </FormControl>
@@ -37,8 +47,17 @@ export default function RegisterServiceProviderCategories() {
           placeholder="Select sub-categories"
           name="subCategories"
           options={state.filteredSubCategories.map((category) => ({
-            label: category.name,
+            label:
+              i18n.language == "en"
+                ? category.name
+                : i18n.language == "ar"
+                ? category.nameAR
+                : category.nameRUS,
             value: category.id,
+            catID: category.id,
+            name: category.name,
+            nameAR: category.nameAR,
+            nameRUS: category.nameRUS,
           }))}
         />
       </FormControl>

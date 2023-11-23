@@ -6,6 +6,7 @@ import { RegisterServiceProviderContext } from "../../../../contexts/RegisterSer
 export type MultiSelectOption = {
   label: string;
   value: string;
+  catID: string;
 };
 
 export default function useRegisterServiceProviderCategories() {

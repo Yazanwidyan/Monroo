@@ -11,6 +11,7 @@ import { Select as MultiSelect } from "chakra-react-select";
 import { CreateEvent } from "../../../models/CreateEvent";
 import styles from "./CreateEventForm.module.scss";
 import useCreateEventForm from "./useCreateEventForm";
+import { useTranslation } from "react-i18next";
 
 export type CreateEventFormProps = {
   onSubmit(createEvent: CreateEvent): Promise<void>;
@@ -18,6 +19,7 @@ export type CreateEventFormProps = {
 
 export default function CreateEventForm(props: CreateEventFormProps) {
   const state = useCreateEventForm({ onSubmit: props.onSubmit });
+  const { i18n } = useTranslation();
 
   return (
     <form onSubmit={state.handleSubmit}>
@@ -32,8 +34,17 @@ export default function CreateEventForm(props: CreateEventFormProps) {
             placeholder="Select category"
             name="catID"
             options={state.categories.map((category) => ({
-              label: category.name,
+              label:
+                i18n.language == "en"
+                  ? category.name
+                  : i18n.language == "ar"
+                  ? category.nameAR
+                  : category.nameRUS,
               value: category.id,
+              catID: category.id,
+              name: category.name,
+              nameAR: category.nameAR,
+              nameRUS: category.nameRUS,
             }))}
           />
         </FormControl>
@@ -49,8 +60,17 @@ export default function CreateEventForm(props: CreateEventFormProps) {
             placeholder="Select sub-categories"
             name="subCatID"
             options={state.filteredSubCategories.map((category) => ({
-              label: category.name,
+              label:
+                i18n.language == "en"
+                  ? category.name
+                  : i18n.language == "ar"
+                  ? category.nameAR
+                  : category.nameRUS,
               value: category.id,
+              catID: category.id,
+              name: category.name,
+              nameAR: category.nameAR,
+              nameRUS: category.nameRUS,
             }))}
           />
         </FormControl>

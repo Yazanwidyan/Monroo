@@ -1,7 +1,7 @@
 export type RegisterServiceProviderPersonalInfo = {
   fname: string;
   lname: string;
-  gender: "Male" | "Female";
+  gender: string;
   username: string;
   password: string;
   confirmPassword: string;
@@ -12,7 +12,7 @@ export type RegisterServiceProviderPersonalInfo = {
 export type RegisterServiceProviderProfessionalInfo = {
   email: string;
   phone: string;
-  education: "High School" | "Diploma" | "Bachelors" | "Masters" | "PhD";
+  education: string;
   averageRatePerHour: number;
   openToWorkInCountry: string;
   countryOfResidence: string;

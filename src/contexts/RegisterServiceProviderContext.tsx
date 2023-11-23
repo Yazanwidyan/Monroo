@@ -37,9 +37,17 @@ type ContextProps = {
   resumeError: string;
   resumeFile: File[];
   oneMinuteVideoInputKey: number;
+  videosInputKey: number;
+  audiosInputKey: number;
   onOneMinuteVideoChange(e?: React.ChangeEvent<HTMLInputElement>): void;
+  onVideosChange(e?: React.ChangeEvent<HTMLInputElement>): void;
+  onAudiosChange(e?: React.ChangeEvent<HTMLInputElement>): void;
+  videosError: string;
+  audiosError: string;
   oneMinuteVideoError: string;
   oneMinuteVideoFile: File[];
+  videosFile: File[];
+  audiosFile: File[];
   imagesInputKey: number;
   onImagesChange(e?: React.ChangeEvent<HTMLInputElement>): void;
   imagesError: string;
@@ -49,7 +57,7 @@ type ContextProps = {
 const PERSONAL_INFO_DEFAULT_VALUE: RegisterServiceProviderPersonalInfo = {
   fname: "",
   lname: "",
-  gender: "Male",
+  gender: "0",
   username: "",
   password: "",
   confirmPassword: "",
@@ -61,7 +69,7 @@ const PROFESSIONAL_INFO_DEFAULT_VALUE: RegisterServiceProviderProfessionalInfo =
   {
     email: "",
     phone: "",
-    education: "High School",
+    education: "",
     averageRatePerHour: 0,
     openToWorkInCountry: "",
     countryOfResidence: "",
@@ -103,9 +111,17 @@ const DEFAULT_VALUE: ContextProps = {
   resumeInputKey: 0,
   resumeFile: [],
   oneMinuteVideoInputKey: 0,
+  videosInputKey: 0,
+  audiosInputKey: 0,
   onOneMinuteVideoChange: () => {},
+  onVideosChange: () => {},
+  onAudiosChange: () => {},
   oneMinuteVideoError: "",
+  videosError: "",
+  audiosError: "",
   oneMinuteVideoFile: [],
+  videosFile: [],
+  audiosFile: [],
   imagesInputKey: 0,
   onImagesChange: () => {},
   imagesError: "",
@@ -176,6 +192,18 @@ export default function RegisterServiceProviderContextProvider({ children }) {
     maxFileCount: 1,
   });
 
+  const [videosFile, videosInputKey, onVideosChange, videosError] =
+    useFileInput({
+      maxFileSizeKB: 10240,
+      maxFileCount: 1,
+    });
+
+  const [audiosFile, audiosInputKey, onAudiosChange, audiosError] =
+    useFileInput({
+      maxFileSizeKB: 10240,
+      maxFileCount: 1,
+    });
+
   const [imageFiles, imagesInputKey, onImagesChange, imagesError] =
     useFileInput({
       maxFileSizeKB: 5120,
@@ -208,9 +236,17 @@ export default function RegisterServiceProviderContextProvider({ children }) {
         onResumeChange,
         resumeError,
         oneMinuteVideoFile,
+        videosFile,
+        audiosFile,
         oneMinuteVideoInputKey,
+        videosInputKey,
+        audiosInputKey,
         onOneMinuteVideoChange,
+        onVideosChange,
+        onAudiosChange,
         oneMinuteVideoError,
+        videosError,
+        audiosError,
         imageFiles,
         imagesInputKey,
         onImagesChange,

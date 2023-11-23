@@ -74,9 +74,9 @@ export default function RegisterServiceProviderProfessionalInfo() {
           <FormLabel>Country of Residence</FormLabel>
           <Select
             placeholder="Select country"
-            value={state.professionalInfo.openToWorkInCountry}
+            value={state.professionalInfo.countryOfResidence}
             onChange={state.handleProfessionalInfoChange}
-            name="openToWorkInCountry"
+            name="countryOfResidence"
           >
             {state.countries.map((country) => (
               <option key={country.code} value={country.code}>
@@ -209,6 +209,56 @@ export default function RegisterServiceProviderProfessionalInfo() {
               <Text>Selected Files:</Text>
               <List>
                 {state.oneMinuteVideoFile.map((file) => (
+                  <ListItem key={file.name}>{file.name}</ListItem>
+                ))}
+              </List>
+            </Box>
+          )}
+        </FormControl>
+      )}
+      {state.registerServiceProviderLookup.videos && (
+        <FormControl>
+          <FormLabel>Videos</FormLabel>
+          <Input
+            type="file"
+            key={state.videosInputKey}
+            accept=".mp4"
+            placeholder="Upload your elevator pitch"
+            onChange={state.onVideosChange}
+          />
+          {state.videosError && (
+            <Text fontSize="10px">{state.videosError}</Text>
+          )}
+          {state.videosFile.length > 0 && (
+            <Box>
+              <Text>Selected Files:</Text>
+              <List>
+                {state.videosFile.map((file) => (
+                  <ListItem key={file.name}>{file.name}</ListItem>
+                ))}
+              </List>
+            </Box>
+          )}
+        </FormControl>
+      )}
+      {state.registerServiceProviderLookup.audios && (
+        <FormControl>
+          <FormLabel>audios</FormLabel>
+          <Input
+            type="file"
+            key={state.audiosInputKey}
+            accept=".mp4"
+            placeholder="Upload your elevator pitch"
+            onChange={state.onAudiosChange}
+          />
+          {state.audiosError && (
+            <Text fontSize="10px">{state.audiosError}</Text>
+          )}
+          {state.audiosFile.length > 0 && (
+            <Box>
+              <Text>Selected Files:</Text>
+              <List>
+                {state.audiosFile.map((file) => (
                   <ListItem key={file.name}>{file.name}</ListItem>
                 ))}
               </List>

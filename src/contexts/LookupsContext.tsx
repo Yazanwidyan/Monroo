@@ -1,15 +1,8 @@
 import { createContext, useEffect, useMemo, useState } from "react";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 
 import { Category, SubCategory } from "../models/Category";
 import { RegisterServiceProviderLookup } from "../models/RegisterServiceProvider";
-import commonService from "../services/commonServices";
-import api from "../utils/api";
-
-interface YourResponseType {
-  id: number;
-  // other properties...
-}
 
 type LookupsContextProps = {
   categories: Category[];
@@ -72,9 +65,13 @@ export default function LookupsProvider({ children }) {
           const category = {
             id: catID.id,
             name: catID.name, // Change this to the actual property name for category name
+            nameAR: catID.nameAR, // Change this to the actual property name for category name
+            nameRUS: catID.nameRUS, // Change this to the actual property name for category name
             subCategories: subCategories.map((subCat) => ({
               id: subCat.id,
               name: subCat.name, // Change this to the actual property name for subcategory name
+              nameAR: subCat.nameAR, // Change this to the actual property name for category name
+              nameRUS: subCat.nameRUS, // Change this to the actual property name for category name
               categoryId: catID.id,
             })),
           };
@@ -82,6 +79,8 @@ export default function LookupsProvider({ children }) {
           categories.push(category);
         }
         setCategories(categories);
+
+        console.log("categoriescategories", categories);
       } catch (error) {
         throw error;
       }
