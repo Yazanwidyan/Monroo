@@ -57,7 +57,6 @@ export default function LoginForm(props: LoginFormProps) {
                 placeholder={t("login.enter_emailOrusername")}
                 value={state.login.username}
                 onChange={state.handleLoginChange}
-                textTransform={"capitalize"}
                 required
               />
             </FormControl>
@@ -71,7 +70,6 @@ export default function LoginForm(props: LoginFormProps) {
                   placeholder={t("login.enter_password")}
                   value={state.login.password}
                   onChange={state.handleLoginChange}
-                  textTransform={"capitalize"}
                   required
                 />
                 <InputRightElement width="2.8rem">

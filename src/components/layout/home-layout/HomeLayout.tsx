@@ -7,8 +7,12 @@ const HomeLayout = () => {
   const navigate = useNavigate();
   const { user, updateUser } = useContext(UserContext);
   const handleLogout = () => {
+    if (user.isMainUser) {
+      navigate("/login-user");
+    } else {
+      navigate("/login-provider");
+    }
     updateUser("");
-    navigate("/login-user");
   };
   return (
     <Box>

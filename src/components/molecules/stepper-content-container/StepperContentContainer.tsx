@@ -12,7 +12,6 @@ import {
 type StepperContentContainerProps = {
   handleBackClick(): void;
   handleNextClick(): void;
-  handleSubmit(): void;
   children: ReactNode;
   steps: number;
   currentStep: number;
@@ -40,11 +39,11 @@ export default function StepperContentContainer(
             Back
           </Button>
           {isLastStep ? (
-            <Button colorScheme="telegram" onClick={props.handleSubmit}>
+            <Button colorScheme="telegram" type="submit">
               Submit
             </Button>
           ) : (
-            <Button colorScheme="telegram" onClick={props.handleNextClick}>
+            <Button colorScheme="telegram" type="submit">
               Next
             </Button>
           )}

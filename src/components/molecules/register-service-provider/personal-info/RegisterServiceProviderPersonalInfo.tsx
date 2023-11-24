@@ -10,6 +10,12 @@ import {
 } from "@chakra-ui/react";
 import useRegisterServiceProviderPersonalInfo from "./useRegisterServiceProviderPersonalInfo";
 
+const maxDateFor18YearsOld = new Date(
+  new Date().setFullYear(new Date().getFullYear() - 18)
+)
+  .toISOString()
+  .split("T")[0];
+
 export default function RegisterServiceProviderPersonalInfo() {
   const state = useRegisterServiceProviderPersonalInfo();
 
@@ -79,14 +85,14 @@ export default function RegisterServiceProviderPersonalInfo() {
         />
       </FormControl>
       <FormControl>
-        <FormLabel>Birthday</FormLabel>
+        <FormLabel>Date of Birth</FormLabel>
         <Input
           type="date"
           name="dob"
-          placeholder="Enter birthday"
+          placeholder="Enter Date of Birth"
           value={state.personalInfo.dob}
           onChange={state.handlePersonalInfoChange}
-          max={new Date().toISOString().split("T")[0]}
+          max={maxDateFor18YearsOld}
           required
         />
       </FormControl>

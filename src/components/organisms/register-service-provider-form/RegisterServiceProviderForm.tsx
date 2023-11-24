@@ -37,15 +37,16 @@ export default function RegisterServiceProviderForm(props) {
       >
         <></>
       </Stepper>
-      <StepperContentContainer
-        steps={state.steps.length}
-        currentStep={state.stepsState.activeStep}
-        handleNextClick={state.handleNextClick}
-        handleBackClick={state.handleBackClick}
-        handleSubmit={state.handleSubmit}
-      >
-        {renderContent()}
-      </StepperContentContainer>
+      <form onSubmit={state.handleSubmit}>
+        <StepperContentContainer
+          steps={state.steps.length}
+          currentStep={state.stepsState.activeStep}
+          handleNextClick={state.handleNextClick}
+          handleBackClick={state.handleBackClick}
+        >
+          {renderContent()}
+        </StepperContentContainer>
+      </form>
     </Flex>
   );
 }

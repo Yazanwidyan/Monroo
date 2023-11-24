@@ -79,8 +79,6 @@ export default function LookupsProvider({ children }) {
           categories.push(category);
         }
         setCategories(categories);
-
-        console.log("categoriescategories", categories);
       } catch (error) {
         throw error;
       }

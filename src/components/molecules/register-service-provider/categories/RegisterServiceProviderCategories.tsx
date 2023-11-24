@@ -14,6 +14,7 @@ export default function RegisterServiceProviderCategories() {
       <FormControl>
         <FormLabel>Select Category</FormLabel>
         <MultiSelect
+          required
           value={state.selectedCategory}
           className={styles.categoriesMultiSelect}
           isSearchable={true}
@@ -38,6 +39,7 @@ export default function RegisterServiceProviderCategories() {
       <FormControl isDisabled={!state.selectedCategory}>
         <FormLabel>Select Sub-Categories</FormLabel>
         <MultiSelect
+          required
           value={state.selectedSubCategories}
           className={styles.subCategoriesMultiSelect}
           closeMenuOnSelect={false}

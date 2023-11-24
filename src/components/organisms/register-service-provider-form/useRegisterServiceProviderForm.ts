@@ -29,8 +29,6 @@ export default function useRegisterServiceProviderForm(props) {
   const navigate = useNavigate();
 
   async function handleNextClick(): Promise<void> {
-    stepsState.goToNext();
-
     const payload = {
       catID: state1.selectedCategory.value,
       subCatID: state1.selectedSubCategories[0].value,
@@ -61,18 +59,23 @@ export default function useRegisterServiceProviderForm(props) {
     stepsState.goToPrevious();
   }
 
-  function handleSubmit(): void {
-    props.handleSubmit(
-      state1.selectedCategory,
-      state1.selectedSubCategories,
-      state2.personalInfo,
-      state3.professionalInfo,
-      state3.resumeFile,
-      state3.imageFiles,
-      state3.oneMinuteVideoFile,
-      state3.videosFile,
-      state3.audiosFile
-    );
+  function handleSubmit(e): void {
+    e.preventDefault();
+    const isSecondStep = stepsState.activeStep === 2;
+    isSecondStep && handleNextClick();
+    stepsState.goToNext();
+    stepsState.activeStep === 3 &&
+      props.handleSubmit(
+        state1.selectedCategory,
+        state1.selectedSubCategories,
+        state2.personalInfo,
+        state3.professionalInfo,
+        state3.resumeFile,
+        state3.imageFiles,
+        state3.oneMinuteVideoFile,
+        state3.videosFile,
+        state3.audiosFile
+      );
   }
 
   return {

@@ -12,6 +12,7 @@ const AuthLayout = () => {
             to={"login-user"}
             fontSize="xl"
             fontWeight="bold"
+            color={"white"}
           >
             Monroo
           </Link>
@@ -19,7 +20,7 @@ const AuthLayout = () => {
           <LanguageSwitcher />
         </Flex>
       </Box>
-      <main>
+      <main style={{ padding: "16px" }}>
         <Outlet />
       </main>
     </Flex>

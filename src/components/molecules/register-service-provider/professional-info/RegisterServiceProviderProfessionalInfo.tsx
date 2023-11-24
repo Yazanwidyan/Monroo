@@ -196,7 +196,7 @@ export default function RegisterServiceProviderProfessionalInfo() {
             type="url"
             name="introductionVideoLink"
             placeholder="Enter your introduction video link"
-            value={state.professionalInfo.instagram}
+            value={state.professionalInfo.introductionVideoLink}
             onChange={state.handleProfessionalInfoChange}
             required
           />
