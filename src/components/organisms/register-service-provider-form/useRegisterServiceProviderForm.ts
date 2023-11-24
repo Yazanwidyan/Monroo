@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { LookupsContext } from "../../../contexts/LookupsContext";
 import commonService from "../../../services/commonServices";
 import axios from "axios";
+import { useSnackBar } from "../../../contexts/SnackbarContext";
 
 const steps = [
   { title: "First Step", description: "Category" },
@@ -27,25 +28,19 @@ export default function useRegisterServiceProviderForm(props) {
   const state3 = useRegisterServiceProviderProfessionalInfo();
 
   const navigate = useNavigate();
+  const { openSnackBar } = useSnackBar();
 
   async function handleNextClick(): Promise<void> {
     const payload = {
       catID: state1.selectedCategory.value,
       subCatID: state1.selectedSubCategories[0].value,
     };
-    const config = {
-      headers: {
-        "x-secret": "MonrooHeaders",
-      },
-    };
-
-    const response = await axios.post(
-      `http://localhost:3000/monroo/apis/lookups/GetProviderLookups`,
-      payload,
-      config
-    );
-
-    updateRegisterServiceProviderLookup(response.data.data);
+    try {
+      const res = await commonService.getProviderlookups(payload);
+      updateRegisterServiceProviderLookup(res.data);
+    } catch (error) {
+      openSnackBar(error, "error");
+    }
   }
 
   function handleBackClick(): void {

@@ -76,8 +76,8 @@ const Messaging = () => {
         res = await providerServices.getDetailedMessages(payload);
       }
 
-      setMessages(res);
-      console.log("res from messages inbox", res);
+      setMessages(res.data);
+      console.log("res from messages inbox", res.data);
     } catch (error) {
       openSnackBar(error, "error");
     }
@@ -113,7 +113,7 @@ const Messaging = () => {
         }
         setNewMessage("");
         await fetchData();
-        console.log("res from message", res);
+        console.log("res from message", res.data);
       } catch (error) {
         openSnackBar(error, "error");
       }

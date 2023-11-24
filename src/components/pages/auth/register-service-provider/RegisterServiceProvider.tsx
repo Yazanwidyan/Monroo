@@ -58,7 +58,7 @@ export default function RegisterServiceProvider() {
 
           try {
             const res = await authServices.registerProvider(data);
-            console.log("res", res);
+            console.log("res", res.data);
           } catch (error) {
             console.log("error", error);
           }

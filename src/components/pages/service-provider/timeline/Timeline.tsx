@@ -26,7 +26,7 @@ const Timeline = () => {
     };
     try {
       const res = await providerServices.sendMessage(payload);
-      console.log("res from message", res);
+      console.log("res from message", res.data);
     } catch (error) {
       openSnackBar(error, "error");
     }
@@ -47,7 +47,7 @@ const Timeline = () => {
     };
     try {
       const res = await providerServices.getProviderEvents(payload);
-      setEventsList(res);
+      setEventsList(res.data);
     } catch (error) {
       openSnackBar(error, "error");
     }

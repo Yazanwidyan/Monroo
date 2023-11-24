@@ -33,7 +33,7 @@ const HomeUser = () => {
     };
     try {
       const res = await userServices.getListProviders(payload);
-      setListProviders(res);
+      setListProviders(res.data);
     } catch (error) {
       openSnackBar(error, "error");
     }

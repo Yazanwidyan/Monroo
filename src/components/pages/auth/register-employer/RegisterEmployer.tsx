@@ -11,7 +11,7 @@ export default function RegisterEmployerPage() {
       onSubmit={async (register: RegisterEmployer) => {
         try {
           const res = await authServices.registerUser(register);
-          console.log("res", res);
+          console.log("res", res.data);
         } catch (error) {
           console.log("error", error);
         }

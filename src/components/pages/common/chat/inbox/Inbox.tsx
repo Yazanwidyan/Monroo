@@ -33,8 +33,8 @@ const Inbox = () => {
       } else {
         res = await providerServices.getUserMessages(payload);
       }
-      setRooms(res);
-      console.log("res from messages inbox", res);
+      setRooms(res.data);
+      console.log("res from messages inbox", res.data);
     } catch (error) {
       openSnackBar(error, "error");
     }

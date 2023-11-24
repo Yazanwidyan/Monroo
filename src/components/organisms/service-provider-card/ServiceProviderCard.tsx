@@ -40,8 +40,8 @@ const ServiceProviderCard = ({
     };
     try {
       const res = await userServices.getUserEvents(payload);
-      console.log(res);
-      setUserEvents(res);
+      console.log(res.data);
+      setUserEvents(res.data);
     } catch (error) {
       openSnackBar(error, "error");
     }

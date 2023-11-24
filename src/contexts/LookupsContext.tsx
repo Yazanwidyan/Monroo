@@ -3,6 +3,8 @@ import axios from "axios";
 
 import { Category, SubCategory } from "../models/Category";
 import { RegisterServiceProviderLookup } from "../models/RegisterServiceProvider";
+import commonService from "../services/commonServices";
+import { useSnackBar } from "./SnackbarContext";
 
 type LookupsContextProps = {
   categories: Category[];
@@ -25,53 +27,32 @@ export default function LookupsProvider({ children }) {
   const [registerServiceProviderLookup, setRegisterServiceProviderLookup] =
     useState<RegisterServiceProviderLookup>({});
 
+  const { openSnackBar } = useSnackBar();
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const config = {
-          headers: {
-            "x-secret": "MonrooHeaders",
-          },
-        };
-
-        const response = await axios.post(
-          `http://localhost:3000/monroo/apis/lookups/getCategories`,
-          null,
-          config
-        );
-
-        const categoriesData = response.data.data;
+        const res = await commonService.getCategories();
+        const categoriesData = res.data;
         const categories = [];
 
         for (const catID of categoriesData) {
           const payload = {
             catID: catID.id,
           };
-
-          const config = {
-            headers: {
-              "x-secret": "MonrooHeaders",
-            },
-          };
-
-          const response = await axios.post(
-            `http://localhost:3000/monroo/apis/lookups/getSubCategories`,
-            payload,
-            config
-          );
-
-          const subCategories = response.data.data;
+          const res = await commonService.getSubCategories(payload);
+          const subCategories = res.data;
 
           const category = {
             id: catID.id,
-            name: catID.name, // Change this to the actual property name for category name
-            nameAR: catID.nameAR, // Change this to the actual property name for category name
-            nameRUS: catID.nameRUS, // Change this to the actual property name for category name
+            name: catID.name,
+            nameAR: catID.nameAR,
+            nameRUS: catID.nameRUS,
             subCategories: subCategories.map((subCat) => ({
               id: subCat.id,
-              name: subCat.name, // Change this to the actual property name for subcategory name
-              nameAR: subCat.nameAR, // Change this to the actual property name for category name
-              nameRUS: subCat.nameRUS, // Change this to the actual property name for category name
+              name: subCat.name,
+              nameAR: subCat.nameAR,
+              nameRUS: subCat.nameRUS,
               categoryId: catID.id,
             })),
           };
@@ -80,7 +61,7 @@ export default function LookupsProvider({ children }) {
         }
         setCategories(categories);
       } catch (error) {
-        throw error;
+        openSnackBar(error, "error");
       }
     };
     fetchCategories();

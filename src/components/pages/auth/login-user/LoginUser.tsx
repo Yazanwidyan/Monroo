@@ -18,7 +18,7 @@ export default function LoginUser() {
       handleSubmit={async (loginInput: LoginInput) => {
         try {
           const res = await authServices.loginUser(loginInput);
-          updateUser(res);
+          updateUser(res.data);
           navigate("/home", { replace: true });
         } catch (error) {
           openSnackBar(error, "error");

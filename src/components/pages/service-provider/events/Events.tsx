@@ -31,7 +31,7 @@ const Events = () => {
     try {
       const res = await providerServices.getBookings(payload);
 
-      console.log("resaaa", res);
+      console.log("resaaa", res.data);
     } catch (error) {
       openSnackBar(error, "error");
     }

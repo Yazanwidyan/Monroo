@@ -6,7 +6,7 @@ const api = axios.create({
 api.interceptors.response.use(
   (response) => {
     if (response?.data?.status == 200) {
-      return response?.data?.data;
+      return response?.data;
     } else {
       return Promise.reject(response?.data?.data);
     }

@@ -18,8 +18,8 @@ export default function LoginProvider() {
       handleSubmit={async (loginInput: LoginInput) => {
         try {
           const res = await authServices.loginProvider(loginInput);
-          updateUser(res);
-          if (!res.hasOwnProperty("dob")) {
+          updateUser(res.data);
+          if (!res.data.hasOwnProperty("dob")) {
             navigate("/home", { replace: true });
           } else {
             navigate("/timeline", { replace: true });
