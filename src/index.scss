@@ -1,4 +1,4 @@
-@use "./variables.scss" as v;
+@use "./variables.scss"as v;
 @import url("https://fonts.googleapis.com/css?family=Poppins");
 
 *,
@@ -10,6 +10,7 @@
 }
 
 body {
+  text-transform: capitalize;
   background-color: v.$background-color;
   margin: 0;
   font-family: "Poppins";

@@ -3,3 +3,8 @@ export type LoginInput = {
   password: string;
   isMainUser: boolean;
 };
+
+export type LoginInputWithoutMain = {
+  username: string;
+  password: string;
+};

@@ -1,10 +1,10 @@
 import useFormFields from "../../../hooks/useFormFields";
-import { LoginInput } from "../../../models/LoginInput";
+import { LoginInputWithoutMain } from "../../../models/LoginInput";
 
 export default function useLoginForm(props: {
-  onSubmit: (loginInput: LoginInput) => void;
+  onSubmit: (loginInput: LoginInputWithoutMain) => void;
 }) {
-  const [login, , handleLoginChange] = useFormFields<LoginInput>({
+  const [login, , handleLoginChange] = useFormFields<LoginInputWithoutMain>({
     username: "",
     password: "",
   });

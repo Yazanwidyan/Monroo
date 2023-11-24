@@ -7,6 +7,7 @@
       "password": "كلمة المرور",
       "enter_username": "ادخل اسم المستخدم",
       "enter_email": "ادخل البريد الالكتروني",
+      "enter_emailOrusername": "ادخل اسم المستخدم او البريد الالكتروني",
       "enter_password": "ادخل كلمة المرور"
     }
   }

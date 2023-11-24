@@ -11,6 +11,9 @@ import {
   Heading,
   Select,
   Textarea,
+  InputGroup,
+  InputRightElement,
+  IconButton,
 } from "@chakra-ui/react";
 import { Select as MultiSelect } from "chakra-react-select";
 
@@ -18,6 +21,8 @@ import { RegisterEmployer } from "../../../models/RegisterEmployer";
 import useRegisterEmployerForm from "./useRegisterEmployerForm";
 import styles from "./RegisterEmployerForm.module.scss";
 import { useTranslation } from "react-i18next";
+import usePasswordVisibility from "../../../hooks/usePasswordVisibility";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 export type RegisterEmployerFormProps = {
   onSubmit(registerEmployer: RegisterEmployer): Promise<void>;
@@ -27,6 +32,10 @@ export type RegisterEmployerFormProps = {
 export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
   const state = useRegisterEmployerForm({ onSubmit: props.onSubmit });
   const { i18n } = useTranslation();
+  const [passwordVisibility, togglePasswordVisibility] = usePasswordVisibility({
+    password: false,
+    confirmPassword: false,
+  });
 
   return (
     <Card margin="auto" width="80%">
@@ -42,17 +51,6 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
             rowGap="20px"
             columnGap="20px"
           >
-            <FormControl>
-              <FormLabel>First & last name</FormLabel>
-              <Input
-                type="text"
-                name="name"
-                placeholder="Enter First & last name"
-                value={state.registerEmployer.name}
-                onChange={state.handleRegisterEmployerChange}
-                required
-              />
-            </FormControl>
             <FormControl>
               <FormLabel>Username</FormLabel>
               <Input
@@ -77,22 +75,81 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
             </FormControl>
             <FormControl>
               <FormLabel>Password</FormLabel>
-              <Input
-                type="password"
-                name="password"
-                placeholder="Enter password"
-                value={state.registerEmployer.password}
-                onChange={state.handleRegisterEmployerChange}
-                required
-              />
+              <InputGroup>
+                <Input
+                  type={passwordVisibility.password ? "text" : "password"}
+                  name="password"
+                  placeholder="Enter password"
+                  value={state.registerEmployer.password}
+                  onChange={state.handleRegisterEmployerChange}
+                  maxLength={20}
+                  minLength={6}
+                  required
+                />
+                <InputRightElement width="2.8rem">
+                  <IconButton
+                    h="1.75rem"
+                    size="sm"
+                    onClick={() => togglePasswordVisibility("password")}
+                    icon={
+                      passwordVisibility.password ? (
+                        <ViewOffIcon />
+                      ) : (
+                        <ViewIcon />
+                      )
+                    }
+                    aria-label={
+                      passwordVisibility.password
+                        ? "Hide password"
+                        : "Show password"
+                    }
+                  />
+                </InputRightElement>
+              </InputGroup>
             </FormControl>
             <FormControl>
               <FormLabel>Confirm Password</FormLabel>
+              <InputGroup>
+                <Input
+                  type={
+                    passwordVisibility.confirmPassword ? "text" : "password"
+                  }
+                  name="confirmPassword"
+                  placeholder="Confirm password"
+                  value={state.registerEmployer.confirmPassword}
+                  onChange={state.handleRegisterEmployerChange}
+                  maxLength={20}
+                  minLength={6}
+                  required
+                />
+                <InputRightElement width="2.8rem">
+                  <IconButton
+                    h="1.75rem"
+                    size="sm"
+                    onClick={() => togglePasswordVisibility("confirmPassword")}
+                    icon={
+                      passwordVisibility.confirmPassword ? (
+                        <ViewOffIcon />
+                      ) : (
+                        <ViewIcon />
+                      )
+                    }
+                    aria-label={
+                      passwordVisibility.confirmPassword
+                        ? "Hide password"
+                        : "Show password"
+                    }
+                  />
+                </InputRightElement>
+              </InputGroup>
+            </FormControl>
+            <FormControl>
+              <FormLabel>First and last name</FormLabel>
               <Input
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm password"
-                value={state.registerEmployer.confirmPassword}
+                type="text"
+                name="name"
+                placeholder="Enter First and last name"
+                value={state.registerEmployer.name}
                 onChange={state.handleRegisterEmployerChange}
                 required
               />
@@ -130,6 +187,7 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
                 value={state.registerEmployer.phone}
                 onChange={state.handleRegisterEmployerChange}
                 pattern="^(\+|00)[1-9][0-9 \-\(\)\.]{7,32}$"
+                maxLength={14}
                 name="phone"
                 placeholder="+971 XXX XXX XXX"
                 required

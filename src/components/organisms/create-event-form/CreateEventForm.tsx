@@ -32,6 +32,7 @@ export default function CreateEventForm(props: CreateEventFormProps) {
             isSearchable={true}
             onChange={state.handleCategoryChange}
             placeholder="Select category"
+            required
             name="catID"
             options={state.categories.map((category) => ({
               label:
@@ -59,6 +60,7 @@ export default function CreateEventForm(props: CreateEventFormProps) {
             onChange={state.handleSubCategoriesChange}
             placeholder="Select sub-categories"
             name="subCatID"
+            required
             options={state.filteredSubCategories.map((category) => ({
               label:
                 i18n.language == "en"
@@ -99,7 +101,7 @@ export default function CreateEventForm(props: CreateEventFormProps) {
         <FormControl>
           <FormLabel>cost</FormLabel>
           <Input
-            type="text"
+            type="number"
             name="averageCost"
             placeholder="Enter cost"
             value={state.createEvent.averageCost}
@@ -110,7 +112,7 @@ export default function CreateEventForm(props: CreateEventFormProps) {
         <FormControl>
           <FormLabel>duration</FormLabel>
           <Input
-            type="text"
+            type="number"
             name="duration"
             placeholder="Enter duration"
             value={state.createEvent.duration}
@@ -127,6 +129,7 @@ export default function CreateEventForm(props: CreateEventFormProps) {
             value={state.createEvent.eventDate}
             onChange={state.handleCreateEventChange}
             min={new Date().toISOString().split("T")[0]}
+            max={"2050-01-01"}
             required
           />
         </FormControl>

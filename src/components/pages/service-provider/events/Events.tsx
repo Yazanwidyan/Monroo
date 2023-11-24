@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Box } from "@chakra-ui/react";
 import EventBookingCard from "../../../organisms/event-booking-card/EventBookingCard";
+import { UserContext } from "../../../../contexts/UserContext";
+import providerServices from "../../../../services/providerServices";
+import { useSnackBar } from "../../../../contexts/SnackbarContext";
 
 const Events = () => {
   const [comingEvents, setComingEvents] = useState([]);
@@ -8,8 +11,30 @@ const Events = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedTab, setSelectedTab] = useState("coming"); // Default selected tab
 
+  const { user } = useContext(UserContext);
+  const { openSnackBar } = useSnackBar();
+
   const handleCancel = () => {
     console.log("cancel event");
+  };
+
+  useEffect(() => {
+    fetchData();
+
+    return () => {};
+  }, []);
+
+  const fetchData = async () => {
+    const payload = {
+      providerID: user.id,
+    };
+    try {
+      const res = await providerServices.getBookings(payload);
+
+      console.log("resaaa", res);
+    } catch (error) {
+      openSnackBar(error, "error");
+    }
   };
 
   const fetchEvents = (status) => {
