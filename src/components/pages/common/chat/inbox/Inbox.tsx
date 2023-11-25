@@ -23,15 +23,12 @@ const Inbox = () => {
   }, []);
 
   const fetchData = async () => {
-    const payload = {
-      userID: user.id,
-    };
     try {
       let res;
       if (user.isMainUser) {
-        res = await userServices.getUserMessages(payload);
+        res = await userServices.getUserMessages();
       } else {
-        res = await providerServices.getUserMessages(payload);
+        res = await providerServices.getUserMessages();
       }
       setRooms(res.data);
       console.log("res from messages inbox", res.data);

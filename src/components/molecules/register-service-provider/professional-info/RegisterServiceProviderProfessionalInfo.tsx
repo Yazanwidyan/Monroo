@@ -259,8 +259,9 @@ export default function RegisterServiceProviderProfessionalInfo() {
             type="file"
             key={state.videosInputKey}
             accept=".mp4"
-            placeholder="Upload your elevator pitch"
+            placeholder="Upload your videos"
             onChange={state.onVideosChange}
+            multiple
           />
           {state.videosError && (
             <Text fontSize="10px">{state.videosError}</Text>
@@ -286,6 +287,7 @@ export default function RegisterServiceProviderProfessionalInfo() {
             accept=".mp4"
             placeholder="Upload your elevator pitch"
             onChange={state.onAudiosChange}
+            multiple
           />
           {state.audiosError && (
             <Text fontSize="10px">{state.audiosError}</Text>
@@ -311,13 +313,14 @@ export default function RegisterServiceProviderProfessionalInfo() {
             accept=".png, .jpeg"
             placeholder="Upload four photos of you"
             onChange={state.onImagesChange}
+            multiple
           />
           {state.imagesError && (
             <Text fontSize="10px">{state.imagesError}</Text>
           )}
           {state.imageFiles.length > 0 && (
             <Box>
-              <Text>Selected Files:</Text>
+              <Text>Selected Files:{state.imageFiles.length}</Text>
               <List>
                 {state.imageFiles.map((file) => (
                   <ListItem key={file.name}>{file.name}</ListItem>
@@ -393,6 +396,7 @@ export default function RegisterServiceProviderProfessionalInfo() {
           <Input
             type="text"
             name="bio"
+            maxLength={200}
             placeholder="Enter bio"
             value={state.professionalInfo.bio}
             onChange={state.handleProfessionalInfoChange}

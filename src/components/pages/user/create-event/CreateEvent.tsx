@@ -25,8 +25,11 @@ export default function CreateEventPage({ isOpen, onClose }) {
         <ModalBody>
           <CreateEventForm
             onSubmit={async (createEvent: CreateEvent) => {
+              const { selectedCategory, selectedSubCategories, ...rest } =
+                createEvent;
+
               const payload = {
-                ...createEvent,
+                ...rest,
                 catID: createEvent.selectedCategory.value,
                 subCatID: createEvent.selectedSubCategories[0].value,
               };

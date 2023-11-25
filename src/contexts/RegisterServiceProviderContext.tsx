@@ -195,13 +195,13 @@ export default function RegisterServiceProviderContextProvider({ children }) {
   const [videosFile, videosInputKey, onVideosChange, videosError] =
     useFileInput({
       maxFileSizeKB: 10240,
-      maxFileCount: 1,
+      maxFileCount: 2,
     });
 
   const [audiosFile, audiosInputKey, onAudiosChange, audiosError] =
     useFileInput({
       maxFileSizeKB: 10240,
-      maxFileCount: 1,
+      maxFileCount: 2,
     });
 
   const [imageFiles, imagesInputKey, onImagesChange, imagesError] =

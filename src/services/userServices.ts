@@ -49,7 +49,7 @@ const userServices = {
         throw error;
       });
   },
-  getUserMessages: (payload) => {
+  getUserMessages: () => {
     const user = JSON.parse(localStorage.getItem("user"));
     const config = {
       headers: {
@@ -57,7 +57,7 @@ const userServices = {
       },
     };
     return api
-      .post(`/monroo/apis/user/getMessagesProfiles`, payload, config)
+      .post(`/monroo/apis/user/getMessagesProfiles`, null, config)
       .then((response) => {
         return response;
       })

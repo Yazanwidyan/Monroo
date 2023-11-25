@@ -56,10 +56,11 @@ export default function RegisterServiceProviderCategories() {
                 ? category.nameAR
                 : category.nameRUS,
             value: category.id,
-            catID: category.id,
+            id: category.id,
             name: category.name,
             nameAR: category.nameAR,
             nameRUS: category.nameRUS,
+            catID: category.categoryId,
           }))}
         />
       </FormControl>

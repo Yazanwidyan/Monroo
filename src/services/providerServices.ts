@@ -17,7 +17,7 @@ const providerServices = {
         throw error;
       });
   },
-  getUserMessages: (payload) => {
+  getUserMessages: () => {
     const user = JSON.parse(localStorage.getItem("user"));
     const config = {
       headers: {
@@ -25,7 +25,7 @@ const providerServices = {
       },
     };
     return api
-      .post(`/monroo/apis/provider/getMessagesProfiles`, payload, config)
+      .post(`/monroo/apis/provider/getMessagesProfiles`, null, config)
       .then((response) => {
         return response;
       })

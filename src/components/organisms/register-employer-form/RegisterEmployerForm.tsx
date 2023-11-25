@@ -228,7 +228,7 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
                 value={state.registerEmployer.about}
                 onChange={state.handleRegisterEmployerChange}
                 name="about"
-                maxLength={255}
+                maxLength={200}
                 placeholder="Tell us more about yourself"
                 rows={5}
               />

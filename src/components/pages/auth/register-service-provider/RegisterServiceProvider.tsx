@@ -48,12 +48,17 @@ export default function RegisterServiceProvider() {
             catID: selectedCategory.value,
             subCatID: selectedSubCategories,
           };
-
           data.append("resumeCV", resumeFile[0]);
-          data.append("images", imageFiles[0]);
+          imageFiles.forEach((file) => {
+            data.append(`images`, file);
+          });
+          videosFile.forEach((file) => {
+            data.append(`videos`, file);
+          });
+          audiosFile.forEach((file) => {
+            data.append(`audios`, file);
+          });
           data.append("onevideo", oneMinuteVideoFile[0]);
-          data.append("videos", videosFile[0]);
-          data.append("audios", audiosFile[0]);
           data.append("data", JSON.stringify(otherData));
 
           try {
