@@ -13,6 +13,7 @@ import Inbox from "./components/pages/common/chat/inbox/Inbox";
 import Messaging from "./components/pages/common/chat/messaging/Messaging";
 import LoginUser from "./components/pages/auth/login-user/LoginUser";
 import LoginProvider from "./components/pages/auth/login-provider/LoginProvider";
+import ServiceProviderProfile from "./components/pages/service-provider/profile/ServiceProviderProfile";
 
 export const AppRoutes = () => (
   <>
@@ -32,6 +33,10 @@ export const AppRoutes = () => (
         <Route path="home" element={<HomeUser />} />
         <Route path="timeline" element={<Timeline />} />
         <Route path="events" element={<Events />} />
+        <Route
+          path="service-provider-profile"
+          element={<ServiceProviderProfile />}
+        />
         <Route path="inbox" element={<Inbox />} />
         <Route path="/inbox/messaging/:roomid" element={<Messaging />} />
       </Route>

@@ -35,6 +35,7 @@ const HomeLayout = () => {
         >
           Home
         </Link>
+
         <Flex align="center">
           {!user.isMainUser && (
             <Link as={RouterLink} to="/events" mx="1rem">
@@ -43,6 +44,13 @@ const HomeLayout = () => {
           )}
           <Link as={RouterLink} to="/inbox">
             Inbox
+          </Link>
+          <Link
+            mx="1rem"
+            as={RouterLink}
+            to={user.isMainUser ? "/user-profile" : "/service-provider-profile"}
+          >
+            Profile
           </Link>
           <Button onClick={handleLogout} ml="1rem" colorScheme="red">
             Logout

@@ -81,6 +81,22 @@ const providerServices = {
         throw error;
       });
   },
+  getAllProvider: () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const config = {
+      headers: {
+        "x-access-token": user.token,
+      },
+    };
+    return api
+      .post(`/monroo/apis/provider/getAllProvider`, null, config)
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        throw error;
+      });
+  },
 };
 
 export default providerServices;
