@@ -103,6 +103,7 @@ export default function RegisterServiceProviderPersonalInfo() {
           value={state.personalInfo.dob}
           onChange={state.handlePersonalInfoChange}
           max={maxDateFor18YearsOld}
+          className="date-rtl"
           required
         />
       </FormControl>

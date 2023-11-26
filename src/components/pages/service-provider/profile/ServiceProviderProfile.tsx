@@ -1,20 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
-import {
-  Box,
-  Heading,
-  Text,
-  VStack,
-  Divider,
-  UnorderedList,
-  ListItem,
-  Image,
-} from "@chakra-ui/react";
+import { useContext, useEffect, useState } from "react";
+import { Box, Heading, Text, VStack, Divider, Image } from "@chakra-ui/react";
 import providerServices from "../../../../services/providerServices";
-import { useSnackBar } from "../../../../contexts/SnackbarContext";
 import { UserContext } from "../../../../contexts/UserContext";
+import useCustomToast from "../../../../hooks/useCustomToast";
 
 const ServiceProviderProfile = () => {
-  const { openSnackBar } = useSnackBar();
+  const { showToast } = useCustomToast();
   const { user } = useContext(UserContext);
   const [userProfile, setUserProfile] = useState<any>({});
 
@@ -30,7 +21,7 @@ const ServiceProviderProfile = () => {
 
       setUserProfile(currentUser || {});
     } catch (error) {
-      openSnackBar(error, "error");
+      showToast(error, { status: "error" });
     }
   };
 

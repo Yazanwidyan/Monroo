@@ -1,16 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
-  collection,
-  addDoc,
-  where,
-  serverTimestamp,
-  onSnapshot,
-  query,
-  orderBy,
-} from "firebase/firestore";
-import { db } from "../../../../../firebase-config";
-import {
   Box,
   Heading,
   VStack,
@@ -20,9 +10,9 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { UserContext } from "../../../../../contexts/UserContext";
-import { useSnackBar } from "../../../../../contexts/SnackbarContext";
 import providerServices from "../../../../../services/providerServices";
 import userServices from "../../../../../services/userServices";
+import useCustomToast from "../../../../../hooks/useCustomToast";
 
 const getStatusText = (status) => {
   switch (status) {
@@ -40,8 +30,9 @@ const getStatusText = (status) => {
 };
 
 const Messaging = () => {
+  const { showToast } = useCustomToast();
+
   const { user } = useContext(UserContext);
-  const { openSnackBar } = useSnackBar();
   const { roomid } = useParams();
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
@@ -79,7 +70,7 @@ const Messaging = () => {
       setMessages(res.data);
       console.log("res from messages inbox", res.data);
     } catch (error) {
-      openSnackBar(error, "error");
+      showToast(error, { status: "error" });
     }
   };
 
@@ -115,7 +106,7 @@ const Messaging = () => {
         await fetchData();
         console.log("res from message", res.data);
       } catch (error) {
-        openSnackBar(error, "error");
+        showToast(error, { status: "error" });
       }
     }
   };

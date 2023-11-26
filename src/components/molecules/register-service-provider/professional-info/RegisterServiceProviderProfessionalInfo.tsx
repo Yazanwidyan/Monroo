@@ -39,6 +39,7 @@ export default function RegisterServiceProviderProfessionalInfo() {
           name="phone"
           placeholder="+971 XXX XXX XXX"
           required
+          className="tel-rtl"
         />
       </FormControl>
       {state.registerServiceProviderLookup.averageRatePerHour && (

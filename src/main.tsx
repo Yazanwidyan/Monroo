@@ -7,23 +7,21 @@ import { themes } from "./ChakraThemes.ts";
 import LookupsProvider from "./contexts/LookupsContext.tsx";
 import "./index.scss";
 import "./Localization/i18next.ts";
-import { SnackBarProvider } from "./contexts/SnackbarContext.tsx";
-import SnackBar from "./components/molecules/snackbar/SnackBar.tsx";
 import { UserProvider } from "./contexts/UserContext.tsx";
+import LanguageProvider from "./Localization/LanguageProvider.tsx";
 
 const theme = extendTheme(themes);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <UserProvider>
-        <SnackBarProvider>
+      <LanguageProvider>
+        <UserProvider>
           <LookupsProvider>
             <App />
           </LookupsProvider>
-          <SnackBar />
-        </SnackBarProvider>
-      </UserProvider>
+        </UserProvider>
+      </LanguageProvider>
     </ChakraProvider>
   </React.StrictMode>
 );

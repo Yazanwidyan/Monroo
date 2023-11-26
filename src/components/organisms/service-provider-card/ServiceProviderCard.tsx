@@ -10,8 +10,8 @@ import {
 import { useContext, useState } from "react";
 import UserEventListModal from "../user-event-list-modal/UserEventListModal";
 import userServices from "../../../services/userServices";
-import { useSnackBar } from "../../../contexts/SnackbarContext";
 import { UserContext } from "../../../contexts/UserContext";
+import useCustomToast from "../../../hooks/useCustomToast";
 
 const ServiceProviderCard = ({
   image,
@@ -23,9 +23,9 @@ const ServiceProviderCard = ({
   gender,
   providerID,
 }) => {
-  const { openSnackBar } = useSnackBar();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user } = useContext(UserContext);
+  const { showToast } = useCustomToast();
 
   const [userEvents, setUserEvents] = useState<any>([]);
 
@@ -43,7 +43,7 @@ const ServiceProviderCard = ({
       console.log(res.data);
       setUserEvents(res.data);
     } catch (error) {
-      openSnackBar(error, "error");
+      showToast(error, { status: "error" });
     }
   };
 

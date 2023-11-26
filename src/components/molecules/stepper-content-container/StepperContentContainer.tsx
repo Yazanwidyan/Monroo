@@ -8,6 +8,7 @@ import {
   Container,
   Heading,
 } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
 
 type StepperContentContainerProps = {
   handleBackClick(): void;
@@ -24,6 +25,7 @@ export default function StepperContentContainer(
     () => props.currentStep === props.steps,
     [props.currentStep, props.steps]
   );
+  const { t } = useTranslation();
 
   return (
     <Container maxWidth={props.currentStep === 1 ? "60%" : "80%"} margin="auto">
@@ -36,15 +38,15 @@ export default function StepperContentContainer(
         <CardBody>{props.children}</CardBody>
         <CardFooter display="flex" justifyContent="space-between">
           <Button variant="ghost" onClick={props.handleBackClick}>
-            Back
+            {t("common.back")}
           </Button>
           {isLastStep ? (
-            <Button colorScheme="telegram" type="submit">
-              Submit
+            <Button colorScheme="primary" type="submit">
+              {t("common.submit")}
             </Button>
           ) : (
-            <Button colorScheme="telegram" type="submit">
-              Next
+            <Button colorScheme="primary" type="submit">
+              {t("common.next")}
             </Button>
           )}
         </CardFooter>

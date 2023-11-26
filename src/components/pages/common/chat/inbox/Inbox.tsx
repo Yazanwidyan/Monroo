@@ -2,15 +2,15 @@ import { useContext, useEffect, useState } from "react";
 import { Box, Button, Text, Stack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import userServices from "../../../../../services/userServices";
-import { useSnackBar } from "../../../../../contexts/SnackbarContext";
 import { UserContext } from "../../../../../contexts/UserContext";
 import providerServices from "../../../../../services/providerServices";
+import useCustomToast from "../../../../../hooks/useCustomToast";
 
 const Inbox = () => {
   const [rooms, setRooms] = useState([]);
   const navigate = useNavigate();
-  const { openSnackBar } = useSnackBar();
   const { user } = useContext(UserContext);
+  const { showToast } = useCustomToast();
 
   const handleRoomClick = (room) => {
     localStorage.setItem("userIDMessage", room.senderID);
@@ -33,7 +33,7 @@ const Inbox = () => {
       setRooms(res.data);
       console.log("res from messages inbox", res.data);
     } catch (error) {
-      openSnackBar(error, "error");
+      showToast(error, { status: "error" });
     }
   };
 

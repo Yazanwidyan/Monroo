@@ -130,12 +130,13 @@ export default function CreateEventForm(props: CreateEventFormProps) {
             onChange={state.handleCreateEventChange}
             min={new Date().toISOString().split("T")[0]}
             max={"2050-01-01"}
+            className="date-rtl"
             required
           />
         </FormControl>
       </SimpleGrid>
       <Flex marginTop="25px" justifyContent="space-between">
-        <Button fontSize="14px" colorScheme="telegram" type="submit">
+        <Button fontSize="14px" colorScheme="primary" type="submit">
           Submit
         </Button>
       </Flex>

@@ -13,21 +13,18 @@ import {
 
 import { UserTypes } from "../../../../models/UserTypes";
 import useRegisterUserPage from "./useRegisterUser";
+import { useTranslation } from "react-i18next";
 
 export default function RegisterUserPage() {
   const state = useRegisterUserPage();
+  const { t } = useTranslation();
 
   return (
     <Container>
       <Card>
-        <CardHeader>
-          <Heading as="h2" color="blackAlpha.700" fontSize="19px">
-            Register
-          </Heading>
-        </CardHeader>
         <CardBody>
           <FormControl>
-            <FormLabel>Who Are You ?</FormLabel>
+            <FormLabel>{t("register.whoAreYou")}</FormLabel>
             <Select
               value={state.userType}
               onChange={state.handleUserTypeChange}
@@ -40,8 +37,8 @@ export default function RegisterUserPage() {
           </FormControl>
         </CardBody>
         <CardFooter margin="auto">
-          <Button colorScheme="telegram" onClick={state.handleNextClick}>
-            Next
+          <Button colorScheme="primary" onClick={state.handleNextClick}>
+            {t("common.next")}
           </Button>
         </CardFooter>
       </Card>

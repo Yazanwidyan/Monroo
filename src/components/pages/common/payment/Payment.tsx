@@ -106,10 +106,11 @@ function Payment() {
               onChange={handleChange}
               maxLength={3}
               placeholder="123"
+              className="tel-rtl"
             />
             <FormErrorMessage>{errors.cvc}</FormErrorMessage>
           </FormControl>
-          <Button type="submit" colorScheme="blue" size="lg" w="100%">
+          <Button type="submit" colorScheme="primary" size="lg" w="100%">
             Pay Now
           </Button>
         </VStack>

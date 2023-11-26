@@ -1,5 +1,11 @@
 {
   "translation": {
+    "common": {
+      "submit": "تقديم",
+      "next": "متابعة",
+      "back": "عودة"
+    },
+    "form": {},
     "login": {
       "login": "تسجيل الدخول",
       "username": "اسم المستخدم",
@@ -8,7 +14,11 @@
       "enter_username": "ادخل اسم المستخدم",
       "enter_email": "ادخل البريد الالكتروني",
       "enter_emailOrusername": "ادخل اسم المستخدم او البريد الالكتروني",
-      "enter_password": "ادخل كلمة المرور"
+      "enter_password": "ادخل كلمة المرور",
+      "create_account": "انشاء حساب"
+    },
+    "register": {
+      "whoAreYou": "اختر نوع الحساب"
     }
   }
 }

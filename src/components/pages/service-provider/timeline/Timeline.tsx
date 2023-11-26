@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import EventTimelineCard from "../../../organisms/event-timeline-card/EventTimelineCard";
-import { useSnackBar } from "../../../../contexts/SnackbarContext";
 import providerServices from "../../../../services/providerServices";
 import { UserContext } from "../../../../contexts/UserContext";
 import { Grid, GridItem } from "@chakra-ui/react";
+import useCustomToast from "../../../../hooks/useCustomToast";
 
 const Timeline = () => {
-  const { openSnackBar } = useSnackBar();
   const { user } = useContext(UserContext);
+  const { showToast } = useCustomToast();
 
   const [eventsList, setEventsList] = useState<any>([]);
 
@@ -28,7 +28,7 @@ const Timeline = () => {
       const res = await providerServices.sendMessage(payload);
       console.log("res from message", res.data);
     } catch (error) {
-      openSnackBar(error, "error");
+      showToast(error, { status: "error" });
     }
   };
 
@@ -49,7 +49,7 @@ const Timeline = () => {
       const res = await providerServices.getProviderEvents(payload);
       setEventsList(res.data);
     } catch (error) {
-      openSnackBar(error, "error");
+      showToast(error, { status: "error" });
     }
   };
 

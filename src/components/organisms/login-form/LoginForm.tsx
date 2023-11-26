@@ -110,10 +110,11 @@ export default function LoginForm(props: LoginFormProps) {
                 as={RouterLink}
                 to="/register"
                 href="/register"
-                color="blue.500"
+                color="primary.500"
                 textDecoration="none"
+                _hover={{ textDecoration: "none" }}
               >
-                Register
+                {t("login.create_account")}
               </ChakraLink>
             </Box>
             <Box>
@@ -123,8 +124,9 @@ export default function LoginForm(props: LoginFormProps) {
                   pathname === "/login-user" ? "/login-provider" : "/login-user"
                 }
                 href="/login-provider"
-                color="blue.500"
+                color="primary.500"
                 textDecoration="none"
+                _hover={{ textDecoration: "none" }}
               >
                 {pathname === "/login-user" ? "Login provider" : "Login user"}
               </ChakraLink>

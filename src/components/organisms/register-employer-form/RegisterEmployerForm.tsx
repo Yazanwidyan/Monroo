@@ -186,6 +186,7 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
                 maxLength={14}
                 name="phone"
                 placeholder="+971 XXX XXX XXX"
+                className="tel-rtl"
                 required
               />
             </FormControl>
@@ -240,7 +241,7 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
             >
               Back
             </Button>
-            <Button fontSize="14px" colorScheme="telegram" type="submit">
+            <Button fontSize="14px" colorScheme="primary" type="submit">
               Submit
             </Button>
           </Flex>

@@ -3,7 +3,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel, Box } from "@chakra-ui/react";
 import EventBookingCard from "../../../organisms/event-booking-card/EventBookingCard";
 import { UserContext } from "../../../../contexts/UserContext";
 import providerServices from "../../../../services/providerServices";
-import { useSnackBar } from "../../../../contexts/SnackbarContext";
+import useCustomToast from "../../../../hooks/useCustomToast";
 
 const Events = () => {
   const [comingEvents, setComingEvents] = useState([]);
@@ -12,7 +12,8 @@ const Events = () => {
   const [selectedTab, setSelectedTab] = useState("coming"); // Default selected tab
 
   const { user } = useContext(UserContext);
-  const { openSnackBar } = useSnackBar();
+
+  const { showToast } = useCustomToast();
 
   const handleCancel = () => {
     console.log("cancel event");
@@ -33,7 +34,7 @@ const Events = () => {
 
       console.log("resaaa", res.data);
     } catch (error) {
-      openSnackBar(error, "error");
+      showToast(error, { status: "error" });
     }
   };
 

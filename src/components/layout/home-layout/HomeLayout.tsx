@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Link } from "@chakra-ui/react";
+import { Box, Button, Flex, Link as ChakraLink } from "@chakra-ui/react";
 import { useContext } from "react";
 import { Outlet, Link as RouterLink, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../contexts/UserContext";
@@ -27,38 +27,57 @@ const HomeLayout = () => {
         top="0"
         zIndex="sticky"
       >
-        <Link
+        <ChakraLink
           as={RouterLink}
           to={user.isMainUser ? "/home" : "/timeline"}
           fontSize="xl"
           fontWeight="bold"
+          textDecoration="none"
+          _hover={{ textDecoration: "none" }}
         >
           Home
-        </Link>
-
+        </ChakraLink>
         <Flex align="center">
           {!user.isMainUser && (
-            <Link as={RouterLink} to="/events" mx="1rem">
+            <ChakraLink
+              as={RouterLink}
+              to="/events"
+              mx="1rem"
+              textDecoration="none"
+              _hover={{ textDecoration: "none" }}
+            >
               Booking
-            </Link>
+            </ChakraLink>
           )}
-          <Link as={RouterLink} to="/inbox">
+          <ChakraLink
+            as={RouterLink}
+            to="/inbox"
+            textDecoration="none"
+            _hover={{ textDecoration: "none" }}
+          >
             Inbox
-          </Link>
-          <Link
+          </ChakraLink>
+
+          <ChakraLink
             mx="1rem"
             as={RouterLink}
             to={user.isMainUser ? "/user-profile" : "/service-provider-profile"}
+            textDecoration="none"
+            _hover={{ textDecoration: "none" }}
           >
             Profile
-          </Link>
-          <Link
+          </ChakraLink>
+
+          <ChakraLink
             mx="1rem"
             as={RouterLink}
             to={user.isMainUser ? "/payment" : "/payment"}
+            textDecoration="none"
+            _hover={{ textDecoration: "none" }}
           >
             Payment
-          </Link>
+          </ChakraLink>
+
           <Button onClick={handleLogout} ml="1rem" colorScheme="red">
             Logout
           </Button>

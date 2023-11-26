@@ -1,10 +1,8 @@
 import { createContext, useEffect, useMemo, useState } from "react";
-import axios from "axios";
-
 import { Category, SubCategory } from "../models/Category";
 import { RegisterServiceProviderLookup } from "../models/RegisterServiceProvider";
 import commonService from "../services/commonServices";
-import { useSnackBar } from "./SnackbarContext";
+import useCustomToast from "../hooks/useCustomToast";
 
 type LookupsContextProps = {
   categories: Category[];
@@ -27,7 +25,7 @@ export default function LookupsProvider({ children }) {
   const [registerServiceProviderLookup, setRegisterServiceProviderLookup] =
     useState<RegisterServiceProviderLookup>({});
 
-  const { openSnackBar } = useSnackBar();
+  const { showToast } = useCustomToast();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -61,7 +59,7 @@ export default function LookupsProvider({ children }) {
         }
         setCategories(categories);
       } catch (error) {
-        openSnackBar(error, "error");
+        showToast(error, { status: "error" });
       }
     };
     fetchCategories();

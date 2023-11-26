@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-import { useSnackBar } from "../../../../contexts/SnackbarContext";
 import ServiceProviderCard from "../../../organisms/service-provider-card/ServiceProviderCard";
 import CreateEvent from "../create-event/CreateEvent";
 import { Button } from "@chakra-ui/button";
 import { Grid, GridItem } from "@chakra-ui/react";
 import { UserContext } from "../../../../contexts/UserContext";
 import userServices from "../../../../services/userServices";
+import useCustomToast from "../../../../hooks/useCustomToast";
 
 const HomeUser = () => {
-  const { openSnackBar } = useSnackBar();
   const { user } = useContext(UserContext);
+  const { showToast } = useCustomToast();
 
   const [providersList, setListProviders] = useState<any>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -35,7 +35,7 @@ const HomeUser = () => {
       const res = await userServices.getListProviders(payload);
       setListProviders(res.data);
     } catch (error) {
-      openSnackBar(error, "error");
+      showToast(error, { status: "error" });
     }
   };
 

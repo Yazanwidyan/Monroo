@@ -12,15 +12,13 @@ import {
   Flex,
   Box,
 } from "@chakra-ui/react";
-import { useSnackBar } from "../../../contexts/SnackbarContext";
 import userServices from "../../../services/userServices";
+import useCustomToast from "../../../hooks/useCustomToast";
 
 const UserEventListModal = ({ isOpen, onClose, events, providerID }) => {
-  const { openSnackBar } = useSnackBar();
+  const { showToast } = useCustomToast();
 
   const requestPrivateEvent = async (event) => {
-    console.log(event);
-
     const payload = {
       userID: event.userID,
       providerID: providerID,
@@ -29,9 +27,12 @@ const UserEventListModal = ({ isOpen, onClose, events, providerID }) => {
     try {
       const res = await userServices.requestPrivateEvent(payload);
       onClose();
-      openSnackBar("event requested successfuly", "success");
+      showToast("event requested successfuly", {
+        title: "",
+        status: "success",
+      });
     } catch (error) {
-      openSnackBar(error, "error");
+      showToast(error, { status: "error" });
     }
   };
 

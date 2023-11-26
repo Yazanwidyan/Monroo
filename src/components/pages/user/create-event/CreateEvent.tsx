@@ -11,10 +11,10 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import userServices from "../../../../services/userServices";
-import { useSnackBar } from "../../../../contexts/SnackbarContext";
+import useCustomToast from "../../../../hooks/useCustomToast";
 
 export default function CreateEventPage({ isOpen, onClose }) {
-  const { openSnackBar } = useSnackBar();
+  const { showToast } = useCustomToast();
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -35,10 +35,13 @@ export default function CreateEventPage({ isOpen, onClose }) {
               };
               try {
                 const res = await userServices.createEvent(payload);
-                openSnackBar("event created successfully", "success");
+                showToast("Event created successfully", {
+                  title: "",
+                  status: "success",
+                });
                 onClose();
               } catch (error) {
-                openSnackBar(error, "error");
+                showToast(error, { status: "error" });
               }
             }}
           />

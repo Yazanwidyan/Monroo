@@ -6,8 +6,7 @@ import useRegisterServiceProviderCategories from "../../molecules/register-servi
 import { useContext } from "react";
 import { LookupsContext } from "../../../contexts/LookupsContext";
 import commonService from "../../../services/commonServices";
-import axios from "axios";
-import { useSnackBar } from "../../../contexts/SnackbarContext";
+import useCustomToast from "../../../hooks/useCustomToast";
 
 const steps = [
   { title: "First Step", description: "Category" },
@@ -27,8 +26,8 @@ export default function useRegisterServiceProviderForm(props) {
   const state2 = useRegisterServiceProviderPersonalInfo();
   const state3 = useRegisterServiceProviderProfessionalInfo();
 
+  const { showToast } = useCustomToast();
   const navigate = useNavigate();
-  const { openSnackBar } = useSnackBar();
 
   async function handleNextClick(): Promise<void> {
     const payload = {
@@ -39,7 +38,7 @@ export default function useRegisterServiceProviderForm(props) {
       const res = await commonService.getProviderlookups(payload);
       updateRegisterServiceProviderLookup(res.data);
     } catch (error) {
-      openSnackBar(error, "error");
+      showToast(error, { status: "error" });
     }
   }
 

@@ -19,8 +19,33 @@ body {
 }
 
 
-input::placeholder {
-  text-transform: capitalize;
+[dir='rtl'] {
+  .css-iohxn1 {
+    right: unset;
+    left: 8px;
+  }
+
+  .css-1otzvkf {
+
+    right: unset;
+    left: 0;
+  }
+
+  .css-1ik4h6n {
+    // close icon
+    right: unset;
+    left: 8px;
+
+  }
+
+  .date-rtl {
+    text-align: end;
+  }
+
+  .tel-rtl {
+    text-align: end;
+
+  }
 }
 
 #root {

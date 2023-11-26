@@ -1,14 +1,23 @@
 {
     "translation": {
+        "common": {
+            "submit": "Submit",
+            "next": "Next",
+            "back": "Back"
+        },
         "login": {
-            "login": "login",
-            "username": "username",
-            "email": "email",
-            "password": "password",
-            "enter_username": "enter username",
-            "enter_email": "enter email",
-            "enter_emailOrusername": "enter username or email",
-            "enter_password": "enter password"
+            "login": "Login",
+            "username": "Username",
+            "email": "Email",
+            "password": "Password",
+            "enter_username": "Enter username",
+            "enter_email": "Enter email",
+            "enter_emailOrusername": "Enter username or email",
+            "enter_password": "Enter password",
+            "create_account": "Create account"
+        },
+        "register": {
+            "whoAreYou": "Who are you ?"
         }
     }
 }

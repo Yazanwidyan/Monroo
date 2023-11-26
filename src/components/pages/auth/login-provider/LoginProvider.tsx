@@ -5,12 +5,11 @@ import { LoginInput } from "../../../../models/LoginInput";
 import { useContext } from "react";
 import { UserContext } from "../../../../contexts/UserContext";
 import authServices from "../../../../services/authServices";
-import { useSnackBar } from "../../../../contexts/SnackbarContext";
+import useCustomToast from "../../../../hooks/useCustomToast";
 
 export default function LoginProvider() {
   const navigate = useNavigate();
-  const { openSnackBar } = useSnackBar();
-
+  const { showToast } = useCustomToast();
   const { updateUser } = useContext(UserContext);
 
   return (
@@ -25,7 +24,7 @@ export default function LoginProvider() {
             navigate("/timeline", { replace: true });
           }
         } catch (error) {
-          openSnackBar(error, "error");
+          showToast(error, { status: "error" });
         }
       }}
     />
