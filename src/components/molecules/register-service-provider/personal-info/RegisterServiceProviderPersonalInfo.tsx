@@ -1,7 +1,10 @@
 import {
   FormControl,
   FormLabel,
+  IconButton,
   Input,
+  InputGroup,
+  InputRightElement,
   Radio,
   RadioGroup,
   Select,
@@ -9,6 +12,8 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import useRegisterServiceProviderPersonalInfo from "./useRegisterServiceProviderPersonalInfo";
+import usePasswordVisibility from "../../../../hooks/usePasswordVisibility";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 const maxDateFor18YearsOld = new Date(
   new Date().setFullYear(new Date().getFullYear() - 18)
@@ -18,10 +23,14 @@ const maxDateFor18YearsOld = new Date(
 
 export default function RegisterServiceProviderPersonalInfo() {
   const state = useRegisterServiceProviderPersonalInfo();
+  const [passwordVisibility, togglePasswordVisibility] = usePasswordVisibility({
+    password: false,
+    confirmPassword: false,
+  });
 
   return (
     <SimpleGrid columns={{ base: 1, md: 2 }} rowGap="20px" columnGap="20px">
-      <FormControl>
+      <FormControl isRequired>
         <FormLabel>First Name</FormLabel>
         <Input
           type="text"
@@ -32,7 +41,7 @@ export default function RegisterServiceProviderPersonalInfo() {
           required
         />
       </FormControl>
-      <FormControl>
+      <FormControl isRequired>
         <FormLabel>Last Name</FormLabel>
         <Input
           type="text"
@@ -43,7 +52,7 @@ export default function RegisterServiceProviderPersonalInfo() {
           required
         />
       </FormControl>
-      <FormControl>
+      <FormControl isRequired>
         <FormLabel>Gender</FormLabel>
         <RadioGroup
           onChange={(value) =>
@@ -58,13 +67,14 @@ export default function RegisterServiceProviderPersonalInfo() {
           </Stack>
         </RadioGroup>
       </FormControl>
-      <FormControl>
+      <FormControl isRequired>
         <FormLabel>Nationality</FormLabel>
         <Select
           placeholder="Select country"
           value={state.personalInfo.nationality}
           onChange={state.handlePersonalInfoChange}
           name="nationality"
+          required
         >
           {state.countries.map((country) => (
             <option key={country.code} value={country.code}>
@@ -73,7 +83,7 @@ export default function RegisterServiceProviderPersonalInfo() {
           ))}
         </Select>
       </FormControl>
-      <FormControl>
+      <FormControl isRequired>
         <FormLabel>Username</FormLabel>
         <Input
           type="text"
@@ -84,7 +94,7 @@ export default function RegisterServiceProviderPersonalInfo() {
           required
         />
       </FormControl>
-      <FormControl>
+      <FormControl isRequired>
         <FormLabel>Date of Birth</FormLabel>
         <Input
           type="date"
@@ -96,27 +106,67 @@ export default function RegisterServiceProviderPersonalInfo() {
           required
         />
       </FormControl>
-      <FormControl>
+      <FormControl isRequired>
         <FormLabel>Password</FormLabel>
-        <Input
-          type="password"
-          name="password"
-          placeholder="Enter password"
-          value={state.personalInfo.password}
-          onChange={state.handlePersonalInfoChange}
-          required
-        />
+        <InputGroup>
+          <Input
+            type={passwordVisibility.password ? "text" : "password"}
+            name="password"
+            placeholder="Enter password"
+            value={state.personalInfo.password}
+            onChange={state.handlePersonalInfoChange}
+            maxLength={20}
+            minLength={6}
+            required
+          />
+          <InputRightElement width="2.8rem">
+            <IconButton
+              h="1.75rem"
+              size="sm"
+              onClick={() => togglePasswordVisibility("password")}
+              icon={
+                passwordVisibility.password ? <ViewOffIcon /> : <ViewIcon />
+              }
+              aria-label={
+                passwordVisibility.password ? "Hide password" : "Show password"
+              }
+            />
+          </InputRightElement>
+        </InputGroup>
       </FormControl>
-      <FormControl>
+      <FormControl isRequired>
         <FormLabel>Confirm Password</FormLabel>
-        <Input
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm password"
-          value={state.personalInfo.confirmPassword}
-          onChange={state.handlePersonalInfoChange}
-          required
-        />
+        <InputGroup>
+          <Input
+            type={passwordVisibility.confirmPassword ? "text" : "password"}
+            name="confirmPassword"
+            placeholder="Confirm password"
+            value={state.personalInfo.confirmPassword}
+            onChange={state.handlePersonalInfoChange}
+            maxLength={20}
+            minLength={6}
+            required
+          />
+          <InputRightElement width="2.8rem">
+            <IconButton
+              h="1.75rem"
+              size="sm"
+              onClick={() => togglePasswordVisibility("confirmPassword")}
+              icon={
+                passwordVisibility.confirmPassword ? (
+                  <ViewOffIcon />
+                ) : (
+                  <ViewIcon />
+                )
+              }
+              aria-label={
+                passwordVisibility.confirmPassword
+                  ? "Hide password"
+                  : "Show password"
+              }
+            />
+          </InputRightElement>
+        </InputGroup>
       </FormControl>
     </SimpleGrid>
   );

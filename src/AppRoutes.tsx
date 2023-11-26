@@ -14,6 +14,7 @@ import Messaging from "./components/pages/common/chat/messaging/Messaging";
 import LoginUser from "./components/pages/auth/login-user/LoginUser";
 import LoginProvider from "./components/pages/auth/login-provider/LoginProvider";
 import ServiceProviderProfile from "./components/pages/service-provider/profile/ServiceProviderProfile";
+import Payment from "./components/pages/common/payment/Payment";
 
 export const AppRoutes = () => (
   <>
@@ -37,6 +38,7 @@ export const AppRoutes = () => (
           path="service-provider-profile"
           element={<ServiceProviderProfile />}
         />
+        <Route path="payment" element={<Payment />} />
         <Route path="inbox" element={<Inbox />} />
         <Route path="/inbox/messaging/:roomid" element={<Messaging />} />
       </Route>

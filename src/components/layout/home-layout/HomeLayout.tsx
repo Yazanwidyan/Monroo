@@ -52,6 +52,13 @@ const HomeLayout = () => {
           >
             Profile
           </Link>
+          <Link
+            mx="1rem"
+            as={RouterLink}
+            to={user.isMainUser ? "/payment" : "/payment"}
+          >
+            Payment
+          </Link>
           <Button onClick={handleLogout} ml="1rem" colorScheme="red">
             Logout
           </Button>

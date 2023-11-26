@@ -39,11 +39,6 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
 
   return (
     <Card margin="auto" width="80%">
-      <CardHeader as="section" textAlign="center">
-        <Heading as="h2" color="blackAlpha.700" fontSize="19px">
-          Register Employer
-        </Heading>
-      </CardHeader>
       <CardBody as="section">
         <form onSubmit={state.handleSubmit}>
           <SimpleGrid
@@ -51,7 +46,7 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
             rowGap="20px"
             columnGap="20px"
           >
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>Username</FormLabel>
               <Input
                 type="text"
@@ -62,7 +57,7 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
                 required
               />
             </FormControl>
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>Email</FormLabel>
               <Input
                 type="email"
@@ -73,7 +68,7 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
                 required
               />
             </FormControl>
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup>
                 <Input
@@ -107,7 +102,7 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
                 </InputRightElement>
               </InputGroup>
             </FormControl>
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>Confirm Password</FormLabel>
               <InputGroup>
                 <Input
@@ -157,6 +152,7 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
             <FormControl>
               <FormLabel>Country</FormLabel>
               <Select
+                required
                 placeholder="Select country"
                 value={state.registerEmployer.country}
                 onChange={state.handleRegisterEmployerChange}
@@ -193,9 +189,10 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
                 required
               />
             </FormControl>
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>Preferred Categories</FormLabel>
               <MultiSelect
+                required
                 className={styles.categoriesMultiSelect}
                 closeMenuOnSelect={false}
                 isSearchable={true}

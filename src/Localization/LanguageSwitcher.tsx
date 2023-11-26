@@ -8,7 +8,7 @@ const lngs = {
 };
 
 export default function LanguageSwitcher() {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   const changeLanguage = (event) => {
     const selectedLanguage = event.target.value;

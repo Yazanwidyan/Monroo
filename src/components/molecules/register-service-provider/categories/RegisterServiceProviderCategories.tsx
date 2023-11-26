@@ -11,7 +11,7 @@ export default function RegisterServiceProviderCategories() {
 
   return (
     <Flex flexDirection="column" gap="12px">
-      <FormControl>
+      <FormControl isRequired>
         <FormLabel>Select Category</FormLabel>
         <MultiSelect
           required
@@ -36,7 +36,7 @@ export default function RegisterServiceProviderCategories() {
           }))}
         />
       </FormControl>
-      <FormControl isDisabled={!state.selectedCategory}>
+      <FormControl isRequired isDisabled={!state.selectedCategory}>
         <FormLabel>Select Sub-Categories</FormLabel>
         <MultiSelect
           required

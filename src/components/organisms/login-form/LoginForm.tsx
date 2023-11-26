@@ -29,12 +29,11 @@ export type LoginFormProps = {
 
 export default function LoginForm(props: LoginFormProps) {
   const state = useLoginForm({ onSubmit: props.handleSubmit });
+  const { t } = useTranslation();
   const { pathname } = useLocation();
   const [passwordVisibility, togglePasswordVisibility] = usePasswordVisibility({
     password: false,
   });
-
-  const { t } = useTranslation();
 
   return (
     <Container maxW="sm" padding="4">
