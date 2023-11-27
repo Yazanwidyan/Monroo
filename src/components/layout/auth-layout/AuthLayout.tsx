@@ -1,30 +1,80 @@
-import { Flex, Box, Spacer, Link as ChakraLink } from "@chakra-ui/react";
+import React, { useState } from "react";
+import {
+  Flex,
+  Box,
+  Spacer,
+  Link as ChakraLink,
+  Button,
+} from "@chakra-ui/react";
 import LanguageSwitcher from "../../../Localization/LanguageSwitcher";
-import { Outlet, Link as RouterLink } from "react-router-dom";
+import { Outlet, Link as RouterLink, useNavigate } from "react-router-dom";
+import LoginModal from "../../organisms/login-modal/LoginModal";
+import { AiOutlineLogin, AiOutlineUserAdd } from "react-icons/ai"; // Import Chakra Icons
+import Footer from "../footer/Footer";
 
 const AuthLayout = () => {
+  const [isLoginOpen, setLoginOpen] = useState(false);
+
+  const navigate = useNavigate();
+
   return (
     <Flex minHeight="100vh" flexDirection="column">
-      <Box bg="primary.500" py="4" px="6">
+      <Box bg="gray.300" py="4" px="6">
         <Flex alignItems="center">
           <ChakraLink
             as={RouterLink}
-            to={"login-user"}
+            to={"/"}
             fontSize="xl"
             fontWeight="bold"
-            color={"white"}
+            color={"primary.500"}
             textDecoration="none"
             _hover={{ textDecoration: "none" }}
           >
             Monroo
           </ChakraLink>
           <Spacer />
+          <Button
+            onClick={() => navigate("register")}
+            leftIcon={<AiOutlineUserAdd size={20} color={"primary.500"} />}
+            variant="outline"
+            fontSize={"small"}
+            fontWeight={500}
+            borderColor="primary.500"
+            color={"primary.500"}
+            _hover={{
+              bg: "primary.200",
+              color: "primary.800",
+              borderColor: "primary.500",
+            }}
+          >
+            Join us
+          </Button>
+          <Button
+            mx={"1rem"}
+            onClick={() => setLoginOpen(true)}
+            leftIcon={<AiOutlineLogin size={20} color={"primary.500"} />}
+            variant="outline"
+            fontWeight={500}
+            fontSize={"small"}
+            borderColor="primary.500"
+            color={"primary.500"}
+            _hover={{
+              bg: "primary.200",
+              color: "primary.800",
+              borderColor: "primary.500",
+            }}
+          >
+            Login
+          </Button>
           <LanguageSwitcher />
         </Flex>
       </Box>
-      <main style={{ padding: "16px" }}>
+      <main style={{ flex: 1 }}>
         <Outlet />
       </main>
+      <Footer />
+
+      <LoginModal isOpen={isLoginOpen} onClose={() => setLoginOpen(false)} />
     </Flex>
   );
 };

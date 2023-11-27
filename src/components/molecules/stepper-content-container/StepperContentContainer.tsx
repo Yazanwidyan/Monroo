@@ -30,11 +30,6 @@ export default function StepperContentContainer(
   return (
     <Container maxWidth={props.currentStep === 1 ? "60%" : "80%"} margin="auto">
       <Card>
-        <CardHeader>
-          <Heading as="h2" color="blackAlpha.700" fontSize="19px">
-            Register
-          </Heading>
-        </CardHeader>
         <CardBody>{props.children}</CardBody>
         <CardFooter display="flex" justifyContent="space-between">
           <Button variant="ghost" onClick={props.handleBackClick}>

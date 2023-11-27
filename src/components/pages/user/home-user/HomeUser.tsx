@@ -1,12 +1,20 @@
 import { useContext, useEffect, useState } from "react";
 import { Button } from "@chakra-ui/button";
-import { Grid, GridItem, SkeletonText } from "@chakra-ui/react";
+import {
+  Grid,
+  GridItem,
+  Input,
+  InputGroup,
+  SkeletonText,
+  Stack,
+} from "@chakra-ui/react";
 import ServiceProviderCard from "../../../organisms/service-provider-card/ServiceProviderCard";
 import CreateEvent from "../create-event/CreateEvent";
 import { UserContext } from "../../../../contexts/UserContext";
 import userServices from "../../../../services/userServices";
 import useCustomToast from "../../../../hooks/useCustomToast";
 import { Skeleton } from "@chakra-ui/react";
+import { Select } from "chakra-react-select";
 
 const HomeUser = () => {
   const { user } = useContext(UserContext);
@@ -15,6 +23,13 @@ const HomeUser = () => {
   const [providersList, setListProviders] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filters, setFilters] = useState({
+    filter1: "",
+    filter2: "",
+    filter3: "",
+    filter4: "",
+  });
 
   const openDialog = () => {
     setIsDialogOpen(true);
@@ -42,9 +57,40 @@ const HomeUser = () => {
     }
   };
 
+  const handleFilterChange = (name: string, value: string) => {
+    setFilters({
+      ...filters,
+      [name]: value,
+    });
+  };
+
+  const submitFilters = () => {
+    // Logic to fetch data based on filters
+  };
+
   return (
     <div>
-      <Grid templateColumns="repeat(auto-fill, minmax(400px, 1fr))" gap={4}>
+      <InputGroup mb={4}>
+        <Input
+          placeholder="Search by name or description"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </InputGroup>
+      <Stack direction="row" spacing={4} mb={4}>
+        <Select
+          name="filter1"
+          value={filters.filter1}
+          onChange={(e) => handleFilterChange("filter1", e.target.value)}
+        ></Select>
+        {/* Add more Select components for other filters */}
+      </Stack>
+
+      <Button colorScheme="primary" onClick={submitFilters}>
+        Apply Filters
+      </Button>
+
+      <Grid templateColumns="repeat(auto-fill, minmax(280px, 1fr))" gap={4}>
         {isLoading
           ? Array.from({ length: 5 }).map((_, index) => (
               <GridItem key={index}>

@@ -24,7 +24,7 @@ export default function RegisterServiceProviderForm(props) {
   }
 
   return (
-    <Flex paddingBottom="20px" flexDirection="column" gap={100}>
+    <Flex margin={8} paddingBottom="20px" flexDirection="column" gap={100}>
       <Stepper
         position="sticky"
         top={0}

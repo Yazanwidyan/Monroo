@@ -100,7 +100,7 @@ const Events = () => {
 
   return (
     <Box p={4}>
-      <Tabs variant="soft-rounded" colorScheme="teal">
+      <Tabs variant="soft-rounded" colorScheme="primary">
         <TabList>
           <Tab onClick={() => fetchEvents("coming")}>Coming Events</Tab>
           <Tab onClick={() => fetchEvents("past")}>Past Events</Tab>

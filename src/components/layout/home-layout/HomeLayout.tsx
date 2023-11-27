@@ -1,92 +1,106 @@
-import { Box, Button, Flex, Link as ChakraLink } from "@chakra-ui/react";
-import { useContext } from "react";
+import React, { useContext } from "react";
+import {
+  Flex,
+  Box,
+  Link as ChakraLink,
+  Button,
+  Container,
+} from "@chakra-ui/react";
 import { Outlet, Link as RouterLink, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../contexts/UserContext";
+import Footer from "../footer/Footer";
 
 const HomeLayout = () => {
   const navigate = useNavigate();
   const { user, updateUser } = useContext(UserContext);
   const handleLogout = () => {
-    if (user.isMainUser) {
-      navigate("/login-user");
-    } else {
-      navigate("/login-provider");
-    }
+    navigate("/");
     updateUser("");
   };
+
   return (
-    <Box>
-      <Flex
-        as="header"
-        align="center"
-        justify="space-between"
-        padding="1rem"
-        boxShadow="0 0 10px rgba(0, 0, 0, 0.1)"
-        bg="primary.500"
-        position="sticky"
-        top="0"
-        zIndex="sticky"
-      >
-        <ChakraLink
-          as={RouterLink}
-          to={user.isMainUser ? "/home" : "/timeline"}
-          fontSize="xl"
-          fontWeight="bold"
-          textDecoration="none"
-          _hover={{ textDecoration: "none" }}
-        >
-          Home
-        </ChakraLink>
-        <Flex align="center">
-          {!user.isMainUser && (
+    <Flex minHeight="100vh" flexDirection="column">
+      <Box bg="gray.300" py="2" px="4">
+        <Container maxW={"80%"}>
+          <Flex
+            alignItems="center"
+            fontSize="sm"
+            fontWeight="bold"
+            textTransform={"uppercase"}
+            justifyContent={"space-between"}
+          >
             <ChakraLink
               as={RouterLink}
-              to="/events"
-              mx="1rem"
+              to={user.isMainUser ? "/home" : "/timeline"}
+              fontSize="lg"
+              fontWeight="bold"
+              color={"primary.500"}
               textDecoration="none"
               _hover={{ textDecoration: "none" }}
+              mr="4"
             >
-              Booking
+              Monroo
             </ChakraLink>
-          )}
-          <ChakraLink
-            as={RouterLink}
-            to="/inbox"
-            textDecoration="none"
-            _hover={{ textDecoration: "none" }}
-          >
-            Inbox
-          </ChakraLink>
-
-          <ChakraLink
-            mx="1rem"
-            as={RouterLink}
-            to={user.isMainUser ? "/user-profile" : "/service-provider-profile"}
-            textDecoration="none"
-            _hover={{ textDecoration: "none" }}
-          >
-            Profile
-          </ChakraLink>
-
-          <ChakraLink
-            mx="1rem"
-            as={RouterLink}
-            to={user.isMainUser ? "/payment" : "/payment"}
-            textDecoration="none"
-            _hover={{ textDecoration: "none" }}
-          >
-            Payment
-          </ChakraLink>
-
-          <Button onClick={handleLogout} ml="1rem" colorScheme="red">
-            Logout
-          </Button>
-        </Flex>
-      </Flex>
-      <Box as="main" p="4">
-        <Outlet />
+            <Flex align="center">
+              {!user.isMainUser && (
+                <ChakraLink
+                  as={RouterLink}
+                  to="/events"
+                  mx="0.5rem"
+                  textDecoration="none"
+                  _hover={{ textDecoration: "none" }}
+                >
+                  Booking
+                </ChakraLink>
+              )}
+              <ChakraLink
+                as={RouterLink}
+                to="/inbox"
+                mx="0.5rem"
+                textDecoration="none"
+                _hover={{ textDecoration: "none" }}
+              >
+                Inbox
+              </ChakraLink>
+              <ChakraLink
+                as={RouterLink}
+                to={
+                  user.isMainUser
+                    ? "/user-profile"
+                    : "/service-provider-profile"
+                }
+                mx="0.5rem"
+                textDecoration="none"
+                _hover={{ textDecoration: "none" }}
+              >
+                Profile
+              </ChakraLink>
+              <ChakraLink
+                as={RouterLink}
+                to={user.isMainUser ? "/payment" : "/payment"}
+                mx="0.5rem"
+                textDecoration="none"
+                _hover={{ textDecoration: "none" }}
+              >
+                Payment
+              </ChakraLink>
+              <Button
+                onClick={handleLogout}
+                mx="0.5rem"
+                colorScheme="red"
+                size="sm"
+              >
+                Logout
+              </Button>
+            </Flex>
+          </Flex>
+        </Container>
       </Box>
-    </Box>
+      <main style={{ flex: 1, padding: "1rem" }}>
+        <Outlet />
+      </main>
+      <Footer />
+    </Flex>
   );
 };
 

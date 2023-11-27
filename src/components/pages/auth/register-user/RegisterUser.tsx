@@ -21,7 +21,7 @@ export default function RegisterUserPage() {
 
   return (
     <Container>
-      <Card>
+      <Card mt={8}>
         <CardBody>
           <FormControl>
             <FormLabel>{t("register.whoAreYou")}</FormLabel>

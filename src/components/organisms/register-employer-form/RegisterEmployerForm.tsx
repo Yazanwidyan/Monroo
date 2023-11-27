@@ -38,7 +38,7 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
   });
 
   return (
-    <Card margin="auto" width="80%">
+    <Card margin="auto" mt={8} width="80%">
       <CardBody as="section">
         <form onSubmit={state.handleSubmit}>
           <SimpleGrid

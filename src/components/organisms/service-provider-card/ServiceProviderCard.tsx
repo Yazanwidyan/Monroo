@@ -27,11 +27,24 @@ const ServiceProviderCard = ({
   const { user } = useContext(UserContext);
   const { showToast } = useCustomToast();
 
+  const [isHovered, setIsHovered] = useState(false);
+
   const [userEvents, setUserEvents] = useState<any>([]);
 
   const handleRequestPrivateEvent = () => {
     openModal();
   };
+  const handleMouseEnter = () => {
+    console.log("ddd");
+
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
+  const handleShowProfile = () => {};
 
   const openModal = async () => {
     setIsModalOpen(true);
@@ -40,7 +53,6 @@ const ServiceProviderCard = ({
     };
     try {
       const res = await userServices.getUserEvents(payload);
-      console.log(res.data);
       setUserEvents(res.data);
     } catch (error) {
       showToast(error, { status: "error" });
@@ -52,24 +64,37 @@ const ServiceProviderCard = ({
   };
 
   return (
-    <Box
-      maxW="md"
-      borderWidth="1px"
-      borderRadius="lg"
-      overflow="hidden"
-      boxShadow="md"
-    >
-      <Image
-        src={
-          image
-            ? image
-            : "https://www.zica.co.zm/wp-content/uploads/2021/02/dummy-profile-image.png"
-        }
-        alt={name}
-      />
+    <Box maxW="md" borderWidth="1px" borderRadius="lg" overflow="hidden">
+      <Box
+        position="relative"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <Image
+          position="relative"
+          src={
+            image
+              ? image
+              : "https://www.zica.co.zm/wp-content/uploads/2021/02/dummy-profile-image.png"
+          }
+          alt={name}
+        />
+        {isHovered && (
+          <Button
+            colorScheme="primary"
+            position="absolute"
+            top="50%"
+            left="50%"
+            transform="translate(-50%, -50%)"
+            onClick={handleShowProfile}
+          >
+            Show Profile
+          </Button>
+        )}
+      </Box>
 
       <Box p="4">
-        <Badge borderRadius="full" px="2" colorScheme="teal" mb="2">
+        <Badge borderRadius="full" px="2" colorScheme="primary" mb="2">
           {title}
         </Badge>
 
@@ -80,23 +105,13 @@ const ServiceProviderCard = ({
         <Text color="gray.600" mb="4">
           {description}
         </Text>
-
-        <VStack spacing="1" align="flex-start" mb="4">
-          <Text>
-            <strong>Experience:</strong> {experience}
-          </Text>
-          <Text>
-            <strong>Nationality:</strong> {nationality}
-          </Text>
-          <Text>
-            <strong>Gender:</strong> {gender === 0 ? "Male" : "Femail"}
-          </Text>
-        </VStack>
-
-        <Button colorScheme="teal" onClick={handleRequestPrivateEvent}>
+        <Button
+          colorScheme="primary"
+          mb="2"
+          onClick={handleRequestPrivateEvent}
+        >
           Request Private Event
         </Button>
-
         <UserEventListModal
           providerID={providerID}
           isOpen={isModalOpen}

@@ -1,34 +1,56 @@
-import { Select } from "@chakra-ui/react";
+import { useState } from "react";
+import {
+  Box,
+  Flex,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Button,
+} from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
+import { FaFlagUsa, FaFlag } from "react-icons/fa"; // Import flag icons
 
 const lngs = {
-  en: { nativeName: "English" },
-  ru: { nativeName: "Russian" },
-  ar: { nativeName: "Arabic" },
+  en: { nativeName: "English", icon: <FaFlagUsa /> },
+  ru: { nativeName: "Russian", icon: <FaFlag /> },
+  ar: { nativeName: "Arabic", icon: <FaFlag /> },
 };
 
-export default function LanguageSwitcher() {
+const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
+  const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
 
-  const changeLanguage = (event) => {
-    const selectedLanguage = event.target.value;
-    i18n.changeLanguage(selectedLanguage);
-    document.body.dir = i18n.dir(selectedLanguage);
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+    document.body.dir = i18n.dir(lng);
+    setSelectedLanguage(lng);
   };
 
   return (
-    <Select
-      variant="outline"
-      size="sm"
-      onChange={changeLanguage}
-      value={i18n.language}
-      width="fit-content"
-    >
-      {Object.keys(lngs).map((lng) => (
-        <option key={lng} value={lng}>
-          {lngs[lng].nativeName}
-        </option>
-      ))}
-    </Select>
+    <Menu>
+      <MenuButton
+        as={Button}
+        fontSize={"small"}
+        color={"primary"}
+        _hover={{
+          bg: "gray.300",
+          color: "primary.800",
+        }}
+        variant="link"
+      >
+        {lngs[selectedLanguage].nativeName}
+      </MenuButton>
+      <MenuList>
+        {Object.keys(lngs).map((lng) => (
+          <MenuItem key={lng} onClick={() => changeLanguage(lng)}>
+            <Flex alignItems="center">{lngs[lng].nativeName}</Flex>
+          </MenuItem>
+        ))}
+      </MenuList>
+    </Menu>
   );
-}
+};
+
+export default LanguageSwitcher;
