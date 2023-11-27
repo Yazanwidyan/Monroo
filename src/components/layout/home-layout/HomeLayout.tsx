@@ -9,6 +9,7 @@ import {
 import { Outlet, Link as RouterLink, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../contexts/UserContext";
 import Footer from "../footer/Footer";
+import { FaSignOutAlt } from "react-icons/fa";
 
 const HomeLayout = () => {
   const navigate = useNavigate();
@@ -20,8 +21,8 @@ const HomeLayout = () => {
 
   return (
     <Flex minHeight="100vh" flexDirection="column">
-      <Box bg="gray.300" py="2" px="4">
-        <Container maxW="7xl">
+      <Box bg="gray.800" py="3" px="4">
+        <Container maxW="8xl">
           <Flex
             alignItems="center"
             fontSize="sm"
@@ -41,7 +42,7 @@ const HomeLayout = () => {
             >
               Monroo
             </ChakraLink>
-            <Flex align="center">
+            <Flex color={"white"} align="center">
               {!user.isMainUser && (
                 <ChakraLink
                   as={RouterLink}
@@ -87,11 +88,11 @@ const HomeLayout = () => {
               <Button
                 onClick={handleLogout}
                 mx="0.5rem"
-                colorScheme="red"
+                colorScheme="white"
                 size="sm"
-              >
-                Logout
-              </Button>
+                variant={"ghost"}
+                leftIcon={<FaSignOutAlt />}
+              ></Button>
             </Flex>
           </Flex>
         </Container>

@@ -12,8 +12,8 @@ import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <Box as="footer" py="8" mt={8} bg="gray.300">
-      <Box maxW="7xl" mx="auto" px="4">
+    <Box color={"white"} as="footer" py="8" mt={8} bg="gray.800">
+      <Box maxW="8xl" mx="auto" px="4">
         <Text
           color={"primary.500"}
           textAlign="left"
@@ -23,7 +23,6 @@ const Footer = () => {
         >
           MONROO
         </Text>
-        <Divider my="4" borderColor="white" />
         <Flex justify="space-between" flexWrap="wrap" mb="4">
           <HStack spacing="4" mb="4">
             <IconButton

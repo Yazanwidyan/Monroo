@@ -10,7 +10,7 @@
 }
 
 body {
-  background-color: v.$background-color;
+  background-color: v.$background-color !important;
   margin: 0;
   font-family: "Poppins";
   -webkit-font-smoothing: antialiased;
@@ -50,4 +50,24 @@ body {
 
 #root {
   height: 100%;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #c4c4c4;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #acacac;
 }

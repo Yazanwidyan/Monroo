@@ -33,10 +33,10 @@ const LanguageSwitcher = () => {
       <MenuButton
         as={Button}
         fontSize={"small"}
-        color={"primary"}
+        color={"primary.500"}
         _hover={{
-          bg: "gray.300",
-          color: "primary.800",
+          bg: "gary.700",
+          color: "primary.500",
         }}
         variant="link"
       >
@@ -44,7 +44,11 @@ const LanguageSwitcher = () => {
       </MenuButton>
       <MenuList>
         {Object.keys(lngs).map((lng) => (
-          <MenuItem key={lng} onClick={() => changeLanguage(lng)}>
+          <MenuItem
+            color={"primary.500"}
+            key={lng}
+            onClick={() => changeLanguage(lng)}
+          >
             <Flex alignItems="center">{lngs[lng].nativeName}</Flex>
           </MenuItem>
         ))}

@@ -81,7 +81,7 @@ const HomeUser = () => {
   };
 
   return (
-    <Container maxW="7xl" style={{ display: "flex" }}>
+    <Container maxW="8xl" style={{ display: "flex" }}>
       <Box flex=".5">
         <Stack direction="column" spacing={4}>
           <Button

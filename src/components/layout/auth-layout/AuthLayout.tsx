@@ -5,6 +5,7 @@ import {
   Spacer,
   Link as ChakraLink,
   Button,
+  Container,
 } from "@chakra-ui/react";
 import LanguageSwitcher from "../../../Localization/LanguageSwitcher";
 import { Outlet, Link as RouterLink, useNavigate } from "react-router-dom";
@@ -19,70 +20,75 @@ const AuthLayout = () => {
 
   return (
     <Flex minHeight="100vh" flexDirection="column">
-      <Box bg="gray.300" py="4" px="6">
-        <Flex
-          fontSize="sm"
-          fontWeight="bold"
-          textTransform={"uppercase"}
-          alignItems="center"
-        >
-          <ChakraLink
-            as={RouterLink}
-            to={"/"}
-            fontSize="xl"
+      <Box color={"white"} bg="gray.800" py="3" px="4">
+        <Container maxW={"8xl"}>
+          <Flex
+            alignItems="center"
+            fontSize="sm"
             fontWeight="bold"
-            color={"primary.500"}
-            textDecoration="none"
-            _hover={{ textDecoration: "none" }}
+            textTransform={"uppercase"}
+            justifyContent={"space-between"}
           >
-            Monroo
-          </ChakraLink>
-          <Spacer />
-          <ChakraLink
-            mx={"1rem"}
-            as={RouterLink}
-            to={"/how-it-works"}
-            textDecoration="none"
-            _hover={{ textDecoration: "none" }}
-          >
-            How it works
-          </ChakraLink>
-          <Button
-            onClick={() => navigate("register")}
-            leftIcon={<AiOutlineUserAdd size={20} color={"primary.500"} />}
-            variant="outline"
-            fontSize={"small"}
-            fontWeight={500}
-            borderColor="primary.500"
-            color={"primary.500"}
-            _hover={{
-              bg: "primary.200",
-              color: "primary.800",
-              borderColor: "primary.500",
-            }}
-          >
-            Join us
-          </Button>
-          <Button
-            mx={"1rem"}
-            onClick={() => setLoginOpen(true)}
-            leftIcon={<AiOutlineLogin size={20} color={"primary.500"} />}
-            variant="outline"
-            fontWeight={500}
-            fontSize={"small"}
-            borderColor="primary.500"
-            color={"primary.500"}
-            _hover={{
-              bg: "primary.200",
-              color: "primary.800",
-              borderColor: "primary.500",
-            }}
-          >
-            Login
-          </Button>
+            <ChakraLink
+              as={RouterLink}
+              to={"/"}
+              fontSize="xl"
+              fontWeight="bold"
+              color={"primary.500"}
+              textDecoration="none"
+              _hover={{ textDecoration: "none" }}
+            >
+              Monroo
+            </ChakraLink>
+            <Spacer />
+            <ChakraLink
+              mx={"1rem"}
+              as={RouterLink}
+              to={"/how-it-works"}
+              textDecoration="none"
+              _hover={{ textDecoration: "none" }}
+            >
+              How it works
+            </ChakraLink>
+            <Button
+              onClick={() => navigate("register")}
+              leftIcon={<AiOutlineUserAdd size={20} color={"primary.500"} />}
+              variant="outline"
+              fontSize={"small"}
+              size={"sm"}
+              fontWeight={500}
+              borderColor="primary.500"
+              color={"primary.500"}
+              _hover={{
+                bg: "primary.200",
+                color: "primary.800",
+                borderColor: "primary.500",
+              }}
+            >
+              Join us
+            </Button>
+            <Button
+              mx={"1rem"}
+              onClick={() => setLoginOpen(true)}
+              leftIcon={<AiOutlineLogin size={20} color={"primary.500"} />}
+              variant="outline"
+              size={"sm"}
+              fontWeight={500}
+              fontSize={"small"}
+              borderColor="primary.500"
+              color={"primary.500"}
+              _hover={{
+                bg: "primary.200",
+                color: "primary.800",
+                borderColor: "primary.500",
+              }}
+            >
+              Login
+            </Button>
 
-          <LanguageSwitcher />
-        </Flex>
+            <LanguageSwitcher />
+          </Flex>
+        </Container>
       </Box>
       <main style={{ flex: 1 }}>
         <Outlet />

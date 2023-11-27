@@ -8,6 +8,7 @@ import {
   Button,
   Text,
   Flex,
+  Avatar,
 } from "@chakra-ui/react";
 import { UserContext } from "../../../../../contexts/UserContext";
 import providerServices from "../../../../../services/providerServices";
@@ -29,34 +30,32 @@ const getStatusText = (status) => {
   }
 };
 
-const Messaging = () => {
+const Messaging = ({ selectedRoom }) => {
   const { showToast } = useCustomToast();
 
   const { user } = useContext(UserContext);
-  const { roomid } = useParams();
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const messagesEndRef = useRef(null); // Ref to the end of messages container
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [newMessage]);
 
   useEffect(() => {
     fetchData();
     return () => {};
-  }, []);
+  }, [selectedRoom]);
 
   const fetchData = async () => {
-    const userIDMessage = localStorage.getItem("userIDMessage");
     let payload;
     if (user.isMainUser) {
       payload = {
-        providerID: userIDMessage,
+        providerID: selectedRoom.senderID,
       };
     } else {
       payload = {
-        userID: userIDMessage,
+        userID: selectedRoom.senderID,
       };
     }
     try {
@@ -66,9 +65,7 @@ const Messaging = () => {
       } else {
         res = await providerServices.getDetailedMessages(payload);
       }
-
       setMessages(res.data);
-      console.log("res from messages inbox", res.data);
     } catch (error) {
       showToast(error, { status: "error" });
     }
@@ -110,6 +107,7 @@ const Messaging = () => {
       }
     }
   };
+
   const renderMessage = (message, index) => {
     if (message.type === 1 && message.providerID !== user.id) {
       return (
@@ -210,13 +208,10 @@ const Messaging = () => {
     }
   };
 
-  return (
+  return selectedRoom ? (
     <Box p={4}>
-      <Heading as="h1" mb={4}>
-        Messaging - Room ID: {roomid}
-      </Heading>
       <VStack spacing={4} mb={4} align="stretch">
-        <Box h="400px" overflowY="scroll">
+        <Box h="calc(100vh - 200px)" overflowY="scroll">
           {messages.map((message, index) => renderMessage(message, index))}
           <div ref={messagesEndRef} />
         </Box>
@@ -228,13 +223,20 @@ const Messaging = () => {
               placeholder="Type a message..."
               flex="1"
               mr={2}
+              borderRadius="full"
+              borderWidth="1px"
+              p={2}
             />
-            <Button colorScheme="primary" type="submit">
+            <Button colorScheme="blue" variant="solid" borderRadius="full">
               Send
             </Button>
           </Flex>
         </form>
       </VStack>
+    </Box>
+  ) : (
+    <Box textAlign="center" fontSize="xl">
+      Choose a room to start messaging
     </Box>
   );
 };

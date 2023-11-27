@@ -19,7 +19,7 @@ const categories = [
 ];
 
 const Landing = () => {
-  const boxBgColor = useColorModeValue("gray.100", "gray.700");
+  const boxBgColor = useColorModeValue("gray.100", "gray.800");
   const boxHoverColor = useColorModeValue("gray.200", "gray.600");
 
   return (
