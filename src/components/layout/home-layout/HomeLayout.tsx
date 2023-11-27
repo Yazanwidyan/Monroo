@@ -21,7 +21,7 @@ const HomeLayout = () => {
   return (
     <Flex minHeight="100vh" flexDirection="column">
       <Box bg="gray.300" py="2" px="4">
-        <Container maxW={"80%"}>
+        <Container maxW="7xl">
           <Flex
             alignItems="center"
             fontSize="sm"

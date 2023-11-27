@@ -106,6 +106,7 @@ const ServiceProviderCard = ({
           {description}
         </Text>
         <Button
+          fontSize="x-small"
           colorScheme="primary"
           mb="2"
           onClick={handleRequestPrivateEvent}

@@ -16,11 +16,13 @@ import LoginProvider from "./components/pages/auth/login-provider/LoginProvider"
 import ServiceProviderProfile from "./components/pages/service-provider/profile/ServiceProviderProfile";
 import Payment from "./components/pages/common/payment/Payment";
 import Landing from "./components/pages/common/landing/Landing";
+import HowItWorks from "./components/pages/common/how-it-works/HowItWorks";
 
 export const AppRoutes = () => (
   <>
     <Route path="/" element={<AuthLayout />}>
       <Route path="/" element={<Landing />} />
+      <Route path="/how-it-works" element={<HowItWorks />} />
       <Route path="register" element={<RegisterUserPage />} />
       <Route path="login-user" element={<LoginUser />} />
       <Route path="login-provider" element={<LoginProvider />} />

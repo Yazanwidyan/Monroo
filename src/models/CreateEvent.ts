@@ -2,7 +2,7 @@ import { MultiSelectOption } from "../components/organisms/create-event-form/use
 
 export type CreateEvent = {
   selectedCategory: MultiSelectOption;
-  selectedSubCategories: MultiSelectOption[];
+  selectedSubCategories: MultiSelectOption;
   title: string;
   desc: string;
   averageCost: string;

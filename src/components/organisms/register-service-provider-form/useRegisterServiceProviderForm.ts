@@ -32,7 +32,7 @@ export default function useRegisterServiceProviderForm(props) {
   async function handleNextClick(): Promise<void> {
     const payload = {
       catID: state1.selectedCategory.value,
-      subCatID: state1.selectedSubCategories[0].value,
+      subCatID: state1.selectedSubCategories.value,
     };
     try {
       const res = await commonService.getProviderlookups(payload);

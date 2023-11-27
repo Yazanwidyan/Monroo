@@ -44,7 +44,6 @@ export default function RegisterServiceProviderCategories() {
           className={styles.subCategoriesMultiSelect}
           closeMenuOnSelect={false}
           isSearchable={true}
-          isMulti={true}
           onChange={state.handleSubCategoriesChange}
           placeholder="Select sub-categories"
           name="subCategories"

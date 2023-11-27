@@ -31,7 +31,7 @@ export default function CreateEventPage({ isOpen, onClose }) {
               const payload = {
                 ...rest,
                 catID: createEvent.selectedCategory.value,
-                subCatID: createEvent.selectedSubCategories[0].value,
+                subCatID: createEvent.selectedSubCategories.value,
               };
               try {
                 const res = await userServices.createEvent(payload);

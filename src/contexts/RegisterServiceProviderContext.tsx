@@ -14,10 +14,10 @@ type ContextProps = {
   personalInfo: RegisterServiceProviderPersonalInfo;
   professionalInfo: RegisterServiceProviderProfessionalInfo;
   selectedCategory: MultiSelectOption;
-  selectedSubCategories: MultiSelectOption[];
+  selectedSubCategories: MultiSelectOption;
   filteredSubCategories: SubCategory[];
   handleCategoryChange(selectedCategories: MultiSelectOption): void;
-  handleSubCategoriesChange(selectedCategories: MultiSelectOption[]): void;
+  handleSubCategoriesChange(selectedCategories: MultiSelectOption): void;
   handlePersonalInfoChange: (
     e?: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -100,7 +100,7 @@ const DEFAULT_VALUE: ContextProps = {
   personalInfo: PERSONAL_INFO_DEFAULT_VALUE,
   professionalInfo: PROFESSIONAL_INFO_DEFAULT_VALUE,
   selectedCategory: null,
-  selectedSubCategories: [],
+  selectedSubCategories: null,
   filteredSubCategories: [],
   handleCategoryChange: () => {},
   handleSubCategoriesChange: () => {},
@@ -137,9 +137,8 @@ export default function RegisterServiceProviderContextProvider({ children }) {
   //#region Categories Selection
 
   const [selectedCategory, setSelectedCategory] = useState<MultiSelectOption>();
-  const [selectedSubCategories, setSelectedSubCategories] = useState<
-    MultiSelectOption[]
-  >([]);
+  const [selectedSubCategories, setSelectedSubCategories] =
+    useState<MultiSelectOption>();
 
   const filteredSubCategories = useMemo(() => {
     return subCategories.filter(
@@ -149,11 +148,11 @@ export default function RegisterServiceProviderContextProvider({ children }) {
 
   function handleCategoryChange(selectedCategory: MultiSelectOption): void {
     setSelectedCategory(selectedCategory);
-    setSelectedSubCategories([]);
+    setSelectedSubCategories(null);
   }
 
   function handleSubCategoriesChange(
-    selectedSubCategories: MultiSelectOption[]
+    selectedSubCategories: MultiSelectOption
   ): void {
     setSelectedSubCategories(selectedSubCategories);
   }

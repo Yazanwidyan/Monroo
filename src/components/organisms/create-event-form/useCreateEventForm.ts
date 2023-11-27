@@ -13,7 +13,7 @@ export type MultiSelectOption = {
 
 const DEFAULT_CREATE_EVENT: CreateEvent = {
   selectedCategory: null,
-  selectedSubCategories: [],
+  selectedSubCategories: null,
   title: "",
   desc: "",
   averageCost: "",
@@ -28,20 +28,19 @@ export default function useCreateEventFormForm(
     useFormFields<CreateEvent>(DEFAULT_CREATE_EVENT);
 
   const [selectedCategory, setSelectedCategory] = useState<MultiSelectOption>();
-  const [selectedSubCategories, setSelectedSubCategories] = useState<
-    MultiSelectOption[]
-  >([]);
+  const [selectedSubCategories, setSelectedSubCategories] =
+    useState<MultiSelectOption>();
 
   const { categories, subCategories } = useContext(LookupsContext);
 
   function handleCategoryChange(selectedCategory: MultiSelectOption): void {
     setSelectedCategory(selectedCategory);
 
-    setSelectedSubCategories([]);
+    setSelectedSubCategories(null);
   }
 
   function handleSubCategoriesChange(
-    selectedSubCategories: MultiSelectOption[]
+    selectedSubCategories: MultiSelectOption
   ): void {
     setSelectedSubCategories(selectedSubCategories);
   }

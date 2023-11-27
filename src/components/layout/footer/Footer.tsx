@@ -13,7 +13,7 @@ import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 const Footer = () => {
   return (
     <Box as="footer" py="8" mt={8} bg="gray.300">
-      <Box maxW="6xl" mx="auto" px="4">
+      <Box maxW="7xl" mx="auto" px="4">
         <Text
           color={"primary.500"}
           textAlign="left"
