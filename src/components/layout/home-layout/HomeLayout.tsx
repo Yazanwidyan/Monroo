@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   Flex,
   Box,
@@ -10,19 +10,30 @@ import { Outlet, Link as RouterLink, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../contexts/UserContext";
 import Footer from "../footer/Footer";
 import { FaSignOutAlt } from "react-icons/fa";
+import CreateEventPage from "../../pages/user/create-event/CreateEvent";
 
 const HomeLayout = () => {
   const navigate = useNavigate();
   const { user, updateUser } = useContext(UserContext);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   const handleLogout = () => {
     navigate("/");
     updateUser("");
   };
 
+  const openDialog = () => {
+    setIsDialogOpen(true);
+  };
+
+  const closeDialog = () => {
+    setIsDialogOpen(false);
+  };
+
   return (
     <Flex minHeight="100vh" flexDirection="column">
-      <Box bg="gray.800" py="3" px="4">
-        <Container maxW="8xl">
+      <Box boxShadow="base" bg="white.100" py="3" px="4">
+        <Container maxW="6xl">
           <Flex
             alignItems="center"
             fontSize="sm"
@@ -42,7 +53,21 @@ const HomeLayout = () => {
             >
               Monroo
             </ChakraLink>
-            <Flex color={"white"} align="center">
+            <Flex color={"black"} align="center">
+              {user.isMainUser && (
+                <>
+                  <Button
+                    mx="0.5rem"
+                    colorScheme="black"
+                    size="sm"
+                    textTransform={"uppercase"}
+                    variant={"outline"}
+                    onClick={openDialog}
+                  >
+                    Create Event
+                  </Button>
+                </>
+              )}
               {!user.isMainUser && (
                 <ChakraLink
                   as={RouterLink}
@@ -88,16 +113,17 @@ const HomeLayout = () => {
               <Button
                 onClick={handleLogout}
                 mx="0.5rem"
-                colorScheme="white"
+                colorScheme="black"
                 size="sm"
                 variant={"ghost"}
                 leftIcon={<FaSignOutAlt />}
               ></Button>
             </Flex>
           </Flex>
+          <CreateEventPage isOpen={isDialogOpen} onClose={closeDialog} />
         </Container>
       </Box>
-      <main style={{ flex: 1, padding: "1rem" }}>
+      <main style={{ flex: 1 }}>
         <Outlet />
       </main>
       <Footer />

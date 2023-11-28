@@ -25,7 +25,7 @@ const Landing = () => {
   return (
     <Box>
       <Image
-        src="https://via.placeholder.com/1200x300" // Replace with your image URL
+        src="../../../src/assets/images/Banner_models_4.webp"
         alt="Big Photo"
         objectFit="cover"
         w="100vw"

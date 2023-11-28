@@ -12,6 +12,7 @@ import UserEventListModal from "../user-event-list-modal/UserEventListModal";
 import userServices from "../../../services/userServices";
 import { UserContext } from "../../../contexts/UserContext";
 import useCustomToast from "../../../hooks/useCustomToast";
+import { useNavigate } from "react-router-dom";
 
 const ServiceProviderCard = ({
   image,
@@ -23,6 +24,7 @@ const ServiceProviderCard = ({
   gender,
   providerID,
 }) => {
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user } = useContext(UserContext);
   const { showToast } = useCustomToast();
@@ -35,8 +37,6 @@ const ServiceProviderCard = ({
     openModal();
   };
   const handleMouseEnter = () => {
-    console.log("ddd");
-
     setIsHovered(true);
   };
 
@@ -44,7 +44,9 @@ const ServiceProviderCard = ({
     setIsHovered(false);
   };
 
-  const handleShowProfile = () => {};
+  const handleShowProfile = () => {
+    navigate("/service-provider-profile-view");
+  };
 
   const openModal = async () => {
     setIsModalOpen(true);
@@ -64,7 +66,7 @@ const ServiceProviderCard = ({
   };
 
   return (
-    <Box maxW="md" borderWidth="1px" borderRadius="lg" overflow="hidden">
+    <Box maxW="md" overflow="hidden">
       <Box
         position="relative"
         onMouseEnter={handleMouseEnter}
@@ -102,9 +104,6 @@ const ServiceProviderCard = ({
           {name}
         </Heading>
 
-        <Text color="gray.600" mb="4">
-          {description}
-        </Text>
         <Button
           fontSize="x-small"
           colorScheme="primary"

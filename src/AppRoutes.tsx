@@ -17,6 +17,7 @@ import ServiceProviderProfile from "./components/pages/service-provider/profile/
 import Payment from "./components/pages/common/payment/Payment";
 import Landing from "./components/pages/common/landing/Landing";
 import HowItWorks from "./components/pages/common/how-it-works/HowItWorks";
+import ServiceProviderProfileView from "./components/pages/user/service-provider-profile-view/ServiceProviderProfileView";
 
 export const AppRoutes = () => (
   <>
@@ -43,7 +44,10 @@ export const AppRoutes = () => (
         />
         <Route path="payment" element={<Payment />} />
         <Route path="inbox" element={<Inbox />} />
-        <Route path="/inbox/messaging/:roomid" element={<Messaging />} />
+        <Route
+          path="service-provider-profile-view"
+          element={<ServiceProviderProfileView />}
+        />
       </Route>
     </Route>
   </>

@@ -12,10 +12,10 @@ import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <Box color={"white"} as="footer" py="8" mt={8} bg="gray.800">
+    <Box color={"white"} as="footer" py="8" mt={8} bg="black">
       <Box maxW="8xl" mx="auto" px="4">
         <Text
-          color={"primary.500"}
+          color={"white"}
           textAlign="left"
           mb="4"
           fontWeight="bold"
