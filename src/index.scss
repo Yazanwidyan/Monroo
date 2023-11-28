@@ -18,6 +18,24 @@ body {
   height: 100vh;
 }
 
+*,
+*::before,
+::after {
+  border-color: 'red' !important;
+}
+
+option:focus,
+option:active {
+  box-shadow: none !important;
+  outline: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+a:focus {
+  outline: none;
+}
 
 [dir='rtl'] {
   .css-iohxn1 {
@@ -52,22 +70,22 @@ body {
   height: 100%;
 }
 
-/* width */
-::-webkit-scrollbar {
-  width: 3px;
-}
+// /* width */
+// ::-webkit-scrollbar {
+//   width: 3px;
+// }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
+// /* Track */
+// ::-webkit-scrollbar-track {
+//   background: #f1f1f1;
+// }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #c4c4c4;
-}
+// /* Handle */
+// ::-webkit-scrollbar-thumb {
+//   background: #c4c4c4;
+// }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #acacac;
-}
+// /* Handle on hover */
+// ::-webkit-scrollbar-thumb:hover {
+//   background: #acacac;
+// }

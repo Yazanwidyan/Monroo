@@ -21,6 +21,7 @@ import { UserContext } from "../../../../contexts/UserContext";
 import userServices from "../../../../services/userServices";
 import useCustomToast from "../../../../hooks/useCustomToast";
 import { FaSearch } from "react-icons/fa";
+import WelcomeBanner from "../../../organisms/welcome-banner/WelcomeBanner";
 
 const DummySelectOptions = [
   { label: "Option 1", value: "option1" },
@@ -77,13 +78,15 @@ const HomeUser = () => {
 
   return (
     <>
-      <Image
+      {/* <Image
         src="../../../src/assets/images/Banner_models_4.webp"
         alt="Big Photo"
         objectFit="cover"
         w="100vw"
         h="calc(100vh - 50vh)" // Adjust this value to accommodate any header/navbar height
-      />
+      /> */}
+
+      <WelcomeBanner />
       <Container maxW="8xl" style={{ display: "flex" }}>
         <Box flex="1">
           <Stack direction="row" spacing={4}>

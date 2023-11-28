@@ -30,9 +30,9 @@ export default function LoginForm(props: LoginFormProps) {
   });
 
   return (
-    <Container maxW="sm" padding="4">
+    <Container maxW="md" p="4">
       <form onSubmit={state.handleSubmit}>
-        <FormControl marginBottom="4">
+        <FormControl mb="4">
           <FormLabel htmlFor="email">{t("login.username")}</FormLabel>
           <Input
             type="text"
@@ -41,10 +41,12 @@ export default function LoginForm(props: LoginFormProps) {
             placeholder={t("login.enter_emailOrusername")}
             value={state.login.username}
             onChange={state.handleLoginChange}
+            variant="filled"
+            borderRadius="md"
             required
           />
         </FormControl>
-        <FormControl marginBottom="4">
+        <FormControl mb="4">
           <FormLabel htmlFor="password">{t("login.password")}</FormLabel>
           <InputGroup>
             <Input
@@ -54,11 +56,13 @@ export default function LoginForm(props: LoginFormProps) {
               placeholder={t("login.enter_password")}
               value={state.login.password}
               onChange={state.handleLoginChange}
+              variant="filled"
+              borderRadius="md"
               required
             />
-            <InputRightElement width="2.8rem">
+            <InputRightElement width="3rem">
               <IconButton
-                h="1.75rem"
+                h="1.5rem"
                 size="sm"
                 onClick={() => togglePasswordVisibility("password")}
                 icon={
@@ -69,6 +73,7 @@ export default function LoginForm(props: LoginFormProps) {
                     ? "Hide password"
                     : "Show password"
                 }
+                variant="ghost"
               />
             </InputRightElement>
           </InputGroup>
@@ -79,23 +84,22 @@ export default function LoginForm(props: LoginFormProps) {
           type="submit"
           width="full"
           textTransform="capitalize"
+          borderRadius="md"
         >
           {t("login.login")}
         </Button>
       </form>
-      <Flex width={"100%"} justifyContent={"space-between"}>
-        <Box>
-          <ChakraLink
-            as={RouterLink}
-            to="/register"
-            href="/register"
-            color="primary.500"
-            textDecoration="none"
-            _hover={{ textDecoration: "none" }}
-          >
-            {t("login.create_account")}
-          </ChakraLink>
-        </Box>
+      <Flex width="100%" justifyContent="center" mt="4">
+        <ChakraLink
+          as={RouterLink}
+          to="/register"
+          href="/register"
+          color="primary.500"
+          textDecoration="none"
+          _hover={{ textDecoration: "underline" }}
+        >
+          {t("login.create_account")}
+        </ChakraLink>
       </Flex>
     </Container>
   );

@@ -21,7 +21,7 @@ const AuthLayout = () => {
   return (
     <Flex minHeight="100vh" flexDirection="column">
       <Box color={"black"} bg="white.100" py="3" px="4">
-        <Container maxW={"8xl"}>
+        <Container maxW={"6xl"}>
           <Flex
             alignItems="center"
             fontSize="sm"

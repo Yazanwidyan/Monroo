@@ -1,63 +1,50 @@
 import React from "react";
-import {
-  Box,
-  Flex,
-  Text,
-  Divider,
-  Link,
-  IconButton,
-  HStack,
-} from "@chakra-ui/react";
+import { Box, Flex, Text, Link, HStack } from "@chakra-ui/react";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <Box color={"white"} as="footer" py="8" mt={8} bg="black">
-      <Box maxW="8xl" mx="auto" px="4">
-        <Text
-          color={"white"}
-          textAlign="left"
-          mb="4"
-          fontWeight="bold"
-          fontSize={"x-large"}
-        >
+    <Box as="footer" py="4" bg="black" color="white">
+      <Flex
+        maxW="6xl"
+        mx="auto"
+        px="4"
+        justify="space-between"
+        alignItems="center"
+        flexDirection={{ base: "column", md: "row" }}
+      >
+        <Text fontWeight="bold" fontSize="lg" mb={{ base: "2", md: "0" }}>
           MONROO
         </Text>
-        <Flex justify="space-between" flexWrap="wrap" mb="4">
-          <HStack spacing="4" mb="4">
-            <IconButton
-              aria-label="Facebook"
-              icon={<FaFacebook />}
-              variant="ghost"
-              fontSize="20px"
-              color="gray.500"
-            />
-            <IconButton
-              aria-label="Twitter"
-              icon={<FaTwitter />}
-              variant="ghost"
-              fontSize="20px"
-              color="gray.500"
-            />
-            <IconButton
-              aria-label="Instagram"
-              icon={<FaInstagram />}
-              variant="ghost"
-              fontSize="20px"
-              color="gray.500"
-            />
-          </HStack>
-          <Flex gap={4} mt={2}>
-            <Link href="#">FAQs</Link>
-            <Link href="#">Privacy Policy</Link>
-            <Link href="#">Terms & Conditions</Link>
-            <Link href="#">Contact</Link>
-          </Flex>
-        </Flex>
-        <Text textAlign="left" color="gray.500">
-          © {new Date().getFullYear()} All Rights Reserved
-        </Text>
-      </Box>
+        <HStack spacing="4" mt={{ base: "4", md: "0" }}>
+          <Link href="#" fontSize="sm">
+            FAQs
+          </Link>
+          <Link href="#" fontSize="sm">
+            Privacy Policy
+          </Link>
+          <Link href="#" fontSize="sm">
+            Terms & Conditions
+          </Link>
+          <Link href="#" fontSize="sm">
+            Contact
+          </Link>
+        </HStack>
+        <HStack spacing="4" mt={{ base: "4", md: "0" }}>
+          <Link href="#" fontSize="xl">
+            <FaFacebook />
+          </Link>
+          <Link href="#" fontSize="xl">
+            <FaTwitter />
+          </Link>
+          <Link href="#" fontSize="xl">
+            <FaInstagram />
+          </Link>
+        </HStack>
+      </Flex>
+      <Text textAlign="center" color="gray.500" fontSize="sm">
+        © {new Date().getFullYear()} MONROO. All Rights Reserved
+      </Text>
     </Box>
   );
 };

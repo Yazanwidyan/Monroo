@@ -1,14 +1,5 @@
 import { useState } from "react";
-import {
-  Box,
-  Flex,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Button,
-} from "@chakra-ui/react";
+import { Select, CSSReset } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { FaFlagUsa, FaFlag } from "react-icons/fa"; // Import flag icons
 
@@ -28,32 +19,26 @@ const LanguageSwitcher = () => {
     setSelectedLanguage(lng);
   };
 
+  const handleSelectChange = (event) => {
+    const selectedValue = event.target.value;
+    changeLanguage(selectedValue);
+  };
+
   return (
-    <Menu>
-      <MenuButton
-        as={Button}
-        fontSize={"small"}
-        color={"primary.500"}
-        _hover={{
-          bg: "gary.700",
-          color: "primary.500",
-        }}
-        variant="link"
+    <>
+      <Select
+        value={selectedLanguage}
+        onChange={handleSelectChange}
+        maxWidth="100px"
+        borderWidth="0"
       >
-        {lngs[selectedLanguage].nativeName}
-      </MenuButton>
-      <MenuList>
-        {Object.keys(lngs).map((lng) => (
-          <MenuItem
-            color={"primary.500"}
-            key={lng}
-            onClick={() => changeLanguage(lng)}
-          >
-            <Flex alignItems="center">{lngs[lng].nativeName}</Flex>
-          </MenuItem>
+        {Object.keys(lngs).map((lngKey) => (
+          <option key={lngKey} value={lngKey}>
+            {lngs[lngKey].nativeName}
+          </option>
         ))}
-      </MenuList>
-    </Menu>
+      </Select>
+    </>
   );
 };
 

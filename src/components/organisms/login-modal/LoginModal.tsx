@@ -28,16 +28,17 @@ const LoginModal = ({ isOpen, onClose }) => {
         <ModalCloseButton color={"white"} />
         <ModalBody>
           <Tabs
+            isFitted
             index={selectedTab === "user" ? 0 : 1}
             onChange={(index) =>
               setSelectedTab(index === 0 ? "user" : "provider")
             }
           >
             <TabList>
-              <Tab _selected={{ color: "primary.500" }} color={"gray.300"}>
+              <Tab _selected={{ color: "primary.500" }} color={"gray.500"}>
                 User
               </Tab>
-              <Tab _selected={{ color: "primary.500" }} color={"gray.300"}>
+              <Tab _selected={{ color: "primary.500" }} color={"gray.500"}>
                 Provider
               </Tab>
             </TabList>
