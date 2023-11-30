@@ -23,7 +23,7 @@ export default function CreateEventForm(props: CreateEventFormProps) {
 
   return (
     <form onSubmit={state.handleSubmit}>
-      <SimpleGrid columns={{ base: 1, md: 1 }} rowGap="20px" columnGap="20px">
+      <SimpleGrid columns={{ base: 1, md: 2 }} rowGap="20px" columnGap="20px">
         <FormControl>
           <FormLabel>Select Category</FormLabel>
           <MultiSelect
@@ -118,7 +118,7 @@ export default function CreateEventForm(props: CreateEventFormProps) {
             required
           />
         </FormControl>
-        <FormControl>
+        <FormControl mb={8}>
           <FormLabel>date</FormLabel>
           <Input
             type="date"
@@ -132,12 +132,12 @@ export default function CreateEventForm(props: CreateEventFormProps) {
             required
           />
         </FormControl>
+        <Flex marginTop="38px" justifyContent="flex-end">
+          <Button fontSize="14px" colorScheme="primary" type="submit">
+            Submit
+          </Button>
+        </Flex>
       </SimpleGrid>
-      <Flex marginTop="25px" justifyContent="space-between">
-        <Button fontSize="14px" colorScheme="primary" type="submit">
-          Submit
-        </Button>
-      </Flex>
     </form>
   );
 }

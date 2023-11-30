@@ -11,9 +11,60 @@ import {
   Text,
   Flex,
   Box,
+  Image,
 } from "@chakra-ui/react";
 import userServices from "../../../services/userServices";
 import useCustomToast from "../../../hooks/useCustomToast";
+
+const EventCard = ({ event, requestPrivateEvent }) => {
+  return (
+    <Box
+      borderWidth="1px"
+      borderRadius="lg"
+      p={0}
+      boxShadow="md"
+      overflow="hidden"
+      position="relative"
+      transition="transform 0.3s ease-in-out"
+      _hover={{ transform: "scale(1.05)" }}
+    >
+      <Image
+        src={
+          event.image
+            ? event.image
+            : "https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png"
+        }
+        alt={event.title}
+        height={200}
+        width="100%"
+        objectFit="cover"
+      />
+      <Box p={2}>
+        <Flex justify="space-between" align="center" mb={2}>
+          <Box>
+            <Text fontWeight="bold" fontSize="medium">
+              {event.title}
+            </Text>
+            <Text color="gray.500" fontSize={"sm"}>
+              {event.eventDate}
+            </Text>
+          </Box>
+          <Box textAlign="right" alignSelf={"end"}>
+            <Button
+              color="primary.500"
+              fontWeight="bold"
+              fontSize={"sm"}
+              cursor="pointer"
+              onClick={() => requestPrivateEvent(event)}
+            >
+              Request Event
+            </Button>
+          </Box>
+        </Flex>
+      </Box>
+    </Box>
+  );
+};
 
 const UserEventListModal = ({ isOpen, onClose, events, providerID }) => {
   const { showToast } = useCustomToast();
@@ -45,21 +96,11 @@ const UserEventListModal = ({ isOpen, onClose, events, providerID }) => {
         <ModalBody>
           <VStack spacing={4} align="stretch">
             {events.map((event, index) => (
-              <Box
-                cursor="pointer"
-                onClick={() => requestPrivateEvent(event)}
+              <EventCard
                 key={index}
-                borderWidth="1px"
-                borderRadius="lg"
-                p={4}
-                boxShadow="base"
-              >
-                <Flex justify="space-between" align="center">
-                  <Text fontWeight="bold">{event.title}</Text>
-                  <Text color="gray.500">{event.eventDate}</Text>
-                </Flex>
-                <Text mt={2}>{event.desc}</Text>
-              </Box>
+                event={event}
+                requestPrivateEvent={requestPrivateEvent}
+              />
             ))}
           </VStack>
         </ModalBody>

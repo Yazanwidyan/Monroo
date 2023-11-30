@@ -23,6 +23,7 @@ const ServiceProviderCard = ({
   nationality,
   gender,
   providerID,
+  userProfile,
 }) => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,7 +46,7 @@ const ServiceProviderCard = ({
   };
 
   const handleShowProfile = () => {
-    navigate("/service-provider-profile-view");
+    navigate("/service-provider-profile-view", { state: userProfile });
   };
 
   const openModal = async () => {
@@ -66,13 +67,16 @@ const ServiceProviderCard = ({
   };
 
   return (
-    <Box maxW="md" overflow="hidden">
+    <Box borderRadius={"md"} maxW="md" overflow="hidden">
       <Box
+        onClick={handleShowProfile}
         position="relative"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        cursor={"pointer"}
       >
         <Image
+          h={350}
           position="relative"
           src={
             image
@@ -80,33 +84,55 @@ const ServiceProviderCard = ({
               : "https://www.zica.co.zm/wp-content/uploads/2021/02/dummy-profile-image.png"
           }
           alt={name}
+          height={320}
+          width="100%"
+          objectFit="cover"
         />
         {isHovered && (
-          <Button
-            colorScheme="primary"
+          <Box
             position="absolute"
-            top="50%"
-            left="50%"
-            transform="translate(-50%, -50%)"
-            onClick={handleShowProfile}
+            top="0"
+            left="0"
+            w="100%"
+            h="100%"
+            bg="rgba(0, 0, 0, 0.5)" // Adjust opacity here (0.5 for 50% opacity)
+            zIndex="1"
+            opacity="0"
+            transition="opacity 0.3s ease" // Transition for opacity change
+            _hover={{ opacity: 1 }}
           >
-            Show Profile
-          </Button>
+            <Button
+              variant={"ghost"}
+              colorScheme="white"
+              color={"white"}
+              position="absolute"
+              top="50%"
+              left="50%"
+              transform="translate(-50%, -50%)"
+              transition="opacity 0.3s ease" // Transition for opacity change
+            >
+              Show Profile
+            </Button>
+          </Box>
         )}
       </Box>
 
-      <Box p="4">
-        <Badge borderRadius="full" px="2" colorScheme="primary" mb="2">
-          {title}
-        </Badge>
-
-        <Heading size="md" fontWeight="semibold" mb="2">
+      <Box>
+        <Text
+          textTransform={"capitalize"}
+          fontSize={"lg"}
+          fontWeight="600"
+          letterSpacing={2}
+          my="2"
+        >
           {name}
-        </Heading>
+        </Text>
 
         <Button
+          variant={"outline"}
+          textTransform={"uppercase"}
           fontSize="x-small"
-          colorScheme="primary"
+          colorScheme="primary.500"
           mb="2"
           onClick={handleRequestPrivateEvent}
         >

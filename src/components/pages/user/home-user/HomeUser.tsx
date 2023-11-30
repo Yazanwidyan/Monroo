@@ -78,34 +78,37 @@ const HomeUser = () => {
 
   return (
     <>
-      {/* <Image
-        src="../../../src/assets/images/Banner_models_4.webp"
-        alt="Big Photo"
-        objectFit="cover"
-        w="100vw"
-        h="calc(100vh - 50vh)" // Adjust this value to accommodate any header/navbar height
-      /> */}
-
       <WelcomeBanner />
-      <Container maxW="8xl" style={{ display: "flex" }}>
+      <Container mt={8} maxW="90%" style={{ display: "flex" }}>
         <Box flex="1">
-          <Stack direction="row" spacing={4}>
+          <Stack my={5} direction="row" spacing={4}>
             <Button
-              px={0}
+              px={3}
               variant="ghost"
               color={selectedTab === "recommended" ? "black" : "gray"}
               colorScheme={selectedTab === "recommended" ? "primary" : "gray"}
               onClick={() => handleTabChange("recommended")}
+              borderRadius={0}
               _hover={{ bg: "none", textDecoration: "none" }} // Remove hover effect
+              borderLeftWidth={selectedTab === "recommended" ? "3px" : "0"} // Add left border if active
+              borderColor={
+                selectedTab === "recommended" ? "primary.400" : "transparent"
+              } // Border color for active tab
             >
               Recommended
             </Button>
             <Button
+              px={3}
               variant="ghost"
               color={selectedTab === "all" ? "black" : "gray"}
               colorScheme={selectedTab === "all" ? "primary" : "gray"}
               onClick={() => handleTabChange("all")}
+              borderRadius={0}
               _hover={{ bg: "none", textDecoration: "none" }} // Remove hover effect
+              borderLeftWidth={selectedTab === "all" ? "3px" : "0"} // Add left border if active
+              borderColor={
+                selectedTab === "all" ? "primary.400" : "transparent"
+              } // Border color for active tab
             >
               All
             </Button>
@@ -116,14 +119,18 @@ const HomeUser = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               bg="transparent"
-              _focus={{ outline: "none" }}
+              border="none"
+              borderRadius={0}
+              borderBottom="1px solid"
+              borderColor="gray.300"
+              _focus={{ borderColor: "gray.400", boxShadow: "none" }}
               _placeholder={{ color: "gray.500" }}
             />
             <InputLeftElement pointerEvents="none">
               <Icon as={FaSearch} color="gray.400" />
             </InputLeftElement>
           </InputGroup>
-          <Stack direction="row" spacing={4} mb={4} align="center">
+          <Stack direction="row" spacing={4} mb={8} align="center">
             <Select
               value={filters.filter1}
               onChange={(selectedOption) =>
@@ -154,7 +161,11 @@ const HomeUser = () => {
               Apply
             </Button>
           </Stack>
-          <Grid templateColumns="repeat(auto-fill, minmax(250px, 1fr))" gap={4}>
+          <Grid
+            mb={8}
+            templateColumns="repeat(auto-fill, minmax(350px, 1fr))"
+            gap={4}
+          >
             {isLoading
               ? Array.from({ length: 5 }).map((_, index) => (
                   <GridItem key={index}>
@@ -185,6 +196,7 @@ const HomeUser = () => {
                       nationality={userProfile.nationality}
                       gender={userProfile.gender}
                       providerID={userProfile.id}
+                      userProfile={userProfile}
                     />
                   </GridItem>
                 ))}

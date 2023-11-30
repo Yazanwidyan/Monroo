@@ -10,12 +10,21 @@
 }
 
 body {
+  letter-spacing: 1.5px;
   background-color: v.$background-color !important;
   margin: 0;
   font-family: "Poppins";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
+}
+
+button {
+  letter-spacing: 1.5px;
+}
+
+::placeholder {
+  letter-spacing: 1.5px;
 }
 
 *,
