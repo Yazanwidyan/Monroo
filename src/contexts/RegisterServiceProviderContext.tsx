@@ -37,15 +37,19 @@ type ContextProps = {
   resumeError: string;
   resumeFile: File[];
   oneMinuteVideoInputKey: number;
+  demoReelInputKey: number;
   videosInputKey: number;
   audiosInputKey: number;
   onOneMinuteVideoChange(e?: React.ChangeEvent<HTMLInputElement>): void;
+  onDemoReelChange(e?: React.ChangeEvent<HTMLInputElement>): void;
   onVideosChange(e?: React.ChangeEvent<HTMLInputElement>): void;
   onAudiosChange(e?: React.ChangeEvent<HTMLInputElement>): void;
   videosError: string;
   audiosError: string;
+  demoReelError: string;
   oneMinuteVideoError: string;
   oneMinuteVideoFile: File[];
+  demoReelFile: File[];
   videosFile: File[];
   audiosFile: File[];
   imagesInputKey: number;
@@ -111,15 +115,19 @@ const DEFAULT_VALUE: ContextProps = {
   resumeInputKey: 0,
   resumeFile: [],
   oneMinuteVideoInputKey: 0,
+  demoReelInputKey: 0,
   videosInputKey: 0,
   audiosInputKey: 0,
   onOneMinuteVideoChange: () => {},
+  onDemoReelChange: () => {},
   onVideosChange: () => {},
   onAudiosChange: () => {},
   oneMinuteVideoError: "",
+  demoReelError: "",
   videosError: "",
   audiosError: "",
   oneMinuteVideoFile: [],
+  demoReelFile: [],
   videosFile: [],
   audiosFile: [],
   imagesInputKey: 0,
@@ -191,6 +199,12 @@ export default function RegisterServiceProviderContextProvider({ children }) {
     maxFileCount: 1,
   });
 
+  const [demoReelFile, demoReelInputKey, onDemoReelChange, demoReelError] =
+    useFileInput({
+      maxFileSizeKB: 10240,
+      maxFileCount: 1,
+    });
+
   const [videosFile, videosInputKey, onVideosChange, videosError] =
     useFileInput({
       maxFileSizeKB: 10240,
@@ -235,15 +249,19 @@ export default function RegisterServiceProviderContextProvider({ children }) {
         onResumeChange,
         resumeError,
         oneMinuteVideoFile,
+        demoReelFile,
         videosFile,
         audiosFile,
         oneMinuteVideoInputKey,
+        demoReelInputKey,
         videosInputKey,
         audiosInputKey,
         onOneMinuteVideoChange,
+        onDemoReelChange,
         onVideosChange,
         onAudiosChange,
         oneMinuteVideoError,
+        demoReelError,
         videosError,
         audiosError,
         imageFiles,

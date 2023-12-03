@@ -253,6 +253,31 @@ export default function RegisterServiceProviderProfessionalInfo() {
           )}
         </FormControl>
       )}
+      {state.registerServiceProviderLookup.demoReel && (
+        <FormControl>
+          <FormLabel>Reel</FormLabel>
+          <Input
+            type="file"
+            key={state.demoReelInputKey}
+            accept=".mp4"
+            placeholder="Upload your elevator pitch"
+            onChange={state.onDemoReelChange}
+          />
+          {state.demoReelError && (
+            <Text fontSize="10px">{state.demoReelError}</Text>
+          )}
+          {state.demoReelFile.length > 0 && (
+            <Box>
+              <Text>Selected Files:</Text>
+              <List>
+                {state.demoReelFile.map((file) => (
+                  <ListItem key={file.name}>{file.name}</ListItem>
+                ))}
+              </List>
+            </Box>
+          )}
+        </FormControl>
+      )}
       {state.registerServiceProviderLookup.videos && (
         <FormControl>
           <FormLabel>Videos</FormLabel>

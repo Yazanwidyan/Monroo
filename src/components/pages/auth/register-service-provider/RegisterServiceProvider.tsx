@@ -17,6 +17,7 @@ export default function RegisterServiceProvider() {
           resumeFile,
           imageFiles,
           oneMinuteVideoFile,
+          demoReelFile,
           videosFile,
           audiosFile
         ) => {
@@ -35,6 +36,8 @@ export default function RegisterServiceProvider() {
             imageFiles,
             "oneMinuteVideoFile:",
             oneMinuteVideoFile,
+            "demoReelFile:",
+            demoReelFile,
             "videosFile:",
             videosFile,
             "audiosFile:",

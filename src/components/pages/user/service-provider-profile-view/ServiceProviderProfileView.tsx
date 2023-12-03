@@ -8,79 +8,31 @@ import {
   GridItem,
   Container,
   Image,
+  Flex,
 } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
 
 import { FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa"; // Import social media icons
+import PhotosGallery from "../../../organisms/photos-gallery/PhotosGallery";
+import VideoGallery from "../../../organisms/vidoes-gallery/VideosGallery";
 
-const profileData = {
-  audios: [],
-  averageRatePerHour: "20",
-  bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  catID: "8347abe2-11ed-4e13-b0c4-5df0e7c9368c",
-  countryOfResidence: "US",
-  demoReel: "https://www.demoreel.com/",
-  dob: "1990-05-15",
-  education: "Bachelor's Degree",
-  email: "example@email.com",
-  experience: "8",
-  fcmToken: "FCM_TOKEN_HERE",
-  fname: "John",
-  gender: 1,
-  height: "175",
-  id: "f89b0e63-d1c1-455c-831d-4d2c679efe6b",
-  instagram: "https://www.instagram.com/example/",
-  introductionVideoLink: "https://www.introvideo.com/",
-  isActive: true,
-  isAmodel: false,
-  linkedin: "https://www.linkedin.com/in/example/",
-  lname: "Doe",
-  musicGenres: ["Pop", "Rock"],
-  musicalInstruments: ["Guitar", "Piano"],
-  nationality: "US",
-  oneMinuteVideo: "https://www.oneminutevideo.com/",
-  openToWorkInCountry: ["US", "CA"],
-  password: "PASSWORD_HASH_HERE",
-  phone: "+1234567890",
-  photos: [
-    "../../src/assets/images/model.jpeg",
-    "../../src/assets/images/model.jpeg",
-  ],
-  portfolio: "https://www.portfolio.com/",
-  profilePic: "../../src/assets/images/model.jpeg",
-  registerDate: "2023-11-28",
-  resume: "https://www.resume.com/",
-  specialSkills: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  spokenLanguage: "English",
-  subCatID: [
-    {
-      id: "ecd45956-b1bb-4b4b-bdfb-b3c81597e53e",
-      name: "Makeup Artist",
-      nameAR: "خبيرة تجميل",
-    },
-  ],
-  token: "TOKEN_HERE",
-  username: "johndoe",
-  videos: [
-    "https://www.youtube.com/watch?v=D0UnqGm_miA&ab_channel=SolutionsForAll",
-  ],
-  visaType: "Work Visa",
-  weight: "70",
-  workLink: "https://www.worklink.com/",
-  youtubelink: "https://www.youtube.com/",
-};
+const personalVidoes = ["sjjj", "jjj"];
 
 const renderOptionalField = (label, value) => {
   if (value) {
     return (
-      <Box>
-        <Text fontWeight="bold">{label}:</Text>
+      <Box mb={2}>
+        <Text fontWeight="400" fontSize="xs">
+          {label}:
+        </Text>
         {label.toLowerCase().includes("link") ? (
-          <Link href={value} target="_blank">
+          <Link href={value} target="_blank" fontSize="sm" color="blue.500">
             {value}
           </Link>
         ) : (
-          <Text>{value}</Text>
+          <Text fontSize="sm" fontWeight={600}>
+            {value}
+          </Text>
         )}
       </Box>
     );
@@ -88,32 +40,32 @@ const renderOptionalField = (label, value) => {
   return null;
 };
 
-const PhotosSection = ({ photos }) => (
+const PhotosSection = ({ photos }) => <PhotosGallery photos={photos} />;
+
+const VideosSection = ({ videos }) => (
   <Box mt={6}>
     <Text fontWeight="bold" fontSize="xl">
-      Photos:
+      Videos
     </Text>
-    <Grid templateColumns="repeat(4, 1fr)" gap={4} mt={4}>
-      {photos.map((photo, index) => (
-        <Box key={index}>
-          <Image src={photo} alt={`Photo ${index + 1}`} />
-        </Box>
+    <Grid templateColumns="repeat(1, 1fr)" gap={4} mt={4}>
+      {videos.map((video, index) => (
+        <VideoGallery title={""} key={index} videoSrc={video} />
       ))}
     </Grid>
   </Box>
 );
 
-const VideosSection = ({ videos }) => (
+const AudiosSection = ({ audios }) => (
   <Box mt={6}>
     <Text fontWeight="bold" fontSize="xl">
       Videos:
     </Text>
     <Grid templateColumns="repeat(3, 1fr)" gap={4} mt={4}>
-      {videos.map((video, index) => (
+      {audios.map((audio, index) => (
         <Box key={index}>
           {/* Render video thumbnails or video player */}
           <iframe
-            src={video}
+            src={audio}
             title={`Video ${index + 1}`}
             width="300"
             height="200"
@@ -126,8 +78,10 @@ const VideosSection = ({ videos }) => (
   </Box>
 );
 const SocialMediaLinks = ({ instagram, linkedin, youtubelink }) => (
-  <Box mt={4}>
-    <Text fontWeight="bold">Social Media:</Text>
+  <Box mt={2} mb={4}>
+    <Text fontSize={"md"} fontWeight="bold" mb={4}>
+      Social Media
+    </Text>
     <Box display="flex" alignItems="center">
       {instagram && (
         <Link href={instagram} target="_blank" mx={2}>
@@ -151,29 +105,27 @@ const SocialMediaLinks = ({ instagram, linkedin, youtubelink }) => (
 
 const PersonalInfo = ({
   dob,
+  email,
   phone,
   nationality,
-  linkedin,
   resume,
   gender,
   height,
   weight,
 }) => (
   <Box>
-    <Text fontSize="xl" fontWeight="bold" mb={4}>
-      Personal Information:
+    <Text fontSize="md" fontWeight="bold" mb={2}>
+      Personal Information
     </Text>
     <Grid templateColumns="repeat(2, 1fr)" gap={4}>
       <Box>
+        {renderOptionalField("Email", email)}
         {renderOptionalField("Date of Birth", dob)}
         {renderOptionalField("Phone", phone)}
         {renderOptionalField("Nationality", nationality)}
-        {renderOptionalField("LinkedIn", linkedin)}
-        {renderOptionalField("Resume", resume)}
       </Box>
       <Box>
-        <Text fontWeight="bold">Gender:</Text>
-        <Text>{gender === 1 ? "Male" : "Female"}</Text>
+        {renderOptionalField("Gender", gender === 1 ? "Male" : "Female")}
         {renderOptionalField("Height", `${height} cm`)}
         {renderOptionalField("Weight", `${weight} kg`)}
       </Box>
@@ -189,20 +141,32 @@ const AdditionalInfo = ({
   oneMinuteVideo,
   visaType,
   openToWorkInCountry,
+  spokenLanguage,
+  specialSkills,
+  musicalInstruments,
+  musicGenres,
+  experience,
+  averageRatePerHour,
 }) => (
   <Box>
-    <Text fontSize={"xl"} fontWeight="bold" mb={4}>
-      Additional Information:
+    <Text fontSize={"md"} fontWeight="bold" mb={2}>
+      Additional Information
     </Text>
     <Grid templateColumns="repeat(2, 1fr)" gap={2}>
       <Box>
         {renderOptionalField("Education", education)}
+        {renderOptionalField("Average Rate Per Hour", averageRatePerHour)}
+        {renderOptionalField("Experience", experience)}
+        {renderOptionalField("MusicGenres", musicGenres)}
+        {renderOptionalField("Musical Instruments", musicalInstruments)}
+        {renderOptionalField("Special Skills", specialSkills)}
+        {renderOptionalField("Spoken Language", spokenLanguage)}
+      </Box>
+      <Box>
         {renderOptionalField("Introduction Video Link", introductionVideoLink)}
         {renderOptionalField("Demo Reel", demoReel)}
         {renderOptionalField("YouTube Link", youtubelink)}
         {renderOptionalField("One Minute Video", oneMinuteVideo)}
-      </Box>
-      <Box>
         {renderOptionalField("Visa Type", visaType)}
         {renderOptionalField(
           "Open to Work In Country",
@@ -246,43 +210,34 @@ const ServiceProviderProfileView = () => {
     spokenLanguage,
     visaType,
     openToWorkInCountry,
-    registerDate,
-    isActive,
-    isAmodel,
-    fcmToken,
     catID,
     subCatID,
-    id,
-    token,
     videos,
     audios,
     photos,
-    password,
   } = location.state;
 
   console.log("location.state", location.state);
 
   return (
     <Box bg="gray.200" p="4">
-      <Container maxW={"8xl"}>
-        <Grid templateColumns="1fr 3fr" gap={4}>
-          {/* Profile Picture and basic details */}
+      <Container maxW={"6xl"}>
+        <Grid templateColumns="1fr 3fr" gap={8}>
           <GridItem colSpan={1}>
             <Box>
               <Image
                 borderRadius={"xl"}
                 src={
-                  profilePic
-                    ? profilePic
-                    : "https://www.zica.co.zm/wp-content/uploads/2021/02/dummy-profile-image.png"
+                  profilePic ||
+                  "https://www.zica.co.zm/wp-content/uploads/2021/02/dummy-profile-image.png"
                 }
                 alt={`${fname} ${lname}`}
-                style={{ maxWidth: "350px", height: "auto" }} // Adjust the maxWidth for the desired size
+                boxSize={"100%"}
               />
             </Box>
             {photos.length > 0 && <PhotosSection photos={photos} />}
-            {/* Videos Section */}
             {videos.length > 0 && <VideosSection videos={videos} />}
+            {audios.length > 0 && <AudiosSection audios={audios} />}
           </GridItem>
           {/* Basic details section ends */}
 
@@ -291,28 +246,36 @@ const ServiceProviderProfileView = () => {
             <Text fontWeight="bold" fontSize="3xl">
               {fname} {lname}
             </Text>
-            <Text fontWeight="300" fontSize="md">
-              {email}
-            </Text>
-            <Text fontSize="lg">{bio}</Text>
+            <Text fontSize="md">{bio}</Text>
             <SocialMediaLinks
               instagram={instagram}
               linkedin={linkedin}
               youtubelink={youtubelink}
             />
-            <Divider my={4} />
+            <Divider my={2} />
+            <Flex gap={4}>
+              {personalVidoes.map((video, index) => (
+                <VideoGallery
+                  title={"Intro video"}
+                  key={index}
+                  videoSrc={video}
+                />
+              ))}
+            </Flex>
+            <Divider my={2} />
+
             <PersonalInfo
               dob={dob}
+              email={email}
               phone={phone}
               nationality={nationality}
               gender={gender}
               height={height}
               weight={weight}
-              linkedin={linkedin}
               resume={resume}
               // Other personal info props...
             />
-            <Divider my={4} />
+            <Divider my={2} />
 
             <AdditionalInfo
               demoReel={demoReel}
@@ -322,6 +285,13 @@ const ServiceProviderProfileView = () => {
               visaType={visaType}
               youtubelink={youtubelink}
               education={education}
+              spokenLanguage={spokenLanguage}
+              specialSkills={specialSkills}
+              averageRatePerHour={averageRatePerHour}
+              experience={experience}
+              musicGenres={musicGenres}
+              musicalInstruments={musicalInstruments}
+
               // Other additional info props...
             />
             {/* Other sections/components */}
