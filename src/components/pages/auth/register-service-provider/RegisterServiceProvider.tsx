@@ -18,6 +18,7 @@ export default function RegisterServiceProvider() {
           imageFiles,
           oneMinuteVideoFile,
           demoReelFile,
+          portfolioFile,
           videosFile,
           audiosFile
         ) => {
@@ -38,6 +39,8 @@ export default function RegisterServiceProvider() {
             oneMinuteVideoFile,
             "demoReelFile:",
             demoReelFile,
+            "portfolioFile:",
+            portfolioFile,
             "videosFile:",
             videosFile,
             "audiosFile:",
@@ -62,6 +65,8 @@ export default function RegisterServiceProvider() {
             data.append(`audios`, file);
           });
           data.append("onevideo", oneMinuteVideoFile[0]);
+          data.append("reel", demoReelFile[0]);
+          data.append("portfolio", portfolioFile[0]);
           data.append("data", JSON.stringify(otherData));
 
           try {

@@ -38,18 +38,22 @@ type ContextProps = {
   resumeFile: File[];
   oneMinuteVideoInputKey: number;
   demoReelInputKey: number;
+  portfolioInputKey: number;
   videosInputKey: number;
   audiosInputKey: number;
   onOneMinuteVideoChange(e?: React.ChangeEvent<HTMLInputElement>): void;
   onDemoReelChange(e?: React.ChangeEvent<HTMLInputElement>): void;
+  onPortfolioChange(e?: React.ChangeEvent<HTMLInputElement>): void;
   onVideosChange(e?: React.ChangeEvent<HTMLInputElement>): void;
   onAudiosChange(e?: React.ChangeEvent<HTMLInputElement>): void;
   videosError: string;
   audiosError: string;
   demoReelError: string;
+  portfolioError: string;
   oneMinuteVideoError: string;
   oneMinuteVideoFile: File[];
   demoReelFile: File[];
+  portfolioFile: File[];
   videosFile: File[];
   audiosFile: File[];
   imagesInputKey: number;
@@ -116,18 +120,22 @@ const DEFAULT_VALUE: ContextProps = {
   resumeFile: [],
   oneMinuteVideoInputKey: 0,
   demoReelInputKey: 0,
+  portfolioInputKey: 0,
   videosInputKey: 0,
   audiosInputKey: 0,
   onOneMinuteVideoChange: () => {},
   onDemoReelChange: () => {},
+  onPortfolioChange: () => {},
   onVideosChange: () => {},
   onAudiosChange: () => {},
   oneMinuteVideoError: "",
   demoReelError: "",
+  portfolioError: "",
   videosError: "",
   audiosError: "",
   oneMinuteVideoFile: [],
   demoReelFile: [],
+  portfolioFile: [],
   videosFile: [],
   audiosFile: [],
   imagesInputKey: 0,
@@ -199,6 +207,12 @@ export default function RegisterServiceProviderContextProvider({ children }) {
     maxFileCount: 1,
   });
 
+  const [portfolioFile, portfolioInputKey, onPortfolioChange, portfolioError] =
+    useFileInput({
+      maxFileSizeKB: 10240,
+      maxFileCount: 1,
+    });
+
   const [demoReelFile, demoReelInputKey, onDemoReelChange, demoReelError] =
     useFileInput({
       maxFileSizeKB: 10240,
@@ -250,18 +264,22 @@ export default function RegisterServiceProviderContextProvider({ children }) {
         resumeError,
         oneMinuteVideoFile,
         demoReelFile,
+        portfolioFile,
         videosFile,
         audiosFile,
         oneMinuteVideoInputKey,
         demoReelInputKey,
+        portfolioInputKey,
         videosInputKey,
         audiosInputKey,
         onOneMinuteVideoChange,
         onDemoReelChange,
+        onPortfolioChange,
         onVideosChange,
         onAudiosChange,
         oneMinuteVideoError,
         demoReelError,
+        portfolioError,
         videosError,
         audiosError,
         imageFiles,

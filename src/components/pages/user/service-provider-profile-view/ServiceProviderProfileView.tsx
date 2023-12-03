@@ -2,30 +2,52 @@ import {
   Box,
   Text,
   Link,
-  VStack,
   Divider,
   Grid,
   GridItem,
   Container,
   Image,
   Flex,
+  Button,
+  Icon,
 } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
 
-import { FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa"; // Import social media icons
+import {
+  FaFileDownload,
+  FaInstagram,
+  FaLinkedin,
+  FaYoutube,
+} from "react-icons/fa"; // Import social media icons
 import PhotosGallery from "../../../organisms/photos-gallery/PhotosGallery";
 import VideoGallery from "../../../organisms/vidoes-gallery/VideosGallery";
-
-const personalVidoes = ["sjjj", "jjj"];
+import EducationLookup from "../../../molecules/education-lookup/EducationLookup";
+import MusicGenreLookup from "../../../molecules/music-genre-lookup/MusicGenreLookup";
+import MusicalInstrumentLookup from "../../../molecules/musical-instrument-lookup/MusicalInstrumentLookup";
+import VisaTypeLookup from "../../../molecules/visa-type-lookup/VisaTypeLookup";
+import CountryLookup from "../../../molecules/country-lookup/CountryLookup";
 
 const renderOptionalField = (label, value) => {
-  if (value) {
+  if (
+    value !== undefined &&
+    value !== null &&
+    value.length > 0 &&
+    value[0] !== null
+  ) {
     return (
       <Box mb={2}>
         <Text fontWeight="400" fontSize="xs">
           {label}:
         </Text>
-        {label.toLowerCase().includes("link") ? (
+        {Array.isArray(value) ? (
+          <Box>
+            {value.map((item, index) => (
+              <Text key={index} fontSize="sm" fontWeight={600}>
+                {item}
+              </Text>
+            ))}
+          </Box>
+        ) : label.toLowerCase().includes("link") ? (
           <Link href={value} target="_blank" fontSize="sm" color="blue.500">
             {value}
           </Link>
@@ -108,7 +130,7 @@ const PersonalInfo = ({
   email,
   phone,
   nationality,
-  resume,
+  countryOfResidence,
   gender,
   height,
   weight,
@@ -122,7 +144,10 @@ const PersonalInfo = ({
         {renderOptionalField("Email", email)}
         {renderOptionalField("Date of Birth", dob)}
         {renderOptionalField("Phone", phone)}
-        {renderOptionalField("Nationality", nationality)}
+        <CountryLookup countryCode={nationality} />
+        {countryOfResidence && (
+          <CountryLookup countryCode={countryOfResidence} />
+        )}
       </Box>
       <Box>
         {renderOptionalField("Gender", gender === 1 ? "Male" : "Female")}
@@ -136,9 +161,7 @@ const PersonalInfo = ({
 const AdditionalInfo = ({
   education,
   introductionVideoLink,
-  demoReel,
   youtubelink,
-  oneMinuteVideo,
   visaType,
   openToWorkInCountry,
   spokenLanguage,
@@ -147,6 +170,8 @@ const AdditionalInfo = ({
   musicGenres,
   experience,
   averageRatePerHour,
+  resume,
+  portfolio,
 }) => (
   <Box>
     <Text fontSize={"md"} fontWeight="bold" mb={2}>
@@ -154,28 +179,59 @@ const AdditionalInfo = ({
     </Text>
     <Grid templateColumns="repeat(2, 1fr)" gap={2}>
       <Box>
-        {renderOptionalField("Education", education)}
+        {education && <EducationLookup value={education} />}
+        {musicGenres[0] !== null && <MusicGenreLookup value={musicGenres} />}
+        {musicalInstruments[0] !== null && (
+          <MusicalInstrumentLookup value={musicalInstruments} />
+        )}
+        {visaType && <VisaTypeLookup value={visaType} />}
+        <Text fontWeight="400" fontSize="xs">
+          resume:
+        </Text>
+        <Button
+          variant={"ghost"}
+          px={0}
+          onClick={() => downloadResume(resume)}
+          size="md"
+          leftIcon={<Icon as={FaFileDownload} />}
+        >
+          Download Resume
+        </Button>
         {renderOptionalField("Average Rate Per Hour", averageRatePerHour)}
         {renderOptionalField("Experience", experience)}
-        {renderOptionalField("MusicGenres", musicGenres)}
-        {renderOptionalField("Musical Instruments", musicalInstruments)}
         {renderOptionalField("Special Skills", specialSkills)}
         {renderOptionalField("Spoken Language", spokenLanguage)}
       </Box>
       <Box>
         {renderOptionalField("Introduction Video Link", introductionVideoLink)}
-        {renderOptionalField("Demo Reel", demoReel)}
         {renderOptionalField("YouTube Link", youtubelink)}
-        {renderOptionalField("One Minute Video", oneMinuteVideo)}
-        {renderOptionalField("Visa Type", visaType)}
-        {renderOptionalField(
-          "Open to Work In Country",
-          openToWorkInCountry.join(", ")
+        {renderOptionalField("Portfolio", portfolio)}
+        {openToWorkInCountry[0] !== "" && (
+          <CountryLookup countryCode={openToWorkInCountry} />
         )}
       </Box>
     </Grid>
   </Box>
 );
+
+const downloadResume = (resume) => {
+  const fileUrl = resume;
+  const fileName = "resume.pdf";
+
+  fetch(fileUrl)
+    .then((response) => response.blob())
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    })
+    .catch((error) => console.error("Error downloading the file:", error));
+};
 
 const ServiceProviderProfileView = () => {
   const location = useLocation();
@@ -191,6 +247,7 @@ const ServiceProviderProfileView = () => {
     phone,
     nationality,
     workLink,
+    countryOfResidence,
     linkedin,
     portfolio,
     resume,
@@ -216,6 +273,8 @@ const ServiceProviderProfileView = () => {
     audios,
     photos,
   } = location.state;
+
+  const personalVidoes = [demoReel, oneMinuteVideo];
 
   console.log("location.state", location.state);
 
@@ -254,13 +313,16 @@ const ServiceProviderProfileView = () => {
             />
             <Divider my={2} />
             <Flex gap={4}>
-              {personalVidoes.map((video, index) => (
-                <VideoGallery
-                  title={"Intro video"}
-                  key={index}
-                  videoSrc={video}
-                />
-              ))}
+              {personalVidoes.map(
+                (video, index) =>
+                  video && (
+                    <VideoGallery
+                      title={"Video"}
+                      key={index}
+                      videoSrc={video}
+                    />
+                  )
+              )}
             </Flex>
             <Divider my={2} />
 
@@ -269,32 +331,30 @@ const ServiceProviderProfileView = () => {
               email={email}
               phone={phone}
               nationality={nationality}
+              countryOfResidence={countryOfResidence}
               gender={gender}
               height={height}
               weight={weight}
-              resume={resume}
+
               // Other personal info props...
             />
             <Divider my={2} />
 
             <AdditionalInfo
-              demoReel={demoReel}
               introductionVideoLink={introductionVideoLink}
-              oneMinuteVideo={oneMinuteVideo}
               openToWorkInCountry={openToWorkInCountry}
               visaType={visaType}
               youtubelink={youtubelink}
-              education={education}
               spokenLanguage={spokenLanguage}
               specialSkills={specialSkills}
               averageRatePerHour={averageRatePerHour}
               experience={experience}
               musicGenres={musicGenres}
               musicalInstruments={musicalInstruments}
-
-              // Other additional info props...
+              education={education}
+              resume={resume}
+              portfolio={portfolio}
             />
-            {/* Other sections/components */}
           </GridItem>
         </Grid>
       </Container>

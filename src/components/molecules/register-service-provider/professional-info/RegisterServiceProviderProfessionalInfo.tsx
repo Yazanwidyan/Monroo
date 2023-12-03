@@ -405,15 +405,27 @@ export default function RegisterServiceProviderProfessionalInfo() {
 
       {state.registerServiceProviderLookup.portfolio && (
         <FormControl>
-          <FormLabel>Portfolio URL</FormLabel>
+          <FormLabel>portfolio</FormLabel>
           <Input
-            type="url"
-            name="portfolio"
-            placeholder="Enter your portfolio URL"
-            value={state.professionalInfo.portfolio}
-            onChange={state.handleProfessionalInfoChange}
-            required
+            type="file"
+            key={state.portfolioInputKey}
+            accept=".mp4"
+            placeholder="Upload your elevator pitch"
+            onChange={state.onPortfolioChange}
           />
+          {state.demoReelError && (
+            <Text fontSize="10px">{state.portfolioError}</Text>
+          )}
+          {state.portfolioFile.length > 0 && (
+            <Box>
+              <Text>Selected Files:</Text>
+              <List>
+                {state.portfolioFile.map((file) => (
+                  <ListItem key={file.name}>{file.name}</ListItem>
+                ))}
+              </List>
+            </Box>
+          )}
         </FormControl>
       )}
       {state.registerServiceProviderLookup.bio && (
