@@ -12,6 +12,7 @@ import {
   Stepper as ChakraStepper,
   StepperProps as ChakraStepperProps,
   UseStepsReturn,
+  Container,
 } from "@chakra-ui/react";
 
 type Step = { title: string; description: string };
@@ -27,25 +28,32 @@ export default function Stepper({
   ...props
 }: StepperProps) {
   return (
-    <ChakraStepper {...props} index={useStepReturn.activeStep - 1} {...props}>
-      {steps.map((step, index) => (
-        <ChakraStep key={index}>
-          <StepIndicator>
-            <StepStatus
-              complete={<StepIcon />}
-              incomplete={<StepNumber />}
-              active={<StepNumber />}
-            />
-          </StepIndicator>
+    <Container maxW={"6xl"}>
+      <ChakraStepper
+        colorScheme={"primary"}
+        {...props}
+        index={useStepReturn.activeStep - 1}
+        {...props}
+      >
+        {steps.map((step, index) => (
+          <ChakraStep key={index}>
+            <StepIndicator>
+              <StepStatus
+                complete={<StepIcon />}
+                incomplete={<StepNumber />}
+                active={<StepNumber />}
+              />
+            </StepIndicator>
 
-          <Box flexShrink="0">
-            <StepTitle>{step.title}</StepTitle>
-            <StepDescription>{step.description}</StepDescription>
-          </Box>
+            <Box flexShrink="0">
+              <StepTitle>{step.title}</StepTitle>
+              <StepDescription>{step.description}</StepDescription>
+            </Box>
 
-          <StepSeparator />
-        </ChakraStep>
-      ))}
-    </ChakraStepper>
+            <StepSeparator />
+          </ChakraStep>
+        ))}
+      </ChakraStepper>
+    </Container>
   );
 }

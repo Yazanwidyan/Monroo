@@ -53,6 +53,7 @@ const AuthLayout = () => {
               How it works
             </ChakraLink>
             <Button
+              mx={"1rem"}
               onClick={() => navigate("register")}
               leftIcon={<AiOutlineUserAdd size={20} color={"primary.500"} />}
               variant="outline"
@@ -70,7 +71,6 @@ const AuthLayout = () => {
               Join us
             </Button>
             <Button
-              mx={"1rem"}
               onClick={() => setLoginOpen(true)}
               leftIcon={<AiOutlineLogin size={20} color={"primary.500"} />}
               variant="outline"

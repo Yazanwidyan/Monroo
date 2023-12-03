@@ -42,7 +42,6 @@ export default function RegisterServiceProviderCategories() {
           required
           value={state.selectedSubCategories}
           className={styles.subCategoriesMultiSelect}
-          closeMenuOnSelect={false}
           isSearchable={true}
           onChange={state.handleSubCategoriesChange}
           placeholder="Select sub-categories"
