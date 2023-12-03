@@ -3,17 +3,14 @@ import {
   FormLabel,
   Input,
   SimpleGrid,
-  Card,
-  CardBody,
-  CardHeader,
   Button,
   Flex,
-  Heading,
   Select,
   Textarea,
   InputGroup,
   InputRightElement,
   IconButton,
+  Box,
 } from "@chakra-ui/react";
 import { Select as MultiSelect } from "chakra-react-select";
 
@@ -38,8 +35,8 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
   });
 
   return (
-    <Card margin="auto" mt={8} width="80%">
-      <CardBody as="section">
+    <Box margin="auto" mt={8} width="6xl">
+      <Box as="section">
         <form onSubmit={state.handleSubmit}>
           <SimpleGrid
             columns={{ base: 1, md: 2 }}
@@ -232,7 +229,7 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
               />
             </FormControl>
           </SimpleGrid>
-          <Flex marginTop="25px" justifyContent="space-between">
+          <Flex mb={8} marginTop="25px" justifyContent="space-between">
             <Button
               fontSize="14px"
               variant="ghost"
@@ -246,7 +243,7 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
             </Button>
           </Flex>
         </form>
-      </CardBody>
-    </Card>
+      </Box>
+    </Box>
   );
 }

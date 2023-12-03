@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Select, CSSReset } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { FaFlagUsa, FaFlag } from "react-icons/fa"; // Import flag icons
 
@@ -25,20 +24,32 @@ const LanguageSwitcher = () => {
   };
 
   return (
-    <>
-      <Select
+    <div
+      style={{
+        position: "relative",
+        width: "90px",
+        padding: "0px 20px 0px 20px",
+      }}
+    >
+      <select
         value={selectedLanguage}
         onChange={handleSelectChange}
-        maxWidth="100px"
-        borderWidth="0"
+        style={{
+          width: "100%",
+          backgroundColor: "white",
+          color: "#333",
+          borderRadius: "4px",
+          backgroundPosition: "right 5px top 50%",
+          outline: "none",
+        }}
       >
         {Object.keys(lngs).map((lngKey) => (
           <option key={lngKey} value={lngKey}>
             {lngs[lngKey].nativeName}
           </option>
         ))}
-      </Select>
-    </>
+      </select>
+    </div>
   );
 };
 

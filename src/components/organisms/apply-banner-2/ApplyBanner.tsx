@@ -55,24 +55,24 @@ const BigCard = ({ image, title, points, buttonText }) => {
 const ApplyBanner = () => {
   const cardData = [
     {
-      image: "https://via.placeholder.com/150", // Update image URL for Card 1
-      title: "Start an exciting career as a model",
+      image: "https://via.placeholder.com/150", // Updated image URL for Card 1
+      title: "Embark on an exciting career as a service provider",
       points: [
-        "Apply online & receive quick feedback from our scouting team",
-        "Discover many exciting job opportunities",
-        "Manage your online model profile and create your Comp Card",
+        "Apply conveniently online and promptly receive feedback from our team",
+        "Explore numerous rewarding job opportunities",
+        "Effortlessly manage your online profile and showcase your services",
       ],
-      buttonText: "Become a Model Now",
+      buttonText: "Join as a Service Provider",
     },
     {
-      image: "https://via.placeholder.com/150", // Update image URL for Card 2
-      title: "Find the right model for your job",
+      image: "https://via.placeholder.com/150", // Updated image URL for Card 2
+      title: "Find the right service provider for your needs",
       points: [
-        "Easy and fast online registration",
-        "Book models for your jobs directly online",
-        "Wide variety of models to meet diverse client needs",
+        "Easily register and find skilled service providers online",
+        "Book services directly through our platform",
+        "Access a diverse range of service providers to meet your requirements",
       ],
-      buttonText: "Find Models Now",
+      buttonText: "Find Service Providers Now",
     },
   ];
 

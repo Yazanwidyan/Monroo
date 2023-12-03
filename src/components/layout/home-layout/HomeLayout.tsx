@@ -5,12 +5,14 @@ import {
   Link as ChakraLink,
   Button,
   Container,
+  Spacer,
 } from "@chakra-ui/react";
 import { Outlet, Link as RouterLink, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../contexts/UserContext";
 import Footer from "../footer/Footer";
 import { FaSignOutAlt } from "react-icons/fa";
 import CreateEventPage from "../../pages/user/create-event/CreateEvent";
+import LanguageSwitcher from "../../../Localization/LanguageSwitcher";
 
 const HomeLayout = () => {
   const navigate = useNavigate();
@@ -49,10 +51,12 @@ const HomeLayout = () => {
               color={"primary.500"}
               textDecoration="none"
               _hover={{ textDecoration: "none" }}
-              mr="4"
             >
               Monroo
             </ChakraLink>
+            <LanguageSwitcher />
+            <Spacer />
+
             <Flex color={"black"} align="center">
               {user.isMainUser && (
                 <>
@@ -88,19 +92,17 @@ const HomeLayout = () => {
               >
                 Inbox
               </ChakraLink>
-              <ChakraLink
-                as={RouterLink}
-                to={
-                  user.isMainUser
-                    ? "/user-profile"
-                    : "/service-provider-profile"
-                }
-                mx="0.5rem"
-                textDecoration="none"
-                _hover={{ textDecoration: "none" }}
-              >
-                Profile
-              </ChakraLink>
+              {!user.isMainUser && (
+                <ChakraLink
+                  as={RouterLink}
+                  to={"/service-provider-profile"}
+                  mx="0.5rem"
+                  textDecoration="none"
+                  _hover={{ textDecoration: "none" }}
+                >
+                  Profile
+                </ChakraLink>
+              )}
               <ChakraLink
                 as={RouterLink}
                 to={user.isMainUser ? "/payment" : "/payment"}

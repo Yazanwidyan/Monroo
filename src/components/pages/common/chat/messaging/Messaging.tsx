@@ -9,11 +9,13 @@ import {
   Text,
   Flex,
   Avatar,
+  Icon,
 } from "@chakra-ui/react";
 import { UserContext } from "../../../../../contexts/UserContext";
 import providerServices from "../../../../../services/providerServices";
 import userServices from "../../../../../services/userServices";
 import useCustomToast from "../../../../../hooks/useCustomToast";
+import { FaPaperPlane } from "react-icons/fa";
 
 const getStatusText = (status) => {
   switch (status) {
@@ -122,10 +124,10 @@ const Messaging = ({ selectedRoom }) => {
             p={3}
             m={3}
             borderRadius="lg"
-            bg={message.senderID === user.id ? "primary.500" : "gray.200"}
+            bg={message.senderID === user.id ? "primary.600" : "gray.200"}
             color={message.senderID === user.id ? "white" : "black"}
           >
-            <Box borderWidth="1px" borderRadius="lg" p="4" m="4">
+            <Box borderRadius="lg" p="4" m="4">
               <Text fontSize="xl" fontWeight="bold">
                 {message.eventObj.title}
               </Text>
@@ -159,10 +161,10 @@ const Messaging = ({ selectedRoom }) => {
             p={3}
             m={3}
             borderRadius="lg"
-            bg={message.senderID === user.id ? "primary.500" : "gray.200"}
+            bg={message.senderID === user.id ? "primary.600" : "gray.200"}
             color={message.senderID === user.id ? "white" : "black"}
           >
-            <Box borderWidth="1px" borderRadius="lg" p="4" m="4">
+            <Box borderRadius="lg" p="4" m="4">
               <Text fontSize="xl" fontWeight="bold">
                 {message.eventObj.title}
               </Text>
@@ -198,7 +200,7 @@ const Messaging = ({ selectedRoom }) => {
             p={3}
             m={3}
             borderRadius="lg"
-            bg={message.senderID === user.id ? "primary.500" : "gray.200"}
+            bg={message.senderID === user.id ? "primary.600" : "gray.200"}
             color={message.senderID === user.id ? "white" : "black"}
           >
             <Text>{message.msg}</Text>
@@ -224,18 +226,23 @@ const Messaging = ({ selectedRoom }) => {
               flex="1"
               mr={2}
               borderRadius="full"
-              borderWidth="1px"
               p={2}
             />
-            <Button colorScheme="blue" variant="solid" borderRadius="full">
-              Send
+            <Button
+              px={0}
+              type="submit"
+              colorScheme="primary.500"
+              variant="ghost"
+              borderRadius="full"
+            >
+              <Icon as={FaPaperPlane} />
             </Button>
           </Flex>
         </form>
       </VStack>
     </Box>
   ) : (
-    <Box textAlign="center" fontSize="xl">
+    <Box mt={8} textAlign="center" fontSize="xl">
       Choose a room to start messaging
     </Box>
   );

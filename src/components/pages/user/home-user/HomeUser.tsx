@@ -79,7 +79,7 @@ const HomeUser = () => {
   return (
     <>
       <WelcomeBanner />
-      <Container mt={8} maxW="90%" style={{ display: "flex" }}>
+      <Container mt={8} maxW="6xl" style={{ display: "flex" }}>
         <Box flex="1">
           <Stack my={5} direction="row" spacing={4}>
             <Button
@@ -163,7 +163,7 @@ const HomeUser = () => {
           </Stack>
           <Grid
             mb={8}
-            templateColumns="repeat(auto-fill, minmax(350px, 1fr))"
+            templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
             gap={4}
           >
             {isLoading
@@ -189,12 +189,7 @@ const HomeUser = () => {
                   <GridItem key={index}>
                     <ServiceProviderCard
                       image={userProfile.profilePic}
-                      title={userProfile.title}
                       name={userProfile.username}
-                      description={userProfile.bio}
-                      experience={userProfile.experience}
-                      nationality={userProfile.nationality}
-                      gender={userProfile.gender}
                       providerID={userProfile.id}
                       userProfile={userProfile}
                     />

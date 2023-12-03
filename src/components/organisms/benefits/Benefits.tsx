@@ -32,7 +32,7 @@ function Benefits() {
             </Text>
             <Text fontSize="md" textAlign="center">
               Have you ever wanted to be shown in catalogs, magazines, or
-              commercials as a model?
+              commercials as a service provider?
             </Text>
           </Flex>
 
@@ -49,8 +49,8 @@ function Benefits() {
               Be Independent
             </Text>
             <Text fontSize="md" textAlign="center">
-              Our online model portal enables you to manage your profile in any
-              location at any time!
+              Our online service portal enables you to manage your profile in
+              any location at any time!
             </Text>
           </Flex>
 
@@ -72,7 +72,7 @@ function Benefits() {
             </Text>
           </Flex>
         </VStack>
-        <Button colorScheme="blue" size="md" mt={10}>
+        <Button colorScheme="primary" size="md" mt={10}>
           Start Now!
         </Button>
       </Container>

@@ -1,5 +1,6 @@
 import { ReactNode, useMemo } from "react";
 import {
+  Box,
   Button,
   Card,
   CardBody,
@@ -28,10 +29,10 @@ export default function StepperContentContainer(
   const { t } = useTranslation();
 
   return (
-    <Container maxWidth={props.currentStep === 1 ? "60%" : "80%"} margin="auto">
-      <Card>
-        <CardBody>{props.children}</CardBody>
-        <CardFooter display="flex" justifyContent="space-between">
+    <Container maxWidth={props.currentStep === 1 ? "3xl" : "6xl"} margin="auto">
+      <Box>
+        <Box>{props.children}</Box>
+        <Box mt={4} display="flex" justifyContent="space-between">
           <Button variant="ghost" onClick={props.handleBackClick}>
             {t("common.back")}
           </Button>
@@ -44,8 +45,8 @@ export default function StepperContentContainer(
               {t("common.next")}
             </Button>
           )}
-        </CardFooter>
-      </Card>
+        </Box>
+      </Box>
     </Container>
   );
 }

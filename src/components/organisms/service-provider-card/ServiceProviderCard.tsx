@@ -14,17 +14,7 @@ import { UserContext } from "../../../contexts/UserContext";
 import useCustomToast from "../../../hooks/useCustomToast";
 import { useNavigate } from "react-router-dom";
 
-const ServiceProviderCard = ({
-  image,
-  title,
-  name,
-  description,
-  experience,
-  nationality,
-  gender,
-  providerID,
-  userProfile,
-}) => {
+const ServiceProviderCard = ({ image, name, providerID, userProfile }) => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user } = useContext(UserContext);

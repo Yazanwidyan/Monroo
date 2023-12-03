@@ -68,7 +68,7 @@ const Inbox = () => {
   };
 
   return (
-    <Container maxW="8xl" style={{ display: "flex" }}>
+    <Container maxW="6xl" style={{ display: "flex" }}>
       <Box flex={2}>
         <Box w="100%" maxW="600px" mx="auto" mt={8}>
           <Input

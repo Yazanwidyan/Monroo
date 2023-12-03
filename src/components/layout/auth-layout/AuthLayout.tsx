@@ -20,7 +20,7 @@ const AuthLayout = () => {
 
   return (
     <Flex minHeight="100vh" flexDirection="column">
-      <Box color={"black"} bg="white.100" py="3" px="4">
+      <Box boxShadow="base" bg="white.100" py="3" px="4">
         <Container maxW={"6xl"}>
           <Flex
             alignItems="center"
@@ -32,7 +32,7 @@ const AuthLayout = () => {
             <ChakraLink
               as={RouterLink}
               to={"/"}
-              fontSize="xl"
+              fontSize="lg"
               fontWeight="bold"
               color={"primary.500"}
               textDecoration="none"
@@ -40,6 +40,8 @@ const AuthLayout = () => {
             >
               Monroo
             </ChakraLink>
+            <LanguageSwitcher />
+
             <Spacer />
             <ChakraLink
               mx={"1rem"}
@@ -85,8 +87,6 @@ const AuthLayout = () => {
             >
               Login
             </Button>
-
-            <LanguageSwitcher />
           </Flex>
         </Container>
       </Box>
