@@ -34,13 +34,12 @@ const AuthLayout = () => {
               to={"/"}
               fontSize="lg"
               fontWeight="bold"
-              color={"primary.500"}
+              color={"black"}
               textDecoration="none"
               _hover={{ textDecoration: "none" }}
             >
               Monroo
             </ChakraLink>
-            <LanguageSwitcher />
 
             <Spacer />
             <ChakraLink
@@ -52,20 +51,19 @@ const AuthLayout = () => {
             >
               How it works
             </ChakraLink>
+            <LanguageSwitcher />
+
             <Button
               mx={"1rem"}
               onClick={() => navigate("register")}
               leftIcon={<AiOutlineUserAdd size={20} color={"primary.500"} />}
-              variant="outline"
               fontSize={"small"}
               size={"sm"}
               fontWeight={500}
-              borderColor="primary.500"
-              color={"primary.500"}
+              color={"white"}
+              bg={"primary.500"}
               _hover={{
-                bg: "primary.200",
-                color: "primary.800",
-                borderColor: "primary.500",
+                bg: "gray.700",
               }}
             >
               Join us
@@ -73,15 +71,13 @@ const AuthLayout = () => {
             <Button
               onClick={() => setLoginOpen(true)}
               leftIcon={<AiOutlineLogin size={20} color={"primary.500"} />}
-              variant="outline"
               size={"sm"}
+              variant={"ghost"}
               fontWeight={500}
               fontSize={"small"}
               borderColor="primary.500"
               color={"primary.500"}
               _hover={{
-                bg: "primary.200",
-                color: "primary.800",
                 borderColor: "primary.500",
               }}
             >

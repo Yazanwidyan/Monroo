@@ -48,18 +48,26 @@ const PhotosGallery = ({ photos }) => {
       </Grid>
 
       {/* Modal for displaying enlarged photo */}
-      <Modal isOpen={isModalOpen} onClose={closeModal} size="3xl">
+      <Modal isOpen={isModalOpen} onClose={closeModal} size="full">
         <ModalOverlay />
-        <ModalContent>
-          <ModalCloseButton />
-          <ModalBody>
+        <ModalContent bg="transparent" boxShadow="none">
+          <ModalCloseButton color="white" />
+          <ModalBody
+            p={0}
+            bg="black"
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
             {selectedPhoto && (
               <Image
                 src={selectedPhoto}
                 alt="Enlarged"
                 width="100%"
-                height="100%"
+                maxHeight="80vh"
                 objectFit="contain"
+                mx="auto"
+                my="auto"
               />
             )}
           </ModalBody>

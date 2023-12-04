@@ -26,8 +26,10 @@ const WelcomeBanner = () => {
         p="4"
       >
         <Box maxW={"3xl"}>
-          <Text lineHeight={"1"} fontWeight={"900"} fontSize="7xl">
-            WELCOME TO MONROO
+          <Text lineHeight={"1"} mb={4} fontWeight={"900"} fontSize="8xl">
+            <span style={{ fontSize: "50px" }}>WELCOME TO</span>
+            <br />
+            MONROO
           </Text>
           <Text fontSize="md">
             Postulet declarant senserit convincere T quisque emolumenti

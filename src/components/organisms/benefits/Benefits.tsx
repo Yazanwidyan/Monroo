@@ -3,7 +3,7 @@ import { Box, Text, Button, VStack, Flex, Container } from "@chakra-ui/react";
 function Benefits() {
   return (
     <Box
-      bg="gray.200"
+      bg="gray.100"
       p={8}
       borderRadius="lg"
       boxShadow="md"

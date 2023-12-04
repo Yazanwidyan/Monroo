@@ -70,7 +70,7 @@ const HeadingTitle = ({ title, desc }) => {
 
 const HowItWorks = () => {
   return (
-    <Box bg="gray.200">
+    <Box bg="gray.100">
       <Container maxW={"7xl"}>
         <Box p="4">
           <Flex bg="white">

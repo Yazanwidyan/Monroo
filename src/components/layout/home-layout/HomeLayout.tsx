@@ -10,9 +10,10 @@ import {
 import { Outlet, Link as RouterLink, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../contexts/UserContext";
 import Footer from "../footer/Footer";
-import { FaSignOutAlt } from "react-icons/fa";
+import { FaPlus, FaPlusCircle, FaSignOutAlt } from "react-icons/fa";
 import CreateEventPage from "../../pages/user/create-event/CreateEvent";
 import LanguageSwitcher from "../../../Localization/LanguageSwitcher";
+import { AiOutlineUserAdd } from "react-icons/ai";
 
 const HomeLayout = () => {
   const navigate = useNavigate();
@@ -57,16 +58,21 @@ const HomeLayout = () => {
             <LanguageSwitcher />
             <Spacer />
 
-            <Flex color={"black"} align="center">
+            <Flex align="center">
               {user.isMainUser && (
                 <>
                   <Button
-                    mx="0.5rem"
-                    colorScheme="black"
-                    size="sm"
-                    textTransform={"uppercase"}
-                    variant={"outline"}
+                    mx={"1rem"}
                     onClick={openDialog}
+                    leftIcon={<FaPlusCircle size={20} color={"primary.500"} />}
+                    fontSize={"small"}
+                    size={"sm"}
+                    fontWeight={500}
+                    color={"white"}
+                    bg={"primary.500"}
+                    _hover={{
+                      bg: "gray.700",
+                    }}
                   >
                     Create Event
                   </Button>
@@ -115,7 +121,7 @@ const HomeLayout = () => {
               <Button
                 onClick={handleLogout}
                 mx="0.5rem"
-                colorScheme="black"
+                colorScheme="primary.500"
                 size="sm"
                 variant={"ghost"}
                 leftIcon={<FaSignOutAlt />}

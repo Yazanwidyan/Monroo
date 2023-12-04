@@ -77,7 +77,7 @@ const ApplyBanner = () => {
   ];
 
   return (
-    <Box bg="gray.200" pt="4">
+    <Box bg="gray.100" pt="4">
       <Container maxW={"7xl"}>
         <Flex p={10} gap={"2rem"} justifyContent={"space-between"}>
           {cardData.map((card, index) => (

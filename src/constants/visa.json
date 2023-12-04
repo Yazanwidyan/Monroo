@@ -1,26 +1,38 @@
 ﻿[
   {
     "id": 1,
-    "name": "Citizen"
+    "name": "Citizen",
+    "nameAR": "مواطن",
+    "nameRUS": "Гражданин"
   },
   {
     "id": 2,
-    "name": "Residence"
+    "name": "Residence",
+    "nameAR": "إقامة",
+    "nameRUS": "Резиденция"
   },
   {
     "id": 3,
-    "name": "Tourist Visa"
+    "name": "Tourist Visa",
+    "nameAR": "تأشيرة سياحية",
+    "nameRUS": "Туристическая виза"
   },
   {
     "id": 4,
-    "name": "Work Visa"
+    "name": "Work Visa",
+    "nameAR": "تأشيرة عمل",
+    "nameRUS": "Рабочая виза"
   },
   {
     "id": 5,
-    "name": "Student Visa"
+    "name": "Student Visa",
+    "nameAR": "تأشيرة طالب",
+    "nameRUS": "Студенческая виза"
   },
   {
     "id": 6,
-    "name": "Business Visa"
+    "name": "Business Visa",
+    "nameAR": "تأشيرة عمل تجاري",
+    "nameRUS": "Бизнес-виза"
   }
 ]

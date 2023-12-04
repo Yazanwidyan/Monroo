@@ -2,16 +2,16 @@ import { useState } from "react";
 import {
   Box,
   Flex,
-  Image,
   Text,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalBody,
   ModalCloseButton,
+  Image,
 } from "@chakra-ui/react";
 
-const VideoGallery = ({ videoSrc, title }) => {
+const AudiosGallery = ({ audioSrc, title }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -38,30 +38,21 @@ const VideoGallery = ({ videoSrc, title }) => {
         onClick={openModal}
       >
         <Box mr={2} w="30px" h="30px" borderRadius="md" overflow="hidden">
-          <Image src={"src/assets/images/play.png"} alt="Video Thumbnail" />
+          <Image src={"src/assets/images/music.png"} alt="Audio Thumbnail" />
         </Box>
         <Text fontSize="sm" fontWeight="bold" isTruncated>
-          {title || "Video"}
+          {title || "Audio"}
         </Text>
       </Flex>
 
-      <Modal isOpen={isModalOpen} onClose={closeModal} size="full">
+      <Modal isOpen={isModalOpen} onClose={closeModal} size="lg">
         <ModalOverlay />
-        <ModalContent bg="black" color="white">
-          <ModalCloseButton color="white" />
-          <ModalBody
-            display={"flex"}
-            justifyContent={"center"}
-            alignItems={"center"}
-            p={0}
-          >
-            <iframe
-              width="100%"
-              height="800px" // Adjust as needed based on header height
-              src={videoSrc}
-              frameBorder="0"
-              allowFullScreen
-            ></iframe>
+        <ModalContent bg="transparent" boxShadow="none">
+          <ModalBody>
+            <audio controls style={{ width: "100%" }}>
+              <source src={audioSrc} />
+              Your browser does not support the audio element.
+            </audio>
           </ModalBody>
         </ModalContent>
       </Modal>
@@ -69,4 +60,4 @@ const VideoGallery = ({ videoSrc, title }) => {
   );
 };
 
-export default VideoGallery;
+export default AudiosGallery;

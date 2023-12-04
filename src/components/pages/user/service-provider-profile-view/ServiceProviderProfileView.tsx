@@ -26,13 +26,20 @@ import MusicGenreLookup from "../../../molecules/music-genre-lookup/MusicGenreLo
 import MusicalInstrumentLookup from "../../../molecules/musical-instrument-lookup/MusicalInstrumentLookup";
 import VisaTypeLookup from "../../../molecules/visa-type-lookup/VisaTypeLookup";
 import CountryLookup from "../../../molecules/country-lookup/CountryLookup";
+import AudiosGallery from "../../../organisms/audios-gallery/AudiosGallery";
+
+const headerHeight = 70; // Height of the header in pixels
+const footerHeight = 100; // Height of the footer in pixels
+
+const minHeight = `calc(100vh - ${headerHeight}px - ${footerHeight}px)`;
 
 const renderOptionalField = (label, value) => {
   if (
     value !== undefined &&
     value !== null &&
     value.length > 0 &&
-    value[0] !== null
+    value[0] !== null &&
+    value !== "0"
   ) {
     return (
       <Box mb={2}>
@@ -80,28 +87,18 @@ const VideosSection = ({ videos }) => (
 const AudiosSection = ({ audios }) => (
   <Box mt={6}>
     <Text fontWeight="bold" fontSize="xl">
-      Videos:
+      audios
     </Text>
-    <Grid templateColumns="repeat(3, 1fr)" gap={4} mt={4}>
+    <Grid templateColumns="repeat(1, 1fr)" gap={4} mt={4}>
       {audios.map((audio, index) => (
-        <Box key={index}>
-          {/* Render video thumbnails or video player */}
-          <iframe
-            src={audio}
-            title={`Video ${index + 1}`}
-            width="300"
-            height="200"
-            frameBorder="0"
-            allowFullScreen
-          ></iframe>
-        </Box>
+        <AudiosGallery title={""} key={index} audioSrc={audio} />
       ))}
     </Grid>
   </Box>
 );
 const SocialMediaLinks = ({ instagram, linkedin, youtubelink }) => (
   <Box mt={2} mb={4}>
-    <Text fontSize={"md"} fontWeight="bold" mb={4}>
+    <Text fontSize={"md"} fontWeight="bold" mb={2}>
       Social Media
     </Text>
     <Box display="flex" alignItems="center">
@@ -135,27 +132,27 @@ const PersonalInfo = ({
   height,
   weight,
 }) => (
-  <Box>
+  <Box mb={4}>
     <Text fontSize="md" fontWeight="bold" mb={2}>
       Personal Information
     </Text>
     <Grid templateColumns="repeat(2, 1fr)" gap={4}>
       <Box>
         {renderOptionalField("Email", email)}
-        {renderOptionalField("Date of Birth", dob)}
-        {renderOptionalField("Phone", phone)}
+        {renderOptionalField("Date of birth", dob)}
         <CountryLookup label={"Nationality"} countryCode={nationality} />
+        {renderOptionalField("Height", `${height}`)}
+      </Box>
+      <Box>
+        {renderOptionalField("Phone", phone)}
+        {renderOptionalField("Gender", gender === 0 ? "Male" : "Female")}
         {countryOfResidence && (
           <CountryLookup
             label={"Country of residence"}
             countryCode={countryOfResidence}
           />
         )}
-      </Box>
-      <Box>
-        {renderOptionalField("Gender", gender === 0 ? "Male" : "Female")}
-        {renderOptionalField("Height", `${height} cm`)}
-        {renderOptionalField("Weight", `${weight} kg`)}
+        {renderOptionalField("Weight", `${weight}`)}
       </Box>
     </Grid>
   </Box>
@@ -176,45 +173,63 @@ const AdditionalInfo = ({
   resume,
   portfolio,
 }) => (
-  <Box>
+  <Box mb={4}>
     <Text fontSize={"md"} fontWeight="bold" mb={2}>
       Additional Information
     </Text>
     <Grid templateColumns="repeat(2, 1fr)" gap={2}>
       <Box>
-        {education && <EducationLookup value={education} />}
-        {musicGenres[0] !== null && <MusicGenreLookup value={musicGenres} />}
-        {musicalInstruments[0] !== null && (
-          <MusicalInstrumentLookup value={musicalInstruments} />
-        )}
         {visaType && <VisaTypeLookup value={visaType} />}
-        <Text fontWeight="400" fontSize="xs">
-          resume:
-        </Text>
-        <Button
-          variant={"ghost"}
-          px={0}
-          onClick={() => downloadResume(resume)}
-          size="md"
-          leftIcon={<Icon as={FaFileDownload} />}
-        >
-          Download Resume
-        </Button>
-        {renderOptionalField("Average Rate Per Hour", averageRatePerHour)}
-        {renderOptionalField("Experience", experience)}
-        {renderOptionalField("Special Skills", specialSkills)}
-        {renderOptionalField("Spoken Language", spokenLanguage)}
-      </Box>
-      <Box>
-        {renderOptionalField("Introduction Video Link", introductionVideoLink)}
-        {renderOptionalField("YouTube Link", youtubelink)}
-        {renderOptionalField("Portfolio", portfolio)}
         {openToWorkInCountry[0] !== "" && (
           <CountryLookup
             label={"Open to work in countries"}
             countryCode={openToWorkInCountry}
           />
         )}
+        {renderOptionalField("Average rate per hour", averageRatePerHour)}
+        {renderOptionalField("Experience", experience)}
+        {renderOptionalField("Special skills", specialSkills)}
+        {musicGenres[0] !== null && <MusicGenreLookup value={musicGenres} />}
+        {musicalInstruments[0] !== null && (
+          <MusicalInstrumentLookup value={musicalInstruments} />
+        )}
+      </Box>
+      <Box>
+        {education && <EducationLookup value={education} />}
+
+        {resume && (
+          <>
+            <Text fontWeight="400" fontSize="xs">
+              Resume:
+            </Text>
+            <Button
+              variant={"icon"}
+              p={0}
+              h={30}
+              onClick={() => downloadResume(resume)}
+              size="md"
+              leftIcon={<Icon as={FaFileDownload} />}
+            ></Button>
+          </>
+        )}
+        {portfolio && (
+          <>
+            <Text fontWeight="400" fontSize="xs">
+              Portfolio:
+            </Text>
+            <Button
+              variant={"icon"}
+              p={0}
+              h={30}
+              onClick={() => downloadResume(portfolio)}
+              size="md"
+              leftIcon={<Icon as={FaFileDownload} />}
+            ></Button>
+          </>
+        )}
+        {renderOptionalField("Spoken language", spokenLanguage)}
+        {renderOptionalField("Introduction video link", introductionVideoLink)}
+        {renderOptionalField("YouTube link", youtubelink)}
       </Box>
     </Grid>
   </Box>
@@ -222,7 +237,7 @@ const AdditionalInfo = ({
 
 const downloadResume = (resume) => {
   const fileUrl = resume;
-  const fileName = "resume.pdf";
+  const fileName = "file.pdf";
 
   fetch(fileUrl)
     .then((response) => response.blob())
@@ -286,7 +301,7 @@ const ServiceProviderProfileView = () => {
   console.log("location.state", location.state);
 
   return (
-    <Box bg="gray.200" p="4">
+    <Box bg="gray.100" p="4" pb={8} minHeight={minHeight}>
       <Container maxW={"6xl"}>
         <Grid templateColumns="1fr 3fr" gap={8}>
           <GridItem colSpan={1}>
@@ -312,27 +327,28 @@ const ServiceProviderProfileView = () => {
             <Text fontWeight="bold" fontSize="3xl">
               {fname} {lname}
             </Text>
-            <Text fontSize="md">{bio}</Text>
+            <Text mb={2} fontSize="md">
+              {bio}
+            </Text>
             <SocialMediaLinks
               instagram={instagram}
               linkedin={linkedin}
               youtubelink={youtubelink}
             />
-            <Divider my={2} />
-            <Flex gap={4}>
-              {personalVidoes.map(
-                (video, index) =>
-                  video && (
-                    <VideoGallery
-                      title={"Video"}
-                      key={index}
-                      videoSrc={video}
-                    />
-                  )
-              )}
-            </Flex>
-            <Divider my={2} />
-
+            {(personalVidoes[0] || personalVidoes[1]) && (
+              <Flex mb={4} gap={4}>
+                {personalVidoes.map(
+                  (video, index) =>
+                    video && (
+                      <VideoGallery
+                        title={"Video"}
+                        key={index}
+                        videoSrc={video}
+                      />
+                    )
+                )}
+              </Flex>
+            )}
             <PersonalInfo
               dob={dob}
               email={email}
@@ -345,7 +361,6 @@ const ServiceProviderProfileView = () => {
 
               // Other personal info props...
             />
-            <Divider my={2} />
 
             <AdditionalInfo
               introductionVideoLink={introductionVideoLink}

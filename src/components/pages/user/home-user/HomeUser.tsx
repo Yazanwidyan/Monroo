@@ -85,7 +85,7 @@ const HomeUser = () => {
             <Button
               px={3}
               variant="ghost"
-              color={selectedTab === "recommended" ? "black" : "gray"}
+              color={selectedTab === "recommended" ? "primary.500" : "gray"}
               colorScheme={selectedTab === "recommended" ? "primary" : "gray"}
               onClick={() => handleTabChange("recommended")}
               borderRadius={0}
@@ -100,7 +100,7 @@ const HomeUser = () => {
             <Button
               px={3}
               variant="ghost"
-              color={selectedTab === "all" ? "black" : "gray"}
+              color={selectedTab === "all" ? "primary.500" : "gray"}
               colorScheme={selectedTab === "all" ? "primary" : "gray"}
               onClick={() => handleTabChange("all")}
               borderRadius={0}
