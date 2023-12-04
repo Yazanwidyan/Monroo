@@ -301,7 +301,7 @@ const ServiceProviderProfileView = () => {
   console.log("location.state", location.state);
 
   return (
-    <Box bg="gray.100" p="4" pb={8} minHeight={minHeight}>
+    <Box bg="primary.50" p="4" pb={8} minHeight={minHeight}>
       <Container maxW={"6xl"}>
         <Grid templateColumns="1fr 3fr" gap={8}>
           <GridItem colSpan={1}>

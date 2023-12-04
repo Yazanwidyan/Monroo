@@ -6,7 +6,7 @@ const partnerImage = "https://via.placeholder.com/150";
 
 function ApplyBanner() {
   return (
-    <Box bg="gray.100">
+    <Box bg="primary.50">
       <Container
         p={8}
         display="flex"

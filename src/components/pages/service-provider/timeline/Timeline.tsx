@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import EventTimelineCard from "../../../organisms/event-timeline-card/EventTimelineCard";
 import providerServices from "../../../../services/providerServices";
 import { UserContext } from "../../../../contexts/UserContext";
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Box, Container, Grid, GridItem, Text } from "@chakra-ui/react";
 import useCustomToast from "../../../../hooks/useCustomToast";
 
 const Timeline = () => {
@@ -54,25 +54,31 @@ const Timeline = () => {
   };
 
   return (
-    <div>
-      <Grid templateColumns="repeat(auto-fill, minmax(400px, 1fr))" gap={4}>
-        {eventsList.map((event, index) => (
-          <GridItem key={index}>
-            <EventTimelineCard
-              image={event.image}
-              title={event.title}
-              name={"event"}
-              duration={event.duration}
-              posted={event.eventDate}
-              description={event.desc}
-              onPoke={handlePoke}
-              onMessage={() => handleMessage(event)}
-              onSave={handleSave}
-            />
-          </GridItem>
-        ))}
-      </Grid>
-    </div>
+    <>
+      <Box boxShadow={"gray.100"} borderWidth={1} mb={4} p={4}>
+        <Container maxW="6xl">
+          <Text color={"gray.600"}>Hi, Yazan</Text>
+        </Container>
+      </Box>
+      <Container mb={12} maxW={"6xl"}>
+        <Grid templateColumns="repeat(auto-fill, minmax(400px, 1fr))" gap={4}>
+          {eventsList.map((event, index) => (
+            <GridItem key={index}>
+              <EventTimelineCard
+                image={event.image}
+                title={event.title}
+                name={"event"}
+                duration={event.duration}
+                posted={event.eventDate}
+                description={event.desc}
+                onMessage={() => handleMessage(event)}
+                onSave={handleSave}
+              />
+            </GridItem>
+          ))}
+        </Grid>
+      </Container>
+    </>
   );
 };
 

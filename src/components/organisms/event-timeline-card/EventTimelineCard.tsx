@@ -2,11 +2,12 @@ import {
   Box,
   Text,
   Flex,
-  Stack,
   Divider,
   Image,
   Button,
+  IconButton,
 } from "@chakra-ui/react";
+import { FaHeart, FaBookmark, FaComment } from "react-icons/fa";
 
 const EventTimelineCard = ({
   image,
@@ -15,36 +16,60 @@ const EventTimelineCard = ({
   duration,
   posted,
   description,
-  onPoke,
   onMessage,
   onSave,
 }) => {
   return (
-    <Box p={4}>
+    <Box borderWidth={1} p={4} borderRadius={8} boxShadow="md">
       <Image
         src={
-          image
-            ? image
-            : "https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png"
+          image ||
+          "https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png"
         }
         alt={name}
         mb={4}
-        width="auto"
-        height="auto"
+        borderRadius={8}
       />
-      <Text fontSize="xl" fontWeight="bold" mb={2}>
+      <Text fontSize="xl" fontWeight="semibold" mb={2}>
         {title}
       </Text>
-      <Text>{description}</Text>
-      <Text>Event duration: {duration} hrs</Text>
-      <Text>Posted: {posted}</Text>
-      <Divider my={3} />
+      <Text color="gray.600" mb={2}>
+        {description}
+      </Text>
+      <Divider my={2} />
 
-      <Flex justifyContent="space-between">
-        <Stack direction="row" spacing={4}>
-          <Button onClick={onMessage}>Message Author</Button>
-          <Button onClick={onSave}>Save Post</Button>
-        </Stack>
+      <Flex align="center" justify="space-between">
+        <Text fontSize="sm" color="gray.500">
+          Duration: {duration} hrs
+        </Text>
+        <Text fontSize="sm" color="gray.500">
+          Posted: {posted}
+        </Text>
+      </Flex>
+
+      <Flex mt={3} justify="space-between">
+        <Button size="sm" colorScheme="primary" onClick={onMessage}>
+          Message Author
+        </Button>
+
+        <Flex>
+          <IconButton
+            icon={<FaHeart />}
+            aria-label="Save"
+            variant="ghost"
+            fontSize="lg"
+            color="gray.500"
+            onClick={onSave}
+            mr={2}
+          />
+          <IconButton
+            icon={<FaBookmark />}
+            aria-label="Bookmark"
+            variant="ghost"
+            fontSize="lg"
+            color="gray.500"
+          />
+        </Flex>
       </Flex>
     </Box>
   );

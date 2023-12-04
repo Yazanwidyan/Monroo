@@ -14,6 +14,7 @@ import {
   InputLeftElement,
   Icon,
   Image,
+  Text,
 } from "@chakra-ui/react";
 import ServiceProviderCard from "../../../organisms/service-provider-card/ServiceProviderCard";
 import CreateEvent from "../create-event/CreateEvent";
@@ -78,7 +79,11 @@ const HomeUser = () => {
 
   return (
     <>
-      <WelcomeBanner />
+      <Box boxShadow={"gray.100"} borderWidth={1} p={4}>
+        <Container maxW="6xl">
+          <Text color={"gray.600"}>Hi, Yazan</Text>
+        </Container>
+      </Box>
       <Container mt={8} maxW="6xl" style={{ display: "flex" }}>
         <Box flex="1">
           <Stack my={5} direction="row" spacing={4}>

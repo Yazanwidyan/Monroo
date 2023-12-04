@@ -70,11 +70,11 @@ const HeadingTitle = ({ title, desc }) => {
 
 const HowItWorks = () => {
   return (
-    <Box bg="gray.100">
+    <Box bg="primary.50">
       <Container maxW={"7xl"}>
         <Box p="4">
-          <Flex bg="white">
-            <Box flex="1" p="24">
+          <Flex p={4} bg="white">
+            <Box flex="1" p="12" pb={0}>
               <Text
                 lineHeight={1}
                 maxWidth={600}
@@ -104,11 +104,13 @@ const HowItWorks = () => {
               </Box>
             </Box>
 
-            <Box flex="1" p="4">
-              <img
-                src="https://via.placeholder.com/300" // Replace with your image URL
-                alt="Your Photo"
-                style={{ width: "100%", height: "auto" }}
+            <Box h="500px" overflow="hidden">
+              <Image
+                src={"src/assets/images/howitworks.jpg"}
+                alt={"photo"}
+                objectFit="cover"
+                w="100%"
+                h="100%"
               />
             </Box>
           </Flex>

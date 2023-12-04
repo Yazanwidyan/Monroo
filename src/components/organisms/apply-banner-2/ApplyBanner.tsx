@@ -17,14 +17,12 @@ const BigCard = ({ image, title, points, buttonText }) => {
       flexDirection={"column"}
       justifyContent={"flex-start"}
       flex={1}
-      borderWidth="1px"
       overflow="hidden"
-      boxShadow="lg"
       textAlign="center"
       bg={"white"}
     >
       <Box h="500px" overflow="hidden">
-        <Image src={image} alt={title} w="100%" h="100%" />
+        <Image src={image} alt={title} objectFit="cover" w="100%" h="100%" />
       </Box>
       <Box p="14">
         <Text fontWeight={"500"} fontSize="3xl" mb="10">
@@ -55,7 +53,7 @@ const BigCard = ({ image, title, points, buttonText }) => {
 const ApplyBanner = () => {
   const cardData = [
     {
-      image: "https://via.placeholder.com/150", // Updated image URL for Card 1
+      image: "src/assets/images/startcareer.jpg", // Updated image URL for Card 1
       title: "Embark on an exciting career as a service provider",
       points: [
         "Apply conveniently online and promptly receive feedback from our team",
@@ -65,7 +63,7 @@ const ApplyBanner = () => {
       buttonText: "Join as a Service Provider",
     },
     {
-      image: "https://via.placeholder.com/150", // Updated image URL for Card 2
+      image: "src/assets/images/findtealent.jpg", // Updated image URL for Card 2
       title: "Find the right service provider for your needs",
       points: [
         "Easily register and find skilled service providers online",
@@ -77,7 +75,7 @@ const ApplyBanner = () => {
   ];
 
   return (
-    <Box bg="gray.100" pt="4">
+    <Box bg="primary.50" pt="4">
       <Container maxW={"7xl"}>
         <Flex p={10} gap={"2rem"} justifyContent={"space-between"}>
           {cardData.map((card, index) => (

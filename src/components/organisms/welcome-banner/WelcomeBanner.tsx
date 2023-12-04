@@ -4,7 +4,7 @@ const WelcomeBanner = () => {
   return (
     <Box position="relative">
       <Image
-        src="../../../src/assets/images/staff.jpg"
+        src="../../../src/assets/images/bg.jpg"
         alt="Welcome to UAE Staffing"
         objectFit="cover"
         w="100vw"

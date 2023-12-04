@@ -49,7 +49,7 @@ const HomeLayout = () => {
               to={user.isMainUser ? "/home" : "/timeline"}
               fontSize="lg"
               fontWeight="bold"
-              color={"primary.500"}
+              color={"black"}
               textDecoration="none"
               _hover={{ textDecoration: "none" }}
             >
