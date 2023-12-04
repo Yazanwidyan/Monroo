@@ -1,7 +1,7 @@
 import { Text, Box } from "@chakra-ui/react";
 import countriesData from "../../../constants/countries.json";
 
-const CountryLookup = ({ countryCode }) => {
+const CountryLookup = ({ countryCode, label }) => {
   const findCountryName = (code) => {
     const country = countriesData.find((item) => item.code === code);
     return country ? country.name : "Country Not Found";
@@ -14,7 +14,12 @@ const CountryLookup = ({ countryCode }) => {
   return (
     <Box mb={2}>
       <Text fontWeight="400" fontSize="xs">
-        {Array.isArray(countryCode) ? "Countries" : "Country"}:
+        {label
+          ? `${label}`
+          : Array.isArray(countryCode)
+          ? "Countries"
+          : "Country"}
+        :
       </Text>
       <Text fontSize="sm" fontWeight={600}>
         {countryName}

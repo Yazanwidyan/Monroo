@@ -33,7 +33,9 @@ type ContextProps = {
     value?: string
   ) => void;
   resumeInputKey: number;
-  onResumeChange(e?: React.ChangeEvent<HTMLInputElement>): void;
+  onResumeChange(
+    e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLButtonElement>
+  ): void;
   resumeError: string;
   resumeFile: File[];
   oneMinuteVideoInputKey: number;
@@ -41,11 +43,21 @@ type ContextProps = {
   portfolioInputKey: number;
   videosInputKey: number;
   audiosInputKey: number;
-  onOneMinuteVideoChange(e?: React.ChangeEvent<HTMLInputElement>): void;
-  onDemoReelChange(e?: React.ChangeEvent<HTMLInputElement>): void;
-  onPortfolioChange(e?: React.ChangeEvent<HTMLInputElement>): void;
-  onVideosChange(e?: React.ChangeEvent<HTMLInputElement>): void;
-  onAudiosChange(e?: React.ChangeEvent<HTMLInputElement>): void;
+  onOneMinuteVideoChange(
+    e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLButtonElement>
+  ): void;
+  onDemoReelChange(
+    e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLButtonElement>
+  ): void;
+  onPortfolioChange(
+    e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLButtonElement>
+  ): void;
+  onVideosChange(
+    e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLButtonElement>
+  ): void;
+  onAudiosChange(
+    e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLButtonElement>
+  ): void;
   videosError: string;
   audiosError: string;
   demoReelError: string;
@@ -57,7 +69,9 @@ type ContextProps = {
   videosFile: File[];
   audiosFile: File[];
   imagesInputKey: number;
-  onImagesChange(e?: React.ChangeEvent<HTMLInputElement>): void;
+  onImagesChange(
+    e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLButtonElement>
+  ): void;
   imagesError: string;
   imageFiles: File[];
 };

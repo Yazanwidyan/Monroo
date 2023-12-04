@@ -144,13 +144,16 @@ const PersonalInfo = ({
         {renderOptionalField("Email", email)}
         {renderOptionalField("Date of Birth", dob)}
         {renderOptionalField("Phone", phone)}
-        <CountryLookup countryCode={nationality} />
+        <CountryLookup label={"Nationality"} countryCode={nationality} />
         {countryOfResidence && (
-          <CountryLookup countryCode={countryOfResidence} />
+          <CountryLookup
+            label={"Country of residence"}
+            countryCode={countryOfResidence}
+          />
         )}
       </Box>
       <Box>
-        {renderOptionalField("Gender", gender === 1 ? "Male" : "Female")}
+        {renderOptionalField("Gender", gender === 0 ? "Male" : "Female")}
         {renderOptionalField("Height", `${height} cm`)}
         {renderOptionalField("Weight", `${weight} kg`)}
       </Box>
@@ -207,7 +210,10 @@ const AdditionalInfo = ({
         {renderOptionalField("YouTube Link", youtubelink)}
         {renderOptionalField("Portfolio", portfolio)}
         {openToWorkInCountry[0] !== "" && (
-          <CountryLookup countryCode={openToWorkInCountry} />
+          <CountryLookup
+            label={"Open to work in countries"}
+            countryCode={openToWorkInCountry}
+          />
         )}
       </Box>
     </Grid>

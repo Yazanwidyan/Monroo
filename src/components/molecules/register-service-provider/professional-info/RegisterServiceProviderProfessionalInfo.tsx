@@ -1,7 +1,9 @@
 import {
   Box,
+  Flex,
   FormControl,
   FormLabel,
+  IconButton,
   Input,
   List,
   ListItem,
@@ -11,10 +13,17 @@ import {
 } from "@chakra-ui/react";
 import useRegisterServiceProviderProfessionalInfo from "./useRegisterServiceProviderProfessionalInfo";
 import { useTranslation } from "react-i18next";
+import { CloseIcon } from "@chakra-ui/icons";
 
 export default function RegisterServiceProviderProfessionalInfo() {
   const state = useRegisterServiceProviderProfessionalInfo();
   const { i18n } = useTranslation();
+
+  const removeFile = () => {
+    // Logic to remove the selected file from state
+    // For example:
+    // updateState({ resumeFile: [], resumeInputKey: Date.now() });
+  };
 
   return (
     <SimpleGrid columns={{ base: 1, md: 2 }} rowGap="20px" columnGap="20px">
@@ -58,6 +67,7 @@ export default function RegisterServiceProviderProfessionalInfo() {
       {state.registerServiceProviderLookup.openToWorkInCountry && (
         <FormControl>
           <FormLabel>Open to Work in Country</FormLabel>
+
           <Select
             placeholder="Select country"
             value={state.professionalInfo.openToWorkInCountry}
@@ -206,153 +216,199 @@ export default function RegisterServiceProviderProfessionalInfo() {
       {state.registerServiceProviderLookup.resume && (
         <FormControl>
           <FormLabel>Resume</FormLabel>
-          <Input
-            type="file"
-            key={state.resumeInputKey}
-            accept=".pdf"
-            placeholder="Upload your resume"
-            onChange={state.onResumeChange}
-          />
+          {state.resumeFile.length === 0 && (
+            <Input
+              type="file"
+              key={state.resumeInputKey}
+              accept=".pdf"
+              placeholder="Upload your resume"
+              onChange={state.onResumeChange}
+            />
+          )}
           {state.resumeError && (
             <Text fontSize="10px">{state.resumeError}</Text>
           )}
           {state.resumeFile.length > 0 && (
-            <Box>
-              <Text>Selected Files:</Text>
-              <List>
+            <Flex alignItems={"center"}>
+              <Text>Selected Files: </Text>
+              <List mt={1} mx={2}>
                 {state.resumeFile.map((file) => (
-                  <ListItem key={file.name}>{file.name}</ListItem>
+                  <ListItem key={file.name}>
+                    {file.name}
+                    <IconButton
+                      icon={<CloseIcon />}
+                      aria-label="Remove file"
+                      mx={2}
+                      size="xs"
+                      onClick={state.onResumeChange}
+                    />
+                  </ListItem>
                 ))}
               </List>
-            </Box>
+            </Flex>
           )}
         </FormControl>
       )}
       {state.registerServiceProviderLookup.oneMinuteVideo && (
         <FormControl>
           <FormLabel>Elevator Pitch</FormLabel>
-          <Input
-            type="file"
-            key={state.oneMinuteVideoInputKey}
-            accept=".mp4"
-            placeholder="Upload your elevator pitch"
-            onChange={state.onOneMinuteVideoChange}
-          />
+          {state.oneMinuteVideoFile.length === 0 && (
+            <Input
+              type="file"
+              key={state.oneMinuteVideoInputKey}
+              accept=".mp4"
+              placeholder="Upload your elevator pitch"
+              onChange={state.onOneMinuteVideoChange}
+            />
+          )}
           {state.oneMinuteVideoError && (
             <Text fontSize="10px">{state.oneMinuteVideoError}</Text>
           )}
           {state.oneMinuteVideoFile.length > 0 && (
-            <Box>
-              <Text>Selected Files:</Text>
-              <List>
+            <Flex alignItems={"center"}>
+              <Text>Selected Files: </Text>
+              <List mt={1} mx={2}>
                 {state.oneMinuteVideoFile.map((file) => (
-                  <ListItem key={file.name}>{file.name}</ListItem>
+                  <ListItem key={file.name}>
+                    {file.name}
+                    <IconButton
+                      icon={<CloseIcon />}
+                      aria-label="Remove file"
+                      mx={2}
+                      size="xs"
+                      onClick={state.onOneMinuteVideoChange}
+                    />
+                  </ListItem>
                 ))}
               </List>
-            </Box>
+            </Flex>
           )}
         </FormControl>
       )}
       {state.registerServiceProviderLookup.demoReel && (
         <FormControl>
           <FormLabel>Reel</FormLabel>
-          <Input
-            type="file"
-            key={state.demoReelInputKey}
-            accept=".mp4"
-            placeholder="Upload your elevator pitch"
-            onChange={state.onDemoReelChange}
-          />
+          {state.demoReelFile.length === 0 && (
+            <Input
+              type="file"
+              key={state.demoReelInputKey}
+              accept=".mp4"
+              placeholder="Upload your elevator pitch"
+              onChange={state.onDemoReelChange}
+            />
+          )}
           {state.demoReelError && (
             <Text fontSize="10px">{state.demoReelError}</Text>
           )}
           {state.demoReelFile.length > 0 && (
-            <Box>
-              <Text>Selected Files:</Text>
-              <List>
+            <Flex alignItems={"center"}>
+              <Text>Selected Files: </Text>
+              <List mt={1} mx={2}>
                 {state.demoReelFile.map((file) => (
-                  <ListItem key={file.name}>{file.name}</ListItem>
+                  <ListItem key={file.name}>
+                    {file.name}
+                    <IconButton
+                      icon={<CloseIcon />}
+                      aria-label="Remove file"
+                      mx={2}
+                      size="xs"
+                      onClick={state.onDemoReelChange}
+                    />
+                  </ListItem>
                 ))}
               </List>
-            </Box>
+            </Flex>
           )}
         </FormControl>
       )}
       {state.registerServiceProviderLookup.videos && (
         <FormControl>
           <FormLabel>Videos</FormLabel>
-          <Input
-            type="file"
-            key={state.videosInputKey}
-            accept=".mp4"
-            placeholder="Upload your videos"
-            onChange={state.onVideosChange}
-            multiple
-          />
+          {state.videosFile.length === 0 && (
+            <Input
+              type="file"
+              key={state.videosInputKey}
+              accept=".mp4"
+              placeholder="Upload your videos"
+              onChange={state.onVideosChange}
+              multiple
+            />
+          )}
           {state.videosError && (
             <Text fontSize="10px">{state.videosError}</Text>
           )}
           {state.videosFile.length > 0 && (
-            <Box>
-              <Text>Selected Files:</Text>
-              <List>
-                {state.videosFile.map((file) => (
-                  <ListItem key={file.name}>{file.name}</ListItem>
-                ))}
-              </List>
-            </Box>
+            <Flex alignItems={"center"}>
+              <Text>Selected Files: {state.videosFile.length}</Text>
+              <IconButton
+                icon={<CloseIcon />}
+                aria-label="Remove file"
+                mx={2}
+                size="xs"
+                onClick={state.onVideosChange}
+              />
+            </Flex>
           )}
         </FormControl>
       )}
       {state.registerServiceProviderLookup.audios && (
         <FormControl>
           <FormLabel>audios</FormLabel>
-          <Input
-            type="file"
-            key={state.audiosInputKey}
-            accept=".mp4"
-            placeholder="Upload your elevator pitch"
-            onChange={state.onAudiosChange}
-            multiple
-          />
+          {state.audiosFile.length === 0 && (
+            <Input
+              type="file"
+              key={state.audiosInputKey}
+              accept=".mp4"
+              placeholder="Upload your elevator pitch"
+              onChange={state.onAudiosChange}
+              multiple
+            />
+          )}
           {state.audiosError && (
             <Text fontSize="10px">{state.audiosError}</Text>
           )}
           {state.audiosFile.length > 0 && (
-            <Box>
-              <Text>Selected Files:</Text>
-              <List>
-                {state.audiosFile.map((file) => (
-                  <ListItem key={file.name}>{file.name}</ListItem>
-                ))}
-              </List>
-            </Box>
+            <Flex alignItems={"center"}>
+              <Text>Selected Files:{state.audiosFile.length} </Text>
+              <IconButton
+                icon={<CloseIcon />}
+                aria-label="Remove file"
+                mx={2}
+                size="xs"
+                onClick={state.onAudiosChange}
+              />
+            </Flex>
           )}
         </FormControl>
       )}
       {state.registerServiceProviderLookup.photos && (
         <FormControl>
           <FormLabel>Photos</FormLabel>
-          <Input
-            type="file"
-            key={state.imagesInputKey}
-            accept=".png, .jpeg"
-            placeholder="Upload four photos of you"
-            onChange={state.onImagesChange}
-            multiple
-          />
+
+          {state.imageFiles.length === 0 && (
+            <Input
+              type="file"
+              key={state.imagesInputKey}
+              accept=".png, .jpeg"
+              placeholder="Upload four photos of you"
+              onChange={state.onImagesChange}
+              multiple
+            />
+          )}
           {state.imagesError && (
             <Text fontSize="10px">{state.imagesError}</Text>
           )}
           {state.imageFiles.length > 0 && (
-            <Box>
-              <Text>Selected Files:{state.imageFiles.length}</Text>
-              <List>
-                {state.imageFiles.map((file) => (
-                  <ListItem key={file.name}>{file.name}</ListItem>
-                ))}
-              </List>
-            </Box>
+            <Flex alignItems={"center"}>
+              <Text>Selected Files: {state.imageFiles.length} </Text>
+              <IconButton
+                icon={<CloseIcon />}
+                aria-label="Remove file"
+                mx={2}
+                size="xs"
+                onClick={state.onImagesChange}
+              />
+            </Flex>
           )}
         </FormControl>
       )}
@@ -406,25 +462,36 @@ export default function RegisterServiceProviderProfessionalInfo() {
       {state.registerServiceProviderLookup.portfolio && (
         <FormControl>
           <FormLabel>portfolio</FormLabel>
-          <Input
-            type="file"
-            key={state.portfolioInputKey}
-            accept=".mp4"
-            placeholder="Upload your elevator pitch"
-            onChange={state.onPortfolioChange}
-          />
-          {state.demoReelError && (
+          {state.portfolioFile.length === 0 && (
+            <Input
+              type="file"
+              key={state.portfolioInputKey}
+              accept=".pdf"
+              placeholder="Upload your portfolio"
+              onChange={state.onPortfolioChange}
+            />
+          )}
+          {state.portfolioError && (
             <Text fontSize="10px">{state.portfolioError}</Text>
           )}
           {state.portfolioFile.length > 0 && (
-            <Box>
-              <Text>Selected Files:</Text>
-              <List>
+            <Flex alignItems={"center"}>
+              <Text>Selected Files: </Text>
+              <List mt={1} mx={2}>
                 {state.portfolioFile.map((file) => (
-                  <ListItem key={file.name}>{file.name}</ListItem>
+                  <ListItem key={file.name}>
+                    {file.name}
+                    <IconButton
+                      icon={<CloseIcon />}
+                      aria-label="Remove file"
+                      mx={2}
+                      size="xs"
+                      onClick={state.onPortfolioChange}
+                    />
+                  </ListItem>
                 ))}
               </List>
-            </Box>
+            </Flex>
           )}
         </FormControl>
       )}

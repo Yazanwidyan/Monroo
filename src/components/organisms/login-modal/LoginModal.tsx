@@ -44,10 +44,10 @@ const LoginModal = ({ isOpen, onClose }) => {
             </TabList>
             <TabPanels>
               <TabPanel>
-                <LoginUser />
+                <LoginUser onClose={onClose} />
               </TabPanel>
               <TabPanel>
-                <LoginProvider />
+                <LoginProvider onClose={onClose} />
               </TabPanel>
             </TabPanels>
           </Tabs>

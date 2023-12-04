@@ -2,9 +2,14 @@ import RegisterServiceProviderForm from "../../../organisms/register-service-pro
 import RegisterServiceProviderContextProvider from "../../../../contexts/RegisterServiceProviderContext";
 import { useNavigate } from "react-router-dom";
 import authServices from "../../../../services/authServices";
+import useCustomToast from "../../../../hooks/useCustomToast";
+import { useContext } from "react";
+import { UserContext } from "../../../../contexts/UserContext";
 
 export default function RegisterServiceProvider() {
   const navigate = useNavigate();
+  const { showToast } = useCustomToast();
+  const { updateUser } = useContext(UserContext);
 
   return (
     <RegisterServiceProviderContextProvider>
@@ -22,32 +27,7 @@ export default function RegisterServiceProvider() {
           videosFile,
           audiosFile
         ) => {
-          console.log(
-            "selectedCategory:",
-            selectedCategory,
-            "selectedSubCategories:",
-            selectedSubCategories,
-            "personalInfo:",
-            personalInfo,
-            "professionalInfo:",
-            professionalInfo,
-            "resumeFile:",
-            resumeFile,
-            "imageFiles:",
-            imageFiles,
-            "oneMinuteVideoFile:",
-            oneMinuteVideoFile,
-            "demoReelFile:",
-            demoReelFile,
-            "portfolioFile:",
-            portfolioFile,
-            "videosFile:",
-            videosFile,
-            "audiosFile:",
-            audiosFile
-          );
           const data = new FormData();
-
           const otherData = {
             ...personalInfo,
             ...professionalInfo,
@@ -72,8 +52,10 @@ export default function RegisterServiceProvider() {
           try {
             const res = await authServices.registerProvider(data);
             console.log("res", res.data);
+            updateUser(res.data);
+            navigate("/timeline", { replace: true });
           } catch (error) {
-            console.log("error", error);
+            showToast(error, { status: "error" });
           }
         }}
       />

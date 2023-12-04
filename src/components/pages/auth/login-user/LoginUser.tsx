@@ -7,7 +7,7 @@ import { UserContext } from "../../../../contexts/UserContext";
 import authServices from "../../../../services/authServices";
 import useCustomToast from "../../../../hooks/useCustomToast";
 
-export default function LoginUser() {
+export default function LoginUser({ onClose }) {
   const navigate = useNavigate();
   const { showToast } = useCustomToast();
 
@@ -15,6 +15,7 @@ export default function LoginUser() {
 
   return (
     <LoginForm
+      onClose={onClose}
       handleSubmit={async (loginInput: LoginInput) => {
         try {
           const res = await authServices.loginUser(loginInput);

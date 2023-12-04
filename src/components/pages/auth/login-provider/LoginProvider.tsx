@@ -7,13 +7,14 @@ import { UserContext } from "../../../../contexts/UserContext";
 import authServices from "../../../../services/authServices";
 import useCustomToast from "../../../../hooks/useCustomToast";
 
-export default function LoginProvider() {
+export default function LoginProvider({ onClose }) {
   const navigate = useNavigate();
   const { showToast } = useCustomToast();
   const { updateUser } = useContext(UserContext);
 
   return (
     <LoginForm
+      onClose={onClose}
       handleSubmit={async (loginInput: LoginInput) => {
         try {
           const res = await authServices.loginProvider(loginInput);

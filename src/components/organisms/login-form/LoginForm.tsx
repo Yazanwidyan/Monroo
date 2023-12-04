@@ -20,6 +20,7 @@ import usePasswordVisibility from "../../../hooks/usePasswordVisibility";
 
 export type LoginFormProps = {
   handleSubmit(loginInput: LoginInput): void;
+  onClose: () => void;
 };
 
 export default function LoginForm(props: LoginFormProps) {
@@ -91,6 +92,7 @@ export default function LoginForm(props: LoginFormProps) {
       </form>
       <Flex width="100%" justifyContent="center" mt="4">
         <ChakraLink
+          onClick={props.onClose}
           as={RouterLink}
           to="/register"
           href="/register"

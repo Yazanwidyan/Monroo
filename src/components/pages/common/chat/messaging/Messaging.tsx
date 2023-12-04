@@ -242,7 +242,7 @@ const Messaging = ({ selectedRoom }) => {
       </VStack>
     </Box>
   ) : (
-    <Box mt={8} textAlign="center" fontSize="xl">
+    <Box mt={9} textAlign="center" fontSize="xl">
       Choose a room to start messaging
     </Box>
   );
