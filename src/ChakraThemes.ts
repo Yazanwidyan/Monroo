@@ -8,7 +8,7 @@ export const themes = {
   },
   colors: {
     primary: {
-      50: "#FCE4EC",
+      50: "#fff0f5",
       100: "#F8BBD0",
       200: "#F48FB1",
       300: "#F06292",

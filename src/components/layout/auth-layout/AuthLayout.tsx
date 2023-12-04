@@ -61,9 +61,9 @@ const AuthLayout = () => {
               size={"sm"}
               fontWeight={500}
               color={"white"}
-              bg={"primary.500"}
+              bg={"gray.700"}
               _hover={{
-                bg: "gray.700",
+                bg: "primary.500",
               }}
             >
               Join us

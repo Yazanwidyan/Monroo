@@ -21,8 +21,13 @@ const LoginModal = ({ isOpen, onClose }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
-        <ModalHeader color={"white"} bg={"primary.500"}>
+      <ModalContent borderRadius={14}>
+        <ModalHeader
+          borderTopLeftRadius={10}
+          borderTopRightRadius={10}
+          color={"white"}
+          bg={"primary.500"}
+        >
           Login
         </ModalHeader>
         <ModalCloseButton color={"white"} />

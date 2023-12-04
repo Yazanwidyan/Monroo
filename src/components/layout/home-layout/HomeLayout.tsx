@@ -35,7 +35,7 @@ const HomeLayout = () => {
 
   return (
     <Flex minHeight="100vh" flexDirection="column">
-      <Box boxShadow="base" bg="white.100" py="3" px="4">
+      <Box bg="white.100" py="3" px="4">
         <Container maxW="6xl">
           <Flex
             alignItems="center"
@@ -69,9 +69,9 @@ const HomeLayout = () => {
                     size={"sm"}
                     fontWeight={500}
                     color={"white"}
-                    bg={"primary.500"}
+                    bg={"gray.700"}
                     _hover={{
-                      bg: "gray.700",
+                      bg: "primary.500",
                     }}
                   >
                     Create Event

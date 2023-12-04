@@ -79,9 +79,11 @@ const HomeUser = () => {
 
   return (
     <>
-      <Box boxShadow={"gray.100"} borderWidth={1} p={4}>
+      <Box boxShadow={"gray.100"} borderBottomWidth={1} p={4}>
         <Container maxW="6xl">
-          <Text color={"gray.600"}>Hi, Yazan</Text>
+          <Text color={"gray.600"} textTransform={"capitalize"}>
+            Hi, {user.name}
+          </Text>
         </Container>
       </Box>
       <Container mt={8} maxW="6xl" style={{ display: "flex" }}>

@@ -1,16 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
-import {
-  Box,
-  Heading,
-  VStack,
-  Input,
-  Button,
-  Text,
-  Flex,
-  Avatar,
-  Icon,
-} from "@chakra-ui/react";
+import { Box, VStack, Input, Button, Text, Flex, Icon } from "@chakra-ui/react";
 import { UserContext } from "../../../../../contexts/UserContext";
 import providerServices from "../../../../../services/providerServices";
 import userServices from "../../../../../services/userServices";
@@ -213,7 +202,12 @@ const Messaging = ({ selectedRoom }) => {
   return selectedRoom ? (
     <Box p={4}>
       <VStack spacing={4} mb={4} align="stretch">
-        <Box h="calc(100vh - 200px)" overflowY="scroll">
+        <Box
+          borderWidth={1}
+          borderRadius={10}
+          h="calc(100vh - 400px)"
+          overflowY="scroll"
+        >
           {messages.map((message, index) => renderMessage(message, index))}
           <div ref={messagesEndRef} />
         </Box>
@@ -225,7 +219,7 @@ const Messaging = ({ selectedRoom }) => {
               placeholder="Type a message..."
               flex="1"
               mr={2}
-              borderRadius="full"
+              borderRadius={10}
               p={2}
             />
             <Button

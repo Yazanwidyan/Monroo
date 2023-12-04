@@ -9,6 +9,7 @@ import {
   VStack,
   Container,
   Input,
+  Spacer,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import userServices from "../../../../../services/userServices";
@@ -69,7 +70,7 @@ const Inbox = () => {
 
   return (
     <Container maxW="6xl" style={{ display: "flex" }}>
-      <Box flex={2}>
+      <Box flex={4}>
         <Box w="100%" maxW="600px" mx="auto" mt={8}>
           <Input
             value={searchTerm}
@@ -99,7 +100,8 @@ const Inbox = () => {
           </VStack>
         </Box>
       </Box>
-      <Box flex={6}>
+      <Box flex={1}></Box>
+      <Box flex={10} mt={4}>
         <Messaging selectedRoom={selectedRoom} />
       </Box>
     </Container>

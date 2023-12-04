@@ -20,7 +20,7 @@ const EventTimelineCard = ({
   onSave,
 }) => {
   return (
-    <Box borderWidth={1} p={4} borderRadius={8} boxShadow="md">
+    <Box borderWidth={1} p={4} borderRadius={8}>
       <Image
         src={
           image ||

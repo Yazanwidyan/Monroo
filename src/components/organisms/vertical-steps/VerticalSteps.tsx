@@ -17,7 +17,7 @@ const VerticalSteps = () => {
     <VerticalTimeline>
       <VerticalTimelineElement
         className="vertical-timeline-element--example"
-        contentStyle={{ background: "teal", color: "#fff" }}
+        contentStyle={{ background: "#2D3748", color: "#fff" }}
         iconStyle={{ background: "black", color: "#fff" }}
         icon={<FaUserPlus />}
       >
@@ -29,7 +29,7 @@ const VerticalSteps = () => {
 
       <VerticalTimelineElement
         className="vertical-timeline-element--example"
-        contentStyle={{ background: "teal", color: "#fff" }}
+        contentStyle={{ background: "#2D3748", color: "#fff" }}
         iconStyle={{ background: "black", color: "#fff" }}
         icon={<FaClipboardList />}
       >
@@ -41,7 +41,7 @@ const VerticalSteps = () => {
 
       <VerticalTimelineElement
         className="vertical-timeline-element--example"
-        contentStyle={{ background: "teal", color: "#fff" }}
+        contentStyle={{ background: "#2D3748", color: "#fff" }}
         iconStyle={{ background: "black", color: "#fff" }}
         icon={<FaHandshake />}
       >
@@ -51,7 +51,7 @@ const VerticalSteps = () => {
 
       <VerticalTimelineElement
         className="vertical-timeline-element--example"
-        contentStyle={{ background: "teal", color: "#fff" }}
+        contentStyle={{ background: "#2D3748", color: "#fff" }}
         iconStyle={{ background: "black", color: "#fff" }}
         icon={<FaStar />}
       >

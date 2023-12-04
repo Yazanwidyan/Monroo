@@ -11,10 +11,6 @@ const Timeline = () => {
 
   const [eventsList, setEventsList] = useState<any>([]);
 
-  const handlePoke = () => {
-    // Logic for poking the author
-  };
-
   const handleMessage = async (event) => {
     const payload = {
       eventID: event.id,
@@ -55,9 +51,11 @@ const Timeline = () => {
 
   return (
     <>
-      <Box boxShadow={"gray.100"} borderWidth={1} mb={4} p={4}>
+      <Box boxShadow={"gray.100"} borderBottomWidth={1} mb={4} p={4}>
         <Container maxW="6xl">
-          <Text color={"gray.600"}>Hi, Yazan</Text>
+          <Text color={"gray.600"} textTransform={"capitalize"}>
+            Hi, {user.fname}
+          </Text>
         </Container>
       </Box>
       <Container mb={12} maxW={"6xl"}>

@@ -22,11 +22,8 @@ const EventCard = ({ event, requestPrivateEvent }) => {
       borderWidth="1px"
       borderRadius="lg"
       p={0}
-      boxShadow="md"
       overflow="hidden"
       position="relative"
-      transition="transform 0.3s ease-in-out"
-      _hover={{ transform: "scale(1.05)" }}
     >
       <Image
         src={
@@ -51,7 +48,7 @@ const EventCard = ({ event, requestPrivateEvent }) => {
           </Box>
           <Box textAlign="right" alignSelf={"end"}>
             <Button
-              color="primary.500"
+              colorScheme={"primary"}
               fontWeight="bold"
               fontSize={"sm"}
               cursor="pointer"
