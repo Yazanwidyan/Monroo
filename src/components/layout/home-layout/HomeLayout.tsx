@@ -35,7 +35,7 @@ const HomeLayout = () => {
 
   return (
     <Flex minHeight="100vh" flexDirection="column">
-      <Box bg="white.100" py="3" px="4">
+      <Box borderBottomWidth={1} bg="white.100" py="3" px="4">
         <Container maxW="6xl">
           <Flex
             alignItems="center"
@@ -69,7 +69,7 @@ const HomeLayout = () => {
                     size={"sm"}
                     fontWeight={500}
                     color={"white"}
-                    bg={"gray.700"}
+                    bg={"black"}
                     _hover={{
                       bg: "primary.500",
                     }}

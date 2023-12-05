@@ -20,7 +20,7 @@ const AuthLayout = () => {
 
   return (
     <Flex minHeight="100vh" flexDirection="column">
-      <Box boxShadow="base" bg="white.100" py="3" px="4">
+      <Box borderBottomWidth={1} bg="white.100" py="3" px="4">
         <Container maxW={"6xl"}>
           <Flex
             alignItems="center"
@@ -51,6 +51,7 @@ const AuthLayout = () => {
             >
               How it works
             </ChakraLink>
+
             <LanguageSwitcher />
 
             <Button
@@ -60,11 +61,7 @@ const AuthLayout = () => {
               fontSize={"small"}
               size={"sm"}
               fontWeight={500}
-              color={"white"}
-              bg={"gray.700"}
-              _hover={{
-                bg: "primary.500",
-              }}
+              colorScheme={"primary"}
             >
               Join us
             </Button>
@@ -75,10 +72,10 @@ const AuthLayout = () => {
               variant={"ghost"}
               fontWeight={500}
               fontSize={"small"}
-              borderColor="primary.500"
-              color={"primary.500"}
+              borderColor="black"
+              color={"black"}
               _hover={{
-                borderColor: "primary.500",
+                borderColor: "black",
               }}
             >
               Login

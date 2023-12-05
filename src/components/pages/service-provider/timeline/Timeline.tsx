@@ -51,7 +51,7 @@ const Timeline = () => {
 
   return (
     <>
-      <Box boxShadow={"gray.100"} borderBottomWidth={1} mb={4} p={4}>
+      <Box mb={4} p={4}>
         <Container maxW="6xl">
           <Text color={"gray.600"} textTransform={"capitalize"}>
             Hi, {user.fname}

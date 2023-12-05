@@ -7,7 +7,6 @@ const Landing = () => {
   return (
     <Box>
       <WelcomeBanner />
-      {/* <ApplyBanner /> */}
       <ApplyBanner />
       <Benefits />
     </Box>
