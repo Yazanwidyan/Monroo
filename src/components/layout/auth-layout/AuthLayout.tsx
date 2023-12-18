@@ -12,10 +12,12 @@ import { Outlet, Link as RouterLink, useNavigate } from "react-router-dom";
 import LoginModal from "../../organisms/login-modal/LoginModal";
 import { AiOutlineLogin, AiOutlineUserAdd } from "react-icons/ai"; // Import Chakra Icons
 import Footer from "../footer/Footer";
+import { useTranslation } from "react-i18next";
 
 const AuthLayout = () => {
   const [isLoginOpen, setLoginOpen] = useState(false);
 
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -49,7 +51,7 @@ const AuthLayout = () => {
               textDecoration="none"
               _hover={{ textDecoration: "none" }}
             >
-              How it works
+              {t("common.how_it_works")}
             </ChakraLink>
 
             <LanguageSwitcher />
@@ -63,7 +65,7 @@ const AuthLayout = () => {
               fontWeight={500}
               colorScheme={"primary"}
             >
-              Join us
+              {t("common.join_us")}
             </Button>
             <Button
               onClick={() => setLoginOpen(true)}
@@ -78,7 +80,7 @@ const AuthLayout = () => {
                 borderColor: "black",
               }}
             >
-              Login
+              {t("common.login")}
             </Button>
           </Flex>
         </Container>

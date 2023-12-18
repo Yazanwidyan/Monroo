@@ -3,7 +3,10 @@
     "common": {
       "submit": "представлять на рассмотрение",
       "next": "следующий",
-      "back": "назад"
+      "back": "назад",
+      "join_us": "Присоединиться",
+      "login": "Войти",
+      "how_it_works": "Как это работает"
     },
     "login": {
       "login": "авторизоваться",
@@ -17,7 +20,43 @@
       "create_account": "Зарегистрироваться"
     },
     "register": {
-      "whoAreYou": "Кто ты ?"
+      "whoAreYou": "Кто вы?",
+      "username": "Имя пользователя",
+      "email": "Электронная почта",
+      "password": "Пароль",
+      "confirm_password": "Подтвердите пароль",
+      "enter_username": "Введите имя пользователя",
+      "enter_email": "Введите адрес электронной почты",
+      "enter_emailOrusername": "Введите имя пользователя или адрес электронной почты",
+      "enter_password": "Введите пароль",
+      "first_last_name": "Имя и фамилия",
+      "enter_first_last_name": "Введите имя и фамилию",
+      "country": "Страна",
+      "select_country": "Выберите страну",
+      "company_name": "Название компании",
+      "enter_company_name": "Введите название компании",
+      "phone_number": "Номер телефона",
+      "preferred_categories": "Предпочтительные категории",
+      "select_category": "Выберите категорию",
+      "about": "Описание",
+      "tell_us_more_about_yourself": "Расскажите нам больше о себе",
+      "select_subcategory": "выбрать подкатегорию",
+      "first_name": "Имя",
+      "last_name": "Фамилия",
+      "gender": "Пол",
+      "nationality": "Национальность",
+      "date_of_birth": "Дата рождения",
+      "male": "Мужской",
+      "female": "Женский",
+      "enter_first_name": "Введите имя",
+      "enter_last_name": "Введите фамилию",
+      "enter_date_of_birth": "Введите дату рождения",
+      "first_step": "Первый шаг",
+      "second_step": "Второй шаг",
+      "third_step": "Третий шаг",
+      "category": "категория",
+      "personal_info": "Личная информация",
+      "professional_info": "Профессиональная информация"
     }
   }
 }

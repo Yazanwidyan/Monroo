@@ -14,6 +14,7 @@ import {
 import useRegisterServiceProviderPersonalInfo from "./useRegisterServiceProviderPersonalInfo";
 import usePasswordVisibility from "../../../../hooks/usePasswordVisibility";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { useTranslation } from "react-i18next";
 
 const maxDateFor18YearsOld = new Date(
   new Date().setFullYear(new Date().getFullYear() - 18)
@@ -22,6 +23,8 @@ const maxDateFor18YearsOld = new Date(
   .split("T")[0];
 
 export default function RegisterServiceProviderPersonalInfo() {
+  const { t } = useTranslation();
+
   const state = useRegisterServiceProviderPersonalInfo();
   const [passwordVisibility, togglePasswordVisibility] = usePasswordVisibility({
     password: false,
@@ -31,29 +34,29 @@ export default function RegisterServiceProviderPersonalInfo() {
   return (
     <SimpleGrid columns={{ base: 1, md: 2 }} rowGap="20px" columnGap="20px">
       <FormControl isRequired>
-        <FormLabel>First Name</FormLabel>
+        <FormLabel>{t("register.first_name")}</FormLabel>
         <Input
           type="text"
           name="fname"
-          placeholder="Enter first name"
+          placeholder={t("register.enter_first_name")}
           value={state.personalInfo.fname}
           onChange={state.handlePersonalInfoChange}
           required
         />
       </FormControl>
       <FormControl isRequired>
-        <FormLabel>Last Name</FormLabel>
+        <FormLabel>{t("register.last_name")}</FormLabel>
         <Input
           type="text"
           name="lname"
-          placeholder="Enter last name"
+          placeholder={t("register.enter_last_name")}
           value={state.personalInfo.lname}
           onChange={state.handlePersonalInfoChange}
           required
         />
       </FormControl>
       <FormControl isRequired>
-        <FormLabel>Gender</FormLabel>
+        <FormLabel>{t("register.gender")}</FormLabel>
         <RadioGroup
           onChange={(value) =>
             state.handlePersonalInfoChange(null, "gender", value)
@@ -62,15 +65,15 @@ export default function RegisterServiceProviderPersonalInfo() {
           name="gender"
         >
           <Stack gap="20px" direction="row">
-            <Radio value="0">Male</Radio>
-            <Radio value="1">Female</Radio>
+            <Radio value="0">{t("register.male")}</Radio>
+            <Radio value="1">{t("register.female")}</Radio>
           </Stack>
         </RadioGroup>
       </FormControl>
       <FormControl isRequired>
-        <FormLabel>Nationality</FormLabel>
+        <FormLabel>{t("register.nationality")}</FormLabel>
         <Select
-          placeholder="Select country"
+          placeholder={t("register.select_country")}
           value={state.personalInfo.nationality}
           onChange={state.handlePersonalInfoChange}
           name="nationality"
@@ -84,22 +87,22 @@ export default function RegisterServiceProviderPersonalInfo() {
         </Select>
       </FormControl>
       <FormControl isRequired>
-        <FormLabel>Username</FormLabel>
+        <FormLabel>{t("register.username")}</FormLabel>
         <Input
           type="text"
           name="username"
-          placeholder="Enter username"
+          placeholder={t("register.enter_username")}
           value={state.personalInfo.username}
           onChange={state.handlePersonalInfoChange}
           required
         />
       </FormControl>
       <FormControl isRequired>
-        <FormLabel>Date of Birth</FormLabel>
+        <FormLabel>{t("register.date_of_birth")}</FormLabel>
         <Input
           type="date"
           name="dob"
-          placeholder="Enter Date of Birth"
+          placeholder={t("register.enter_date_of_birth")}
           value={state.personalInfo.dob}
           onChange={state.handlePersonalInfoChange}
           max={maxDateFor18YearsOld}
@@ -108,12 +111,12 @@ export default function RegisterServiceProviderPersonalInfo() {
         />
       </FormControl>
       <FormControl isRequired>
-        <FormLabel>Password</FormLabel>
+        <FormLabel>{t("register.password")}</FormLabel>
         <InputGroup>
           <Input
             type={passwordVisibility.password ? "text" : "password"}
             name="password"
-            placeholder="Enter password"
+            placeholder={t("register.enter_password")}
             value={state.personalInfo.password}
             onChange={state.handlePersonalInfoChange}
             maxLength={20}
@@ -136,12 +139,12 @@ export default function RegisterServiceProviderPersonalInfo() {
         </InputGroup>
       </FormControl>
       <FormControl isRequired>
-        <FormLabel>Confirm Password</FormLabel>
+        <FormLabel>{t("register.confirm_password")}</FormLabel>
         <InputGroup>
           <Input
             type={passwordVisibility.confirmPassword ? "text" : "password"}
             name="confirmPassword"
-            placeholder="Confirm password"
+            placeholder={t("register.confirm_password")}
             value={state.personalInfo.confirmPassword}
             onChange={state.handlePersonalInfoChange}
             maxLength={20}

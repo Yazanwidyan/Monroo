@@ -7,14 +7,23 @@ import { useContext } from "react";
 import { LookupsContext } from "../../../contexts/LookupsContext";
 import commonService from "../../../services/commonServices";
 import useCustomToast from "../../../hooks/useCustomToast";
-
-const steps = [
-  { title: "First Step", description: "Category" },
-  { title: "Second Step", description: "Personal Info" },
-  { title: "Third Step", description: "Professional Info" },
-];
+import { useTranslation } from "react-i18next";
 
 export default function useRegisterServiceProviderForm(props) {
+  const { t } = useTranslation();
+
+  const steps = [
+    { title: t("register.first_step"), description: t("register.category") },
+    {
+      title: t("register.second_step"),
+      description: t("register.personal_info"),
+    },
+    {
+      title: t("register.third_step"),
+      description: t("register.professional_info"),
+    },
+  ];
+
   const stepsState = useSteps({
     index: 1,
     count: steps.length,

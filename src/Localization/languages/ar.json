@@ -3,7 +3,10 @@
     "common": {
       "submit": "تقديم",
       "next": "متابعة",
-      "back": "عودة"
+      "back": "عودة",
+      "join_us": "تسجيل جديد",
+      "login": "تسجيل الدخول",
+      "how_it_works": "كيف يعمل موقعنا"
     },
     "form": {},
     "login": {
@@ -18,7 +21,43 @@
       "create_account": "انشاء حساب"
     },
     "register": {
-      "whoAreYou": "اختر نوع الحساب"
+      "whoAreYou": "اختر نوع الحساب",
+      "username": "اسم المستخدم",
+      "email": "البريد الالكتروني",
+      "password": "كلمة المرور",
+      "confirm_password": "تأكيد كلمة المرور",
+      "enter_username": "ادخل اسم المستخدم",
+      "enter_email": "ادخل البريد الالكتروني",
+      "enter_emailOrusername": "ادخل اسم المستخدم او البريد الالكتروني",
+      "enter_password": "ادخل كلمة المرور",
+      "first_last_name": "الاسم الاول والاخير",
+      "enter_first_last_name": "ادخل الاسم الاول والاخير",
+      "country": "البلد",
+      "select_country": "اختر البلد",
+      "company_name": "اسم الشركة",
+      "enter_company_name": "ادخل اسم الشركة",
+      "phone_number": "رقم الهاتف",
+      "preferred_categories": "الفئات المفضلة",
+      "select_category": "اختر الفئة",
+      "about": "حول",
+      "tell_us_more_about_yourself": "اخبرنا عنك اكثر",
+      "select_subcategory": "اختر الفئة الفرعية",
+      "first_name": "الاسم الأول",
+      "last_name": "الاسم الأخير",
+      "gender": "الجنس",
+      "nationality": "الجنسية",
+      "date_of_birth": "تاريخ الميلاد",
+      "male": "ذكر",
+      "female": "انثى",
+      "enter_first_name": "ادخل الاسم الأول",
+      "enter_last_name": "ادخل الاسم الأخير",
+      "enter_date_of_birth": "ادخل تاريخ الميلاد",
+      "first_step": "الخطوة الأولى",
+      "second_step": "الخطوة الثانية",
+      "third_step": "الخطوة الثالثة",
+      "category": "الفئة",
+      "personal_info": "المعلومات الشخصية",
+      "professional_info": "المعلومات الاحترافية"
     }
   }
 }

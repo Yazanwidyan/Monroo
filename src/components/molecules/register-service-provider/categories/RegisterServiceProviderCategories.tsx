@@ -7,19 +7,19 @@ import { useTranslation } from "react-i18next";
 
 export default function RegisterServiceProviderCategories() {
   const state = useRegisterServiceProviderCategories();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <Flex flexDirection="column" gap="12px">
       <FormControl isRequired>
-        <FormLabel>Select Category</FormLabel>
+        <FormLabel>{t("register.select_category")}</FormLabel>
         <MultiSelect
           required
           value={state.selectedCategory}
           className={styles.categoriesMultiSelect}
           isSearchable={true}
           onChange={state.handleCategoryChange}
-          placeholder="Select category"
+          placeholder={t("register.select_category")}
           name="category"
           options={state.categories.map((category) => ({
             label:
@@ -37,14 +37,14 @@ export default function RegisterServiceProviderCategories() {
         />
       </FormControl>
       <FormControl isRequired isDisabled={!state.selectedCategory}>
-        <FormLabel>Select Sub-Categories</FormLabel>
+        <FormLabel>{t("register.select_subcategory")}</FormLabel>
         <MultiSelect
           required
           value={state.selectedSubCategories}
           className={styles.subCategoriesMultiSelect}
           isSearchable={true}
           onChange={state.handleSubCategoriesChange}
-          placeholder="Select sub-categories"
+          placeholder={t("register.select_subcategory")}
           name="subCategories"
           options={state.filteredSubCategories.map((category) => ({
             label:

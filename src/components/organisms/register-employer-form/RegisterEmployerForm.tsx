@@ -28,7 +28,8 @@ export type RegisterEmployerFormProps = {
 
 export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
   const state = useRegisterEmployerForm({ onSubmit: props.onSubmit });
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
+
   const [passwordVisibility, togglePasswordVisibility] = usePasswordVisibility({
     password: false,
     confirmPassword: false,
@@ -44,34 +45,34 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
             columnGap="20px"
           >
             <FormControl isRequired>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>{t("register.username")}</FormLabel>
               <Input
                 type="text"
                 name="username"
-                placeholder="Enter username"
+                placeholder={t("register.enter_username")}
                 value={state.registerEmployer.username}
                 onChange={state.handleRegisterEmployerChange}
                 required
               />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>{t("register.email")}</FormLabel>
               <Input
                 type="email"
                 name="email"
-                placeholder="Enter email"
+                placeholder={t("register.enter_email")}
                 value={state.registerEmployer.email}
                 onChange={state.handleRegisterEmployerChange}
                 required
               />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>{t("register.password")}</FormLabel>
               <InputGroup>
                 <Input
                   type={passwordVisibility.password ? "text" : "password"}
                   name="password"
-                  placeholder="Enter password"
+                  placeholder={t("register.enter_password")}
                   value={state.registerEmployer.password}
                   onChange={state.handleRegisterEmployerChange}
                   maxLength={20}
@@ -100,14 +101,14 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
               </InputGroup>
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>Confirm Password</FormLabel>
+              <FormLabel>{t("register.confirm_password")}</FormLabel>
               <InputGroup>
                 <Input
                   type={
                     passwordVisibility.confirmPassword ? "text" : "password"
                   }
                   name="confirmPassword"
-                  placeholder="Confirm password"
+                  placeholder={t("register.confirm_password")}
                   value={state.registerEmployer.confirmPassword}
                   onChange={state.handleRegisterEmployerChange}
                   maxLength={20}
@@ -136,21 +137,21 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
               </InputGroup>
             </FormControl>
             <FormControl>
-              <FormLabel>First and last name</FormLabel>
+              <FormLabel>{t("register.first_last_name")}</FormLabel>
               <Input
                 type="text"
                 name="name"
-                placeholder="Enter First and last name"
+                placeholder={t("register.enter_first_last_name")}
                 value={state.registerEmployer.name}
                 onChange={state.handleRegisterEmployerChange}
                 required
               />
             </FormControl>
             <FormControl>
-              <FormLabel>Country</FormLabel>
+              <FormLabel>{t("register.country")}</FormLabel>
               <Select
                 required
-                placeholder="Select country"
+                placeholder={t("register.select_country")}
                 value={state.registerEmployer.country}
                 onChange={state.handleRegisterEmployerChange}
                 name="country"
@@ -163,18 +164,18 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
               </Select>
             </FormControl>
             <FormControl>
-              <FormLabel>Company Name</FormLabel>
+              <FormLabel>{t("register.company_name")}</FormLabel>
               <Input
                 type="text"
                 name="companyName"
-                placeholder="Enter company name"
+                placeholder={t("register.enter_company_name")}
                 value={state.registerEmployer.companyName}
                 onChange={state.handleRegisterEmployerChange}
                 required
               />
             </FormControl>
             <FormControl>
-              <FormLabel>Phone Number</FormLabel>
+              <FormLabel>{t("register.phone_number")}</FormLabel>
               <Input
                 type="tel"
                 value={state.registerEmployer.phone}
@@ -188,7 +189,7 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
               />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>Preferred Categories</FormLabel>
+              <FormLabel>{t("register.preferred_categories")}</FormLabel>
               <MultiSelect
                 required
                 className={styles.categoriesMultiSelect}
@@ -200,7 +201,7 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
                     categories.map((category) => category.value)
                   )
                 }
-                placeholder="Select categories"
+                placeholder={t("register.select_category")}
                 name="categories"
                 options={state.categories.map((category) => ({
                   label:
@@ -218,13 +219,13 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
               />
             </FormControl>
             <FormControl gridColumn="1/-1">
-              <FormLabel>About</FormLabel>
+              <FormLabel>{t("register.about")}</FormLabel>
               <Textarea
                 value={state.registerEmployer.about}
                 onChange={state.handleRegisterEmployerChange}
                 name="about"
                 maxLength={200}
-                placeholder="Tell us more about yourself"
+                placeholder={t("register.tell_us_more_about_yourself")}
                 rows={5}
               />
             </FormControl>
@@ -236,10 +237,10 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
               onClick={props.onBackClick}
               type="button"
             >
-              Back
+              {t("common.back")}
             </Button>
             <Button fontSize="14px" colorScheme="primary" type="submit">
-              Submit
+              {t("common.submit")}
             </Button>
           </Flex>
         </form>

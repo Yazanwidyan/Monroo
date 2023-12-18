@@ -17,7 +17,7 @@ import { CloseIcon } from "@chakra-ui/icons";
 
 export default function RegisterServiceProviderProfessionalInfo() {
   const state = useRegisterServiceProviderProfessionalInfo();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const removeFile = () => {
     // Logic to remove the selected file from state
@@ -28,18 +28,18 @@ export default function RegisterServiceProviderProfessionalInfo() {
   return (
     <SimpleGrid columns={{ base: 1, md: 2 }} rowGap="20px" columnGap="20px">
       <FormControl>
-        <FormLabel>Email</FormLabel>
+        <FormLabel>{t("register.email")}</FormLabel>
         <Input
           type="email"
           name="email"
-          placeholder="Enter email"
+          placeholder={t("register.enter_email")}
           value={state.professionalInfo.email}
           onChange={state.handleProfessionalInfoChange}
           required
         />
       </FormControl>
       <FormControl>
-        <FormLabel>Phone Number</FormLabel>
+        <FormLabel>{t("register.phone_number")}</FormLabel>
         <Input
           type="tel"
           value={state.professionalInfo.phone}
@@ -53,23 +53,22 @@ export default function RegisterServiceProviderProfessionalInfo() {
       </FormControl>
       {state.registerServiceProviderLookup.averageRatePerHour && (
         <FormControl>
-          <FormLabel>Average Rate per Hour</FormLabel>
+          <FormLabel>{t("register.Average_Rate_per_Hour")}</FormLabel>
           <Input
             type="number"
             value={state.professionalInfo.averageRatePerHour}
             onChange={state.handleProfessionalInfoChange}
             name="averageRatePerHour"
-            placeholder="Enter your average rate per hour in AED"
+            placeholder={t("register.Enter_your_average_rate_per_hour_in_AED ")}
             required
           />
         </FormControl>
       )}
       {state.registerServiceProviderLookup.openToWorkInCountry && (
         <FormControl>
-          <FormLabel>Open to Work in Country</FormLabel>
-
+          <FormLabel>{t("register.Open_to_Work_in_Country")}</FormLabel>
           <Select
-            placeholder="Select country"
+            placeholder={t("register.select_country")}
             value={state.professionalInfo.openToWorkInCountry}
             onChange={state.handleProfessionalInfoChange}
             name="openToWorkInCountry"
@@ -84,9 +83,9 @@ export default function RegisterServiceProviderProfessionalInfo() {
       )}
       {state.registerServiceProviderLookup.countryOfResidence && (
         <FormControl>
-          <FormLabel>Country of Residence</FormLabel>
+          <FormLabel>{t("register.Country_of_Residence")}</FormLabel>
           <Select
-            placeholder="Select country"
+            placeholder={t("register.select_country")}
             value={state.professionalInfo.countryOfResidence}
             onChange={state.handleProfessionalInfoChange}
             name="countryOfResidence"
@@ -101,9 +100,9 @@ export default function RegisterServiceProviderProfessionalInfo() {
       )}
       {state.registerServiceProviderLookup.education && (
         <FormControl>
-          <FormLabel>Education</FormLabel>
+          <FormLabel>{t("register.Education")}</FormLabel>
           <Select
-            placeholder="Select education"
+            placeholder={t("register.select_education")}
             value={state.professionalInfo.education}
             onChange={state.handleProfessionalInfoChange}
             name="education"
@@ -122,11 +121,11 @@ export default function RegisterServiceProviderProfessionalInfo() {
       )}
       {state.registerServiceProviderLookup.spokenLanguage && (
         <FormControl>
-          <FormLabel>Spoken Languages</FormLabel>
+          <FormLabel>{t("register.spoken_languages")}</FormLabel>
           <Input
             type="text"
             name="spokenLanguage"
-            placeholder="Enter spoken languages"
+            placeholder={t("register.enter_spoken_languages")}
             value={state.professionalInfo.spokenLanguage}
             onChange={state.handleProfessionalInfoChange}
             required
@@ -134,21 +133,21 @@ export default function RegisterServiceProviderProfessionalInfo() {
         </FormControl>
       )}
       <FormControl>
-        <FormLabel>Years of Experience</FormLabel>
+        <FormLabel>{t("register.years_of_experience")}</FormLabel>
         <Input
           type="number"
           value={state.professionalInfo.experience}
           onChange={state.handleProfessionalInfoChange}
           name="experience"
-          placeholder="Enter your years of experience"
+          placeholder={t("register.enter_your_years_of_experience")}
           required
         />
       </FormControl>
       {state.registerServiceProviderLookup.visaType && (
         <FormControl>
-          <FormLabel>Visa Type</FormLabel>
+          <FormLabel>{t("register.visa_type")}</FormLabel>
           <Select
-            placeholder="Select your visa type"
+            placeholder={t("register.select_your_visa_type")}
             value={state.professionalInfo.visaType}
             onChange={state.handleProfessionalInfoChange}
             name="visaType"
@@ -163,37 +162,37 @@ export default function RegisterServiceProviderProfessionalInfo() {
       )}
       {state.registerServiceProviderLookup.height && (
         <FormControl>
-          <FormLabel>Height</FormLabel>
+          <FormLabel>{t("register.height")}</FormLabel>
           <Input
             type="number"
             value={state.professionalInfo.height}
             onChange={state.handleProfessionalInfoChange}
             name="height"
-            placeholder="Enter your height"
+            placeholder={t("register.enter_your_height")}
             required
           />
         </FormControl>
       )}
       {state.registerServiceProviderLookup.weight && (
         <FormControl>
-          <FormLabel>Weight</FormLabel>
+          <FormLabel>{t("register.weight")}</FormLabel>
           <Input
             type="number"
             value={state.professionalInfo.weight}
             onChange={state.handleProfessionalInfoChange}
             name="weight"
-            placeholder="Enter your height"
+            placeholder={t("register.enter_your_weight")}
             required
           />
         </FormControl>
       )}
       {state.registerServiceProviderLookup.instagram && (
         <FormControl>
-          <FormLabel>Instagram Account URL</FormLabel>
+          <FormLabel>{t("register.instagram_account_URL")}</FormLabel>
           <Input
             type="url"
             name="instagram"
-            placeholder="Enter your instagram account URL"
+            placeholder={t("register.enter_instagram_account_URL")}
             value={state.professionalInfo.instagram}
             onChange={state.handleProfessionalInfoChange}
             required
@@ -202,11 +201,11 @@ export default function RegisterServiceProviderProfessionalInfo() {
       )}
       {state.registerServiceProviderLookup.introductionVideoLink && (
         <FormControl>
-          <FormLabel>introduction video link</FormLabel>
+          <FormLabel>{t("register.introduction_video_link")}</FormLabel>
           <Input
             type="url"
             name="introductionVideoLink"
-            placeholder="Enter your introduction video link"
+            placeholder={t("register.enter_introduction_video_link")}
             value={state.professionalInfo.introductionVideoLink}
             onChange={state.handleProfessionalInfoChange}
             required
@@ -215,13 +214,13 @@ export default function RegisterServiceProviderProfessionalInfo() {
       )}
       {state.registerServiceProviderLookup.resume && (
         <FormControl>
-          <FormLabel>Resume</FormLabel>
+          <FormLabel>{t("register.resume")}</FormLabel>
           {state.resumeFile.length === 0 && (
             <Input
               type="file"
               key={state.resumeInputKey}
               accept=".pdf"
-              placeholder="Upload your resume"
+              placeholder={t("register.upload_resume")}
               onChange={state.onResumeChange}
             />
           )}
@@ -230,7 +229,7 @@ export default function RegisterServiceProviderProfessionalInfo() {
           )}
           {state.resumeFile.length > 0 && (
             <Flex alignItems={"center"}>
-              <Text>Selected Files: </Text>
+              <Text>{t("register.selected_files")}</Text>
               <List mt={1} mx={2}>
                 {state.resumeFile.map((file) => (
                   <ListItem key={file.name}>
@@ -251,13 +250,13 @@ export default function RegisterServiceProviderProfessionalInfo() {
       )}
       {state.registerServiceProviderLookup.oneMinuteVideo && (
         <FormControl>
-          <FormLabel>Elevator Pitch</FormLabel>
+          <FormLabel>{t("register.elevator_pitch")}</FormLabel>
           {state.oneMinuteVideoFile.length === 0 && (
             <Input
               type="file"
               key={state.oneMinuteVideoInputKey}
               accept=".mp4"
-              placeholder="Upload your elevator pitch"
+              placeholder={t("register.upload_elevator_pitch")}
               onChange={state.onOneMinuteVideoChange}
             />
           )}
@@ -266,7 +265,7 @@ export default function RegisterServiceProviderProfessionalInfo() {
           )}
           {state.oneMinuteVideoFile.length > 0 && (
             <Flex alignItems={"center"}>
-              <Text>Selected Files: </Text>
+              <Text>{t("register.selected_files")}</Text>
               <List mt={1} mx={2}>
                 {state.oneMinuteVideoFile.map((file) => (
                   <ListItem key={file.name}>
@@ -287,13 +286,13 @@ export default function RegisterServiceProviderProfessionalInfo() {
       )}
       {state.registerServiceProviderLookup.demoReel && (
         <FormControl>
-          <FormLabel>Reel</FormLabel>
+          <FormLabel>{t("register.reel")}</FormLabel>
           {state.demoReelFile.length === 0 && (
             <Input
               type="file"
               key={state.demoReelInputKey}
               accept=".mp4"
-              placeholder="Upload your elevator pitch"
+              placeholder={t("register.upload_reel")}
               onChange={state.onDemoReelChange}
             />
           )}
@@ -302,7 +301,7 @@ export default function RegisterServiceProviderProfessionalInfo() {
           )}
           {state.demoReelFile.length > 0 && (
             <Flex alignItems={"center"}>
-              <Text>Selected Files: </Text>
+              <Text>{t("register.selected_files")}</Text>
               <List mt={1} mx={2}>
                 {state.demoReelFile.map((file) => (
                   <ListItem key={file.name}>
@@ -323,13 +322,13 @@ export default function RegisterServiceProviderProfessionalInfo() {
       )}
       {state.registerServiceProviderLookup.videos && (
         <FormControl>
-          <FormLabel>Videos</FormLabel>
+          <FormLabel>{t("register.videos")}</FormLabel>
           {state.videosFile.length === 0 && (
             <Input
               type="file"
               key={state.videosInputKey}
               accept=".mp4"
-              placeholder="Upload your videos"
+              placeholder={t("register.upload_videos")}
               onChange={state.onVideosChange}
               multiple
             />
@@ -339,7 +338,9 @@ export default function RegisterServiceProviderProfessionalInfo() {
           )}
           {state.videosFile.length > 0 && (
             <Flex alignItems={"center"}>
-              <Text>Selected Files: {state.videosFile.length}</Text>
+              <Text>
+                {t("register.selected_files")} {state.videosFile.length}
+              </Text>
               <IconButton
                 icon={<CloseIcon />}
                 aria-label="Remove file"
@@ -353,13 +354,13 @@ export default function RegisterServiceProviderProfessionalInfo() {
       )}
       {state.registerServiceProviderLookup.audios && (
         <FormControl>
-          <FormLabel>audios</FormLabel>
+          <FormLabel>{t("register.audios")}</FormLabel>
           {state.audiosFile.length === 0 && (
             <Input
               type="file"
               key={state.audiosInputKey}
               accept=".mp4"
-              placeholder="Upload your elevator pitch"
+              placeholder={t("register.upload_audios")}
               onChange={state.onAudiosChange}
               multiple
             />
@@ -369,7 +370,9 @@ export default function RegisterServiceProviderProfessionalInfo() {
           )}
           {state.audiosFile.length > 0 && (
             <Flex alignItems={"center"}>
-              <Text>Selected Files:{state.audiosFile.length} </Text>
+              <Text>
+                {t("register.selected_files")} {state.audiosFile.length}{" "}
+              </Text>
               <IconButton
                 icon={<CloseIcon />}
                 aria-label="Remove file"
@@ -383,14 +386,14 @@ export default function RegisterServiceProviderProfessionalInfo() {
       )}
       {state.registerServiceProviderLookup.photos && (
         <FormControl>
-          <FormLabel>Photos</FormLabel>
+          <FormLabel>{t("register.photos")}</FormLabel>
 
           {state.imageFiles.length === 0 && (
             <Input
               type="file"
               key={state.imagesInputKey}
               accept=".png, .jpeg"
-              placeholder="Upload four photos of you"
+              placeholder={t("register.upload_four_photos")}
               onChange={state.onImagesChange}
               multiple
             />
@@ -400,7 +403,9 @@ export default function RegisterServiceProviderProfessionalInfo() {
           )}
           {state.imageFiles.length > 0 && (
             <Flex alignItems={"center"}>
-              <Text>Selected Files: {state.imageFiles.length} </Text>
+              <Text>
+                {t("register.selected_files")} {state.imageFiles.length}{" "}
+              </Text>
               <IconButton
                 icon={<CloseIcon />}
                 aria-label="Remove file"
@@ -435,11 +440,11 @@ export default function RegisterServiceProviderProfessionalInfo() {
       </FormControl> */}
       {state.registerServiceProviderLookup.youtubeLink && (
         <FormControl>
-          <FormLabel>Youtube URL</FormLabel>
+          <FormLabel>{t("register.youtube_url")}</FormLabel>
           <Input
             type="url"
             name="youtubeLink"
-            placeholder="Enter youtube channel URL"
+            placeholder={t("register.enter_youtube_channel_url")}
             value={state.professionalInfo.youtubeLink}
             onChange={state.handleProfessionalInfoChange}
           />
@@ -447,11 +452,11 @@ export default function RegisterServiceProviderProfessionalInfo() {
       )}
       {state.registerServiceProviderLookup.linkedin && (
         <FormControl>
-          <FormLabel>LinkedIn Account URL</FormLabel>
+          <FormLabel>{t("register.linkedin_account_url")}</FormLabel>
           <Input
             type="url"
             name="linkedin"
-            placeholder="Enter your linkedin account URL"
+            placeholder={t("register.enter_linkedin_account_url")}
             value={state.professionalInfo.linkedin}
             onChange={state.handleProfessionalInfoChange}
             required
@@ -461,13 +466,13 @@ export default function RegisterServiceProviderProfessionalInfo() {
 
       {state.registerServiceProviderLookup.portfolio && (
         <FormControl>
-          <FormLabel>portfolio</FormLabel>
+          <FormLabel>{t("register.portfolio")}</FormLabel>
           {state.portfolioFile.length === 0 && (
             <Input
               type="file"
               key={state.portfolioInputKey}
               accept=".pdf"
-              placeholder="Upload your portfolio"
+              placeholder={t("register.upload_portfolio")}
               onChange={state.onPortfolioChange}
             />
           )}
@@ -476,7 +481,7 @@ export default function RegisterServiceProviderProfessionalInfo() {
           )}
           {state.portfolioFile.length > 0 && (
             <Flex alignItems={"center"}>
-              <Text>Selected Files: </Text>
+              <Text>{t("register.selected_files")} </Text>
               <List mt={1} mx={2}>
                 {state.portfolioFile.map((file) => (
                   <ListItem key={file.name}>
@@ -497,12 +502,12 @@ export default function RegisterServiceProviderProfessionalInfo() {
       )}
       {state.registerServiceProviderLookup.bio && (
         <FormControl>
-          <FormLabel>Bio</FormLabel>
+          <FormLabel>{t("register.bio")}</FormLabel>
           <Input
             type="text"
             name="bio"
             maxLength={200}
-            placeholder="Enter bio"
+            placeholder={t("register.enter_bio")}
             value={state.professionalInfo.bio}
             onChange={state.handleProfessionalInfoChange}
             required
@@ -511,9 +516,9 @@ export default function RegisterServiceProviderProfessionalInfo() {
       )}
       {state.registerServiceProviderLookup.musicalInstruments && (
         <FormControl>
-          <FormLabel>Musical Instruments</FormLabel>
+          <FormLabel>{t("register.musical_instruments")}</FormLabel>
           <Select
-            placeholder="Select instrument"
+            placeholder={t("register.select_musical_instruments")}
             value={state.professionalInfo.musicalInstruments}
             onChange={state.handleProfessionalInfoChange}
             name="musicalInstruments"
@@ -528,9 +533,9 @@ export default function RegisterServiceProviderProfessionalInfo() {
       )}
       {state.registerServiceProviderLookup.musicGenres && (
         <FormControl>
-          <FormLabel>Music Genres</FormLabel>
+          <FormLabel>{t("register.music_genres")}</FormLabel>
           <Select
-            placeholder="Select music genres"
+            placeholder={t("register.select_music_genres")}
             value={state.professionalInfo.musicGenres}
             onChange={state.handleProfessionalInfoChange}
             name="musicGenres"
@@ -545,11 +550,11 @@ export default function RegisterServiceProviderProfessionalInfo() {
       )}
       {state.registerServiceProviderLookup.specialSkills && (
         <FormControl>
-          <FormLabel>Special Skills</FormLabel>
+          <FormLabel>{t("register.special_skills")}</FormLabel>
           <Input
             type="text"
             name="specialSkills"
-            placeholder="Enter your special skills"
+            placeholder={t("register.enter_special_skills")}
             value={state.professionalInfo.specialSkills}
             onChange={state.handleProfessionalInfoChange}
             required

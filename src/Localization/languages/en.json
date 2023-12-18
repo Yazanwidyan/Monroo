@@ -3,7 +3,10 @@
         "common": {
             "submit": "Submit",
             "next": "Next",
-            "back": "Back"
+            "back": "Back",
+            "join_us": "Join us",
+            "login": "Login",
+            "how_it_works": "How it works"
         },
         "login": {
             "login": "Login",
@@ -17,7 +20,43 @@
             "create_account": "Create account"
         },
         "register": {
-            "whoAreYou": "Who are you ?"
+            "whoAreYou": "Who are you ?",
+            "username": "Username",
+            "email": "Email",
+            "password": "Password",
+            "confirm_password": "Confirm password",
+            "enter_username": "Enter username",
+            "enter_email": "Enter email",
+            "enter_emailOrusername": "Enter username or email",
+            "enter_password": "Enter password",
+            "first_last_name": "First and last name",
+            "enter_first_last_name": "Enter first and last name",
+            "country": "Country",
+            "select_country": "Select country",
+            "company_name": "Company name",
+            "enter_company_name": "Enter company name",
+            "phone_number": "Phone number",
+            "preferred_categories": "Preferred categories",
+            "select_category": "Select category",
+            "about": "About",
+            "tell_us_more_about_yourself": "Tell us more about yourself",
+            "select_subcategory": "Select subcategory",
+            "first_name": "First name",
+            "last_name": "Last name",
+            "gender": "Gender",
+            "nationality": "Nationality",
+            "date_of_birth": "Date of birth",
+            "male": "Male",
+            "female": "Female",
+            "enter_first_name": "Enter first name",
+            "enter_last_name": "Enter last name",
+            "enter_date_of_birth": "Enter date of birth",
+            "first_step": "First step",
+            "second_step": "Second step",
+            "third_step": "Third step",
+            "category": "Category",
+            "personal_info": "Personal info",
+            "professional_info": "Professional info"
         }
     }
 }
