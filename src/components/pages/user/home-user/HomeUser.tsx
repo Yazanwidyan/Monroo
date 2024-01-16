@@ -10,12 +10,15 @@ import {
   Container,
   Skeleton,
   Button,
-  Select,
   InputLeftElement,
   Icon,
   Image,
   Text,
+  FormControl,
+  FormLabel,
 } from "@chakra-ui/react";
+import { debounce } from "lodash";
+import { Select as MultiSelect } from "chakra-react-select";
 import ServiceProviderCard from "../../../organisms/service-provider-card/ServiceProviderCard";
 import CreateEvent from "../create-event/CreateEvent";
 import { UserContext } from "../../../../contexts/UserContext";
@@ -23,9 +26,12 @@ import userServices from "../../../../services/userServices";
 import useCustomToast from "../../../../hooks/useCustomToast";
 import { FaSearch } from "react-icons/fa";
 import WelcomeBanner from "../../../organisms/welcome-banner/WelcomeBanner";
+import { useTranslation } from "react-i18next";
+import styles from "./HomeUser.module.scss";
+import { LookupsContext } from "../../../../contexts/LookupsContext";
 
 const DummySelectOptions = [
-  { label: "Option 1", value: "option1" },
+  { label: "host", value: "b214094a-f7f1-43fd-8dbd-ceabd53f9ef1" },
   { label: "Option 2", value: "option2" },
   { label: "Option 3", value: "option3" },
 ];
@@ -33,17 +39,18 @@ const DummySelectOptions = [
 const HomeUser = () => {
   const { user } = useContext(UserContext);
   const { showToast } = useCustomToast();
+  const { i18n } = useTranslation();
 
+  const { categories } = useContext(LookupsContext);
+  const [selectedCategory, setSelectedCategory] = useState([]);
   const [providersList, setListProviders] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
-  const [filters, setFilters] = useState({
-    filter1: "",
-    filter2: "",
-    filter3: "",
-  });
-
   const [selectedTab, setSelectedTab] = useState("recommended");
+
+  const handleCategoryChange = (selectedCategoryIds) => {
+    setSelectedCategory(selectedCategoryIds);
+  };
 
   const fetchData = async (isAll: boolean) => {
     const payload = {
@@ -60,9 +67,32 @@ const HomeUser = () => {
     }
   };
 
+  const searchProviders = async () => {
+    const payload = {
+      ids: JSON.stringify(selectedCategory),
+      key: searchQuery,
+      gender: 1,
+    };
+    try {
+      const res = await userServices.searchProviders(payload);
+      setListProviders(res.data);
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const debouncedSearchProviders = debounce(searchProviders, 500);
+
   useEffect(() => {
-    fetchData(false);
-  }, []);
+    if (searchQuery !== "" || selectedCategory.length !== 0) {
+      debouncedSearchProviders();
+    } else {
+      fetchData(false);
+    }
+
+    return () => debouncedSearchProviders.cancel();
+  }, [searchQuery, selectedCategory]);
 
   const handleTabChange = (tab: string) => {
     if (tab === "recommended") {
@@ -71,10 +101,6 @@ const HomeUser = () => {
       fetchData(true);
     }
     setSelectedTab(tab);
-  };
-
-  const handleFilterChange = (filterName, value) => {
-    setFilters({ ...filters, [filterName]: value });
   };
 
   return (
@@ -138,35 +164,34 @@ const HomeUser = () => {
             </InputLeftElement>
           </InputGroup>
           <Stack direction="row" spacing={4} mb={8} align="center">
-            <Select
-              value={filters.filter1}
-              onChange={(selectedOption) =>
-                handleFilterChange("filter1", selectedOption)
-              }
-              placeholder="Select"
-            />
-            <Select
-              value={filters.filter2}
-              onChange={(selectedOption) =>
-                handleFilterChange("filter2", selectedOption)
-              }
-              placeholder="Select"
-            />
-            <Select
-              value={filters.filter3}
-              onChange={(selectedOption) =>
-                handleFilterChange("filter3", selectedOption)
-              }
-              placeholder="Select"
-            />
-            <Button
-              size="sm"
-              fontSize="x-small"
-              variant="outline"
-              colorScheme="primary"
-            >
-              Apply
-            </Button>
+            <FormControl>
+              <MultiSelect
+                isMulti={true}
+                className={styles.categoriesMultiSelect}
+                isSearchable={true}
+                onChange={(categories) =>
+                  handleCategoryChange(
+                    categories.map((category) => category.value)
+                  )
+                }
+                placeholder="Select category"
+                required
+                name="catID"
+                options={categories.map((category) => ({
+                  label:
+                    i18n.language == "en"
+                      ? category.name
+                      : i18n.language == "ar"
+                      ? category.nameAR
+                      : category.nameRUS,
+                  value: category.id,
+                  catID: category.id,
+                  name: category.name,
+                  nameAR: category.nameAR,
+                  nameRUS: category.nameRUS,
+                }))}
+              />
+            </FormControl>
           </Stack>
           <Grid
             mb={8}
