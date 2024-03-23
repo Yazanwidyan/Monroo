@@ -1,52 +1,45 @@
-import { useNavigate } from "react-router-dom";
-import { CreateEvent } from "../../../../models/CreateEvent";
+import { CreateEvent } from '../../../../models/CreateEvent';
 
-import CreateEventForm from "../../../organisms/create-event-form/CreateEventForm";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
-} from "@chakra-ui/react";
-import userServices from "../../../../services/userServices";
-import useCustomToast from "../../../../hooks/useCustomToast";
+import CreateEventForm from '../../../organisms/create-event-form/CreateEventForm';
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton } from '@chakra-ui/react';
+import userServices from '../../../../services/userServices';
+import useCustomToast from '../../../../hooks/useCustomToast';
 
 export default function CreateEventPage({ isOpen, onClose }) {
-  const { showToast } = useCustomToast();
+    const { showToast } = useCustomToast();
 
-  return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent minW={1200}>
-        <ModalHeader>Create Event</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <CreateEventForm
-            onSubmit={async (createEvent: CreateEvent) => {
-              const { selectedCategory, selectedSubCategories, ...rest } =
-                createEvent;
+    return (
+        <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent minW={1200}>
+                <ModalHeader>Create Event</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                    <CreateEventForm
+                        onSubmit={async (createEvent: CreateEvent) => {
+                            const { selectedCategory, selectedSubCategories, ...rest } = createEvent;
 
-              const payload = {
-                ...rest,
-                catID: createEvent.selectedCategory.value,
-                subCatID: createEvent.selectedSubCategories.value,
-              };
-              try {
-                const res = await userServices.createEvent(payload);
-                showToast("Event created successfully", {
-                  title: "",
-                  status: "success",
-                });
-                onClose();
-              } catch (error) {
-                showToast(error, { status: "error" });
-              }
-            }}
-          />
-        </ModalBody>
-      </ModalContent>
-    </Modal>
-  );
+                            const payload = {
+                                ...rest,
+                                catID: createEvent.selectedCategory.value,
+                                subCatID: createEvent.selectedSubCategories.value,
+                            };
+                            try {
+                                const res = await userServices.createEvent(payload);
+                                console.log(res);
+
+                                showToast('Event created successfully', {
+                                    title: '',
+                                    status: 'success',
+                                });
+                                onClose();
+                            } catch (error) {
+                                showToast(error, { status: 'error' });
+                            }
+                        }}
+                    />
+                </ModalBody>
+            </ModalContent>
+        </Modal>
+    );
 }

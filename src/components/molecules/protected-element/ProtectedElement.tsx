@@ -1,27 +1,17 @@
-import { useContext, useMemo, ReactNode } from "react";
-import { AdminRole } from "../../../models/AdminInfo";
-import {
-  AdminContext,
-  AdminContextType,
-} from "../../../contexts/admin-context/AdminContext";
+import { useMemo, ReactNode } from 'react';
 
 type ProtectedElementProps = {
-  children: ReactNode;
-  element?: ReactNode;
-  allowedRoles: AdminRole[];
+    children: ReactNode;
+    element?: ReactNode;
+    allowedRoles: [];
 };
 
-export default function ProtectedElement({
-  element = <></>,
-  ...props
-}: ProtectedElementProps) {
-  const { adminInfo } = useContext(AdminContext) as AdminContextType;
+export default function ProtectedElement({ element = <></>, ...props }: ProtectedElementProps) {
+    const {} = '';
 
-  const isAuthorized = useMemo(() => {
-    if (!adminInfo) return false;
+    const isAuthorized = useMemo(() => {
+        return props.allowedRoles;
+    }, [props.allowedRoles]);
 
-    return props.allowedRoles.includes(adminInfo?.role);
-  }, [adminInfo, props.allowedRoles]);
-
-  return isAuthorized ? <>{props.children}</> : <>{element}</>;
+    return isAuthorized ? <>{props.children}</> : <>{element}</>;
 }

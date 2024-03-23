@@ -1,237 +1,180 @@
-import { useContext, useEffect, useState } from "react";
-import {
-  Grid,
-  GridItem,
-  Input,
-  InputGroup,
-  SkeletonText,
-  Stack,
-  Box,
-  Container,
-  Skeleton,
-  Button,
-  InputLeftElement,
-  Icon,
-  Image,
-  Text,
-  FormControl,
-  FormLabel,
-} from "@chakra-ui/react";
-import { debounce } from "lodash";
-import { Select as MultiSelect } from "chakra-react-select";
-import ServiceProviderCard from "../../../organisms/service-provider-card/ServiceProviderCard";
-import CreateEvent from "../create-event/CreateEvent";
-import { UserContext } from "../../../../contexts/UserContext";
-import userServices from "../../../../services/userServices";
-import useCustomToast from "../../../../hooks/useCustomToast";
-import { FaSearch } from "react-icons/fa";
-import WelcomeBanner from "../../../organisms/welcome-banner/WelcomeBanner";
-import { useTranslation } from "react-i18next";
-import styles from "./HomeUser.module.scss";
-import { LookupsContext } from "../../../../contexts/LookupsContext";
-
-const DummySelectOptions = [
-  { label: "host", value: "b214094a-f7f1-43fd-8dbd-ceabd53f9ef1" },
-  { label: "Option 2", value: "option2" },
-  { label: "Option 3", value: "option3" },
-];
+import { useContext, useEffect, useState } from 'react';
+import { Grid, GridItem, Input, InputGroup, SkeletonText, Stack, Box, Container, Skeleton, Button, InputLeftElement, Icon, Text, FormControl } from '@chakra-ui/react';
+import { debounce } from 'lodash';
+import { Select as MultiSelect } from 'chakra-react-select';
+import ServiceProviderCard from '../../../organisms/service-provider-card/ServiceProviderCard';
+import { UserContext } from '../../../../contexts/UserContext';
+import userServices from '../../../../services/userServices';
+import useCustomToast from '../../../../hooks/useCustomToast';
+import { FaSearch } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
+import styles from './HomeUser.module.scss';
+import { LookupsContext } from '../../../../contexts/LookupsContext';
 
 const HomeUser = () => {
-  const { user } = useContext(UserContext);
-  const { showToast } = useCustomToast();
-  const { i18n } = useTranslation();
+    const { user } = useContext(UserContext);
+    const { showToast } = useCustomToast();
+    const { i18n } = useTranslation();
 
-  const { categories } = useContext(LookupsContext);
-  const [selectedCategory, setSelectedCategory] = useState([]);
-  const [providersList, setListProviders] = useState<any>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedTab, setSelectedTab] = useState("recommended");
+    const { categories } = useContext(LookupsContext);
+    const [selectedCategory, setSelectedCategory] = useState([]);
+    const [providersList, setListProviders] = useState<any>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [selectedTab, setSelectedTab] = useState('recommended');
 
-  const handleCategoryChange = (selectedCategoryIds) => {
-    setSelectedCategory(selectedCategoryIds);
-  };
-
-  const fetchData = async (isAll: boolean) => {
-    const payload = {
-      userID: user.id,
-      isAll,
+    const handleCategoryChange = (selectedCategoryIds) => {
+        setSelectedCategory(selectedCategoryIds);
     };
-    try {
-      const res = await userServices.getListProviders(payload);
-      setListProviders(res.data);
-    } catch (error) {
-      showToast(error, { status: "error" });
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
-  const searchProviders = async () => {
-    const payload = {
-      ids: JSON.stringify(selectedCategory),
-      key: searchQuery,
-      gender: 1,
+    const fetchData = async (isAll: boolean) => {
+        const payload = {
+            userID: user.id,
+            isAll,
+        };
+        try {
+            const res = await userServices.getListProviders(payload);
+            setListProviders(res.data);
+        } catch (error) {
+            showToast(error, { status: 'error' });
+        } finally {
+            setIsLoading(false);
+        }
     };
-    try {
-      const res = await userServices.searchProviders(payload);
-      setListProviders(res.data);
-    } catch (error) {
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
-  const debouncedSearchProviders = debounce(searchProviders, 500);
+    const searchProviders = async () => {
+        const payload = {
+            ids: JSON.stringify(selectedCategory),
+            key: searchQuery,
+            gender: 1,
+        };
+        try {
+            const res = await userServices.searchProviders(payload);
+            setListProviders(res.data);
+        } catch (error) {
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
-  useEffect(() => {
-    if (searchQuery !== "" || selectedCategory.length !== 0) {
-      debouncedSearchProviders();
-    } else {
-      fetchData(false);
-    }
+    const debouncedSearchProviders = debounce(searchProviders, 500);
 
-    return () => debouncedSearchProviders.cancel();
-  }, [searchQuery, selectedCategory]);
+    useEffect(() => {
+        if (searchQuery !== '' || selectedCategory.length !== 0) {
+            debouncedSearchProviders();
+        } else {
+            fetchData(false);
+        }
 
-  const handleTabChange = (tab: string) => {
-    if (tab === "recommended") {
-      fetchData(false);
-    } else if (tab === "all") {
-      fetchData(true);
-    }
-    setSelectedTab(tab);
-  };
+        return () => debouncedSearchProviders.cancel();
+    }, [searchQuery, selectedCategory]);
 
-  return (
-    <>
-      <Box p={4}>
-        <Container maxW="6xl">
-          <Text color={"gray.600"} textTransform={"capitalize"}>
-            Hi, {user.name}
-          </Text>
-        </Container>
-      </Box>
-      <Container mt={8} maxW="6xl" style={{ display: "flex" }}>
-        <Box flex="1">
-          <Stack my={5} direction="row" spacing={4}>
-            <Button
-              px={3}
-              variant="ghost"
-              color={selectedTab === "recommended" ? "primary.500" : "gray"}
-              colorScheme={selectedTab === "recommended" ? "primary" : "gray"}
-              onClick={() => handleTabChange("recommended")}
-              borderRadius={0}
-              _hover={{ bg: "none", textDecoration: "none" }} // Remove hover effect
-              borderLeftWidth={selectedTab === "recommended" ? "3px" : "0"} // Add left border if active
-              borderColor={
-                selectedTab === "recommended" ? "primary.400" : "transparent"
-              } // Border color for active tab
-            >
-              Recommended
-            </Button>
-            <Button
-              px={3}
-              variant="ghost"
-              color={selectedTab === "all" ? "primary.500" : "gray"}
-              colorScheme={selectedTab === "all" ? "primary" : "gray"}
-              onClick={() => handleTabChange("all")}
-              borderRadius={0}
-              _hover={{ bg: "none", textDecoration: "none" }} // Remove hover effect
-              borderLeftWidth={selectedTab === "all" ? "3px" : "0"} // Add left border if active
-              borderColor={
-                selectedTab === "all" ? "primary.400" : "transparent"
-              } // Border color for active tab
-            >
-              All
-            </Button>
-          </Stack>
-          <InputGroup mb={4} bg="white">
-            <Input
-              placeholder="Search by name or description"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              bg="transparent"
-              border="none"
-              borderRadius={0}
-              borderBottom="1px solid"
-              borderColor="gray.300"
-              _focus={{ borderColor: "gray.400", boxShadow: "none" }}
-              _placeholder={{ color: "gray.500" }}
-            />
-            <InputLeftElement pointerEvents="none">
-              <Icon as={FaSearch} color="gray.400" />
-            </InputLeftElement>
-          </InputGroup>
-          <Stack direction="row" spacing={4} mb={8} align="center">
-            <FormControl>
-              <MultiSelect
-                isMulti={true}
-                className={styles.categoriesMultiSelect}
-                isSearchable={true}
-                onChange={(categories) =>
-                  handleCategoryChange(
-                    categories.map((category) => category.value)
-                  )
-                }
-                placeholder="Select category"
-                required
-                name="catID"
-                options={categories.map((category) => ({
-                  label:
-                    i18n.language == "en"
-                      ? category.name
-                      : i18n.language == "ar"
-                      ? category.nameAR
-                      : category.nameRUS,
-                  value: category.id,
-                  catID: category.id,
-                  name: category.name,
-                  nameAR: category.nameAR,
-                  nameRUS: category.nameRUS,
-                }))}
-              />
-            </FormControl>
-          </Stack>
-          <Grid
-            mb={8}
-            templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
-            gap={4}
-          >
-            {isLoading
-              ? Array.from({ length: 5 }).map((_, index) => (
-                  <GridItem key={index}>
-                    <Skeleton height="300px" />
-                    <SkeletonText
-                      mt="4"
-                      noOfLines={4}
-                      spacing="4"
-                      skeletonHeight="2"
-                    />
-                    <SkeletonText
-                      mt="4"
-                      noOfLines={4}
-                      spacing="4"
-                      skeletonHeight="2"
-                    />
-                    <Skeleton mt={4} height="40px" width="200px" />
-                  </GridItem>
-                ))
-              : providersList.map((userProfile, index) => (
-                  <GridItem key={index}>
-                    <ServiceProviderCard
-                      image={userProfile.profilePic}
-                      name={userProfile.username}
-                      providerID={userProfile.id}
-                      userProfile={userProfile}
-                    />
-                  </GridItem>
-                ))}
-          </Grid>
-        </Box>
-      </Container>
-    </>
-  );
+    const handleTabChange = (tab: string) => {
+        if (tab === 'recommended') {
+            fetchData(false);
+        } else if (tab === 'all') {
+            fetchData(true);
+        }
+        setSelectedTab(tab);
+    };
+
+    return (
+        <>
+            <Box p={4}>
+                <Container maxW="6xl">
+                    <Text color={'gray.600'} textTransform={'capitalize'}>
+                        Hi, {user.name}
+                    </Text>
+                </Container>
+            </Box>
+            <Container mt={8} maxW="6xl" style={{ display: 'flex' }}>
+                <Box flex="1">
+                    <Stack my={5} direction="row" spacing={4}>
+                        <Button
+                            px={3}
+                            variant="ghost"
+                            color={selectedTab === 'recommended' ? 'primary.500' : 'gray'}
+                            colorScheme={selectedTab === 'recommended' ? 'primary' : 'gray'}
+                            onClick={() => handleTabChange('recommended')}
+                            borderRadius={0}
+                            _hover={{ bg: 'none', textDecoration: 'none' }} // Remove hover effect
+                            borderLeftWidth={selectedTab === 'recommended' ? '3px' : '0'} // Add left border if active
+                            borderColor={selectedTab === 'recommended' ? 'primary.400' : 'transparent'} // Border color for active tab
+                        >
+                            Recommended
+                        </Button>
+                        <Button
+                            px={3}
+                            variant="ghost"
+                            color={selectedTab === 'all' ? 'primary.500' : 'gray'}
+                            colorScheme={selectedTab === 'all' ? 'primary' : 'gray'}
+                            onClick={() => handleTabChange('all')}
+                            borderRadius={0}
+                            _hover={{ bg: 'none', textDecoration: 'none' }} // Remove hover effect
+                            borderLeftWidth={selectedTab === 'all' ? '3px' : '0'} // Add left border if active
+                            borderColor={selectedTab === 'all' ? 'primary.400' : 'transparent'} // Border color for active tab
+                        >
+                            All
+                        </Button>
+                    </Stack>
+                    <InputGroup mb={4} bg="white">
+                        <Input
+                            placeholder="Search by name or description"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            bg="transparent"
+                            border="none"
+                            borderRadius={0}
+                            borderBottom="1px solid"
+                            borderColor="gray.300"
+                            _focus={{ borderColor: 'gray.400', boxShadow: 'none' }}
+                            _placeholder={{ color: 'gray.500' }}
+                        />
+                        <InputLeftElement pointerEvents="none">
+                            <Icon as={FaSearch} color="gray.400" />
+                        </InputLeftElement>
+                    </InputGroup>
+                    <Stack direction="row" spacing={4} mb={8} align="center">
+                        <FormControl>
+                            <MultiSelect
+                                isMulti={true}
+                                className={styles.categoriesMultiSelect}
+                                isSearchable={true}
+                                onChange={(categories) => handleCategoryChange(categories.map((category) => category.value))}
+                                placeholder="Select category"
+                                required
+                                name="catID"
+                                options={categories.map((category) => ({
+                                    label: i18n.language == 'en' ? category.name : i18n.language == 'ar' ? category.nameAR : category.nameRUS,
+                                    value: category.id,
+                                    catID: category.id,
+                                    name: category.name,
+                                    nameAR: category.nameAR,
+                                    nameRUS: category.nameRUS,
+                                }))}
+                            />
+                        </FormControl>
+                    </Stack>
+                    <Grid mb={8} templateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={4}>
+                        {isLoading
+                            ? Array.from({ length: 5 }).map((_, index) => (
+                                  <GridItem key={index}>
+                                      <Skeleton height="300px" />
+                                      <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
+                                      <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
+                                      <Skeleton mt={4} height="40px" width="200px" />
+                                  </GridItem>
+                              ))
+                            : providersList.map((userProfile, index) => (
+                                  <GridItem key={index}>
+                                      <ServiceProviderCard image={userProfile.profilePic} name={userProfile.username} providerID={userProfile.id} userProfile={userProfile} />
+                                  </GridItem>
+                              ))}
+                    </Grid>
+                </Box>
+            </Container>
+        </>
+    );
 };
 
 export default HomeUser;

@@ -1,32 +1,15 @@
-import {
-  Box,
-  Text,
-  Link,
-  Divider,
-  Grid,
-  GridItem,
-  Container,
-  Image,
-  Flex,
-  Button,
-  Icon,
-} from "@chakra-ui/react";
-import { useLocation } from "react-router-dom";
+import { Box, Text, Link, Grid, GridItem, Container, Image, Flex, Button, Icon } from '@chakra-ui/react';
+import { useLocation } from 'react-router-dom';
 
-import {
-  FaFileDownload,
-  FaInstagram,
-  FaLinkedin,
-  FaYoutube,
-} from "react-icons/fa"; // Import social media icons
-import PhotosGallery from "../../../organisms/photos-gallery/PhotosGallery";
-import VideoGallery from "../../../organisms/vidoes-gallery/VideosGallery";
-import EducationLookup from "../../../molecules/education-lookup/EducationLookup";
-import MusicGenreLookup from "../../../molecules/music-genre-lookup/MusicGenreLookup";
-import MusicalInstrumentLookup from "../../../molecules/musical-instrument-lookup/MusicalInstrumentLookup";
-import VisaTypeLookup from "../../../molecules/visa-type-lookup/VisaTypeLookup";
-import CountryLookup from "../../../molecules/country-lookup/CountryLookup";
-import AudiosGallery from "../../../organisms/audios-gallery/AudiosGallery";
+import { FaFileDownload, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa'; // Import social media icons
+import PhotosGallery from '../../../organisms/photos-gallery/PhotosGallery';
+import VideoGallery from '../../../organisms/vidoes-gallery/VideosGallery';
+import EducationLookup from '../../../molecules/education-lookup/EducationLookup';
+import MusicGenreLookup from '../../../molecules/music-genre-lookup/MusicGenreLookup';
+import MusicalInstrumentLookup from '../../../molecules/musical-instrument-lookup/MusicalInstrumentLookup';
+import VisaTypeLookup from '../../../molecules/visa-type-lookup/VisaTypeLookup';
+import CountryLookup from '../../../molecules/country-lookup/CountryLookup';
+import AudiosGallery from '../../../organisms/audios-gallery/AudiosGallery';
 
 const headerHeight = 70; // Height of the header in pixels
 const footerHeight = 100; // Height of the footer in pixels
@@ -34,354 +17,289 @@ const footerHeight = 100; // Height of the footer in pixels
 const minHeight = `calc(100vh - ${headerHeight}px - ${footerHeight}px)`;
 
 const renderOptionalField = (label, value) => {
-  if (
-    value !== undefined &&
-    value !== null &&
-    value.length > 0 &&
-    value[0] !== null &&
-    value !== "0"
-  ) {
-    return (
-      <Box mb={2}>
-        <Text fontWeight="400" fontSize="xs">
-          {label}:
-        </Text>
-        {Array.isArray(value) ? (
-          <Box>
-            {value.map((item, index) => (
-              <Text key={index} fontSize="sm" fontWeight={600}>
-                {item}
-              </Text>
-            ))}
-          </Box>
-        ) : label.toLowerCase().includes("link") ? (
-          <Link href={value} target="_blank" fontSize="sm" color="blue.500">
-            {value}
-          </Link>
-        ) : (
-          <Text fontSize="sm" fontWeight={600}>
-            {value}
-          </Text>
-        )}
-      </Box>
-    );
-  }
-  return null;
+    if (value !== undefined && value !== null && value.length > 0 && value[0] !== null && value !== '0') {
+        return (
+            <Box mb={2}>
+                <Text fontWeight="400" fontSize="xs">
+                    {label}:
+                </Text>
+                {Array.isArray(value) ? (
+                    <Box>
+                        {value.map((item, index) => (
+                            <Text key={index} fontSize="sm" fontWeight={600}>
+                                {item}
+                            </Text>
+                        ))}
+                    </Box>
+                ) : label.toLowerCase().includes('link') ? (
+                    <Link href={value} target="_blank" fontSize="sm" color="blue.500">
+                        {value}
+                    </Link>
+                ) : (
+                    <Text fontSize="sm" fontWeight={600}>
+                        {value}
+                    </Text>
+                )}
+            </Box>
+        );
+    }
+    return null;
 };
 
 const PhotosSection = ({ photos }) => <PhotosGallery photos={photos} />;
 
 const VideosSection = ({ videos }) => (
-  <Box mt={6}>
-    <Text fontWeight="bold" fontSize="xl">
-      Videos
-    </Text>
-    <Grid templateColumns="repeat(1, 1fr)" gap={4} mt={4}>
-      {videos.map((video, index) => (
-        <VideoGallery title={""} key={index} videoSrc={video} />
-      ))}
-    </Grid>
-  </Box>
+    <Box mt={6}>
+        <Text fontWeight="bold" fontSize="xl">
+            Videos
+        </Text>
+        <Grid templateColumns="repeat(1, 1fr)" gap={4} mt={4}>
+            {videos.map((video, index) => (
+                <VideoGallery title={''} key={index} videoSrc={video} />
+            ))}
+        </Grid>
+    </Box>
 );
 
 const AudiosSection = ({ audios }) => (
-  <Box mt={6}>
-    <Text fontWeight="bold" fontSize="xl">
-      audios
-    </Text>
-    <Grid templateColumns="repeat(1, 1fr)" gap={4} mt={4}>
-      {audios.map((audio, index) => (
-        <AudiosGallery title={""} key={index} audioSrc={audio} />
-      ))}
-    </Grid>
-  </Box>
+    <Box mt={6}>
+        <Text fontWeight="bold" fontSize="xl">
+            audios
+        </Text>
+        <Grid templateColumns="repeat(1, 1fr)" gap={4} mt={4}>
+            {audios.map((audio, index) => (
+                <AudiosGallery title={''} key={index} audioSrc={audio} />
+            ))}
+        </Grid>
+    </Box>
 );
 const SocialMediaLinks = ({ instagram, linkedin, youtubelink }) => (
-  <Box mt={2} mb={4}>
-    <Text fontSize={"md"} fontWeight="bold" mb={2}>
-      Social Media
-    </Text>
-    <Box display="flex" alignItems="center">
-      {instagram && (
-        <Link href={instagram} target="_blank" mx={2}>
-          <FaInstagram size={24} />
-        </Link>
-      )}
-      {linkedin && (
-        <Link href={linkedin} target="_blank" mx={2}>
-          <FaLinkedin size={24} />
-        </Link>
-      )}
-      {youtubelink && (
-        <Link href={youtubelink} target="_blank" mx={2}>
-          <FaYoutube size={24} />
-        </Link>
-      )}
-      {/* Add more social media icons and links as needed */}
+    <Box mt={2} mb={4}>
+        <Text fontSize={'md'} fontWeight="bold" mb={2}>
+            Social Media
+        </Text>
+        <Box display="flex" alignItems="center">
+            {instagram && (
+                <Link href={instagram} target="_blank" mx={2}>
+                    <FaInstagram size={24} />
+                </Link>
+            )}
+            {linkedin && (
+                <Link href={linkedin} target="_blank" mx={2}>
+                    <FaLinkedin size={24} />
+                </Link>
+            )}
+            {youtubelink && (
+                <Link href={youtubelink} target="_blank" mx={2}>
+                    <FaYoutube size={24} />
+                </Link>
+            )}
+            {/* Add more social media icons and links as needed */}
+        </Box>
     </Box>
-  </Box>
 );
 
-const PersonalInfo = ({
-  dob,
-  email,
-  phone,
-  nationality,
-  countryOfResidence,
-  gender,
-  height,
-  weight,
-}) => (
-  <Box mb={4}>
-    <Text fontSize="md" fontWeight="bold" mb={2}>
-      Personal Information
-    </Text>
-    <Grid templateColumns="repeat(2, 1fr)" gap={4}>
-      <Box>
-        {renderOptionalField("Email", email)}
-        {renderOptionalField("Date of birth", dob)}
-        <CountryLookup label={"Nationality"} countryCode={nationality} />
-        {renderOptionalField("Height", `${height}`)}
-      </Box>
-      <Box>
-        {renderOptionalField("Phone", phone)}
-        {renderOptionalField("Gender", gender === 0 ? "Male" : "Female")}
-        {countryOfResidence && (
-          <CountryLookup
-            label={"Country of residence"}
-            countryCode={countryOfResidence}
-          />
-        )}
-        {renderOptionalField("Weight", `${weight}`)}
-      </Box>
-    </Grid>
-  </Box>
+const PersonalInfo = ({ dob, email, phone, nationality, countryOfResidence, gender, height, weight }) => (
+    <Box mb={4}>
+        <Text fontSize="md" fontWeight="bold" mb={2}>
+            Personal Information
+        </Text>
+        <Grid templateColumns="repeat(2, 1fr)" gap={4}>
+            <Box>
+                {renderOptionalField('Email', email)}
+                {renderOptionalField('Date of birth', dob)}
+                <CountryLookup label={'Nationality'} countryCode={nationality} />
+                {renderOptionalField('Height', `${height}`)}
+            </Box>
+            <Box>
+                {renderOptionalField('Phone', phone)}
+                {renderOptionalField('Gender', gender === 0 ? 'Male' : 'Female')}
+                {countryOfResidence && <CountryLookup label={'Country of residence'} countryCode={countryOfResidence} />}
+                {renderOptionalField('Weight', `${weight}`)}
+            </Box>
+        </Grid>
+    </Box>
 );
 
 const AdditionalInfo = ({
-  education,
-  introductionVideoLink,
-  youtubelink,
-  visaType,
-  openToWorkInCountry,
-  spokenLanguage,
-  specialSkills,
-  musicalInstruments,
-  musicGenres,
-  experience,
-  averageRatePerHour,
-  resume,
-  portfolio,
+    education,
+    introductionVideoLink,
+    youtubelink,
+    visaType,
+    openToWorkInCountry,
+    spokenLanguage,
+    specialSkills,
+    musicalInstruments,
+    musicGenres,
+    experience,
+    averageRatePerHour,
+    resume,
+    portfolio,
 }) => (
-  <Box mb={4}>
-    <Text fontSize={"md"} fontWeight="bold" mb={2}>
-      Additional Information
-    </Text>
-    <Grid templateColumns="repeat(2, 1fr)" gap={2}>
-      <Box>
-        {visaType && <VisaTypeLookup value={visaType} />}
-        {openToWorkInCountry[0] !== "" && (
-          <CountryLookup
-            label={"Open to work in countries"}
-            countryCode={openToWorkInCountry}
-          />
-        )}
-        {renderOptionalField("Average rate per hour", averageRatePerHour)}
-        {renderOptionalField("Experience", experience)}
-        {renderOptionalField("Special skills", specialSkills)}
-        {musicGenres[0] !== null && <MusicGenreLookup value={musicGenres} />}
-        {musicalInstruments[0] !== null && (
-          <MusicalInstrumentLookup value={musicalInstruments} />
-        )}
-      </Box>
-      <Box>
-        {education && <EducationLookup value={education} />}
+    <Box mb={4}>
+        <Text fontSize={'md'} fontWeight="bold" mb={2}>
+            Additional Information
+        </Text>
+        <Grid templateColumns="repeat(2, 1fr)" gap={2}>
+            <Box>
+                {visaType && <VisaTypeLookup value={visaType} />}
+                {openToWorkInCountry[0] !== '' && <CountryLookup label={'Open to work in countries'} countryCode={openToWorkInCountry} />}
+                {renderOptionalField('Average rate per hour', averageRatePerHour)}
+                {renderOptionalField('Experience', experience)}
+                {renderOptionalField('Special skills', specialSkills)}
+                {musicGenres[0] !== null && <MusicGenreLookup value={musicGenres} />}
+                {musicalInstruments[0] !== null && <MusicalInstrumentLookup value={musicalInstruments} />}
+            </Box>
+            <Box>
+                {education && <EducationLookup value={education} />}
 
-        {resume && (
-          <>
-            <Text fontWeight="400" fontSize="xs">
-              Resume:
-            </Text>
-            <Button
-              variant={"icon"}
-              p={0}
-              h={30}
-              onClick={() => downloadResume(resume)}
-              size="md"
-              leftIcon={<Icon as={FaFileDownload} />}
-            ></Button>
-          </>
-        )}
-        {portfolio && (
-          <>
-            <Text fontWeight="400" fontSize="xs">
-              Portfolio:
-            </Text>
-            <Button
-              variant={"icon"}
-              p={0}
-              h={30}
-              onClick={() => downloadResume(portfolio)}
-              size="md"
-              leftIcon={<Icon as={FaFileDownload} />}
-            ></Button>
-          </>
-        )}
-        {renderOptionalField("Spoken language", spokenLanguage)}
-        {renderOptionalField("Introduction video link", introductionVideoLink)}
-        {renderOptionalField("YouTube link", youtubelink)}
-      </Box>
-    </Grid>
-  </Box>
+                {resume && (
+                    <>
+                        <Text fontWeight="400" fontSize="xs">
+                            Resume:
+                        </Text>
+                        <Button variant={'icon'} p={0} h={30} onClick={() => downloadResume(resume)} size="md" leftIcon={<Icon as={FaFileDownload} />}></Button>
+                    </>
+                )}
+                {portfolio && (
+                    <>
+                        <Text fontWeight="400" fontSize="xs">
+                            Portfolio:
+                        </Text>
+                        <Button variant={'icon'} p={0} h={30} onClick={() => downloadResume(portfolio)} size="md" leftIcon={<Icon as={FaFileDownload} />}></Button>
+                    </>
+                )}
+                {renderOptionalField('Spoken language', spokenLanguage)}
+                {renderOptionalField('Introduction video link', introductionVideoLink)}
+                {renderOptionalField('YouTube link', youtubelink)}
+            </Box>
+        </Grid>
+    </Box>
 );
 
 const downloadResume = (resume) => {
-  const fileUrl = resume;
-  const fileName = "file.pdf";
+    const fileUrl = resume;
+    const fileName = 'file.pdf';
 
-  fetch(fileUrl)
-    .then((response) => response.blob())
-    .then((blob) => {
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = fileName;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
-    })
-    .catch((error) => console.error("Error downloading the file:", error));
+    fetch(fileUrl)
+        .then((response) => response.blob())
+        .then((blob) => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        })
+        .catch((error) => console.error('Error downloading the file:', error));
 };
 
 const ServiceProviderProfileView = () => {
-  const location = useLocation();
-  window.scrollTo(0, 0);
+    const location = useLocation();
+    window.scrollTo(0, 0);
 
-  const {
-    fname,
-    lname,
-    email,
-    bio,
-    instagram,
-    dob,
-    education,
-    phone,
-    nationality,
-    workLink,
-    countryOfResidence,
-    linkedin,
-    portfolio,
-    resume,
-    introductionVideoLink,
-    demoReel,
-    youtubelink,
-    oneMinuteVideo,
-    profilePic,
-    averageRatePerHour,
-    experience,
-    gender,
-    height,
-    weight,
-    musicGenres,
-    musicalInstruments,
-    specialSkills,
-    spokenLanguage,
-    visaType,
-    openToWorkInCountry,
-    catID,
-    subCatID,
-    videos,
-    audios,
-    photos,
-  } = location.state;
+    const {
+        fname,
+        lname,
+        email,
+        bio,
+        instagram,
+        dob,
+        education,
+        phone,
+        nationality,
+        countryOfResidence,
+        linkedin,
+        portfolio,
+        resume,
+        introductionVideoLink,
+        demoReel,
+        youtubelink,
+        oneMinuteVideo,
+        profilePic,
+        averageRatePerHour,
+        experience,
+        gender,
+        height,
+        weight,
+        musicGenres,
+        musicalInstruments,
+        specialSkills,
+        spokenLanguage,
+        visaType,
+        openToWorkInCountry,
+        videos,
+        audios,
+        photos,
+    } = location.state;
 
-  const personalVidoes = [demoReel, oneMinuteVideo];
+    const personalVidoes = [demoReel, oneMinuteVideo];
 
-  console.log("location.state", location.state);
+    console.log('location.state', location.state);
 
-  return (
-    <Box bg="primary.50" p="4" pb={8} minHeight={minHeight}>
-      <Container maxW={"6xl"}>
-        <Grid templateColumns="1fr 3fr" gap={8}>
-          <GridItem colSpan={1}>
-            <Box>
-              <Image
-                borderRadius={"xl"}
-                src={
-                  profilePic ||
-                  "https://www.zica.co.zm/wp-content/uploads/2021/02/dummy-profile-image.png"
-                }
-                alt={`${fname} ${lname}`}
-                boxSize={"100%"}
-              />
-            </Box>
-            {photos.length > 0 && <PhotosSection photos={photos} />}
-            {videos.length > 0 && <VideosSection videos={videos} />}
-            {audios.length > 0 && <AudiosSection audios={audios} />}
-          </GridItem>
-          {/* Basic details section ends */}
+    return (
+        <Box bg="primary.50" p="4" pb={8} minHeight={minHeight}>
+            <Container maxW={'6xl'}>
+                <Grid templateColumns="1fr 3fr" gap={8}>
+                    <GridItem colSpan={1}>
+                        <Box>
+                            <Image borderRadius={'xl'} src={profilePic || 'https://www.zica.co.zm/wp-content/uploads/2021/02/dummy-profile-image.png'} alt={`${fname} ${lname}`} boxSize={'100%'} />
+                        </Box>
+                        {photos.length > 0 && <PhotosSection photos={photos} />}
+                        {videos.length > 0 && <VideosSection videos={videos} />}
+                        {audios.length > 0 && <AudiosSection audios={audios} />}
+                    </GridItem>
+                    {/* Basic details section ends */}
 
-          {/* Profile sections */}
-          <GridItem colSpan={1}>
-            <Text fontWeight="bold" fontSize="3xl">
-              {fname} {lname}
-            </Text>
-            <Text mb={2} fontSize="md">
-              {bio}
-            </Text>
-            <SocialMediaLinks
-              instagram={instagram}
-              linkedin={linkedin}
-              youtubelink={youtubelink}
-            />
-            {(personalVidoes[0] || personalVidoes[1]) && (
-              <Flex mb={4} gap={4}>
-                {personalVidoes.map(
-                  (video, index) =>
-                    video && (
-                      <VideoGallery
-                        title={"Video"}
-                        key={index}
-                        videoSrc={video}
-                      />
-                    )
-                )}
-              </Flex>
-            )}
-            <PersonalInfo
-              dob={dob}
-              email={email}
-              phone={phone}
-              nationality={nationality}
-              countryOfResidence={countryOfResidence}
-              gender={gender}
-              height={height}
-              weight={weight}
+                    {/* Profile sections */}
+                    <GridItem colSpan={1}>
+                        <Text fontWeight="bold" fontSize="3xl">
+                            {fname} {lname}
+                        </Text>
+                        <Text mb={2} fontSize="md">
+                            {bio}
+                        </Text>
+                        <SocialMediaLinks instagram={instagram} linkedin={linkedin} youtubelink={youtubelink} />
+                        {(personalVidoes[0] || personalVidoes[1]) && (
+                            <Flex mb={4} gap={4}>
+                                {personalVidoes.map((video, index) => video && <VideoGallery title={'Video'} key={index} videoSrc={video} />)}
+                            </Flex>
+                        )}
+                        <PersonalInfo
+                            dob={dob}
+                            email={email}
+                            phone={phone}
+                            nationality={nationality}
+                            countryOfResidence={countryOfResidence}
+                            gender={gender}
+                            height={height}
+                            weight={weight}
 
-              // Other personal info props...
-            />
+                            // Other personal info props...
+                        />
 
-            <AdditionalInfo
-              introductionVideoLink={introductionVideoLink}
-              openToWorkInCountry={openToWorkInCountry}
-              visaType={visaType}
-              youtubelink={youtubelink}
-              spokenLanguage={spokenLanguage}
-              specialSkills={specialSkills}
-              averageRatePerHour={averageRatePerHour}
-              experience={experience}
-              musicGenres={musicGenres}
-              musicalInstruments={musicalInstruments}
-              education={education}
-              resume={resume}
-              portfolio={portfolio}
-            />
-          </GridItem>
-        </Grid>
-      </Container>
-    </Box>
-  );
+                        <AdditionalInfo
+                            introductionVideoLink={introductionVideoLink}
+                            openToWorkInCountry={openToWorkInCountry}
+                            visaType={visaType}
+                            youtubelink={youtubelink}
+                            spokenLanguage={spokenLanguage}
+                            specialSkills={specialSkills}
+                            averageRatePerHour={averageRatePerHour}
+                            experience={experience}
+                            musicGenres={musicGenres}
+                            musicalInstruments={musicalInstruments}
+                            education={education}
+                            resume={resume}
+                            portfolio={portfolio}
+                        />
+                    </GridItem>
+                </Grid>
+            </Container>
+        </Box>
+    );
 };
 
 export default ServiceProviderProfileView;
