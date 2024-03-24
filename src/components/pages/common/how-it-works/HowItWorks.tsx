@@ -60,7 +60,7 @@ const HowItWorks = () => {
                         </Box>
 
                         <Box h="500px" overflow="hidden">
-                            <Image src={'src/assets/images/howitworks.jpg'} alt={'photo'} objectFit="cover" w="100%" h="100%" />
+                            <Image src={'/assets/images/howitworks.jpg'} alt={'photo'} objectFit="cover" w="100%" h="100%" />
                         </Box>
                     </Flex>
 

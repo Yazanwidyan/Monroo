@@ -28,7 +28,7 @@ const AudiosGallery = ({ audioSrc, title }) => {
                 onClick={openModal}
             >
                 <Box mr={2} w="30px" h="30px" borderRadius="md" overflow="hidden">
-                    <Image src={'src/assets/images/music.png'} alt="Audio Thumbnail" />
+                    <Image src={'/assets/images/music.png'} alt="Audio Thumbnail" />
                 </Box>
                 <Text fontSize="sm" fontWeight="bold" isTruncated>
                     {title || 'Audio'}

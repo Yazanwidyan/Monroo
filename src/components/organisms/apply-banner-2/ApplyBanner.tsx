@@ -30,7 +30,7 @@ const BigCard = ({ image, title, points, buttonText }) => {
 const ApplyBanner = () => {
     const cardData = [
         {
-            image: 'src/assets/images/startcareer.jpg', // Updated image URL for Card 1
+            image: '/assets/images/startcareer.jpg', // Updated image URL for Card 1
             title: 'Embark on an exciting career as a service provider',
             points: [
                 'Apply conveniently online and promptly receive feedback from our team',
@@ -40,7 +40,7 @@ const ApplyBanner = () => {
             buttonText: 'Join as a Service Provider',
         },
         {
-            image: 'src/assets/images/findtealent.jpg', // Updated image URL for Card 2
+            image: '/assets/images/findtealent.jpg', // Updated image URL for Card 2
             title: 'Find the right service provider for your needs',
             points: [
                 'Easily register and find skilled service providers online',
