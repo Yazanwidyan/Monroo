@@ -15,18 +15,21 @@ import Payment from './components/pages/common/payment/Payment';
 import Landing from './components/pages/common/landing/Landing';
 import HowItWorks from './components/pages/common/how-it-works/HowItWorks';
 import ServiceProviderProfileView from './components/pages/user/service-provider-profile-view/ServiceProviderProfileView';
+import AuthRoutes from './components/molecules/auth-routes/AuthRoutes';
 
 export const AppRoutes = () => (
     <>
-        <Route path="/" element={<AuthLayout />}>
-            <Route path="/" element={<Landing />} />
-            <Route path="/how-it-works" element={<HowItWorks />} />
-            <Route path="register" element={<RegisterUserPage />} />
-            <Route path="register/user" element={<RegisterEmployerPage />} />
-            <Route path="register/service-provider" element={<RegisterServiceProvider />} />
+        <Route element={<AuthRoutes />}>
+            <Route path="/" element={<AuthLayout />}>
+                <Route path="/" element={<Landing />} />
+                <Route path="/how-it-works" element={<HowItWorks />} />
+                <Route path="register" element={<RegisterUserPage />} />
+                <Route path="register/user" element={<RegisterEmployerPage />} />
+                <Route path="register/service-provider" element={<RegisterServiceProvider />} />
+            </Route>
         </Route>
-        <Route path="/" element={<HomeLayout />}>
-            <Route element={<PrivateRoutes />}>
+        <Route element={<PrivateRoutes />}>
+            <Route path="/" element={<HomeLayout />}>
                 <Route path="home" element={<HomeUser />} />
                 <Route path="timeline" element={<Timeline />} />
                 <Route path="events" element={<Events />} />

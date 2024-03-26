@@ -14,7 +14,7 @@ const HomeLayout = () => {
 
     const handleLogout = () => {
         navigate('/');
-        updateUser('');
+        updateUser(null);
     };
 
     const openDialog = () => {
