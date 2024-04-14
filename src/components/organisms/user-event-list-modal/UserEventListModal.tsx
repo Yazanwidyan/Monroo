@@ -5,7 +5,6 @@ import useCustomToast from '../../../hooks/useCustomToast';
 const EventCard = ({ event, requestPrivateEvent }) => {
     return (
         <Box borderWidth="1px" borderRadius="lg" p={0} overflow="hidden" position="relative">
-            <Image src={event.image ? event.image : 'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png'} alt={event.title} height={200} width="100%" objectFit="cover" />
             <Box p={2}>
                 <Flex justify="space-between" align="center" mb={2}>
                     <Box>
@@ -13,7 +12,7 @@ const EventCard = ({ event, requestPrivateEvent }) => {
                             {event.title}
                         </Text>
                         <Text color="gray.500" fontSize={'sm'}>
-                            {event.eventDate}
+                            {event.desc}
                         </Text>
                     </Box>
                     <Box textAlign="right" alignSelf={'end'}>

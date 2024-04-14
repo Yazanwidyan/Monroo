@@ -48,13 +48,13 @@ const Timeline = () => {
     return (
         <>
             <Box mb={4} p={4}>
-                <Container maxW="6xl">
+                <Container maxW="5xl">
                     <Text color={'gray.600'} textTransform={'capitalize'}>
                         Hi, {user.fname}
                     </Text>
                 </Container>
             </Box>
-            <Container mb={12} maxW={'6xl'}>
+            <Container mb={12} maxW={'5xl'}>
                 <Grid templateColumns="repeat(auto-fill, minmax(400px, 1fr))" gap={4}>
                     {eventsList?.map((event, index) => (
                         <GridItem key={index}>

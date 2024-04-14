@@ -16,7 +16,7 @@ const AuthLayout = () => {
     return (
         <Flex minHeight="100vh" flexDirection="column">
             <Box borderBottomWidth={1} bg="white.100" py="3" px="4">
-                <Container maxW={'6xl'}>
+                <Container maxW={'5xl'}>
                     <Flex alignItems="center" fontSize="sm" fontWeight="bold" textTransform={'uppercase'} justifyContent={'space-between'}>
                         <ChakraLink as={RouterLink} to={'/'} fontSize="lg" fontWeight="bold" color={'black'} textDecoration="none" _hover={{ textDecoration: 'none' }}>
                             Monroo

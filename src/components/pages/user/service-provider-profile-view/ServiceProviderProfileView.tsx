@@ -1,5 +1,5 @@
-import { Box, Text, Link, Grid, GridItem, Container, Image, Flex, Button, Icon } from '@chakra-ui/react';
-import { useLocation } from 'react-router-dom';
+import { Box, Text, Link, Grid, GridItem, Container, Image, Flex, Button, Icon, Modal, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, Divider } from '@chakra-ui/react';
+import { useLocation, useParams } from 'react-router-dom';
 
 import { FaFileDownload, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa'; // Import social media icons
 import PhotosGallery from '../../../organisms/photos-gallery/PhotosGallery';
@@ -10,6 +10,10 @@ import MusicalInstrumentLookup from '../../../molecules/musical-instrument-looku
 import VisaTypeLookup from '../../../molecules/visa-type-lookup/VisaTypeLookup';
 import CountryLookup from '../../../molecules/country-lookup/CountryLookup';
 import AudiosGallery from '../../../organisms/audios-gallery/AudiosGallery';
+import userServices from '../../../../services/userServices';
+import { useEffect, useState } from 'react';
+import StarRating from '../../../molecules/star-rating/StarRating';
+import ReviewForm from '../../../molecules/star-rating/ReviewForm';
 
 const headerHeight = 70; // Height of the header in pixels
 const footerHeight = 100; // Height of the footer in pixels
@@ -17,7 +21,7 @@ const footerHeight = 100; // Height of the footer in pixels
 const minHeight = `calc(100vh - ${headerHeight}px - ${footerHeight}px)`;
 
 const renderOptionalField = (label, value) => {
-    if (value !== undefined && value !== null && value.length > 0 && value[0] !== null && value !== '0') {
+    if (value !== undefined && value !== null && value?.length > 0 && value[0] !== null && value !== '0') {
         return (
             <Box mb={2}>
                 <Text fontWeight="400" fontSize="xs">
@@ -80,21 +84,20 @@ const SocialMediaLinks = ({ instagram, linkedin, youtubelink }) => (
         </Text>
         <Box display="flex" alignItems="center">
             {instagram && (
-                <Link href={instagram} target="_blank" mx={2}>
+                <Link href={`https://www.instagram.com/${instagram}`} target="_blank" mx={2}>
                     <FaInstagram size={24} />
                 </Link>
             )}
             {linkedin && (
-                <Link href={linkedin} target="_blank" mx={2}>
+                <Link href={`https://www.linkedin.com/in/${linkedin}`} target="_blank" mx={2}>
                     <FaLinkedin size={24} />
                 </Link>
             )}
             {youtubelink && (
-                <Link href={youtubelink} target="_blank" mx={2}>
+                <Link href={`https://www.youtube.com/channel/${youtubelink}`} target="_blank" mx={2}>
                     <FaYoutube size={24} />
                 </Link>
             )}
-            {/* Add more social media icons and links as needed */}
         </Box>
     </Box>
 );
@@ -108,16 +111,31 @@ const PersonalInfo = ({ dob, email, phone, nationality, countryOfResidence, gend
             <Box>
                 {renderOptionalField('Email', email)}
                 {renderOptionalField('Date of birth', dob)}
-                <CountryLookup label={'Nationality'} countryCode={nationality} />
+                {renderOptionalField('Nationality', nationality)}
                 {renderOptionalField('Height', `${height}`)}
             </Box>
             <Box>
                 {renderOptionalField('Phone', phone)}
                 {renderOptionalField('Gender', gender === 0 ? 'Male' : 'Female')}
-                {countryOfResidence && <CountryLookup label={'Country of residence'} countryCode={countryOfResidence} />}
+                {renderOptionalField('Country of residence', countryOfResidence)}
                 {renderOptionalField('Weight', `${weight}`)}
             </Box>
         </Grid>
+    </Box>
+);
+
+const Reviews = ({ reviews, openModal }) => (
+    <Box mb={4}>
+        <Text fontSize="md" fontWeight="bold" mb={2}>
+            Reviews
+        </Text>
+        {reviews.map((item: any) => {
+            return <Text>{item.comment}</Text>;
+        })}
+        <Divider my={4}></Divider>
+        <Button paddingX={0} variant="text" onClick={openModal}>
+            <Text fontSize={'sm'}>Write your review</Text>
+        </Button>
     </Box>
 );
 
@@ -142,13 +160,13 @@ const AdditionalInfo = ({
         </Text>
         <Grid templateColumns="repeat(2, 1fr)" gap={2}>
             <Box>
-                {visaType && <VisaTypeLookup value={visaType} />}
-                {openToWorkInCountry[0] !== '' && <CountryLookup label={'Open to work in countries'} countryCode={openToWorkInCountry} />}
+                {visaType ? <VisaTypeLookup value={visaType} /> : null}
+                {renderOptionalField('Open to work in countries', openToWorkInCountry?.[0])}
                 {renderOptionalField('Average rate per hour', averageRatePerHour)}
                 {renderOptionalField('Experience', experience)}
                 {renderOptionalField('Special skills', specialSkills)}
-                {musicGenres[0] !== null && <MusicGenreLookup value={musicGenres} />}
-                {musicalInstruments[0] !== null && <MusicalInstrumentLookup value={musicalInstruments} />}
+                {musicGenres?.[0] !== null && <MusicGenreLookup value={musicGenres} />}
+                {musicalInstruments?.[0] !== null && <MusicalInstrumentLookup value={musicalInstruments} />}
             </Box>
             <Box>
                 {education && <EducationLookup value={education} />}
@@ -197,8 +215,61 @@ const downloadResume = (resume) => {
 };
 
 const ServiceProviderProfileView = () => {
-    const location = useLocation();
+    const [providerProfile, setProviderProfile] = useState({});
+    const [reviews, setReviews] = useState([]);
+    const [starsAvarage, setStarsAvarage] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const { providerID } = useParams();
+
     window.scrollTo(0, 0);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const fetchProviderProfile = async () => {
+        const payload = {
+            providerID: providerID,
+        };
+        try {
+            const res = await userServices.getProviderProfile(payload);
+            console.log('res.data', res.data);
+            setProviderProfile(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const fetchReviews = async () => {
+        const payload = {
+            providerID: providerID,
+        };
+        try {
+            const res = await userServices.getReviews(payload);
+            setReviews(res.data);
+            const totalStars = res?.data?.reduce((acc, review) => acc + review?.stars, 0);
+            const averageRating = totalStars / res?.data?.length;
+            setStarsAvarage(averageRating);
+            console.log('revies', res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleReviewSubmit = (review) => {
+        console.log('review', review);
+
+        // Add the new review to the list of reviews
+    };
+
+    useEffect(() => {
+        fetchProviderProfile();
+        fetchReviews();
+    }, []);
 
     const {
         fname,
@@ -233,23 +304,29 @@ const ServiceProviderProfileView = () => {
         videos,
         audios,
         photos,
-    } = location.state;
+    } = providerProfile as any;
 
     const personalVidoes = [demoReel, oneMinuteVideo];
 
-    console.log('location.state', location.state);
+    console.log('location.state', countryOfResidence);
 
     return (
         <Box bg="primary.50" p="4" pb={8} minHeight={minHeight}>
-            <Container maxW={'6xl'}>
+            <Container maxW={'5xl'}>
                 <Grid templateColumns="1fr 3fr" gap={8}>
                     <GridItem colSpan={1}>
                         <Box>
-                            <Image borderRadius={'xl'} src={profilePic || 'https://www.zica.co.zm/wp-content/uploads/2021/02/dummy-profile-image.png'} alt={`${fname} ${lname}`} boxSize={'100%'} />
+                            <Image
+                                height={300}
+                                width={'100%'}
+                                borderRadius={'xl'}
+                                src={profilePic || 'https://www.zica.co.zm/wp-content/uploads/2021/02/dummy-profile-image.png'}
+                                alt={`${fname} ${lname}`}
+                            />
                         </Box>
-                        {photos.length > 0 && <PhotosSection photos={photos} />}
-                        {videos.length > 0 && <VideosSection videos={videos} />}
-                        {audios.length > 0 && <AudiosSection audios={audios} />}
+                        {photos?.length > 0 && <PhotosSection photos={photos} />}
+                        {videos?.length > 0 && <VideosSection videos={videos} />}
+                        {audios?.length > 0 && <AudiosSection audios={audios} />}
                     </GridItem>
                     {/* Basic details section ends */}
 
@@ -258,6 +335,7 @@ const ServiceProviderProfileView = () => {
                         <Text fontWeight="bold" fontSize="3xl">
                             {fname} {lname}
                         </Text>
+                        {<StarRating rating={starsAvarage ? starsAvarage : 0} />}
                         <Text mb={2} fontSize="md">
                             {bio}
                         </Text>
@@ -295,9 +373,20 @@ const ServiceProviderProfileView = () => {
                             resume={resume}
                             portfolio={portfolio}
                         />
+                        {<Reviews reviews={reviews} openModal={openModal} />}
                     </GridItem>
                 </Grid>
             </Container>
+
+            <Modal isOpen={isModalOpen} onClose={closeModal}>
+                <ModalOverlay />
+                <ModalContent borderRadius={14}>
+                    <ModalCloseButton color="black" />
+                    <ModalBody>
+                        <ReviewForm providerID={providerID} fetchReviews={fetchReviews} closeModal={closeModal} />
+                    </ModalBody>
+                </ModalContent>
+            </Modal>
         </Box>
     );
 };

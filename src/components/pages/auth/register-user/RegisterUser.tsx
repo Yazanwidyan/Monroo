@@ -3,11 +3,17 @@ import { UserTypes } from '../../../../models/UserTypes';
 import useRegisterUserPage from './useRegisterUser';
 import { useTranslation } from 'react-i18next';
 import { GoogleAuthProvider, FacebookAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
+import authServices from '../../../../services/authServices';
+import { useContext } from 'react';
+import { UserContext } from '../../../../contexts/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function RegisterUserPage() {
     const auth = getAuth();
     const google_provider = new GoogleAuthProvider();
     const facebook_provider = new FacebookAuthProvider();
+    const { updateUser } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const state = useRegisterUserPage();
     const { t } = useTranslation();
@@ -15,6 +21,13 @@ export default function RegisterUserPage() {
     const logGoogleUser = async () => {
         const response = await signInWithPopup(auth, google_provider);
         console.log(response);
+
+        const payload = {
+            username: response?.user?.email,
+        };
+        const res = await authServices.socialLoginUser(payload);
+        updateUser(res.data);
+        navigate('/home', { replace: true });
     };
 
     const logFacebookUser = async () => {

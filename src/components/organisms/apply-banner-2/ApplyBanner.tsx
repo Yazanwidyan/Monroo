@@ -1,7 +1,10 @@
 import { Flex, Box, Image, Text, Button, VStack, Container } from '@chakra-ui/react';
 import { CheckIcon } from '@chakra-ui/icons'; // Make sure to import the CheckIcon from Chakra UI
+import { useNavigate } from 'react-router-dom';
 
 const BigCard = ({ image, title, points, buttonText }) => {
+    const navigate = useNavigate();
+
     return (
         <Box display={'flex'} flexDirection={'column'} justifyContent={'flex-start'} flex={1} overflow="hidden" textAlign="center" bg={'white'}>
             <Box h="500px" overflow="hidden">
@@ -19,7 +22,7 @@ const BigCard = ({ image, title, points, buttonText }) => {
                         </Flex>
                     ))}
                 </VStack>
-                <Button variant={'outline'} colorScheme="primary.500" mt="4" mx="auto">
+                <Button onClick={() => navigate('register')} variant={'outline'} colorScheme="primary.500" mt="4" mx="auto">
                     {buttonText}
                 </Button>
             </Box>

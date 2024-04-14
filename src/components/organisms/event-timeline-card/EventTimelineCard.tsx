@@ -25,10 +25,10 @@ const EventTimelineCard = ({ image, title, userName, duration, posted, descripti
     };
 
     return (
-        <Box borderWidth={1} p={4} borderRadius={8}>
+        <Box onClick={handleShowEvent} cursor={'pointer'} borderColor={'gray.300'} borderWidth={1} p={4} borderRadius={8}>
             <Flex gap={4}>
                 <Box textAlign="center">
-                    <Avatar name={userName} src={image || '/assets/images/userprofile.jpg'} />
+                    <Avatar mb={2} name={userName} src={image || '/assets/images/userprofile.jpg'} />
                     <Text fontSize="xs" mb={2}>
                         {userName}
                     </Text>
@@ -42,31 +42,32 @@ const EventTimelineCard = ({ image, title, userName, duration, posted, descripti
                     </Text>
                 </Box>
             </Flex>
-            <Divider my={2} />
-
-            <Flex align="center" justify="space-between">
-                <Text fontSize="xs" color="gray.500">
-                    Posted
-                    <Box as="br" />
-                    {formatDate(posted)}
-                </Text>
-                <Text fontSize="xs" color="gray.500">
-                    Event
-                    <Box as="br" />
-                    {formatDate(eventDate)}
-                </Text>
-                <Text fontSize="xs" color="gray.500">
-                    Duration
-                    <Box as="br" />
-                    {duration} hrs
-                </Text>
+            <Flex align="center" borderTopColor={'gray.300'} borderTopWidth={2} paddingTop={3} justify="space-between" fontSize="sm" color="gray.500">
+                <Flex direction="column" align="center">
+                    <Text fontSize={'xs'} fontWeight="bold">
+                        Posted
+                    </Text>
+                    <Text>{formatDate(posted)}</Text>
+                </Flex>
+                <Flex direction="column" align="center">
+                    <Text fontSize={'xs'} fontWeight="bold">
+                        Event Date
+                    </Text>
+                    <Text>{formatDate(eventDate)}</Text>
+                </Flex>
+                <Flex direction="column" align="center">
+                    <Text fontSize={'xs'} fontWeight="bold">
+                        Duration
+                    </Text>
+                    <Text>{duration} hrs</Text>
+                </Flex>
             </Flex>
 
-            <Flex mt={3} justify="space-between">
+            {/* <Flex mt={3} justify="space-between">
                 <Button size="sm" colorScheme="primary" onClick={handleShowEvent}>
                     View event
                 </Button>
-            </Flex>
+            </Flex> */}
             <Modal isOpen={isModalOpen} onClose={closeModal} size="lg">
                 <ModalOverlay />
                 <ModalContent>

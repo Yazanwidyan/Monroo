@@ -1,4 +1,4 @@
-import { Box, Image, Text, Button } from '@chakra-ui/react';
+import { Box, Text, Button, Avatar, Flex, Divider } from '@chakra-ui/react';
 import { useContext, useState } from 'react';
 import UserEventListModal from '../user-event-list-modal/UserEventListModal';
 import userServices from '../../../services/userServices';
@@ -6,29 +6,20 @@ import { UserContext } from '../../../contexts/UserContext';
 import useCustomToast from '../../../hooks/useCustomToast';
 import { useNavigate } from 'react-router-dom';
 
-const ServiceProviderCard = ({ image, name, providerID, userProfile }) => {
+const ServiceProviderCard = ({ experience, nationality, gender, bio, image, name, providerID, userProfile }: any) => {
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { user } = useContext(UserContext);
     const { showToast } = useCustomToast();
-
-    const [isHovered, setIsHovered] = useState(false);
 
     const [userEvents, setUserEvents] = useState<any>([]);
 
     const handleRequestPrivateEvent = () => {
         openModal();
     };
-    const handleMouseEnter = () => {
-        setIsHovered(true);
-    };
-
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-    };
 
     const handleShowProfile = () => {
-        navigate('/service-provider-profile-view', { state: userProfile });
+        navigate(`/service-provider-profile-view/${providerID}`);
     };
 
     const openModal = async () => {
@@ -49,52 +40,42 @@ const ServiceProviderCard = ({ image, name, providerID, userProfile }) => {
     };
 
     return (
-        <Box borderRadius={'md'} maxW="md" overflow="hidden">
-            <Box onClick={handleShowProfile} position="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} cursor={'pointer'}>
-                <Image
-                    h={350}
-                    position="relative"
-                    src={image ? image : 'https://www.zica.co.zm/wp-content/uploads/2021/02/dummy-profile-image.png'}
-                    alt={name}
-                    height={320}
-                    width="100%"
-                    objectFit="cover"
-                />
-                {isHovered && (
-                    <Box
-                        position="absolute"
-                        top="0"
-                        left="0"
-                        w="100%"
-                        h="100%"
-                        bg="rgba(0, 0, 0, 0.5)" // Adjust opacity here (0.5 for 50% opacity)
-                        zIndex="1"
-                        opacity="0"
-                        transition="opacity 0.3s ease" // Transition for opacity change
-                        _hover={{ opacity: 1 }}
-                    >
-                        <Button
-                            variant={'ghost'}
-                            colorScheme="white"
-                            color={'white'}
-                            position="absolute"
-                            top="50%"
-                            left="50%"
-                            transform="translate(-50%, -50%)"
-                            transition="opacity 0.3s ease" // Transition for opacity change
-                        >
-                            Show Profile
-                        </Button>
-                    </Box>
-                )}
-            </Box>
-
-            <Box>
-                <Text textTransform={'capitalize'} fontSize={'lg'} fontWeight="600" letterSpacing={2} my="2">
+        <Box borderColor="#CBD5E0" p={3} borderWidth="2px" borderRadius={'md'} maxW="md" overflow="hidden">
+            <Flex gap={4} alignItems={'center'}>
+                <Avatar cursor={'pointer'} onClick={handleShowProfile} name={name} src={image || '/assets/images/userprofile.jpg'} />
+                <Text fontSize="md" mb={2}>
                     {name}
                 </Text>
+            </Flex>
+            <Text minH="3rem" fontSize="xs" color="gray.600" mt={4} mb={2}>
+                {bio?.length > 60 ? bio?.substring(0, 110) + '...' : bio}
+            </Text>
+            <Divider my={2} />
 
-                <Button variant={'outline'} textTransform={'uppercase'} fontSize="x-small" colorScheme="primary.500" mb="2" onClick={handleRequestPrivateEvent}>
+            <Flex align="center" justify="space-between" fontSize="sm" color="gray.500">
+                <Flex direction="column" align="center">
+                    <Text fontSize={'xs'} fontWeight="bold">
+                        Experince
+                    </Text>
+                    <Text> {experience ? experience : 'N/A'}</Text>
+                </Flex>
+                <Flex direction="column" align="center">
+                    <Text fontSize={'xs'} fontWeight="bold">
+                        Nationality
+                    </Text>
+                    <Text> {nationality ? nationality : 'N/A'}</Text>
+                </Flex>
+                <Flex direction="column" align="center">
+                    <Text fontSize={'xs'} fontWeight="bold">
+                        Gender
+                    </Text>
+                    <Text> {gender == 0 ? 'Male' : 'Female'}</Text>
+                </Flex>
+            </Flex>
+            <Divider my={3} />
+
+            <Box>
+                <Button width={'100%'} variant={'outline'} textTransform={'uppercase'} fontSize="x-small" colorScheme="primary" mb="0" onClick={handleRequestPrivateEvent}>
                     Request Private Event
                 </Button>
                 <UserEventListModal providerID={providerID} isOpen={isModalOpen} onClose={closeModal} events={userEvents} />

@@ -55,7 +55,7 @@ const Inbox = () => {
     };
 
     return (
-        <Container maxW="6xl" style={{ display: 'flex' }}>
+        <Container maxW="5xl" style={{ display: 'flex' }}>
             <Box flex={4}>
                 <Box w="100%" maxW="600px" mx="auto" mt={8}>
                     <Input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search rooms" mb={4} />
@@ -74,7 +74,7 @@ const Inbox = () => {
                                 bg={selectedRoom === room ? 'gray.100' : 'inherit'}
                                 _hover={{ bg: 'gray.100' }}
                             >
-                                <Avatar src={room.profileImg} />
+                                <Avatar src={room.senderPhoto} />
                                 <Text ml={3}>{room.senderName}</Text>
                             </Box>
                         ))}

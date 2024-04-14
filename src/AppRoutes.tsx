@@ -16,6 +16,7 @@ import Landing from './components/pages/common/landing/Landing';
 import HowItWorks from './components/pages/common/how-it-works/HowItWorks';
 import ServiceProviderProfileView from './components/pages/user/service-provider-profile-view/ServiceProviderProfileView';
 import AuthRoutes from './components/molecules/auth-routes/AuthRoutes';
+import UserProfile from './components/pages/user/user-profile/UserProfile';
 
 export const AppRoutes = () => (
     <>
@@ -33,10 +34,11 @@ export const AppRoutes = () => (
                 <Route path="home" element={<HomeUser />} />
                 <Route path="timeline" element={<Timeline />} />
                 <Route path="events" element={<Events />} />
+                <Route path="user-profile" element={<UserProfile />} />
                 <Route path="service-provider-profile" element={<ServiceProviderProfile />} />
                 <Route path="payment" element={<Payment />} />
                 <Route path="inbox" element={<Inbox />} />
-                <Route path="service-provider-profile-view" element={<ServiceProviderProfileView />} />
+                <Route path="service-provider-profile-view/:providerID" element={<ServiceProviderProfileView />} />
             </Route>
         </Route>
     </>

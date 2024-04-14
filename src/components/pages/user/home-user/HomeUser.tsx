@@ -81,13 +81,13 @@ const HomeUser = () => {
     return (
         <>
             <Box p={4}>
-                <Container maxW="6xl">
+                <Container maxW="5xl">
                     <Text color={'gray.600'} textTransform={'capitalize'}>
                         Hi, {user.name}
                     </Text>
                 </Container>
             </Box>
-            <Container mt={8} maxW="6xl" style={{ display: 'flex' }}>
+            <Container maxW="5xl" style={{ display: 'flex' }}>
                 <Box flex="1">
                     <Stack my={5} direction="row" spacing={4}>
                         <Button
@@ -167,7 +167,16 @@ const HomeUser = () => {
                               ))
                             : providersList.map((userProfile, index) => (
                                   <GridItem key={index}>
-                                      <ServiceProviderCard image={userProfile.profilePic} name={userProfile.username} providerID={userProfile.id} userProfile={userProfile} />
+                                      <ServiceProviderCard
+                                          bio={userProfile.bio}
+                                          image={userProfile.profilePic}
+                                          name={userProfile.fname + ' ' + userProfile.lname}
+                                          providerID={userProfile.id}
+                                          userProfile={userProfile}
+                                          experince={userProfile.experience}
+                                          nationality={userProfile.nationality}
+                                          gender={userProfile.gender}
+                                      />
                                   </GridItem>
                               ))}
                     </Grid>

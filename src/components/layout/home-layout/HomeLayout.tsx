@@ -3,7 +3,7 @@ import { Flex, Box, Link as ChakraLink, Button, Container, Spacer } from '@chakr
 import { Outlet, Link as RouterLink, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../../contexts/UserContext';
 import Footer from '../footer/Footer';
-import { FaPlusCircle, FaSignOutAlt } from 'react-icons/fa';
+import { FaPlusCircle, FaSignOutAlt, FaUserAlt } from 'react-icons/fa';
 import CreateEventPage from '../../pages/user/create-event/CreateEvent';
 import LanguageSwitcher from '../../../Localization/LanguageSwitcher';
 
@@ -28,7 +28,7 @@ const HomeLayout = () => {
     return (
         <Flex minHeight="100vh" flexDirection="column">
             <Box borderBottomWidth={1} bg="white.100" py="3" px="4">
-                <Container maxW="6xl">
+                <Container maxW="5xl">
                     <Flex alignItems="center" fontSize="sm" fontWeight="bold" textTransform={'uppercase'} justifyContent={'space-between'}>
                         <ChakraLink
                             as={RouterLink}
@@ -77,9 +77,14 @@ const HomeLayout = () => {
                                     Profile
                                 </ChakraLink>
                             )}
-                            <ChakraLink as={RouterLink} to={user.isMainUser ? '/payment' : '/payment'} mx="0.5rem" textDecoration="none" _hover={{ textDecoration: 'none' }}>
+                            {/* <ChakraLink as={RouterLink} to={user.isMainUser ? '/payment' : '/payment'} mx="0.5rem" textDecoration="none" _hover={{ textDecoration: 'none' }}>
                                 Payment
-                            </ChakraLink>
+                            </ChakraLink> */}
+                            {user.isMainUser && (
+                                <ChakraLink as={RouterLink} to={'/user-profile'} mx="0.5rem" textDecoration="none" _hover={{ textDecoration: 'none' }}>
+                                    <FaUserAlt />
+                                </ChakraLink>
+                            )}
                             <Button onClick={handleLogout} mx="0.5rem" colorScheme="primary.500" size="sm" variant={'ghost'} leftIcon={<FaSignOutAlt />}></Button>
                         </Flex>
                     </Flex>

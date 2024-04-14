@@ -111,10 +111,9 @@ const Messaging = ({ selectedRoom }) => {
                             <Text fontSize="md" mt="2">
                                 {message.eventObj.desc}
                             </Text>
-                            <Text fontSize="sm" mt="2">
-                                Created Date: {message.eventObj.createdDate}
-                            </Text>
                             <Text fontSize="sm">Event Date: {message.eventObj.eventDate}</Text>
+                            <Text fontSize="sm">Event duration: {message.eventObj.duration} hrs</Text>
+                            <Text fontSize="sm">Event avg cost: {message.eventObj.averageCost}</Text>
                             <Text fontSize="sm">User ID: {message.eventObj.userID}</Text>
                             <Text fontSize="sm" mt="2">
                                 Status: {getStatusText(message.eventObj.status)}
@@ -134,16 +133,13 @@ const Messaging = ({ selectedRoom }) => {
                             <Text fontSize="md" mt="2">
                                 {message.eventObj.desc}
                             </Text>
-                            <Text fontSize="sm" mt="2">
-                                Created Date: {message.eventObj.createdDate}
-                            </Text>
                             <Text fontSize="sm">Event Date: {message.eventObj.eventDate}</Text>
-                            <Text fontSize="sm">User ID: {message.eventObj.userID}</Text>
+                            <Text fontSize="sm">Event duration: {message.eventObj.duration} hrs</Text>
+                            <Text fontSize="sm">Event avg cost: {message.eventObj.averageCost}</Text> <Text fontSize="sm">User ID: {message.eventObj.userID}</Text>
                             <Text fontSize="sm" mt="2">
                                 Status: {getStatusText(message.eventObj.status)}
                             </Text>
-                            <Button>approve request</Button>
-                            <Button>cancel request</Button>
+                            <Button mt={5}>Approve request</Button>
                         </Box>
                     </Box>
                 </Flex>
@@ -168,8 +164,17 @@ const Messaging = ({ selectedRoom }) => {
                 </Box>
                 <form onSubmit={(e) => sendMessage(e, messages[0])}>
                     <Flex>
-                        <Input value={newMessage} onChange={(e) => setNewMessage(e.target.value)} placeholder="Type a message..." flex="1" mr={2} borderRadius={10} p={2} />
-                        <Button px={0} type="submit" colorScheme="primary.500" variant="ghost" borderRadius="full">
+                        <Input
+                            disabled={messages[0]?.eventObj?.status === 0}
+                            value={newMessage}
+                            onChange={(e) => setNewMessage(e.target.value)}
+                            placeholder={messages[0]?.eventObj?.status === 0 ? ' Send not allowed' : ' Type a message...'}
+                            flex="1"
+                            mr={2}
+                            borderRadius={10}
+                            p={2}
+                        />
+                        <Button isDisabled={messages[0]?.eventObj?.status === 0} px={0} type="submit" colorScheme="primary.500" variant="ghost" borderRadius="full">
                             <Icon as={FaPaperPlane} />
                         </Button>
                     </Flex>
