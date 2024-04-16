@@ -1,5 +1,5 @@
 import { Box, Text, Link, Grid, GridItem, Container, Image, Flex, Button, Icon, Modal, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, Divider } from '@chakra-ui/react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { FaFileDownload, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa'; // Import social media icons
 import PhotosGallery from '../../../organisms/photos-gallery/PhotosGallery';
@@ -8,7 +8,6 @@ import EducationLookup from '../../../molecules/education-lookup/EducationLookup
 import MusicGenreLookup from '../../../molecules/music-genre-lookup/MusicGenreLookup';
 import MusicalInstrumentLookup from '../../../molecules/musical-instrument-lookup/MusicalInstrumentLookup';
 import VisaTypeLookup from '../../../molecules/visa-type-lookup/VisaTypeLookup';
-import CountryLookup from '../../../molecules/country-lookup/CountryLookup';
 import AudiosGallery from '../../../organisms/audios-gallery/AudiosGallery';
 import userServices from '../../../../services/userServices';
 import { useEffect, useState } from 'react';
@@ -260,12 +259,6 @@ const ServiceProviderProfileView = () => {
         }
     };
 
-    const handleReviewSubmit = (review) => {
-        console.log('review', review);
-
-        // Add the new review to the list of reviews
-    };
-
     useEffect(() => {
         fetchProviderProfile();
         fetchReviews();
@@ -317,7 +310,7 @@ const ServiceProviderProfileView = () => {
                     <GridItem colSpan={1}>
                         <Box>
                             <Image
-                                height={300}
+                                height={260}
                                 width={'100%'}
                                 borderRadius={'xl'}
                                 src={profilePic || 'https://www.zica.co.zm/wp-content/uploads/2021/02/dummy-profile-image.png'}

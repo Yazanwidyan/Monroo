@@ -6,12 +6,27 @@ import providerServices from '../../../../services/providerServices';
 import useCustomToast from '../../../../hooks/useCustomToast';
 import userServices from '../../../../services/userServices';
 
-const Events = () => {
+const UserBooking = () => {
     const [comingEvents, setComingEvents] = useState([]);
     const [pastEvents, setPastEvents] = useState([]);
     const [selectedTab, setSelectedTab] = useState('coming'); // Default selected tab
 
+    const { user } = useContext(UserContext);
+
     const { showToast } = useCustomToast();
+
+    const handleCancel = async (eventID) => {
+        const payload = {
+            eventID,
+        };
+        try {
+            await userServices.cancelEvent(payload);
+            showToast('event canceled successfuly', { status: 'success' });
+            fetchData('coming');
+        } catch (error) {
+            showToast(error, { status: 'error' });
+        }
+    };
 
     useEffect(() => {
         fetchData('coming');
@@ -24,7 +39,7 @@ const Events = () => {
         setSelectedTab(status);
 
         try {
-            const res = await providerServices.getBookings();
+            const res = await userServices.getBookings();
             console.log('resoooo', res.data);
             setComingEvents(res.data);
         } catch (error) {
@@ -57,6 +72,7 @@ const Events = () => {
                                                 location={event.location}
                                                 duration={event.duration}
                                                 status={event.status}
+                                                onCancel={handleCancel} // handleCancel function to cancel the event
                                             />
                                         ))
                                     ) : (
@@ -83,6 +99,7 @@ const Events = () => {
                                                 location={event.location}
                                                 duration={event.duration}
                                                 status={event.status}
+                                                onCancel={handleCancel} // handleCancel function to cancel the event
                                             />
                                         ))
                                     ) : (
@@ -101,4 +118,4 @@ const Events = () => {
     );
 };
 
-export default Events;
+export default UserBooking;

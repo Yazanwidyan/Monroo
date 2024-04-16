@@ -1,10 +1,11 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { Box, VStack, Input, Button, Text, Flex, Icon } from '@chakra-ui/react';
+import { Box, VStack, Input, Button, Text, Flex, Icon, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody } from '@chakra-ui/react';
 import { UserContext } from '../../../../../contexts/UserContext';
 import providerServices from '../../../../../services/providerServices';
 import userServices from '../../../../../services/userServices';
 import useCustomToast from '../../../../../hooks/useCustomToast';
 import { FaPaperPlane } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const getStatusText = (status) => {
     switch (status) {
@@ -23,12 +24,61 @@ const getStatusText = (status) => {
 
 const Messaging = ({ selectedRoom }) => {
     const { showToast } = useCustomToast();
-
+    const navigate = useNavigate();
     const { user } = useContext(UserContext);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
     const messagesEndRef = useRef(null);
+    const [eventData, setEventData] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isSendAllowed, setIsSendAllowed] = useState(false);
 
+    const openModal = (message) => {
+        console.log(selectedRoom);
+
+        setEventData({ senderName: selectedRoom?.senderName, message: message });
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const goProviderProfile = (providerID) => {
+        navigate(`/service-provider-profile-view/${providerID}`);
+    };
+
+    const getPermission = async (message) => {
+        const payload = {
+            eventID: message?.eventID,
+            userID: message?.eventObj?.userID,
+            providerID: message?.eventObj?.providerID,
+        };
+        try {
+            const res = await userServices.getPermission(payload);
+            console.log('res from permission', res.data);
+            setIsSendAllowed(true);
+            // showToast('send allowed', { status: 'success' });
+        } catch (error) {
+            setIsSendAllowed(false);
+            console.log(error);
+        }
+    };
+
+    const approveConnectionRequest = async (message) => {
+        const payload = {
+            eventID: message.eventID,
+            userID: message.eventObj.userID,
+            providerID: message.eventObj.providerID,
+        };
+        try {
+            const res = await userServices.approvePermission(payload);
+            console.log('res from permission', res.data);
+            showToast('request approved successfuly', { status: 'success' });
+        } catch (error) {
+            showToast(error, { status: 'error' });
+        }
+    };
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [newMessage]);
@@ -57,6 +107,7 @@ const Messaging = ({ selectedRoom }) => {
                 res = await providerServices.getDetailedMessages(payload);
             }
             setMessages(res.data);
+            getPermission(res.data[res.data.length - 1]);
         } catch (error) {
             showToast(error, { status: 'error' });
         }
@@ -103,21 +154,18 @@ const Messaging = ({ selectedRoom }) => {
         if (message.type === 1 && message.providerID !== user.id) {
             return (
                 <Flex key={index} justifyContent={message.senderID === user.id ? 'flex-end' : 'flex-start'}>
-                    <Box maxW="70%" p={3} m={3} borderRadius="lg" bg={message.senderID === user.id ? 'primary.600' : 'gray.200'} color={message.senderID === user.id ? 'white' : 'black'}>
-                        <Box borderRadius="lg" p="4" m="4">
-                            <Text fontSize="xl" fontWeight="bold">
+                    <Box maxW="70%" m={2} borderRadius="lg" bg={message.senderID === user.id ? 'primary.600' : 'gray.200'} color={message.senderID === user.id ? 'white' : 'black'}>
+                        <Box borderRadius="lg" p="4">
+                            <Text fontSize="sm" fontWeight="bold">
+                                Event request
+                            </Text>
+                            <Text fontSize="sm" fontWeight="bold">
                                 {message.eventObj.title}
                             </Text>
-                            <Text fontSize="md" mt="2">
-                                {message.eventObj.desc}
-                            </Text>
-                            <Text fontSize="sm">Event Date: {message.eventObj.eventDate}</Text>
-                            <Text fontSize="sm">Event duration: {message.eventObj.duration} hrs</Text>
-                            <Text fontSize="sm">Event avg cost: {message.eventObj.averageCost}</Text>
-                            <Text fontSize="sm">User ID: {message.eventObj.userID}</Text>
-                            <Text fontSize="sm" mt="2">
-                                Status: {getStatusText(message.eventObj.status)}
-                            </Text>
+                            <Text fontSize="xs">Description: {message.eventObj.desc}</Text>
+                            <Text fontSize="xs">Event Date: {message.eventObj.eventDate}</Text>
+                            <Text fontSize="xs">Event duration: {message.eventObj.duration} hrs</Text>
+                            <Text fontSize="xs">Event avg cost: {message.eventObj.averageCost}</Text>
                         </Box>
                     </Box>
                 </Flex>
@@ -125,21 +173,96 @@ const Messaging = ({ selectedRoom }) => {
         } else if (message.type === 1) {
             return (
                 <Flex key={index} justifyContent={message.senderID === user.id ? 'flex-end' : 'flex-start'}>
-                    <Box maxW="70%" p={3} m={3} borderRadius="lg" bg={message.senderID === user.id ? 'primary.600' : 'gray.200'} color={message.senderID === user.id ? 'white' : 'black'}>
-                        <Box borderRadius="lg" p="4" m="4">
-                            <Text fontSize="xl" fontWeight="bold">
+                    <Box maxW="70%" m={2} borderRadius="lg" bg={message.senderID === user.id ? 'primary.600' : 'gray.200'} color={message.senderID === user.id ? 'white' : 'black'}>
+                        <Box borderRadius="lg" p="4">
+                            <Text fontSize="sm" fontWeight="bold">
+                                Event request
+                            </Text>
+                            <Text fontSize="sm" fontWeight="bold">
                                 {message.eventObj.title}
                             </Text>
-                            <Text fontSize="md" mt="2">
-                                {message.eventObj.desc}
+                            <Text fontSize="xs">Description: {message.eventObj.desc}</Text>
+                            <Text fontSize="xs">Event Date: {message.eventObj.eventDate}</Text>
+                            <Text fontSize="xs">Event duration: {message.eventObj.duration} hrs</Text>
+                            <Text fontSize="xs">Event avg cost: {message.eventObj.averageCost}</Text>
+                            <Button fontSize={'sm'} width={'100%'} mt={5}>
+                                Approve request
+                            </Button>
+                            <Button fontSize={'sm'} width={'100%'} onClick={() => openModal(message)} mt={3}>
+                                See event
+                            </Button>
+                        </Box>
+                    </Box>
+                </Flex>
+            );
+        } else if (message.type === 4) {
+            return (
+                <Flex key={index} justifyContent={message.senderID === user.id ? 'flex-end' : 'flex-start'}>
+                    <Box maxW="70%" m={2} borderRadius="lg" bg={message.senderID === user.id ? 'primary.600' : 'gray.200'} color={message.senderID === user.id ? 'white' : 'black'}>
+                        <Box borderRadius="lg" p="4">
+                            <Text fontSize="sm" fontWeight="bold">
+                                Connection request
                             </Text>
-                            <Text fontSize="sm">Event Date: {message.eventObj.eventDate}</Text>
-                            <Text fontSize="sm">Event duration: {message.eventObj.duration} hrs</Text>
-                            <Text fontSize="sm">Event avg cost: {message.eventObj.averageCost}</Text> <Text fontSize="sm">User ID: {message.eventObj.userID}</Text>
-                            <Text fontSize="sm" mt="2">
-                                Status: {getStatusText(message.eventObj.status)}
+                            <Box margin={4} padding={4} bg={message.senderID === user.id ? '#b52824' : '#cad0d9'} borderRadius={'md'}>
+                                <Text fontSize="sm" fontWeight="bold">
+                                    {message.eventObj.title}
+                                </Text>
+                                <Text fontSize="xs">Description: {message.eventObj.desc}</Text>
+                            </Box>
+                            {message.senderID !== user.id ? (
+                                <Text fontSize="xs">Someone requested connection to discuss event details with you</Text>
+                            ) : (
+                                <Text fontSize="xs">You just requested connection to discuss event details with the auther</Text>
+                            )}
+                            {message.senderID !== user.id && (
+                                <>
+                                    <Button onClick={() => approveConnectionRequest(message)} fontSize={'sm'} width={'100%'} mt={5}>
+                                        Approve request
+                                    </Button>
+                                    <Button onClick={() => goProviderProfile(message.senderID)} fontSize={'sm'} width={'100%'} mt={2}>
+                                        Visit profile
+                                    </Button>
+                                </>
+                            )}
+                        </Box>
+                    </Box>
+                </Flex>
+            );
+        } else if (message.type === 5) {
+            return (
+                <Flex key={index} justifyContent={message.senderID === user.id ? 'flex-end' : 'flex-start'}>
+                    <Box maxW="70%" m={2} borderRadius="lg" bg={message.senderID === user.id ? 'primary.600' : 'gray.200'} color={message.senderID === user.id ? 'white' : 'black'}>
+                        <Box borderRadius="lg" p="4">
+                            <Text fontSize="sm" fontWeight="bold">
+                                Deal request
                             </Text>
-                            <Button mt={5}>Approve request</Button>
+                            <Text fontSize="sm" fontWeight="bold">
+                                {message.eventObj.title}
+                            </Text>
+                            <Text fontSize="xs">Description: {message.eventObj.desc}</Text>
+                            <Text fontSize="xs">Deal price: {message.msg}</Text>
+                            {message.senderID !== user.id && (
+                                <Button fontSize={'sm'} width={'100%'} mt={5}>
+                                    Accept deal
+                                </Button>
+                            )}
+                        </Box>
+                    </Box>
+                </Flex>
+            );
+        } else if (message.type === 6) {
+            return (
+                <Flex key={index} justifyContent={message.senderID === user.id ? 'flex-end' : 'flex-start'}>
+                    <Box maxW="70%" m={2} borderRadius="lg" bg={message.senderID === user.id ? 'green.500' : 'green.500'} color={message.senderID === user.id ? 'white' : 'white'}>
+                        <Box borderRadius="lg" p="4">
+                            <Text fontSize="sm" fontWeight="bold">
+                                Deal approved
+                            </Text>
+                            <Text fontSize="sm" fontWeight="bold">
+                                {message.eventObj.title}
+                            </Text>
+                            <Text fontSize="xs">Description: {message.eventObj.desc}</Text>
+                            <Text fontSize="xs">Deal price: {message.msg}</Text>
                         </Box>
                     </Box>
                 </Flex>
@@ -148,7 +271,7 @@ const Messaging = ({ selectedRoom }) => {
             return (
                 <Flex key={index} justifyContent={message.senderID === user.id ? 'flex-end' : 'flex-start'}>
                     <Box maxW="70%" p={3} m={3} borderRadius="lg" bg={message.senderID === user.id ? 'primary.600' : 'gray.200'} color={message.senderID === user.id ? 'white' : 'black'}>
-                        <Text>{message.msg}</Text>
+                        <Text fontSize={'xs'}>{message.msg}</Text>
                     </Box>
                 </Flex>
             );
@@ -165,21 +288,51 @@ const Messaging = ({ selectedRoom }) => {
                 <form onSubmit={(e) => sendMessage(e, messages[0])}>
                     <Flex>
                         <Input
-                            disabled={messages[0]?.eventObj?.status === 0}
+                            disabled={!isSendAllowed}
                             value={newMessage}
                             onChange={(e) => setNewMessage(e.target.value)}
-                            placeholder={messages[0]?.eventObj?.status === 0 ? ' Send not allowed' : ' Type a message...'}
+                            placeholder={isSendAllowed ? 'Type a message...' : 'Send not allowed'}
                             flex="1"
                             mr={2}
                             borderRadius={10}
                             p={2}
                         />
-                        <Button isDisabled={messages[0]?.eventObj?.status === 0} px={0} type="submit" colorScheme="primary.500" variant="ghost" borderRadius="full">
+                        <Button isDisabled={!isSendAllowed} px={0} type="submit" colorScheme="primary.500" variant="ghost" borderRadius="full">
                             <Icon as={FaPaperPlane} />
                         </Button>
                     </Flex>
                 </form>
             </VStack>
+            <Modal isOpen={isModalOpen} onClose={closeModal}>
+                <ModalOverlay />
+                <ModalContent minW={800}>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        <Box borderRadius="lg" p="4">
+                            <Box mb={6}>
+                                <Text mb={4} fontSize="sm" fontWeight="medium" color={'gray.500'}>
+                                    Created By
+                                </Text>
+                                <Text fontSize="sm" fontWeight="bold">
+                                    {eventData?.senderName}
+                                </Text>
+                            </Box>
+                            <Text mb={2} fontSize="sm" fontWeight="medium" color={'gray.500'}>
+                                info
+                            </Text>
+                            <Box borderColor={'gray.400'} borderWidth={1} borderRadius={'xl'} p={4}>
+                                <Text fontSize="sm" fontWeight="bold">
+                                    {eventData?.message?.eventObj?.title}
+                                </Text>
+                                <Text fontSize="xs">Description: {eventData?.message?.eventObj?.desc}</Text>
+                                <Text fontSize="xs">Event Date: {eventData?.message?.eventObj?.eventDate}</Text>
+                                <Text fontSize="xs">Event duration: {eventData?.message?.eventObj?.duration} hrs</Text>
+                                <Text fontSize="xs">Event avg cost: {eventData?.message?.eventObj?.averageCost}</Text>
+                            </Box>
+                        </Box>
+                    </ModalBody>
+                </ModalContent>
+            </Modal>
         </Box>
     ) : (
         <Box mt={9} textAlign="center" fontSize="xl">

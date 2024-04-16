@@ -1,129 +1,375 @@
-import { useContext, useEffect, useState } from "react";
-import { Box, Heading, Text, VStack, Divider, Image } from "@chakra-ui/react";
-import providerServices from "../../../../services/providerServices";
-import { UserContext } from "../../../../contexts/UserContext";
-import useCustomToast from "../../../../hooks/useCustomToast";
+import { Box, Text, Link, Grid, GridItem, Container, Image, Flex, Button, Icon } from '@chakra-ui/react';
 
-const ServiceProviderProfile = () => {
-  const { showToast } = useCustomToast();
-  const { user } = useContext(UserContext);
-  const [userProfile, setUserProfile] = useState<any>({});
+import { FaFileDownload, FaInstagram, FaLinkedin, FaPencilAlt, FaYoutube } from 'react-icons/fa'; // Import social media icons
+import PhotosGallery from '../../../organisms/photos-gallery/PhotosGallery';
+import VideoGallery from '../../../organisms/vidoes-gallery/VideosGallery';
+import EducationLookup from '../../../molecules/education-lookup/EducationLookup';
+import MusicGenreLookup from '../../../molecules/music-genre-lookup/MusicGenreLookup';
+import MusicalInstrumentLookup from '../../../molecules/musical-instrument-lookup/MusicalInstrumentLookup';
+import VisaTypeLookup from '../../../molecules/visa-type-lookup/VisaTypeLookup';
+import AudiosGallery from '../../../organisms/audios-gallery/AudiosGallery';
+import userServices from '../../../../services/userServices';
+import { useContext, useEffect, useState } from 'react';
+import StarRating from '../../../molecules/star-rating/StarRating';
+import { UserContext } from '../../../../contexts/UserContext';
+import providerServices from '../../../../services/providerServices';
+import EditProfileModal from './EditProfileModal';
 
-  useEffect(() => {
-    fetchData();
-    return () => {};
-  }, []);
+const headerHeight = 70; // Height of the header in pixels
+const footerHeight = 100; // Height of the footer in pixels
 
-  const fetchData = async () => {
-    try {
-      const res = await providerServices.getAllProvider();
-      const currentUser = res.data.find((users) => users.id === user.id);
+const minHeight = `calc(100vh - ${headerHeight}px - ${footerHeight}px)`;
 
-      setUserProfile(currentUser || {});
-    } catch (error) {
-      showToast(error, { status: "error" });
+const renderOptionalField = (label, value) => {
+    if (value !== undefined && value !== null && value?.length > 0 && value[0] !== null && value !== '0') {
+        return (
+            <Box mb={2}>
+                <Text fontWeight="400" fontSize="xs">
+                    {label}:
+                </Text>
+                {Array.isArray(value) ? (
+                    <Box>
+                        {value.map((item, index) => (
+                            <Text key={index} fontSize="sm" fontWeight={600}>
+                                {item}
+                            </Text>
+                        ))}
+                    </Box>
+                ) : label.toLowerCase().includes('link') ? (
+                    <Link href={value} target="_blank" fontSize="sm" color="blue.500">
+                        {value}
+                    </Link>
+                ) : (
+                    <Text fontSize="sm" fontWeight={600}>
+                        {value}
+                    </Text>
+                )}
+            </Box>
+        );
     }
-  };
-
-  return (
-    <Box p="4">
-      <Heading as="h2" mb="4">
-        Service Provider Profile
-      </Heading>
-
-      <VStack align="start" spacing="4">
-        <Box w="100%">
-          <Heading as="h3" fontSize="xl">
-            Personal Information
-          </Heading>
-          <Text>Name: {`${userProfile.fname} ${userProfile.lname}`}</Text>
-          <Text>Date of Birth: {userProfile.dob}</Text>
-          <Text>
-            Gender: {userProfile.gender === 0 ? "Not specified" : "Other"}
-          </Text>
-          <Text>Country of Residence: {userProfile.countryOfResidence}</Text>
-          <Text>Nationality: {userProfile.nationality}</Text>
-          <Text>Spoken Languages: {userProfile.spokenLanguage}</Text>
-        </Box>
-
-        <Divider />
-
-        <Box w="100%">
-          <Heading as="h3" fontSize="xl">
-            Contact Information
-          </Heading>
-          <Text>Email: {userProfile.email}</Text>
-          <Text>Phone: {userProfile.phone}</Text>
-          <Text>Instagram: {userProfile.instagram}</Text>
-        </Box>
-
-        <Divider />
-
-        <Box w="100%">
-          <Heading as="h3" fontSize="xl">
-            Professional Details
-          </Heading>
-          <Text>Experience: {userProfile.experience} years</Text>
-          <Text>Education: Level {userProfile.education}</Text>
-          <Text>Average Rate Per Hour: ${userProfile.averageRatePerHour}</Text>
-          <Text>Visa Type: Type {userProfile.visaType}</Text>
-          <Text>
-            Open to Work in Country:{" "}
-            {userProfile.openToWorkInCountry?.join(", ")}
-          </Text>
-        </Box>
-
-        <Divider />
-
-        <Box w="100%">
-          <Heading as="h3" fontSize="xl">
-            Portfolio
-          </Heading>
-          <Text>
-            Introduction Video:{" "}
-            <a href={userProfile.introductionVideoLink}>
-              {userProfile.introductionVideoLink}
-            </a>
-          </Text>
-          <Text>Videos:</Text>
-          {userProfile.videos &&
-            userProfile.videos.map((video: string, index: number) => (
-              <Box key={index}>
-                <Text>Video {index + 1}</Text>
-                <video controls width="400" style={{ maxWidth: "100%" }}>
-                  <source src={video} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </Box>
-            ))}
-          <Text>Photos:</Text>
-          <VStack align="start" spacing="2">
-            {userProfile.photos &&
-              userProfile.photos.map((photo: string, index: number) => (
-                <Image
-                  key={index}
-                  src={photo}
-                  alt={`Photo ${index + 1}`}
-                  maxW="400px"
-                />
-              ))}
-          </VStack>
-        </Box>
-
-        <Divider />
-
-        <Box w="100%">
-          <Heading as="h3" fontSize="xl">
-            Additional Information
-          </Heading>
-          <Text>
-            Special Skills: {userProfile.specialSkills || "Not specified"}
-          </Text>
-          <Text>Bio: {userProfile.bio}</Text>
-        </Box>
-      </VStack>
-    </Box>
-  );
+    return null;
 };
 
-export default ServiceProviderProfile;
+const PhotosSection = ({ photos }) => <PhotosGallery photos={photos} />;
+
+const VideosSection = ({ videos }) => (
+    <Box mt={6}>
+        <Text fontWeight="bold" fontSize="xl">
+            Videos
+        </Text>
+        <Grid templateColumns="repeat(1, 1fr)" gap={4} mt={4}>
+            {videos.map((video, index) => (
+                <VideoGallery title={''} key={index} videoSrc={video} />
+            ))}
+        </Grid>
+    </Box>
+);
+
+const AudiosSection = ({ audios }) => (
+    <Box mt={6}>
+        <Text fontWeight="bold" fontSize="xl">
+            audios
+        </Text>
+        <Grid templateColumns="repeat(1, 1fr)" gap={4} mt={4}>
+            {audios.map((audio, index) => (
+                <AudiosGallery title={''} key={index} audioSrc={audio} />
+            ))}
+        </Grid>
+    </Box>
+);
+const SocialMediaLinks = ({ instagram, linkedin, youtubelink }) => (
+    <Box mt={2} mb={4}>
+        <Text fontSize={'md'} fontWeight="bold" mb={2}>
+            Social Media
+        </Text>
+        <Box display="flex" alignItems="center">
+            {instagram && (
+                <Link href={`https://www.instagram.com/${instagram}`} target="_blank" mx={2}>
+                    <FaInstagram size={24} />
+                </Link>
+            )}
+            {linkedin && (
+                <Link href={`https://www.linkedin.com/in/${linkedin}`} target="_blank" mx={2}>
+                    <FaLinkedin size={24} />
+                </Link>
+            )}
+            {youtubelink && (
+                <Link href={`https://www.youtube.com/channel/${youtubelink}`} target="_blank" mx={2}>
+                    <FaYoutube size={24} />
+                </Link>
+            )}
+        </Box>
+    </Box>
+);
+
+const PersonalInfo = ({ dob, email, phone, nationality, countryOfResidence, gender, height, weight }) => (
+    <Box mb={4}>
+        <Text fontSize="md" fontWeight="bold" mb={2}>
+            Personal Information
+        </Text>
+        <Grid templateColumns="repeat(2, 1fr)" gap={4}>
+            <Box>
+                {renderOptionalField('Email', email)}
+                {renderOptionalField('Date of birth', dob)}
+                {renderOptionalField('Nationality', nationality)}
+                {renderOptionalField('Height', `${height}`)}
+            </Box>
+            <Box>
+                {renderOptionalField('Phone', phone)}
+                {renderOptionalField('Gender', gender === 0 ? 'Male' : 'Female')}
+                {renderOptionalField('Country of residence', countryOfResidence)}
+                {renderOptionalField('Weight', `${weight}`)}
+            </Box>
+        </Grid>
+    </Box>
+);
+
+const AdditionalInfo = ({
+    education,
+    introductionVideoLink,
+    youtubelink,
+    visaType,
+    openToWorkInCountry,
+    spokenLanguage,
+    specialSkills,
+    musicalInstruments,
+    musicGenres,
+    experience,
+    averageRatePerHour,
+    resume,
+    portfolio,
+}) => (
+    <Box mb={4}>
+        <Text fontSize={'md'} fontWeight="bold" mb={2}>
+            Additional Information
+        </Text>
+        <Grid templateColumns="repeat(2, 1fr)" gap={2}>
+            <Box>
+                {visaType ? <VisaTypeLookup value={visaType} /> : null}
+                {renderOptionalField('Open to work in countries', openToWorkInCountry?.[0])}
+                {renderOptionalField('Average rate per hour', averageRatePerHour)}
+                {renderOptionalField('Experience', experience)}
+                {renderOptionalField('Special skills', specialSkills)}
+                {musicGenres?.[0] !== null && <MusicGenreLookup value={musicGenres} />}
+                {musicalInstruments?.[0] !== null && <MusicalInstrumentLookup value={musicalInstruments} />}
+            </Box>
+            <Box>
+                {education && <EducationLookup value={education} />}
+
+                {resume && (
+                    <>
+                        <Text fontWeight="400" fontSize="xs">
+                            Resume:
+                        </Text>
+                        <Button variant={'icon'} p={0} h={30} onClick={() => downloadResume(resume)} size="md" leftIcon={<Icon as={FaFileDownload} />}></Button>
+                    </>
+                )}
+                {portfolio && (
+                    <>
+                        <Text fontWeight="400" fontSize="xs">
+                            Portfolio:
+                        </Text>
+                        <Button variant={'icon'} p={0} h={30} onClick={() => downloadResume(portfolio)} size="md" leftIcon={<Icon as={FaFileDownload} />}></Button>
+                    </>
+                )}
+                {renderOptionalField('Spoken language', spokenLanguage)}
+                {renderOptionalField('Introduction video link', introductionVideoLink)}
+                {renderOptionalField('YouTube link', youtubelink)}
+            </Box>
+        </Grid>
+    </Box>
+);
+
+const downloadResume = (resume) => {
+    const fileUrl = resume;
+    const fileName = 'file.pdf';
+
+    fetch(fileUrl)
+        .then((response) => response.blob())
+        .then((blob) => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        })
+        .catch((error) => console.error('Error downloading the file:', error));
+};
+
+const ServiceProviderProfileView = () => {
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false); // State to manage modal open/close
+    const [providerProfile, setProviderProfile] = useState({});
+    const [starsAvarage, setStarsAvarage] = useState(null);
+
+    const { user } = useContext(UserContext);
+
+    const openEditModal = () => {
+        setIsEditModalOpen(true);
+    };
+
+    // Function to close the edit modal
+    const closeEditModal = () => {
+        setIsEditModalOpen(false);
+    };
+    const handleProfileEdit = async (updatedProfile) => {
+        setProviderProfile(updatedProfile);
+
+        const data = new FormData();
+
+        data.append('data', JSON.stringify(updatedProfile));
+
+        try {
+            const res = await providerServices.updateProvider(data);
+            console.log('res', res.data);
+            // updateUser(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+        closeEditModal();
+        // You may want to send the updated profile data to the backend for saving changes
+    };
+
+    window.scrollTo(0, 0);
+
+    const fetchProviderProfile = async () => {
+        try {
+            const res = await providerServices.getAllProvider();
+            const currentUser = res.data.find((users) => users.id === user.id);
+            setProviderProfile(currentUser);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const fetchReviews = async () => {
+        try {
+            const res = await providerServices.getMyReviews();
+            const totalStars = res?.data?.reduce((acc, review) => acc + review?.stars, 0);
+            const averageRating = totalStars / res?.data?.length;
+            setStarsAvarage(averageRating);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchProviderProfile();
+        fetchReviews();
+    }, []);
+
+    const {
+        fname,
+        lname,
+        email,
+        bio,
+        instagram,
+        dob,
+        education,
+        phone,
+        nationality,
+        countryOfResidence,
+        linkedin,
+        portfolio,
+        resume,
+        introductionVideoLink,
+        demoReel,
+        youtubelink,
+        oneMinuteVideo,
+        profilePic,
+        averageRatePerHour,
+        experience,
+        gender,
+        height,
+        weight,
+        musicGenres,
+        musicalInstruments,
+        specialSkills,
+        spokenLanguage,
+        visaType,
+        openToWorkInCountry,
+        videos,
+        audios,
+        photos,
+    } = providerProfile as any;
+
+    const personalVidoes = [demoReel, oneMinuteVideo];
+
+    return (
+        <Box bg="primary.50" p="4" pb={8} minHeight={minHeight}>
+            <Container maxW={'5xl'}>
+                <Box textAlign={'end'} mb={'-10'}>
+                    <Button leftIcon={<FaPencilAlt />} color={'black'} bg={'white'} onClick={openEditModal}>
+                        <Text fontSize={'sm'}>Edit my profile</Text>
+                    </Button>
+                </Box>
+                <Grid templateColumns="1fr 3fr" gap={8}>
+                    <GridItem colSpan={1}>
+                        <Box>
+                            <Image
+                                height={260}
+                                width={'100%'}
+                                borderRadius={'xl'}
+                                src={profilePic || 'https://www.zica.co.zm/wp-content/uploads/2021/02/dummy-profile-image.png'}
+                                alt={`${fname} ${lname}`}
+                            />
+                        </Box>
+                        {photos?.length > 0 && <PhotosSection photos={photos} />}
+                        {videos?.length > 0 && <VideosSection videos={videos} />}
+                        {audios?.length > 0 && <AudiosSection audios={audios} />}
+                    </GridItem>
+                    {/* Basic details section ends */}
+
+                    {/* Profile sections */}
+                    <GridItem colSpan={1}>
+                        <Text fontWeight="bold" fontSize="3xl">
+                            {fname} {lname}
+                        </Text>
+                        {<StarRating rating={starsAvarage ? starsAvarage : 0} />}
+                        <Text mb={2} fontSize="md">
+                            {bio}
+                        </Text>
+                        <SocialMediaLinks instagram={instagram} linkedin={linkedin} youtubelink={youtubelink} />
+                        {(personalVidoes[0] || personalVidoes[1]) && (
+                            <Flex mb={4} gap={4}>
+                                {personalVidoes.map((video, index) => video && <VideoGallery title={'Video'} key={index} videoSrc={video} />)}
+                            </Flex>
+                        )}
+                        <PersonalInfo
+                            dob={dob}
+                            email={email}
+                            phone={phone}
+                            nationality={nationality}
+                            countryOfResidence={countryOfResidence}
+                            gender={gender}
+                            height={height}
+                            weight={weight}
+
+                            // Other personal info props...
+                        />
+
+                        <AdditionalInfo
+                            introductionVideoLink={introductionVideoLink}
+                            openToWorkInCountry={openToWorkInCountry}
+                            visaType={visaType}
+                            youtubelink={youtubelink}
+                            spokenLanguage={spokenLanguage}
+                            specialSkills={specialSkills}
+                            averageRatePerHour={averageRatePerHour}
+                            experience={experience}
+                            musicGenres={musicGenres}
+                            musicalInstruments={musicalInstruments}
+                            education={education}
+                            resume={resume}
+                            portfolio={portfolio}
+                        />
+                    </GridItem>
+                </Grid>
+            </Container>
+            <EditProfileModal isOpen={isEditModalOpen} onClose={closeEditModal} providerProfile={providerProfile} onSave={handleProfileEdit} />
+        </Box>
+    );
+};
+
+export default ServiceProviderProfileView;

@@ -177,6 +177,70 @@ const userServices = {
                 throw error;
             });
     },
+    approvePermission: (payload) => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const config = {
+            headers: {
+                'x-access-token': user.token,
+            },
+        };
+        return api
+            .post(`/monroo/apis/user/ApprovePermission`, payload, config)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                throw error;
+            });
+    },
+    getPermission: (payload) => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const config = {
+            headers: {
+                'x-access-token': user.token,
+            },
+        };
+        return api
+            .post(`/monroo/apis/user/getPermission`, payload, config)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                throw error;
+            });
+    },
+    cancelEvent: (payload) => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const config = {
+            headers: {
+                'x-access-token': user.token,
+            },
+        };
+        return api
+            .post(`/monroo/apis/user/cancelEvent`, payload, config)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                throw error;
+            });
+    },
+    getBookings: () => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const config = {
+            headers: {
+                'x-access-token': user.token,
+            },
+        };
+        return api
+            .post(`/monroo/apis/user/getBookings`, null, config)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                throw error;
+            });
+    },
 };
 
 export default userServices;

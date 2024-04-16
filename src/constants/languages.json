@@ -1,0 +1,170 @@
+[
+    {
+        "code": "ar",
+        "name": {
+            "en": "Arabic",
+            "ar": "العربية"
+        }
+    },
+    {
+        "code": "en",
+        "name": {
+            "en": "English",
+            "ar": "الإنجليزية"
+        }
+    },
+    {
+        "code": "fr",
+        "name": {
+            "en": "French",
+            "ar": "الفرنسية"
+        }
+    },
+    {
+        "code": "es",
+        "name": {
+            "en": "Spanish",
+            "ar": "الإسبانية"
+        }
+    },
+    {
+        "code": "de",
+        "name": {
+            "en": "German",
+            "ar": "الألمانية"
+        }
+    },
+    {
+        "code": "zh",
+        "name": {
+            "en": "Chinese",
+            "ar": "الصينية"
+        }
+    },
+    {
+        "code": "hi",
+        "name": {
+            "en": "Hindi",
+            "ar": "الهندية"
+        }
+    },
+    {
+        "code": "ja",
+        "name": {
+            "en": "Japanese",
+            "ar": "اليابانية"
+        }
+    },
+    {
+        "code": "ru",
+        "name": {
+            "en": "Russian",
+            "ar": "الروسية"
+        }
+    },
+    {
+        "code": "pt",
+        "name": {
+            "en": "Portuguese",
+            "ar": "البرتغالية"
+        }
+    },
+    {
+        "code": "ko",
+        "name": {
+            "en": "Korean",
+            "ar": "الكورية"
+        }
+    },
+    {
+        "code": "it",
+        "name": {
+            "en": "Italian",
+            "ar": "الإيطالية"
+        }
+    },
+    {
+        "code": "tr",
+        "name": {
+            "en": "Turkish",
+            "ar": "التركية"
+        }
+    },
+    {
+        "code": "nl",
+        "name": {
+            "en": "Dutch",
+            "ar": "الهولندية"
+        }
+    },
+    {
+        "code": "pl",
+        "name": {
+            "en": "Polish",
+            "ar": "البولندية"
+        }
+    },
+    {
+        "code": "sv",
+        "name": {
+            "en": "Swedish",
+            "ar": "السويدية"
+        }
+    },
+    {
+        "code": "uk",
+        "name": {
+            "en": "Ukrainian",
+            "ar": "الأوكرانية"
+        }
+    },
+    {
+        "code": "el",
+        "name": {
+            "en": "Greek",
+            "ar": "اليونانية"
+        }
+    },
+    {
+        "code": "cs",
+        "name": {
+            "en": "Czech",
+            "ar": "التشيكية"
+        }
+    },
+    {
+        "code": "da",
+        "name": {
+            "en": "Danish",
+            "ar": "الدنماركية"
+        }
+    },
+    {
+        "code": "fi",
+        "name": {
+            "en": "Finnish",
+            "ar": "الفنلندية"
+        }
+    },
+    {
+        "code": "hu",
+        "name": {
+            "en": "Hungarian",
+            "ar": "الهنغارية"
+        }
+    },
+    {
+        "code": "no",
+        "name": {
+            "en": "Norwegian",
+            "ar": "النرويجية"
+        }
+    },
+    {
+        "code": "ro",
+        "name": {
+            "en": "Romanian",
+            "ar": "الرومانية"
+        }
+    }
+]

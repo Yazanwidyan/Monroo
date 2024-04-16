@@ -14,15 +14,12 @@ const Timeline = () => {
     const handleMessage = async (event) => {
         const payload = {
             eventID: event.id,
-            msg: 'hello',
             userID: event.userID,
-            providerID: user.id,
-            senderID: user.id,
-            type: 2,
         };
         try {
-            const res = await providerServices.sendMessage(payload);
-            console.log('res from message', res.data);
+            const res = await providerServices.requestConnection(payload);
+            console.log('res from contact', res.data);
+            showToast('Request send successfuly', { status: 'success' });
         } catch (error) {
             showToast(error, { status: 'error' });
         }
@@ -65,7 +62,6 @@ const Timeline = () => {
                                 duration={event.duration}
                                 posted={event.createdDate}
                                 description={event.desc}
-                                status={event.status}
                                 country={event.country}
                                 eventDate={event.eventDate}
                                 averageCost={event.averageCost}

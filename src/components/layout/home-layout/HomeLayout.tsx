@@ -64,11 +64,9 @@ const HomeLayout = () => {
                                     </Button>
                                 </>
                             )}
-                            {!user.isMainUser && (
-                                <ChakraLink as={RouterLink} to="/events" mx="0.5rem" textDecoration="none" _hover={{ textDecoration: 'none' }}>
-                                    Booking
-                                </ChakraLink>
-                            )}
+                            <ChakraLink as={RouterLink} to={!user.isMainUser ? '/events' : '/user-booking'} mx="0.5rem" textDecoration="none" _hover={{ textDecoration: 'none' }}>
+                                Booking
+                            </ChakraLink>
                             <ChakraLink as={RouterLink} to="/inbox" mx="0.5rem" textDecoration="none" _hover={{ textDecoration: 'none' }}>
                                 Inbox
                             </ChakraLink>

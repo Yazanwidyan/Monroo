@@ -17,6 +17,7 @@ import HowItWorks from './components/pages/common/how-it-works/HowItWorks';
 import ServiceProviderProfileView from './components/pages/user/service-provider-profile-view/ServiceProviderProfileView';
 import AuthRoutes from './components/molecules/auth-routes/AuthRoutes';
 import UserProfile from './components/pages/user/user-profile/UserProfile';
+import UserBooking from './components/pages/user/user-booking/UserBooking';
 
 export const AppRoutes = () => (
     <>
@@ -34,6 +35,7 @@ export const AppRoutes = () => (
                 <Route path="home" element={<HomeUser />} />
                 <Route path="timeline" element={<Timeline />} />
                 <Route path="events" element={<Events />} />
+                <Route path="user-booking" element={<UserBooking />} />
                 <Route path="user-profile" element={<UserProfile />} />
                 <Route path="service-provider-profile" element={<ServiceProviderProfile />} />
                 <Route path="payment" element={<Payment />} />

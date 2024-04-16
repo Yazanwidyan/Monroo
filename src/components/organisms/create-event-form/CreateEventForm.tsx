@@ -5,10 +5,14 @@ import { CreateEvent } from '../../../models/CreateEvent';
 import styles from './CreateEventForm.module.scss';
 import useCreateEventForm from './useCreateEventForm';
 import { useTranslation } from 'react-i18next';
+import languagesList from '../../../constants/languages.json';
 
 export type CreateEventFormProps = {
     onSubmit(createEvent: CreateEvent): Promise<void>;
 };
+
+const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
 
 export default function CreateEventForm(props: CreateEventFormProps) {
     const state = useCreateEventForm({ onSubmit: props.onSubmit });
@@ -66,31 +70,41 @@ export default function CreateEventForm(props: CreateEventFormProps) {
                     <Input type="text" name="desc" placeholder="Enter description" value={state.createEvent.desc} onChange={state.handleCreateEventChange} required />
                 </FormControl>
                 <FormControl>
-                    <FormLabel>cost</FormLabel>
-                    <Input type="number" name="averageCost" placeholder="Enter cost" value={state.createEvent.averageCost} onChange={state.handleCreateEventChange} required />
+                    <FormLabel>Event budget</FormLabel>
+                    <Input min={1} type="number" name="averageCost" placeholder="Enter budget" value={state.createEvent.averageCost} onChange={state.handleCreateEventChange} required />
+                </FormControl>
+
+                <FormControl>
+                    <FormLabel>Gender</FormLabel>
+                    <Select name="gender" value={state.createEvent.gender} onChange={state.handleCreateEventChange} placeholder="Select option">
+                        <option value="-1">Not specified</option>
+                        <option value="0">Male</option>
+                        <option value="1">Female</option>
+                    </Select>
+                </FormControl>
+                <FormControl>
+                    <FormLabel>Language</FormLabel>
+                    <Select name="languages" value={state.createEvent.languages} onChange={state.handleCreateEventChange} placeholder="Select option">
+                        {languagesList.map((language) => (
+                            <option key={language.code} value={language.code}>
+                                {i18n.language == 'en' ? language.name.en : language.name.ar}
+                            </option>
+                        ))}
+                    </Select>
                 </FormControl>
                 <FormControl>
                     <FormLabel>Location</FormLabel>
                     <Input type="text" name="location" placeholder="Enter location" value={state.createEvent.location} onChange={state.handleCreateEventChange} required />
                 </FormControl>
                 <FormControl>
-                    <FormLabel>Gender</FormLabel>
-                    <Select onChange={state.handleCreateEventChange} placeholder="Select option">
-                        <option value="-1">Not specified</option>
-                        <option value="0">Male</option>
-                        <option value="1">Female</option>
-                    </Select>
-                </FormControl>
-
-                <FormControl>
                     <FormLabel>start date</FormLabel>
                     <Input
                         type="date"
                         name="eventDate"
                         placeholder="Enter start date"
-                        value={state.createEvent.eventDate}
+                        value={state.createEvent.eventDate || tomorrow.toISOString().split('T')[0]} // Initialize with the day after the current day if no value is set
                         onChange={state.handleCreateEventChange}
-                        min={new Date().toISOString().split('T')[0]}
+                        min={new Date(Date.now() + 86400000).toISOString().split('T')[0]} // Adding 24 hours in milliseconds to the current date
                         max={'2050-01-01'}
                         className="date-rtl"
                         required
@@ -102,9 +116,9 @@ export default function CreateEventForm(props: CreateEventFormProps) {
                         type="date"
                         name="eventEndDate"
                         placeholder="Enter end date"
-                        value={state.createEvent.eventEndDate}
+                        value={state.createEvent.eventEndDate || tomorrow.toISOString().split('T')[0]} // Initialize with the day after the current day if no value is set
                         onChange={state.handleCreateEventChange}
-                        min={new Date().toISOString().split('T')[0]}
+                        min={state.createEvent.eventDate || tomorrow.toISOString().split('T')[0]} // Setting min date to the event start date
                         max={'2050-01-01'}
                         className="date-rtl"
                         required
@@ -112,7 +126,7 @@ export default function CreateEventForm(props: CreateEventFormProps) {
                 </FormControl>
                 <FormControl>
                     <FormLabel>Event duration, hrs</FormLabel>
-                    <Input type="number" name="duration" placeholder="Enter duration" value={state.createEvent.duration} onChange={state.handleCreateEventChange} required />
+                    <Input min={1} type="number" name="duration" placeholder="Enter duration" value={state.createEvent.duration} onChange={state.handleCreateEventChange} required />
                 </FormControl>
             </SimpleGrid>
             <Flex marginTop="38px" justifyContent="flex-end">
