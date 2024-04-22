@@ -17,7 +17,8 @@
             "enter_email": "Enter email",
             "enter_emailOrusername": "Enter username or email",
             "enter_password": "Enter password",
-            "create_account": "Create account"
+            "create_account": "Create account",
+            "dont_have_account": "Dont have account?"
         },
         "register": {
             "whoAreYou": "Who are you ?",

@@ -18,6 +18,7 @@ import ServiceProviderProfileView from './components/pages/user/service-provider
 import AuthRoutes from './components/molecules/auth-routes/AuthRoutes';
 import UserProfile from './components/pages/user/user-profile/UserProfile';
 import UserBooking from './components/pages/user/user-booking/UserBooking';
+import EasyRegisterUserPage from './components/pages/auth/easy-register-user/EasyRegisterUser';
 
 export const AppRoutes = () => (
     <>
@@ -28,6 +29,9 @@ export const AppRoutes = () => (
                 <Route path="register" element={<RegisterUserPage />} />
                 <Route path="register/user" element={<RegisterEmployerPage />} />
                 <Route path="register/service-provider" element={<RegisterServiceProvider />} />
+            </Route>
+            <Route>
+                <Route path="user-register" element={<EasyRegisterUserPage />} />
             </Route>
         </Route>
         <Route element={<PrivateRoutes />}>

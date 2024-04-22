@@ -145,7 +145,7 @@ const HomeUser = () => {
                                 required
                                 name="catID"
                                 options={categories.map((category) => ({
-                                    label: i18n.language == 'en' ? category.name : i18n.language == 'ar' ? category.nameAR : category.nameRUS,
+                                    label: i18n?.language?.includes('en') ? category.name : i18n?.language?.includes('ar') ? category.nameAR : category.nameRUS,
                                     value: category.id,
                                     catID: category.id,
                                     name: category.name,

@@ -31,7 +31,6 @@ const UserEventListModal = ({ isOpen, onClose, events, providerID }) => {
 
     const requestPrivateEvent = async (event) => {
         const payload = {
-            userID: event.userID,
             providerID: providerID,
             eventID: event.id,
         };

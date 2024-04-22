@@ -5,6 +5,8 @@ import providerServices from '../../../../../services/providerServices';
 import userServices from '../../../../../services/userServices';
 import useCustomToast from '../../../../../hooks/useCustomToast';
 import { FaPaperPlane } from 'react-icons/fa';
+import { FaHandshake } from 'react-icons/fa'; // Importing handshake icon from react-icons library
+
 import { useNavigate } from 'react-router-dom';
 
 const getStatusText = (status) => {
@@ -32,6 +34,8 @@ const Messaging = ({ selectedRoom }) => {
     const [eventData, setEventData] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isSendAllowed, setIsSendAllowed] = useState(false);
+    const [isDealModalOpen, setIsDealModalOpen] = useState(false);
+    const [dealPrice, setDealPrice] = useState('');
 
     const openModal = (message) => {
         console.log(selectedRoom);
@@ -42,6 +46,24 @@ const Messaging = ({ selectedRoom }) => {
 
     const closeModal = () => {
         setIsModalOpen(false);
+    };
+
+    const openDealModal = () => {
+        setIsDealModalOpen(true);
+    };
+
+    const closeDealModal = () => {
+        setIsDealModalOpen(false);
+    };
+
+    const handleSubmitDeal = () => {
+        console.log('Submitted deal price:', dealPrice);
+        setDealPrice('');
+        closeDealModal();
+    };
+
+    const handlePriceChange = (e) => {
+        setDealPrice(e.target.value); // Update the dealPrice state with the parsed number or 0 if NaN
     };
 
     const goProviderProfile = (providerID) => {
@@ -281,6 +303,11 @@ const Messaging = ({ selectedRoom }) => {
     return selectedRoom ? (
         <Box p={4}>
             <VStack spacing={4} mb={4} align="stretch">
+                <Box textAlign={'end'} marginBottom={'-3'}>
+                    <Button onClick={openDealModal} colorScheme="primary" size="md" mt={4} rightIcon={<Icon as={FaHandshake} />}>
+                        Make a Deal
+                    </Button>
+                </Box>
                 <Box borderWidth={1} borderRadius={10} h="calc(100vh - 400px)" overflowY="scroll">
                     {messages.map((message, index) => renderMessage(message, index))}
                     <div ref={messagesEndRef} />
@@ -329,6 +356,20 @@ const Messaging = ({ selectedRoom }) => {
                                 <Text fontSize="xs">Event duration: {eventData?.message?.eventObj?.duration} hrs</Text>
                                 <Text fontSize="xs">Event avg cost: {eventData?.message?.eventObj?.averageCost}</Text>
                             </Box>
+                        </Box>
+                    </ModalBody>
+                </ModalContent>
+            </Modal>
+            <Modal isOpen={isDealModalOpen} onClose={closeDealModal}>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        <Box mt={10} textAlign={'end'}>
+                            <Input type="number" placeholder="Enter deal price" value={dealPrice} onChange={handlePriceChange} />
+                            <Button colorScheme="primary" mt={4} onClick={handleSubmitDeal}>
+                                Submit
+                            </Button>
                         </Box>
                     </ModalBody>
                 </ModalContent>

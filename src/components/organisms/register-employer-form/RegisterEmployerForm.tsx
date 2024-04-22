@@ -148,7 +148,7 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
                                 placeholder={t('register.select_category')}
                                 name="categories"
                                 options={state.categories.map((category) => ({
-                                    label: i18n.language == 'en' ? category.name : i18n.language == 'ar' ? category.nameAR : category.nameRUS,
+                                    label: i18n?.language?.includes('en') ? category.name : i18n?.language?.includes('ar') ? category.nameAR : category.nameRUS,
                                     value: category.id,
                                     catID: category.id,
                                     name: category.name,

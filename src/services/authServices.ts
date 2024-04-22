@@ -77,6 +77,21 @@ const authServices = {
                 throw error;
             });
     },
+    socialRegisterUser: (payload) => {
+        const config = {
+            headers: {
+                'x-secret': 'MonrooHeaders',
+            },
+        };
+        return api
+            .post(`/monroo/apis/user/SocialRegister`, payload, config)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                throw error;
+            });
+    },
 };
 
 export default authServices;

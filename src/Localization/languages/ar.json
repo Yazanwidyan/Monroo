@@ -18,7 +18,8 @@
       "enter_email": "ادخل البريد الالكتروني",
       "enter_emailOrusername": "ادخل اسم المستخدم او البريد الالكتروني",
       "enter_password": "ادخل كلمة المرور",
-      "create_account": "انشاء حساب"
+      "create_account": "انشاء حساب",
+      "dont_have_account": "ليس لديك حساب؟"
     },
     "register": {
       "whoAreYou": "اختر نوع الحساب",
