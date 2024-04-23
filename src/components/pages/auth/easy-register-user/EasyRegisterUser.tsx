@@ -1,5 +1,5 @@
 import { useContext, useMemo, useState } from 'react';
-import { Box, FormControl, FormLabel, Input, Select, Textarea, Button, Grid, GridItem, Container } from '@chakra-ui/react';
+import { Box, FormControl, FormLabel, Input, Select, Textarea, Button, Grid, GridItem, Container, Toast } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import countryList from '../../../../constants/countries.json';
@@ -8,6 +8,7 @@ import styles from '../../../organisms/register-employer-form/RegisterEmployerFo
 import { LookupsContext } from '../../../../contexts/LookupsContext';
 import { UserContext } from '../../../../contexts/UserContext';
 import authServices from '../../../../services/authServices';
+import useCustomToast from '../../../../hooks/useCustomToast';
 
 export default function EasyRegisterUserPage() {
     const countries: { name: string; code: string; flag: string }[] = useMemo(() => countryList.filter((country) => country.code !== 'IL'), []);
@@ -17,8 +18,7 @@ export default function EasyRegisterUserPage() {
 
     const navigate = useNavigate();
     const { t, i18n } = useTranslation();
-
-    console.log('i18n', i18n);
+    const { showToast } = useCustomToast();
 
     const [imageFile, setImageFile] = useState(location?.state?.formData?.profilePic || null);
     const [formData, setFormData] = useState({
@@ -77,7 +77,7 @@ export default function EasyRegisterUserPage() {
             updateUser(res.data);
             navigate('/home', { replace: true });
         } catch (error) {
-            console.log(error);
+            showToast(error, { status: 'error' });
         }
         console.log(formData);
     };

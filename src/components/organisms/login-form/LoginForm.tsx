@@ -13,6 +13,7 @@ import { UserContext } from '../../../contexts/UserContext';
 export type LoginFormProps = {
     handleSubmit(loginInput: LoginInput): void;
     onClose: () => void;
+    selectedTab: string;
 };
 
 export default function LoginForm(props: LoginFormProps) {
@@ -33,16 +34,27 @@ export default function LoginForm(props: LoginFormProps) {
             const payload = {
                 username: response?.user?.email,
             };
-            const res = await authServices.socialLoginUser(payload);
-            updateUser(res.data);
-            navigate('/home', { replace: true });
+
+            if (props.selectedTab == 'user') {
+                const res = await authServices.socialLoginUser(payload);
+                updateUser(res.data);
+                navigate('/home', { replace: true });
+            } else {
+                const res = await authServices.socialLoginProvider(payload);
+                updateUser(res.data);
+                navigate('/timeline', { replace: true });
+            }
         } catch (error) {
             const formData = {
                 username: response?.user?.displayName,
                 email: response?.user?.email,
                 profilePic: response?.user?.photoURL,
             };
-            navigate('/user-register', { state: { formData }, replace: true });
+            if (props.selectedTab == 'user') {
+                navigate('/user-register', { state: { formData }, replace: true });
+            } else {
+                navigate('/provider-register', { state: { formData }, replace: true });
+            }
         }
     };
 

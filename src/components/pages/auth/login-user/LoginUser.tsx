@@ -1,30 +1,31 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
-import LoginForm from "../../../organisms/login-form/LoginForm";
-import { LoginInput } from "../../../../models/LoginInput";
-import { useContext } from "react";
-import { UserContext } from "../../../../contexts/UserContext";
-import authServices from "../../../../services/authServices";
-import useCustomToast from "../../../../hooks/useCustomToast";
+import LoginForm from '../../../organisms/login-form/LoginForm';
+import { LoginInput } from '../../../../models/LoginInput';
+import { useContext } from 'react';
+import { UserContext } from '../../../../contexts/UserContext';
+import authServices from '../../../../services/authServices';
+import useCustomToast from '../../../../hooks/useCustomToast';
 
-export default function LoginUser({ onClose }) {
-  const navigate = useNavigate();
-  const { showToast } = useCustomToast();
+export default function LoginUser({ selectedTab, onClose }) {
+    const navigate = useNavigate();
+    const { showToast } = useCustomToast();
 
-  const { updateUser } = useContext(UserContext);
+    const { updateUser } = useContext(UserContext);
 
-  return (
-    <LoginForm
-      onClose={onClose}
-      handleSubmit={async (loginInput: LoginInput) => {
-        try {
-          const res = await authServices.loginUser(loginInput);
-          updateUser(res.data);
-          navigate("/home", { replace: true });
-        } catch (error) {
-          showToast(error, { status: "error" });
-        }
-      }}
-    />
-  );
+    return (
+        <LoginForm
+            selectedTab={selectedTab}
+            onClose={onClose}
+            handleSubmit={async (loginInput: LoginInput) => {
+                try {
+                    const res = await authServices.loginUser(loginInput);
+                    updateUser(res.data);
+                    navigate('/home', { replace: true });
+                } catch (error) {
+                    showToast(error, { status: 'error' });
+                }
+            }}
+        />
+    );
 }

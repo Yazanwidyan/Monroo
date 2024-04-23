@@ -1,4 +1,4 @@
-import { FormControl, FormLabel, Input, SimpleGrid, Button, Flex, Select, Textarea, InputGroup, InputRightElement, IconButton, Box } from '@chakra-ui/react';
+import { FormControl, FormLabel, Input, SimpleGrid, Button, Flex, Select, Textarea, InputGroup, InputRightElement, IconButton, Box, Image } from '@chakra-ui/react';
 import { Select as MultiSelect } from 'chakra-react-select';
 
 import { RegisterEmployer } from '../../../models/RegisterEmployer';
@@ -6,10 +6,10 @@ import useRegisterEmployerForm from './useRegisterEmployerForm';
 import styles from './RegisterEmployerForm.module.scss';
 import { useTranslation } from 'react-i18next';
 import usePasswordVisibility from '../../../hooks/usePasswordVisibility';
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { DeleteIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
 export type RegisterEmployerFormProps = {
-    onSubmit(registerEmployer: RegisterEmployer): Promise<void>;
+    onSubmit(registerEmployer: RegisterEmployer, profilePic: any): Promise<void>;
     onBackClick(): void;
 };
 
@@ -22,11 +22,28 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
         confirmPassword: false,
     });
 
+    const clearProfilePic = () => {
+        state.setProfilePic(null); // Clear profile picture
+    };
+
     return (
         <Box margin="auto" mt={8} width="5xl">
             <Box as="section">
                 <form onSubmit={state.handleSubmit}>
                     <SimpleGrid columns={{ base: 1, md: 2 }} rowGap="20px" columnGap="20px">
+                        <FormControl isRequired mb={4}>
+                            <FormLabel>{t('Profile Picture')}</FormLabel>
+                            {state.profilePic ? (
+                                <Flex alignItems={'center'}>
+                                    <Image src={URL.createObjectURL(state.profilePic)} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '20px' }} />
+                                    <Button mx={2} fontSize={14} onClick={clearProfilePic}>
+                                        Remove
+                                    </Button>
+                                </Flex>
+                            ) : (
+                                <Input type="file" name="profilePic" onChange={state.handleFileChange} />
+                            )}
+                        </FormControl>
                         <FormControl isRequired>
                             <FormLabel>{t('register.username')}</FormLabel>
                             <Input

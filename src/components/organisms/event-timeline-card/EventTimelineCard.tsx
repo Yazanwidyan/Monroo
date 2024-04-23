@@ -22,8 +22,6 @@ const EventTimelineCard = ({ image, title, userName, duration, posted, descripti
     };
 
     const formatDate = (timestamp) => {
-        console.log('timestamp', timestamp);
-
         let date;
         if (/^\d+$/.test(timestamp)) {
             // If the timestamp contains only digits, assume it's a Unix timestamp

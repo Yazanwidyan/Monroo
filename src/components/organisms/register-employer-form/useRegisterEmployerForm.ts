@@ -24,6 +24,7 @@ export default function useRegisterEmployerForm(props: Pick<RegisterEmployerForm
     const [registerEmployer, , handleRegisterEmployerChange] = useFormFields<RegisterEmployer>(DEFAULT_REGISTER_EMPLOYER);
 
     const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>([]);
+    const [profilePic, setProfilePic] = useState<File | null>(null); // State to hold the selected file
 
     const { categories } = useContext(LookupsContext);
 
@@ -31,6 +32,14 @@ export default function useRegisterEmployerForm(props: Pick<RegisterEmployerForm
 
     function handleCategoriesChange(selectedCategoryIds: string[]): void {
         setSelectedCategoryIds(selectedCategoryIds);
+    }
+
+    function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+        const fileList = e.target.files;
+        if (fileList && fileList.length > 0) {
+            const selectedFile = fileList[0];
+            setProfilePic(selectedFile);
+        }
     }
 
     function handleSubmit(e: FormEvent<HTMLFormElement>): void {
@@ -43,10 +52,14 @@ export default function useRegisterEmployerForm(props: Pick<RegisterEmployerForm
             return;
         }
 
-        props.onSubmit({
-            ...registerEmployer,
-            intrestedList: selectedCategoryIds,
-        });
+        // Include file in the submission payload
+        props.onSubmit(
+            {
+                ...registerEmployer,
+                intrestedList: selectedCategoryIds,
+            },
+            profilePic
+        );
     }
 
     return {
@@ -57,5 +70,8 @@ export default function useRegisterEmployerForm(props: Pick<RegisterEmployerForm
         categories,
         handleCategoriesChange,
         selectedCategoryIds,
+        profilePic,
+        setProfilePic,
+        handleFileChange, // Add handleFileChange function to expose it to the component
     };
 }
