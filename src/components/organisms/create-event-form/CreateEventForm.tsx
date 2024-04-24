@@ -77,9 +77,9 @@ export default function CreateEventForm(props: CreateEventFormProps) {
                 <FormControl>
                     <FormLabel>Gender</FormLabel>
                     <Select name="gender" value={state.createEvent.gender} onChange={state.handleCreateEventChange} placeholder="Select option">
-                        <option value="-1">Not specified</option>
-                        <option value="0">Male</option>
-                        <option value="1">Female</option>
+                        <option value={-1}>Not specified</option>
+                        <option value={0}>Male</option>
+                        <option value={1}>Female</option>
                     </Select>
                 </FormControl>
                 <FormControl>

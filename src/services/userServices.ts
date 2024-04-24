@@ -225,6 +225,22 @@ const userServices = {
                 throw error;
             });
     },
+    makeDeal: (payload) => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const config = {
+            headers: {
+                'x-access-token': user.token,
+            },
+        };
+        return api
+            .post(`/monroo/apis/user/MakeADeal`, payload, config)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                throw error;
+            });
+    },
     getBookings: () => {
         const user = JSON.parse(localStorage.getItem('user'));
         const config = {

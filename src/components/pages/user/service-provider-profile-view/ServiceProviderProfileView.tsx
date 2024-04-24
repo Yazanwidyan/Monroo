@@ -115,7 +115,7 @@ const PersonalInfo = ({ dob, email, phone, nationality, countryOfResidence, gend
             </Box>
             <Box>
                 {renderOptionalField('Phone', phone)}
-                {renderOptionalField('Gender', gender === 0 ? 'Male' : 'Female')}
+                {renderOptionalField('Gender', gender == 0 ? 'Male' : 'Female')}
                 {renderOptionalField('Country of residence', countryOfResidence)}
                 {renderOptionalField('Weight', `${weight}`)}
             </Box>

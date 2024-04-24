@@ -22,6 +22,7 @@
     "register": {
       "whoAreYou": "Кто вы?",
       "username": "Имя пользователя",
+      "profilepic": "Изображение профиля",
       "email": "Электронная почта",
       "password": "Пароль",
       "confirm_password": "Подтвердите пароль",

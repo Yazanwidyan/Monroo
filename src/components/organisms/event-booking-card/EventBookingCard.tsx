@@ -21,9 +21,11 @@ const EventBookingCard: React.FC<{
                 {description}
             </Text>
             <Flex align="center" justify="space-between" mb={2}>
-                <Text fontSize="sm">
-                    Cost: <span style={{ fontWeight: 'bold' }}>{cost}</span>
-                </Text>
+                {cost && (
+                    <Text fontSize="sm">
+                        Cost: <span style={{ fontWeight: 'bold' }}>{cost}</span>
+                    </Text>
+                )}
                 <Text fontSize="sm">
                     Date: <span style={{ fontWeight: 'bold' }}>{date}</span>
                 </Text>
@@ -44,9 +46,9 @@ const EventBookingCard: React.FC<{
             </Flex>
             <Divider my={3} />
             <Stack direction="row" spacing={4}>
-                <Box bg={status === 1 ? '#0eb546' : '#ff5454'} display={'flex'} borderRadius={'md'} p={2} alignItems={'center'} justifyContent={'center'}>
+                <Box bg={status === 0 ? '#2173A5' : status === 1 ? '#0eb546' : '#ff5454'} display={'flex'} borderRadius={'md'} p={2} alignItems={'center'} justifyContent={'center'}>
                     <Text color={'white'} fontSize={'sm'}>
-                        {status == 1 ? 'Booked' : 'Canceled'}
+                        {status == 0 ? 'Pending' : status == 1 ? 'Booked' : 'Canceled'}
                     </Text>
                 </Box>
                 {status === 1 && oncancel && (

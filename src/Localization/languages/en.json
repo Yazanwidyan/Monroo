@@ -23,6 +23,7 @@
         "register": {
             "whoAreYou": "Who are you ?",
             "username": "Username",
+            "profilepic": "Profile picture",
             "email": "Email",
             "password": "Password",
             "confirm_password": "Confirm password",

@@ -4,7 +4,7 @@ import { UserContext } from '../../../../../contexts/UserContext';
 import providerServices from '../../../../../services/providerServices';
 import userServices from '../../../../../services/userServices';
 import useCustomToast from '../../../../../hooks/useCustomToast';
-import { FaPaperPlane } from 'react-icons/fa';
+import { FaCcVisa, FaMoneyBill, FaPaperPlane } from 'react-icons/fa';
 import { FaHandshake } from 'react-icons/fa'; // Importing handshake icon from react-icons library
 
 import { useNavigate } from 'react-router-dom';
@@ -28,6 +28,8 @@ const Messaging = ({ selectedRoom }) => {
     const { showToast } = useCustomToast();
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
+    console.log('user', user);
+
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
     const messagesEndRef = useRef(null);
@@ -36,6 +38,7 @@ const Messaging = ({ selectedRoom }) => {
     const [isSendAllowed, setIsSendAllowed] = useState(false);
     const [isDealModalOpen, setIsDealModalOpen] = useState(false);
     const [dealPrice, setDealPrice] = useState('');
+    const [mainEvent, setMainEvent] = useState(null);
 
     const openModal = (message) => {
         console.log(selectedRoom);
@@ -56,7 +59,19 @@ const Messaging = ({ selectedRoom }) => {
         setIsDealModalOpen(false);
     };
 
-    const handleSubmitDeal = () => {
+    const handleSubmitDeal = async () => {
+        const payload = {
+            eventID: mainEvent?.eventID,
+            providerID: mainEvent?.providerID,
+            dealPrice: dealPrice,
+        };
+        try {
+            const res = await userServices.makeDeal(payload);
+            console.log('res from make deal', res.data);
+            fetchData();
+        } catch (error) {
+            console.log(error);
+        }
         console.log('Submitted deal price:', dealPrice);
         setDealPrice('');
         closeDealModal();
@@ -73,8 +88,8 @@ const Messaging = ({ selectedRoom }) => {
     const getPermission = async (message) => {
         const payload = {
             eventID: message?.eventID,
-            userID: message?.eventObj?.userID,
-            providerID: message?.eventObj?.providerID,
+            userID: message?.userID,
+            providerID: message?.providerID,
         };
         try {
             const res = await userServices.getPermission(payload);
@@ -129,7 +144,55 @@ const Messaging = ({ selectedRoom }) => {
                 res = await providerServices.getDetailedMessages(payload);
             }
             setMessages(res.data);
-            getPermission(res.data[res.data.length - 1]);
+            let mainEvent = null;
+            for (let i = res.data.length - 1; i >= 0; i--) {
+                if (res.data[i].eventID !== '') {
+                    mainEvent = res.data[i];
+                    break; // Stop the loop once a matching item is found
+                }
+            }
+            if (mainEvent !== null) {
+                console.log('Main event:', mainEvent);
+                setMainEvent(mainEvent);
+                getPermission(mainEvent);
+            } else {
+                console.log('No item with non-empty eventID found.');
+            }
+        } catch (error) {
+            showToast(error, { status: 'error' });
+        }
+    };
+    const approveRequest = async (message) => {
+        const payload = {
+            msg: '',
+            type: 3,
+            userID: message.userID,
+            eventID: message.eventID,
+            eventObj: message.eventObj,
+        };
+
+        try {
+            const res = await providerServices.sendMessage(payload);
+            await fetchData();
+            console.log('res from message', res.data);
+        } catch (error) {
+            showToast(error, { status: 'error' });
+        }
+    };
+
+    const approveDeal = async () => {
+        const payload = {
+            msg: mainEvent.msg,
+            type: 6,
+            userID: mainEvent.userID,
+            eventID: mainEvent.eventID,
+            eventObj: mainEvent.eventObj,
+        };
+
+        try {
+            const res = await providerServices.sendMessage(payload);
+            await fetchData();
+            console.log('res from message', res.data);
         } catch (error) {
             showToast(error, { status: 'error' });
         }
@@ -207,7 +270,7 @@ const Messaging = ({ selectedRoom }) => {
                             <Text fontSize="xs">Event Date: {message.eventObj.eventDate}</Text>
                             <Text fontSize="xs">Event duration: {message.eventObj.duration} hrs</Text>
                             <Text fontSize="xs">Event avg cost: {message.eventObj.averageCost}</Text>
-                            <Button fontSize={'sm'} width={'100%'} mt={5}>
+                            <Button onClick={() => approveRequest(message)} fontSize={'sm'} width={'100%'} mt={5}>
                                 Approve request
                             </Button>
                             <Button fontSize={'sm'} width={'100%'} onClick={() => openModal(message)} mt={3}>
@@ -264,7 +327,7 @@ const Messaging = ({ selectedRoom }) => {
                             <Text fontSize="xs">Description: {message.eventObj.desc}</Text>
                             <Text fontSize="xs">Deal price: {message.msg}</Text>
                             {message.senderID !== user.id && (
-                                <Button fontSize={'sm'} width={'100%'} mt={5}>
+                                <Button onClick={approveDeal} fontSize={'sm'} width={'100%'} mt={5}>
                                     Accept deal
                                 </Button>
                             )}
@@ -304,31 +367,41 @@ const Messaging = ({ selectedRoom }) => {
         <Box p={4}>
             <VStack spacing={4} mb={4} align="stretch">
                 <Box textAlign={'end'} marginBottom={'-3'}>
-                    <Button onClick={openDealModal} colorScheme="primary" size="md" mt={4} rightIcon={<Icon as={FaHandshake} />}>
-                        Make a Deal
-                    </Button>
+                    {user?.isMainUser ? (
+                        <Button onClick={openDealModal} colorScheme="primary" size="md" mt={4} rightIcon={<Icon as={FaHandshake} />}>
+                            Make a Deal
+                        </Button>
+                    ) : null}
                 </Box>
                 <Box borderWidth={1} borderRadius={10} h="calc(100vh - 400px)" overflowY="scroll">
                     {messages.map((message, index) => renderMessage(message, index))}
                     <div ref={messagesEndRef} />
                 </Box>
-                <form onSubmit={(e) => sendMessage(e, messages[0])}>
-                    <Flex>
-                        <Input
-                            disabled={!isSendAllowed}
-                            value={newMessage}
-                            onChange={(e) => setNewMessage(e.target.value)}
-                            placeholder={isSendAllowed ? 'Type a message...' : 'Send not allowed'}
-                            flex="1"
-                            mr={2}
-                            borderRadius={10}
-                            p={2}
-                        />
-                        <Button isDisabled={!isSendAllowed} px={0} type="submit" colorScheme="primary.500" variant="ghost" borderRadius="full">
-                            <Icon as={FaPaperPlane} />
+                {user?.isMainUser && mainEvent?.type == 6 ? (
+                    <Box>
+                        <Button colorScheme="primary" size="md" mt={4} rightIcon={<Icon as={FaCcVisa} />}>
+                            Proceed to payment
                         </Button>
-                    </Flex>
-                </form>
+                    </Box>
+                ) : (
+                    <form onSubmit={(e) => sendMessage(e, messages[0])}>
+                        <Flex>
+                            <Input
+                                disabled={!isSendAllowed}
+                                value={newMessage}
+                                onChange={(e) => setNewMessage(e.target.value)}
+                                placeholder={isSendAllowed ? 'Type a message...' : 'Send not allowed'}
+                                flex="1"
+                                mr={2}
+                                borderRadius={10}
+                                p={2}
+                            />
+                            <Button isDisabled={!isSendAllowed} px={0} type="submit" colorScheme="primary.500" variant="ghost" borderRadius="full">
+                                <Icon as={FaPaperPlane} />
+                            </Button>
+                        </Flex>
+                    </form>
+                )}
             </VStack>
             <Modal isOpen={isModalOpen} onClose={closeModal}>
                 <ModalOverlay />

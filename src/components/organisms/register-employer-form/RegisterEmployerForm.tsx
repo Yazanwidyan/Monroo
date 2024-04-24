@@ -32,7 +32,7 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
                 <form onSubmit={state.handleSubmit}>
                     <SimpleGrid columns={{ base: 1, md: 2 }} rowGap="20px" columnGap="20px">
                         <FormControl isRequired mb={4}>
-                            <FormLabel>{t('Profile Picture')}</FormLabel>
+                            <FormLabel>{t('register.profilepPic')}</FormLabel>
                             {state.profilePic ? (
                                 <Flex alignItems={'center'}>
                                     <Image src={URL.createObjectURL(state.profilePic)} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '20px' }} />
@@ -77,7 +77,7 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
                                         h="1.75rem"
                                         size="sm"
                                         onClick={() => togglePasswordVisibility('password')}
-                                        icon={passwordVisibility.password ? <ViewOffIcon /> : <ViewIcon />}
+                                        icon={passwordVisibility.password ? <ViewIcon /> : <ViewOffIcon />}
                                         aria-label={passwordVisibility.password ? 'Hide password' : 'Show password'}
                                     />
                                 </InputRightElement>
@@ -101,7 +101,7 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
                                         h="1.75rem"
                                         size="sm"
                                         onClick={() => togglePasswordVisibility('confirmPassword')}
-                                        icon={passwordVisibility.confirmPassword ? <ViewOffIcon /> : <ViewIcon />}
+                                        icon={passwordVisibility.confirmPassword ? <ViewIcon /> : <ViewOffIcon />}
                                         aria-label={passwordVisibility.confirmPassword ? 'Hide password' : 'Show password'}
                                     />
                                 </InputRightElement>

@@ -24,6 +24,7 @@
     "register": {
       "whoAreYou": "اختر نوع الحساب",
       "username": "اسم المستخدم",
+      "profilepic": "الصورة الشخصية",
       "email": "البريد الالكتروني",
       "password": "كلمة المرور",
       "confirm_password": "تأكيد كلمة المرور",

@@ -94,7 +94,7 @@ export default function LoginForm(props: LoginFormProps) {
                                 h="1.5rem"
                                 size="sm"
                                 onClick={() => togglePasswordVisibility('password')}
-                                icon={passwordVisibility.password ? <ViewOffIcon /> : <ViewIcon />}
+                                icon={passwordVisibility.password ? <ViewIcon /> : <ViewOffIcon />}
                                 aria-label={passwordVisibility.password ? 'Hide password' : 'Show password'}
                                 variant="ghost"
                             />

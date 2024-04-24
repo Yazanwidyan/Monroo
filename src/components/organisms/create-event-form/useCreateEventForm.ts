@@ -17,7 +17,7 @@ const DEFAULT_CREATE_EVENT: CreateEvent = {
     title: '',
     desc: '',
     averageCost: '',
-    gender: '',
+    gender: 0,
     languages: '',
     duration: '',
     eventDate: '',

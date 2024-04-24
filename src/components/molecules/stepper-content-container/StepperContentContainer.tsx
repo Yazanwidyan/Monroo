@@ -15,7 +15,7 @@ export default function StepperContentContainer(props: StepperContentContainerPr
     const { t } = useTranslation();
 
     return (
-        <Container maxWidth={props.currentStep === 1 ? '3xl' : '5xl'} margin="auto">
+        <Container maxWidth={'5xl'} margin="auto">
             <Box>
                 <Box>{props.children}</Box>
                 <Box mt={4} display="flex" justifyContent="space-between">

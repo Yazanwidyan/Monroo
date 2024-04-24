@@ -12,21 +12,21 @@ export const UserContext = createContext<UserContextType>({
 });
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [user, setUser] = useState<LoginInput | null>(() => {
+    const [user, setUser] = useState<any | null>(() => {
         const storedUser = localStorage.getItem('user');
         return storedUser ? JSON.parse(storedUser) : null;
     });
 
-    const updateUser = (userInfo: LoginInput | null) => {
+    const updateUser = (userInfo: any | null) => {
         if (userInfo) {
-            setUser({ ...userInfo, isMainUser: !userInfo.hasOwnProperty('dob') });
-            localStorage.setItem(
-                'user',
-                JSON.stringify({
-                    ...userInfo,
-                    isMainUser: !userInfo.hasOwnProperty('dob'),
-                })
-            );
+            const updatedUserInfo = {
+                ...userInfo,
+                isMainUser: !userInfo.hasOwnProperty('dob'),
+                // Retain existing token if new token is empty
+                token: userInfo.token ? userInfo.token : user ? user.token : null,
+            };
+            setUser(updatedUserInfo);
+            localStorage.setItem('user', JSON.stringify(updatedUserInfo));
         } else {
             setUser(userInfo);
             localStorage.removeItem('user');

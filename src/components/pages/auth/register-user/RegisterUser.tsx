@@ -20,14 +20,32 @@ export default function RegisterUserPage() {
 
     const logGoogleUser = async () => {
         const response = await signInWithPopup(auth, google_provider);
-        console.log(response);
+        try {
+            const payload = {
+                username: response?.user?.email,
+            };
 
-        const payload = {
-            username: response?.user?.email,
-        };
-        const res = await authServices.socialLoginUser(payload);
-        updateUser(res.data);
-        navigate('/home', { replace: true });
+            if (state.userType == 0) {
+                const res = await authServices.socialLoginUser(payload);
+                updateUser(res.data);
+                navigate('/home', { replace: true });
+            } else {
+                const res = await authServices.socialLoginProvider(payload);
+                updateUser(res.data);
+                navigate('/timeline', { replace: true });
+            }
+        } catch (error) {
+            const formData = {
+                username: response?.user?.displayName,
+                email: response?.user?.email,
+                profilePic: response?.user?.photoURL,
+            };
+            if (state.userType == 0) {
+                navigate('/user-register', { state: { formData }, replace: true });
+            } else {
+                navigate('/provider-register', { state: { formData }, replace: true });
+            }
+        }
     };
 
     const logFacebookUser = async () => {

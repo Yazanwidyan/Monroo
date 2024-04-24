@@ -8,7 +8,7 @@ export type CreateEvent = {
     averageCost: string;
     duration: string;
     languages: string;
-    gender: string;
+    gender: number;
     eventDate: string;
     eventEndDate: string;
     location: string;
