@@ -144,7 +144,7 @@ export default function EditServiceProviderContextProvider({ providerProfile, ch
     //#region Categories Selection
 
     const [selectedCategory, setSelectedCategory] = useState<MultiSelectOption>();
-    const [selectedSubCategories, setSelectedSubCategories] = useState<MultiSelectOption>();
+    const [selectedSubCategories, setSelectedSubCategories] = useState<any>();
 
     const filteredSubCategories = useMemo(() => {
         return subCategories.filter((subCategory) => subCategory.categoryId === selectedCategory?.value);
@@ -181,6 +181,10 @@ export default function EditServiceProviderContextProvider({ providerProfile, ch
                 catID: providerProfile.subCatID[0].catID,
                 label: providerProfile.subCatID[0].name,
                 value: providerProfile.subCatID[0].id,
+                id: providerProfile.subCatID[0].id,
+                name: providerProfile.subCatID[0].name,
+                nameAR: providerProfile.subCatID[0].nameAR,
+                nameRUS: providerProfile.subCatID[0].nameRUS,
             });
 
             setPersonalInfo((prevPersonalInfo) => ({

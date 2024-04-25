@@ -110,7 +110,7 @@ export default function EasyRegisterUserPage() {
                             <FormLabel>{t('register.country')}</FormLabel>
                             <Select required placeholder={t('register.select_country')} value={formData.country} onChange={handleChange} name="country">
                                 {countries.map((country) => (
-                                    <option key={country.code} value={country.code}>
+                                    <option key={country.code} value={country.name}>
                                         {country.name}
                                     </option>
                                 ))}

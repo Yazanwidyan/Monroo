@@ -22,15 +22,15 @@ export default function EditServiceProviderPersonalInfo() {
             <FormControl isRequired>
                 <FormLabel>{t('register.gender')}</FormLabel>
                 <Select name="gender" value={state.personalInfo.gender} onChange={state.handlePersonalInfoChange} placeholder="Select option">
-                    <option value={0}>Male</option>
-                    <option value={1}>Female</option>
+                    <option value={1}>Male</option>
+                    <option value={2}>Female</option>
                 </Select>
             </FormControl>
             <FormControl isRequired>
                 <FormLabel>{t('register.nationality')}</FormLabel>
                 <Select placeholder={t('register.select_country')} value={state.personalInfo.nationality} onChange={state.handlePersonalInfoChange} name="nationality" required>
                     {state.countries.map((country) => (
-                        <option key={country.code} value={country.code}>
+                        <option key={country.code} value={country.name}>
                             {country.name}
                         </option>
                     ))}

@@ -122,7 +122,7 @@ export default function RegisterEmployerForm(props: RegisterEmployerFormProps) {
                             <FormLabel>{t('register.country')}</FormLabel>
                             <Select required placeholder={t('register.select_country')} value={state.registerEmployer.country} onChange={state.handleRegisterEmployerChange} name="country">
                                 {state.countries.map((country) => (
-                                    <option key={country.code} value={country.code}>
+                                    <option key={country.code} value={country.name}>
                                         {country.name}
                                     </option>
                                 ))}

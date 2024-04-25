@@ -73,7 +73,7 @@ export default function EditServiceProviderProfessionalInfo() {
                     <FormLabel>{t('register.Open_to_Work_in_Country')}</FormLabel>
                     <Select placeholder={t('register.select_country')} value={state.professionalInfo.openToWorkInCountry} onChange={state.handleProfessionalInfoChange} name="openToWorkInCountry">
                         {state.countries.map((country) => (
-                            <option key={country.code} value={country.code}>
+                            <option key={country.code} value={country.name}>
                                 {country.name}
                             </option>
                         ))}
@@ -85,7 +85,7 @@ export default function EditServiceProviderProfessionalInfo() {
                     <FormLabel>{t('register.Country_of_Residence')}</FormLabel>
                     <Select placeholder={t('register.select_country')} value={state.professionalInfo.countryOfResidence} onChange={state.handleProfessionalInfoChange} name="countryOfResidence">
                         {state.countries.map((country) => (
-                            <option key={country.code} value={country.code}>
+                            <option key={country.code} value={country.name}>
                                 {country.name}
                             </option>
                         ))}
