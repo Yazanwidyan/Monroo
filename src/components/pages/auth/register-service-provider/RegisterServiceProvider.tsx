@@ -32,6 +32,8 @@ export default function RegisterServiceProvider() {
                         ...personalInfo,
                         ...professionalInfo,
                         visaType: professionalInfo.visaType || 0,
+                        musicalInstruments: professionalInfo.musicalInstruments || [],
+                        musicGenres: professionalInfo.musicGenres || [],
                         catID: selectedCategory.value,
                         subCatID: selectedSubCategories,
                     };

@@ -35,6 +35,7 @@ const authServices = {
         const config = {
             headers: {
                 'x-secret': 'MonrooHeaders',
+                'Content-Type': 'multipart/form-data',
             },
         };
         return api
@@ -96,10 +97,27 @@ const authServices = {
         const config = {
             headers: {
                 'x-secret': 'MonrooHeaders',
+                'Content-Type': 'multipart/form-data',
             },
         };
         return api
             .post(`/monroo/apis/user/SocialRegister`, payload, config)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                throw error;
+            });
+    },
+    socialRegisterProvider: (payload) => {
+        const config = {
+            headers: {
+                'x-secret': 'MonrooHeaders',
+                'Content-Type': 'multipart/form-data',
+            },
+        };
+        return api
+            .post(`/monroo/apis/provider/SocialRegister`, payload, config)
             .then((response) => {
                 return response;
             })

@@ -178,9 +178,9 @@ export default function EditServiceProviderContextProvider({ providerProfile, ch
                 value: providerProfile.catID,
             });
             setSelectedSubCategories({
-                catID: providerProfile.subCatID[0].value,
-                label: providerProfile.subCatID[0].label,
-                value: providerProfile.subCatID[0].value,
+                catID: providerProfile.subCatID[0].catID,
+                label: providerProfile.subCatID[0].name,
+                value: providerProfile.subCatID[0].id,
             });
 
             setPersonalInfo((prevPersonalInfo) => ({

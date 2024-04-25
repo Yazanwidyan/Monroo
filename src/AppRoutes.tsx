@@ -19,6 +19,7 @@ import AuthRoutes from './components/molecules/auth-routes/AuthRoutes';
 import UserProfile from './components/pages/user/user-profile/UserProfile';
 import UserBooking from './components/pages/user/user-booking/UserBooking';
 import EasyRegisterUserPage from './components/pages/auth/easy-register-user/EasyRegisterUser';
+import EasyRegisterProviderPage from './components/pages/auth/easy-register-provider/EasyRegisterProvider';
 
 export const AppRoutes = () => (
     <>
@@ -32,6 +33,7 @@ export const AppRoutes = () => (
             </Route>
             <Route>
                 <Route path="user-register" element={<EasyRegisterUserPage />} />
+                <Route path="provider-register" element={<EasyRegisterProviderPage />} />
             </Route>
         </Route>
         <Route element={<PrivateRoutes />}>

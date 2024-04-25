@@ -239,7 +239,7 @@ const Messaging = ({ selectedRoom }) => {
         if (message.type === 1 && message.providerID !== user.id) {
             return (
                 <Flex key={index} justifyContent={message.senderID === user.id ? 'flex-end' : 'flex-start'}>
-                    <Box maxW="70%" m={2} borderRadius="lg" bg={message.senderID === user.id ? 'primary.600' : 'gray.200'} color={message.senderID === user.id ? 'white' : 'black'}>
+                    <Box maxW="70%" m={2} borderRadius="lg" bg={message.senderID === user.id ? 'gray.200' : 'primary.500'} color={message.senderID === user.id ? 'black' : 'white'}>
                         <Box borderRadius="lg" p="4">
                             <Text fontSize="sm" fontWeight="bold">
                                 Event request
@@ -258,7 +258,7 @@ const Messaging = ({ selectedRoom }) => {
         } else if (message.type === 1) {
             return (
                 <Flex key={index} justifyContent={message.senderID === user.id ? 'flex-end' : 'flex-start'}>
-                    <Box maxW="70%" m={2} borderRadius="lg" bg={message.senderID === user.id ? 'primary.600' : 'gray.200'} color={message.senderID === user.id ? 'white' : 'black'}>
+                    <Box maxW="70%" m={2} borderRadius="lg" bg={message.senderID === user.id ? 'gray.200' : 'primary.500'} color={message.senderID === user.id ? 'black' : 'white'}>
                         <Box borderRadius="lg" p="4">
                             <Text fontSize="sm" fontWeight="bold">
                                 Event request
@@ -283,12 +283,12 @@ const Messaging = ({ selectedRoom }) => {
         } else if (message.type === 4) {
             return (
                 <Flex key={index} justifyContent={message.senderID === user.id ? 'flex-end' : 'flex-start'}>
-                    <Box maxW="70%" m={2} borderRadius="lg" bg={message.senderID === user.id ? 'primary.600' : 'gray.200'} color={message.senderID === user.id ? 'white' : 'black'}>
+                    <Box maxW="70%" m={2} borderRadius="lg" bg={message.senderID === user.id ? 'gray.200' : 'primary.500'} color={message.senderID === user.id ? 'black' : 'white'}>
                         <Box borderRadius="lg" p="4">
                             <Text fontSize="sm" fontWeight="bold">
                                 Connection request
                             </Text>
-                            <Box margin={4} padding={4} bg={message.senderID === user.id ? '#b52824' : '#cad0d9'} borderRadius={'md'}>
+                            <Box margin={4} padding={4} bg={message.senderID === user.id ? 'gray.100' : 'primary.400'} borderRadius={'md'}>
                                 <Text fontSize="sm" fontWeight="bold">
                                     {message.eventObj.title}
                                 </Text>
@@ -313,10 +313,28 @@ const Messaging = ({ selectedRoom }) => {
                     </Box>
                 </Flex>
             );
+        } else if (message.type === 3) {
+            return (
+                <Flex key={index} justifyContent={message.senderID === user.id ? 'flex-end' : 'flex-start'}>
+                    <Box maxW="70%" m={2} borderRadius="lg" bg={message.senderID === user.id ? 'gray.200' : 'primary.500'} color={message.senderID === user.id ? 'black' : 'white'}>
+                        <Box borderRadius="lg" p="4">
+                            <Text fontSize="sm" fontWeight="bold">
+                                Request accepted
+                            </Text>
+                            <Box margin={4} padding={4} bg={message.senderID === user.id ? 'gray.100' : 'primary.400'} borderRadius={'md'}>
+                                <Text fontSize="sm" fontWeight="bold">
+                                    {message.eventObj.title}
+                                </Text>
+                                <Text fontSize="xs">Description: {message.eventObj.desc}</Text>
+                            </Box>
+                        </Box>
+                    </Box>
+                </Flex>
+            );
         } else if (message.type === 5) {
             return (
                 <Flex key={index} justifyContent={message.senderID === user.id ? 'flex-end' : 'flex-start'}>
-                    <Box maxW="70%" m={2} borderRadius="lg" bg={message.senderID === user.id ? 'primary.600' : 'gray.200'} color={message.senderID === user.id ? 'white' : 'black'}>
+                    <Box maxW="70%" m={2} borderRadius="lg" bg={message.senderID === user.id ? 'gray.200' : 'primary.500'} color={message.senderID === user.id ? 'black' : 'white'}>
                         <Box borderRadius="lg" p="4">
                             <Text fontSize="sm" fontWeight="bold">
                                 Deal request
@@ -355,7 +373,7 @@ const Messaging = ({ selectedRoom }) => {
         } else {
             return (
                 <Flex key={index} justifyContent={message.senderID === user.id ? 'flex-end' : 'flex-start'}>
-                    <Box maxW="70%" p={3} m={3} borderRadius="lg" bg={message.senderID === user.id ? 'primary.600' : 'gray.200'} color={message.senderID === user.id ? 'white' : 'black'}>
+                    <Box maxW="70%" p={3} m={3} borderRadius="lg" bg={message.senderID === user.id ? 'gray.200' : 'primary.500'} color={message.senderID === user.id ? 'black' : 'white'}>
                         <Text fontSize={'xs'}>{message.msg}</Text>
                     </Box>
                 </Flex>
@@ -367,7 +385,7 @@ const Messaging = ({ selectedRoom }) => {
         <Box p={4}>
             <VStack spacing={4} mb={4} align="stretch">
                 <Box textAlign={'end'} marginBottom={'-3'}>
-                    {user?.isMainUser ? (
+                    {user?.isMainUser && mainEvent?.type != 6 ? (
                         <Button onClick={openDealModal} colorScheme="primary" size="md" mt={4} rightIcon={<Icon as={FaHandshake} />}>
                             Make a Deal
                         </Button>

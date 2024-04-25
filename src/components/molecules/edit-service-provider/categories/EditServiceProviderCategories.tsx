@@ -22,7 +22,7 @@ export default function EditServiceProviderCategories() {
                     placeholder={t('register.select_category')}
                     name="category"
                     options={state.categories.map((category) => ({
-                        label: i18n.language == 'en' ? category.name : i18n.language == 'ar' ? category.nameAR : category.nameRUS,
+                        label: i18n?.language?.includes('en') ? category.name : i18n?.language?.includes('ar') ? category.nameAR : category.nameRUS,
                         value: category.id,
                         catID: category.id,
                         name: category.name,
@@ -42,13 +42,13 @@ export default function EditServiceProviderCategories() {
                     placeholder={t('register.select_subcategory')}
                     name="subCategories"
                     options={state.filteredSubCategories.map((category) => ({
-                        label: i18n.language == 'en' ? category.name : i18n.language == 'ar' ? category.nameAR : category.nameRUS,
+                        label: i18n?.language?.includes('en') ? category.name : i18n?.language?.includes('ar') ? category.nameAR : category.nameRUS,
                         value: category.id,
                         id: category.id,
+                        catID: category.categoryId,
                         name: category.name,
                         nameAR: category.nameAR,
                         nameRUS: category.nameRUS,
-                        catID: category.categoryId,
                     }))}
                 />
             </FormControl>

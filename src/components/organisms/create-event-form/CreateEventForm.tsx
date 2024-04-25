@@ -87,7 +87,7 @@ export default function CreateEventForm(props: CreateEventFormProps) {
                     <Select name="languages" value={state.createEvent.languages} onChange={state.handleCreateEventChange} placeholder="Select option">
                         {languagesList.map((language) => (
                             <option key={language.code} value={language.code}>
-                                {i18n.language == 'en' ? language.name.en : language.name.ar}
+                                {i18n?.language?.includes('en') ? language.name.en : language.name.ar}
                             </option>
                         ))}
                     </Select>
