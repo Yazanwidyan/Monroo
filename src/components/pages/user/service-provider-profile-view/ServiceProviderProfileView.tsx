@@ -20,7 +20,7 @@ const footerHeight = 100; // Height of the footer in pixels
 const minHeight = `calc(100vh - ${headerHeight}px - ${footerHeight}px)`;
 
 const renderOptionalField = (label, value) => {
-    if (value !== undefined && value !== null && value?.length > 0 && value[0] !== null && value !== '0') {
+    if (value !== undefined && value !== null && value !== 'null' && value?.length > 0 && value[0] !== null && value !== '0') {
         return (
             <Box mb={2}>
                 <Text fontWeight="400" fontSize="xs">
@@ -115,7 +115,7 @@ const PersonalInfo = ({ dob, email, phone, nationality, countryOfResidence, gend
             </Box>
             <Box>
                 {renderOptionalField('Phone', phone)}
-                {renderOptionalField('Gender', gender == 1 ? 'Male' : 'Female')}
+                {renderOptionalField('Gender', gender == 1 ? 'Male' : gender == 2 ? 'Female' : '')}
                 {renderOptionalField('Country of residence', countryOfResidence)}
                 {renderOptionalField('Weight', `${weight}`)}
             </Box>
@@ -164,8 +164,8 @@ const AdditionalInfo = ({
                 {renderOptionalField('Average rate per hour', averageRatePerHour)}
                 {renderOptionalField('Experience', experience)}
                 {renderOptionalField('Special skills', specialSkills)}
-                {musicGenres?.[0] !== null && <MusicGenreLookup value={musicGenres} />}
-                {musicalInstruments?.[0] !== null && <MusicalInstrumentLookup value={musicalInstruments} />}
+                {musicGenres?.length && musicGenres?.[0] !== null ? <MusicGenreLookup value={musicGenres} /> : null}
+                {musicalInstruments?.length && musicalInstruments?.[0] !== null ? <MusicalInstrumentLookup value={musicalInstruments} /> : null}
             </Box>
             <Box>
                 {education && <EducationLookup value={education} />}
@@ -188,7 +188,6 @@ const AdditionalInfo = ({
                 )}
                 {renderOptionalField('Spoken language', spokenLanguage)}
                 {renderOptionalField('Introduction video link', introductionVideoLink)}
-                {renderOptionalField('YouTube link', youtubelink)}
             </Box>
         </Grid>
     </Box>
@@ -332,7 +331,7 @@ const ServiceProviderProfileView = () => {
                         <Text mb={2} fontSize="md">
                             {bio}
                         </Text>
-                        <SocialMediaLinks instagram={instagram} linkedin={linkedin} youtubelink={youtubelink} />
+                        {instagram || linkedin || youtubelink ? <SocialMediaLinks instagram={instagram} linkedin={linkedin} youtubelink={youtubelink} /> : null}
                         {(personalVidoes[0] || personalVidoes[1]) && (
                             <Flex mb={4} gap={4}>
                                 {personalVidoes.map((video, index) => video && <VideoGallery title={'Video'} key={index} videoSrc={video} />)}

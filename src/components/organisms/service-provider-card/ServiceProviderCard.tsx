@@ -69,7 +69,7 @@ const ServiceProviderCard = ({ experience, nationality, gender, bio, image, name
                     <Text fontSize={'xs'} fontWeight="bold">
                         Gender
                     </Text>
-                    <Text> {gender == 1 ? 'Male' : 'Female'}</Text>
+                    <Text> {gender == 1 ? 'Male' : gender == 2 ? 'Female' : 'N/A'}</Text>
                 </Flex>
             </Flex>
             <Divider my={3} />

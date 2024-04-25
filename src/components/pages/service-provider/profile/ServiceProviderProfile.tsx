@@ -116,7 +116,7 @@ const PersonalInfo = ({ dob, email, phone, nationality, countryOfResidence, gend
             </Box>
             <Box>
                 {renderOptionalField('Phone', phone)}
-                {renderOptionalField('Gender', gender == 1 ? 'Male' : 'Female')}
+                {renderOptionalField('Gender', gender == 1 ? 'Male' : gender == 2 ? 'Female' : '')}
                 {renderOptionalField('Country of residence', countryOfResidence)}
                 {renderOptionalField('Weight', `${weight}`)}
             </Box>
@@ -174,7 +174,6 @@ const AdditionalInfo = ({
                 )}
                 {renderOptionalField('Spoken language', spokenLanguage)}
                 {renderOptionalField('Introduction video link', introductionVideoLink)}
-                {renderOptionalField('YouTube link', youtubelink)}
             </Box>
         </Grid>
     </Box>
