@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Box, Container, Text } from '@chakra-ui/react';
-import EventBookingCard from '../../../organisms/event-booking-card/EventBookingCard';
+import UserEventBookingCard from '../../../organisms/user-event-booking-card/UserEventBookingCard';
 import useCustomToast from '../../../../hooks/useCustomToast';
 import userServices from '../../../../services/userServices';
 
@@ -31,13 +31,20 @@ const UserBooking = () => {
     }, []);
 
     const fetchData = async (status) => {
-        console.log(status);
         setSelectedTab(status);
 
         try {
             const res = await userServices.getBookings();
-            console.log('resoooo', res.data);
-            setComingEvents(res.data);
+            const events = res.data;
+            if (status === 'coming') {
+                // Filter events based on status
+                const comingEventsData = events.filter((event) => event.status === 1);
+                setComingEvents(comingEventsData);
+            } else if (status === 'past') {
+                // Filter events based on status
+                const pastEventsData = events.filter((event) => event.status !== 1);
+                setPastEvents(pastEventsData);
+            }
         } catch (error) {
             showToast(error, { status: 'error' });
         }
@@ -58,7 +65,7 @@ const UserBooking = () => {
                                 <>
                                     {comingEvents.length ? (
                                         comingEvents.map((event) => (
-                                            <EventBookingCard
+                                            <UserEventBookingCard
                                                 key={event.id}
                                                 eventID={event.id}
                                                 title={event.title}
@@ -85,7 +92,7 @@ const UserBooking = () => {
                                 <>
                                     {pastEvents.length ? (
                                         pastEvents.map((event) => (
-                                            <EventBookingCard
+                                            <UserEventBookingCard
                                                 key={event.id}
                                                 eventID={event.id}
                                                 title={event.title}

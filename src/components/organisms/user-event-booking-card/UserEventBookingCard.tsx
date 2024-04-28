@@ -1,7 +1,7 @@
 import { Box, Text, Flex, Button, Stack, Divider } from '@chakra-ui/react';
 import { FaRegCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
 
-const EventBookingCard: React.FC<{
+const UserEventBookingCard: React.FC<{
     title: string;
     eventID: string;
     description: string;
@@ -14,9 +14,16 @@ const EventBookingCard: React.FC<{
 }> = ({ eventID, title, description, cost, date, location, duration, status, onCancel }) => {
     return (
         <Box borderWidth="1px" mb={4} borderRadius="sm" p={4} boxShadow="base">
-            <Text fontSize="lg" fontWeight="bold" mb={2}>
-                {title}
-            </Text>
+            <Flex justifyContent={'space-between'}>
+                <Text fontSize="lg" fontWeight="bold" mb={2}>
+                    {title}
+                </Text>
+                <Box bg={status === 0 ? '#2173A5' : status === 1 ? '#0eb546' : '#ff5454'} display={'flex'} borderRadius={'md'} p={2} alignItems={'center'} justifyContent={'center'}>
+                    <Text color={'white'} fontSize={'sm'}>
+                        {status == 0 ? 'Pending' : status == 1 ? 'Booked' : 'Canceled'}
+                    </Text>
+                </Box>
+            </Flex>
             <Text fontSize="sm" fontWeight="bold" mb={2}>
                 {description}
             </Text>
@@ -46,14 +53,9 @@ const EventBookingCard: React.FC<{
             </Flex>
             <Divider my={3} />
             <Stack direction="row" spacing={4}>
-                <Box bg={status === 0 ? '#2173A5' : status === 1 ? '#0eb546' : '#ff5454'} display={'flex'} borderRadius={'md'} p={2} alignItems={'center'} justifyContent={'center'}>
-                    <Text color={'white'} fontSize={'sm'}>
-                        {status == 0 ? 'Pending' : status == 1 ? 'Booked' : 'Canceled'}
-                    </Text>
-                </Box>
-                {status === 1 && oncancel && (
-                    <Button fontSize={'sm'} bg={'primary.500'} color={'white'} onClick={() => onCancel(eventID)} type="button">
-                        cancel event
+                {status === 1 && (
+                    <Button fontSize={'sm'} colorScheme={'primary'} onClick={() => onCancel(eventID)} type="button">
+                        Cancel event
                     </Button>
                 )}
             </Stack>
@@ -61,4 +63,4 @@ const EventBookingCard: React.FC<{
     );
 };
 
-export default EventBookingCard;
+export default UserEventBookingCard;

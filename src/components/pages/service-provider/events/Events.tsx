@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Box, Container, Image, Text } from '@chakra-ui/react';
-import EventBookingCard from '../../../organisms/event-booking-card/EventBookingCard';
+import ProviderEventBookingCard from '../../../organisms/provider-event-booking-card/ProviderEventBookingCard';
 import { UserContext } from '../../../../contexts/UserContext';
 import providerServices from '../../../../services/providerServices';
 import useCustomToast from '../../../../hooks/useCustomToast';
@@ -47,7 +47,7 @@ const Events = () => {
                                 <>
                                     {comingEvents.length ? (
                                         comingEvents.map((event) => (
-                                            <EventBookingCard
+                                            <ProviderEventBookingCard
                                                 key={event.id}
                                                 eventID={event.id}
                                                 title={event.title}
@@ -73,7 +73,7 @@ const Events = () => {
                                 <>
                                     {pastEvents.length ? (
                                         pastEvents.map((event) => (
-                                            <EventBookingCard
+                                            <ProviderEventBookingCard
                                                 key={event.id}
                                                 eventID={event.id}
                                                 title={event.title}

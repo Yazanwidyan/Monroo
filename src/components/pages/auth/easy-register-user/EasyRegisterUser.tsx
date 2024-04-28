@@ -66,6 +66,7 @@ export default function EasyRegisterUserPage() {
             companyName: formData?.companyName,
             intrestedList: formData?.intrestedList,
             name: formData?.username.split(' ')[0],
+            profilePic: formData.profilePic,
         };
 
         const data = new FormData();

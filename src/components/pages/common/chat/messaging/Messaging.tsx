@@ -28,8 +28,6 @@ const Messaging = ({ selectedRoom }) => {
     const { showToast } = useCustomToast();
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
-    console.log('user', user);
-
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
     const messagesEndRef = useRef(null);
@@ -41,8 +39,6 @@ const Messaging = ({ selectedRoom }) => {
     const [mainEvent, setMainEvent] = useState(null);
 
     const openModal = (message) => {
-        console.log(selectedRoom);
-
         setEventData({ senderName: selectedRoom?.senderName, message: message });
         setIsModalOpen(true);
     };
@@ -67,12 +63,8 @@ const Messaging = ({ selectedRoom }) => {
         };
         try {
             const res = await userServices.makeDeal(payload);
-            console.log('res from make deal', res.data);
             fetchData();
-        } catch (error) {
-            console.log(error);
-        }
-        console.log('Submitted deal price:', dealPrice);
+        } catch (error) {}
         setDealPrice('');
         closeDealModal();
     };
@@ -93,32 +85,30 @@ const Messaging = ({ selectedRoom }) => {
         };
         try {
             const res = await userServices.getPermission(payload);
-            console.log('res from permission', res.data);
             setIsSendAllowed(true);
             // showToast('send allowed', { status: 'success' });
         } catch (error) {
             setIsSendAllowed(false);
-            console.log(error);
         }
     };
 
     const approveConnectionRequest = async (message) => {
         const payload = {
             eventID: message.eventID,
-            userID: message.eventObj.userID,
-            providerID: message.eventObj.providerID,
+            userID: message.userID,
+            providerID: message.providerID,
         };
         try {
             const res = await userServices.approvePermission(payload);
-            console.log('res from permission', res.data);
+            fetchData();
             showToast('request approved successfuly', { status: 'success' });
         } catch (error) {
             showToast(error, { status: 'error' });
         }
     };
-    useEffect(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, [newMessage]);
+    // useEffect(() => {
+    //     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // }, [newMessage]);
 
     useEffect(() => {
         fetchData();
@@ -152,7 +142,6 @@ const Messaging = ({ selectedRoom }) => {
                 }
             }
             if (mainEvent !== null) {
-                console.log('Main event:', mainEvent);
                 setMainEvent(mainEvent);
                 getPermission(mainEvent);
             } else {
@@ -164,17 +153,14 @@ const Messaging = ({ selectedRoom }) => {
     };
     const approveRequest = async (message) => {
         const payload = {
-            msg: '',
-            type: 3,
-            userID: message.userID,
             eventID: message.eventID,
-            eventObj: message.eventObj,
+            userID: message.userID,
+            providerID: message.providerID,
         };
-
         try {
-            const res = await providerServices.sendMessage(payload);
-            await fetchData();
-            console.log('res from message', res.data);
+            const res = await userServices.approvePermission(payload);
+            fetchData();
+            showToast('request approved successfuly', { status: 'success' });
         } catch (error) {
             showToast(error, { status: 'error' });
         }
@@ -182,17 +168,15 @@ const Messaging = ({ selectedRoom }) => {
 
     const approveDeal = async () => {
         const payload = {
-            msg: mainEvent.msg,
-            type: 6,
             userID: mainEvent.userID,
             eventID: mainEvent.eventID,
-            eventObj: mainEvent.eventObj,
+            providerID: mainEvent.providerID,
+            msgID: mainEvent.id,
         };
 
         try {
-            const res = await providerServices.sendMessage(payload);
+            const res = await userServices.approveDeal(payload);
             await fetchData();
-            console.log('res from message', res.data);
         } catch (error) {
             showToast(error, { status: 'error' });
         }
@@ -228,7 +212,6 @@ const Messaging = ({ selectedRoom }) => {
                 }
                 setNewMessage('');
                 await fetchData();
-                console.log('res from message', res.data);
             } catch (error) {
                 showToast(error, { status: 'error' });
             }
@@ -236,6 +219,10 @@ const Messaging = ({ selectedRoom }) => {
     };
 
     const renderMessage = (message, index) => {
+        console.log('sss');
+
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+
         if (message.type === 1 && message.providerID !== user.id) {
             return (
                 <Flex key={index} justifyContent={message.senderID === user.id ? 'flex-end' : 'flex-start'}>
@@ -270,9 +257,11 @@ const Messaging = ({ selectedRoom }) => {
                             <Text fontSize="xs">Event Date: {message.eventObj.eventDate}</Text>
                             <Text fontSize="xs">Event duration: {message.eventObj.duration} hrs</Text>
                             <Text fontSize="xs">Event avg cost: {message.eventObj.averageCost}</Text>
-                            <Button onClick={() => approveRequest(message)} fontSize={'sm'} width={'100%'} mt={5}>
-                                Approve request
-                            </Button>
+                            {!isSendAllowed && (
+                                <Button onClick={() => approveRequest(message)} fontSize={'sm'} width={'100%'} mt={5}>
+                                    Approve request
+                                </Button>
+                            )}
                             <Button fontSize={'sm'} width={'100%'} onClick={() => openModal(message)} mt={3}>
                                 See event
                             </Button>
@@ -381,11 +370,13 @@ const Messaging = ({ selectedRoom }) => {
         }
     };
 
+    console.log('main', mainEvent);
+
     return selectedRoom ? (
         <Box p={4}>
             <VStack spacing={4} mb={4} align="stretch">
-                <Box textAlign={'end'} marginBottom={'-3'}>
-                    {user?.isMainUser && mainEvent?.type != 6 ? (
+                <Box textAlign={'end'} marginBottom={'-3'} marginTop={'-6'}>
+                    {user?.isMainUser && mainEvent?.type != 6 && isSendAllowed ? (
                         <Button onClick={openDealModal} colorScheme="primary" size="md" mt={4} rightIcon={<Icon as={FaHandshake} />}>
                             Make a Deal
                         </Button>

@@ -80,6 +80,7 @@ export default function EasyRegisterProviderPage() {
             email: formData.email,
             catID: formData.catID,
             subCatID: formData.subCatID,
+            profilePic: formData.profilePic,
             visaType: 0,
         };
 
