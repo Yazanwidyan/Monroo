@@ -63,6 +63,23 @@ const authServices = {
                 throw error;
             });
     },
+    mainEasyRegisterProvider: (payload) => {
+        const config = {
+            headers: {
+                'x-secret': 'MonrooHeaders',
+                'Content-Type': 'multipart/form-data',
+            },
+        };
+        return api
+            .post(`/monroo/apis/provider/EasyRegister`, payload, config)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                throw error;
+            });
+    },
+
     socialLoginUser: (payload) => {
         const config = {
             headers: {

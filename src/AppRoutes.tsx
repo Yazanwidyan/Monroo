@@ -20,6 +20,7 @@ import UserProfile from './components/pages/user/user-profile/UserProfile';
 import UserBooking from './components/pages/user/user-booking/UserBooking';
 import EasyRegisterUserPage from './components/pages/auth/easy-register-user/EasyRegisterUser';
 import EasyRegisterProviderPage from './components/pages/auth/easy-register-provider/EasyRegisterProvider';
+import MainEasyRegisterProviderPage from './components/pages/auth/main-easy-register-provider/MainEasyRegisterProvider';
 
 export const AppRoutes = () => (
     <>
@@ -29,7 +30,7 @@ export const AppRoutes = () => (
                 <Route path="/how-it-works" element={<HowItWorks />} />
                 <Route path="register" element={<RegisterUserPage />} />
                 <Route path="register/user" element={<RegisterEmployerPage />} />
-                <Route path="register/service-provider" element={<RegisterServiceProvider />} />
+                <Route path="register/service-provider" element={<MainEasyRegisterProviderPage />} />
             </Route>
             <Route>
                 <Route path="user-register" element={<EasyRegisterUserPage />} />

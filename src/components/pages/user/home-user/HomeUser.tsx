@@ -74,11 +74,7 @@ const HomeUser = () => {
         if (selectedEducation.length > 0) {
             filteredProviders = filteredProviders.filter((provider) => selectedEducation.includes(provider.education));
         }
-        if (selectedExperience.length > 0) {
-            setTimeout(() => {
-                filteredProviders = filteredProviders.filter((provider) => provider.experience >= selectedExperience[0] && provider.experience <= selectedExperience[1]);
-            }, 800);
-        }
+        filteredProviders = filteredProviders.filter((provider) => provider.experience >= selectedExperience[0] && provider.experience <= selectedExperience[1]);
         return filteredProviders;
     };
 
@@ -237,7 +233,7 @@ const HomeUser = () => {
                                             name={userProfile.fname + ' ' + userProfile.lname}
                                             providerID={userProfile.id}
                                             userProfile={userProfile}
-                                            experince={userProfile.experience}
+                                            experience={userProfile.experience}
                                             nationality={userProfile.nationality}
                                             gender={userProfile.gender}
                                         />
