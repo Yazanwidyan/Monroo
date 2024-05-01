@@ -3,6 +3,7 @@ import useEditServiceProviderProfessionalInfo from './useEditServiceProviderProf
 import { useTranslation } from 'react-i18next';
 import { CloseIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import usePasswordVisibility from '../../../../hooks/usePasswordVisibility';
+import languagesList from '../../../../constants/languages.json';
 
 export default function EditServiceProviderProfessionalInfo() {
     const state = useEditServiceProviderProfessionalInfo();
@@ -97,8 +98,8 @@ export default function EditServiceProviderProfessionalInfo() {
                     <FormLabel>{t('register.Education')}</FormLabel>
                     <Select placeholder={t('register.select_education')} value={state.professionalInfo.education} onChange={state.handleProfessionalInfoChange} name="education">
                         {state.education.map((edu) => (
-                            <option key={edu.code} value={edu.code}>
-                                {i18n.language === 'en' ? edu.name : i18n.language === 'ar' ? edu.nameAR : edu.nameRUS}
+                            <option key={edu.code} value={i18n?.language?.includes('en') ? edu.name : i18n.language === 'ar' ? edu.nameAR : edu.nameRUS}>
+                                {i18n?.language?.includes('en') ? edu.name : i18n.language === 'ar' ? edu.nameAR : edu.nameRUS}
                             </option>
                         ))}
                     </Select>
@@ -107,14 +108,13 @@ export default function EditServiceProviderProfessionalInfo() {
             {state.registerServiceProviderLookup.spokenLanguage && (
                 <FormControl>
                     <FormLabel>{t('register.spoken_languages')}</FormLabel>
-                    <Input
-                        type="text"
-                        name="spokenLanguage"
-                        placeholder={t('register.enter_spoken_languages')}
-                        value={state.professionalInfo.spokenLanguage}
-                        onChange={state.handleProfessionalInfoChange}
-                        required
-                    />
+                    <Select placeholder={t('register.enter_spoken_languages')} value={state.professionalInfo.spokenLanguage} onChange={state.handleProfessionalInfoChange} name="spokenLanguage">
+                        {languagesList.map((language) => (
+                            <option key={language.code} value={i18n?.language?.includes('en') ? language.name.en : language.name.ar}>
+                                {i18n?.language?.includes('en') ? language.name.en : language.name.ar}
+                            </option>
+                        ))}
+                    </Select>
                 </FormControl>
             )}
             <FormControl>

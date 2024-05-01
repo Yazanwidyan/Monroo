@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { Box, VStack, Input, Button, Text, Flex, Icon, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody } from '@chakra-ui/react';
+import { Box, VStack, Input, Button, Text, Flex, Icon, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, Divider } from '@chakra-ui/react';
 import { UserContext } from '../../../../../contexts/UserContext';
 import providerServices from '../../../../../services/providerServices';
 import userServices from '../../../../../services/userServices';
@@ -8,6 +8,7 @@ import { FaCcVisa, FaMoneyBill, FaPaperPlane } from 'react-icons/fa';
 import { FaHandshake } from 'react-icons/fa'; // Importing handshake icon from react-icons library
 
 import { useNavigate } from 'react-router-dom';
+import paymentService from '../../../../../services/paymentServices';
 
 const getStatusText = (status) => {
     switch (status) {
@@ -69,6 +70,24 @@ const Messaging = ({ selectedRoom }) => {
         closeDealModal();
     };
 
+    const checkoutSim = async () => {
+        const payload = {
+            eventID: mainEvent?.eventID,
+            amount: mainEvent?.eventObj?.dealCost ? mainEvent?.eventObj?.dealCost : mainEvent?.msg,
+        };
+        try {
+            const res = await paymentService.checkoutSim(payload);
+            showToast('payment is successful', { status: 'success' });
+            approvePermissionAfterPaymentSucceed();
+        } catch (error) {
+            showToast('payment not successful', { status: 'error' });
+            console.log(error);
+        }
+
+        // setDealPrice('');
+        // closeDealModal();
+    };
+
     const handlePriceChange = (e) => {
         setDealPrice(e.target.value); // Update the dealPrice state with the parsed number or 0 if NaN
     };
@@ -89,6 +108,22 @@ const Messaging = ({ selectedRoom }) => {
             // showToast('send allowed', { status: 'success' });
         } catch (error) {
             setIsSendAllowed(false);
+        }
+    };
+
+    const approvePermissionAfterPaymentSucceed = async () => {
+        const payload = {
+            eventID: mainEvent.eventID,
+            userID: mainEvent.userID,
+            providerID: mainEvent.providerID,
+            permissionValue: true,
+            paymentwaiting: true,
+        };
+        try {
+            const res = await userServices.approvePermission(payload);
+            fetchData();
+        } catch (error) {
+            showToast(error, { status: 'error' });
         }
     };
 
@@ -219,9 +254,9 @@ const Messaging = ({ selectedRoom }) => {
     };
 
     const renderMessage = (message, index) => {
-        console.log('sss');
-
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => {
+            messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        }, 500);
 
         if (message.type === 1 && message.providerID !== user.id) {
             return (
@@ -238,6 +273,14 @@ const Messaging = ({ selectedRoom }) => {
                             <Text fontSize="xs">Event Date: {message.eventObj.eventDate}</Text>
                             <Text fontSize="xs">Event duration: {message.eventObj.duration} hrs</Text>
                             <Text fontSize="xs">Event avg cost: {message.eventObj.averageCost}</Text>
+                            {isSendAllowed && (
+                                <Box mt={3}>
+                                    <Divider></Divider>
+                                    <Text mt={3} textAlign={'center'}>
+                                        Event accepted
+                                    </Text>
+                                </Box>
+                            )}
                         </Box>
                     </Box>
                 </Flex>
@@ -257,10 +300,17 @@ const Messaging = ({ selectedRoom }) => {
                             <Text fontSize="xs">Event Date: {message.eventObj.eventDate}</Text>
                             <Text fontSize="xs">Event duration: {message.eventObj.duration} hrs</Text>
                             <Text fontSize="xs">Event avg cost: {message.eventObj.averageCost}</Text>
-                            {!isSendAllowed && (
+                            {!isSendAllowed && mainEvent.eventID == message.eventID ? (
                                 <Button onClick={() => approveRequest(message)} fontSize={'sm'} width={'100%'} mt={5}>
                                     Approve request
                                 </Button>
+                            ) : (
+                                <Box mt={3}>
+                                    <Divider></Divider>
+                                    <Text mt={3} textAlign={'center'}>
+                                        Event accepted
+                                    </Text>
+                                </Box>
                             )}
                             <Button fontSize={'sm'} width={'100%'} onClick={() => openModal(message)} mt={3}>
                                 See event
@@ -333,7 +383,7 @@ const Messaging = ({ selectedRoom }) => {
                             </Text>
                             <Text fontSize="xs">Description: {message.eventObj.desc}</Text>
                             <Text fontSize="xs">Deal price: {message.msg}</Text>
-                            {message.senderID !== user.id && (
+                            {message.senderID !== user.id && mainEvent.eventID == message.eventID && mainEvent.type != 6 && (
                                 <Button onClick={approveDeal} fontSize={'sm'} width={'100%'} mt={5}>
                                     Accept deal
                                 </Button>
@@ -384,11 +434,11 @@ const Messaging = ({ selectedRoom }) => {
                 </Box>
                 <Box borderWidth={1} borderRadius={10} h="calc(100vh - 400px)" overflowY="scroll">
                     {messages.map((message, index) => renderMessage(message, index))}
-                    <div ref={messagesEndRef} />
+                    <div ref={messagesEndRef}></div>
                 </Box>
-                {user?.isMainUser && mainEvent?.type == 6 ? (
+                {user?.isMainUser && mainEvent?.type == 6 && mainEvent?.eventObj?.status != 3 ? (
                     <Box>
-                        <Button colorScheme="primary" size="md" mt={4} rightIcon={<Icon as={FaCcVisa} />}>
+                        <Button onClick={checkoutSim} colorScheme="primary" size="md" mt={4} rightIcon={<Icon as={FaCcVisa} />}>
                             Proceed to payment
                         </Button>
                     </Box>

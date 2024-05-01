@@ -44,7 +44,7 @@ const ServiceProviderCard = ({ experience, nationality, gender, bio, image, name
             <Flex gap={4} alignItems={'center'}>
                 <Avatar cursor={'pointer'} onClick={handleShowProfile} name={name} src={image || '/assets/images/userprofile.jpg'} />
                 <Text fontSize="md" mb={2}>
-                    {name} {experience}
+                    {name}
                 </Text>
             </Flex>
             <Text minH="3rem" fontSize="xs" color="gray.600" mt={4} mb={2}>
