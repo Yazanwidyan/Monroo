@@ -1,7 +1,46 @@
 import { Box, Flex, Text, Link, HStack } from '@chakra-ui/react';
+import { useContext, useEffect } from 'react';
 import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
+import { UserContext } from '../../../contexts/UserContext';
+import { useNavigate } from 'react-router-dom';
+import userServices from '../../../services/userServices';
+import providerServices from '../../../services/providerServices';
 
 const Footer = () => {
+    const navigate = useNavigate();
+
+    const { user, updateUser } = useContext(UserContext);
+
+    useEffect(() => {
+        if (user?.isMainUser) {
+            fetchUserData();
+        } else {
+            fetchProviderData();
+        }
+    }, []);
+
+    const fetchUserData = async () => {
+        const payload = {
+            userID: user.id,
+        };
+        try {
+            const res = await userServices.getListProviders(payload);
+        } catch (error) {
+            updateUser(null);
+            navigate('/');
+        }
+    };
+    const fetchProviderData = async () => {
+        const payload = {
+            userID: user.id,
+        };
+        try {
+            const res = await providerServices.getProviderEvents(payload);
+        } catch (error) {
+            updateUser(null);
+            navigate('/');
+        }
+    };
     return (
         <Box as="footer" py="4" bg="black" color="white">
             <Flex maxW="5xl" mx="auto" px="4" justify="space-between" alignItems="center" flexDirection={{ base: 'column', md: 'row' }}>

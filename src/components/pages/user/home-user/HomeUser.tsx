@@ -195,7 +195,7 @@ const HomeUser = () => {
                                 }))}
                             />
                         </FormControl>
-                        <Box width={'100%'} px={1}>
+                        {/*} <Box width={'100%'} px={1}>
                             <FormControl>
                                 <Text fontSize="sm" color="gray.500">
                                     Experience: {selectedExperience[0]} - {selectedExperience[1]} yrs
@@ -208,7 +208,7 @@ const HomeUser = () => {
                                     <RangeSliderThumb index={1} />
                                 </RangeSlider>
                             </FormControl>
-                        </Box>
+                        </Box>*/}
                     </Box>
 
                     <Box mb={8}>
