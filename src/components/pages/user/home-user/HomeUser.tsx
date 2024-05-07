@@ -1,30 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
-import {
-    Grid,
-    GridItem,
-    Input,
-    InputGroup,
-    SkeletonText,
-    Stack,
-    Box,
-    Container,
-    Skeleton,
-    InputLeftElement,
-    Icon,
-    Text,
-    FormControl,
-    RangeSlider,
-    RangeSliderTrack,
-    RangeSliderFilledTrack,
-    RangeSliderThumb,
-} from '@chakra-ui/react'; // Import Slider components from Chakra UI
+import { useContext, useEffect, useState } from 'react';
+import { Grid, GridItem, SkeletonText, Stack, Box, Container, Skeleton, Text, FormControl } from '@chakra-ui/react'; // Import Slider components from Chakra UI
 import { debounce } from 'lodash';
 import { Select as MultiSelect } from 'chakra-react-select';
 import ServiceProviderCard from '../../../organisms/service-provider-card/ServiceProviderCard';
 import { UserContext } from '../../../../contexts/UserContext';
 import userServices from '../../../../services/userServices';
 import useCustomToast from '../../../../hooks/useCustomToast';
-import { FaSearch } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import styles from './HomeUser.module.scss';
 import { LookupsContext } from '../../../../contexts/LookupsContext';
@@ -56,9 +37,9 @@ const HomeUser = () => {
         setSelectedEducation(selectedEducation);
     };
 
-    const handleExperienceChange = (values: number[]) => {
-        setSelectedExperience(values);
-    };
+    // const handleExperienceChange = (values: number[]) => {
+    //     setSelectedExperience(values);
+    // };
 
     const filterProviders = () => {
         let filteredProviders = providersList;

@@ -1,14 +1,14 @@
-import { useContext, useEffect, useState } from 'react';
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Box, Container, Image, Text } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Box, Container, Text } from '@chakra-ui/react';
 import ProviderEventBookingCard from '../../../organisms/provider-event-booking-card/ProviderEventBookingCard';
-import { UserContext } from '../../../../contexts/UserContext';
+// import { UserContext } from '../../../../contexts/UserContext';
 import providerServices from '../../../../services/providerServices';
 import useCustomToast from '../../../../hooks/useCustomToast';
-import userServices from '../../../../services/userServices';
+// import userServices from '../../../../services/userServices';
 
 const Events = () => {
     const [comingEvents, setComingEvents] = useState([]);
-    const [pastEvents, setPastEvents] = useState([]);
+    const [pastEvents] = useState([]);
     const [selectedTab, setSelectedTab] = useState('coming'); // Default selected tab
 
     const { showToast } = useCustomToast();

@@ -1,11 +1,11 @@
-import { FormControl, FormLabel, Input, Button, Container, Link as ChakraLink, Flex, InputRightElement, IconButton, InputGroup, Text, Image, Spacer, Divider } from '@chakra-ui/react';
+import { FormControl, FormLabel, Input, Button, Container, Link as ChakraLink, Flex, InputRightElement, IconButton, InputGroup, Text, Image, Divider } from '@chakra-ui/react';
 import useLoginForm from './useLoginForm';
 import { useTranslation } from 'react-i18next';
 import { LoginInput } from '../../../models/LoginInput';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import usePasswordVisibility from '../../../hooks/usePasswordVisibility';
-import { GoogleAuthProvider, FacebookAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import authServices from '../../../services/authServices';
 import { useContext } from 'react';
 import { UserContext } from '../../../contexts/UserContext';

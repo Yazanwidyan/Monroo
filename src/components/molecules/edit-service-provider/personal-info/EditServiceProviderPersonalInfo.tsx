@@ -1,4 +1,4 @@
-import { FormControl, FormLabel, Input, Radio, RadioGroup, Select, SimpleGrid, Stack } from '@chakra-ui/react';
+import { FormControl, FormLabel, Input, Select, SimpleGrid } from '@chakra-ui/react';
 import useEditServiceProviderPersonalInfo from './useEditServiceProviderPersonalInfo';
 import { useTranslation } from 'react-i18next';
 

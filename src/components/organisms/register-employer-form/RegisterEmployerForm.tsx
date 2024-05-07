@@ -6,7 +6,7 @@ import useRegisterEmployerForm from './useRegisterEmployerForm';
 import styles from './RegisterEmployerForm.module.scss';
 import { useTranslation } from 'react-i18next';
 import usePasswordVisibility from '../../../hooks/usePasswordVisibility';
-import { DeleteIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
 export type RegisterEmployerFormProps = {
     onSubmit(registerEmployer: RegisterEmployer, profilePic: any): Promise<void>;

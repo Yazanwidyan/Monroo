@@ -2,7 +2,7 @@ import { useContext, useMemo, useState } from 'react';
 import { FormControl, FormLabel, Input, Button, Container, SimpleGrid, Box, InputGroup, InputRightElement, IconButton } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
-import countryList from '../../../../constants/countries.json';
+// import countryList from '../../../../constants/countries.json';
 import { Select as MultiSelect } from 'chakra-react-select';
 import { LookupsContext } from '../../../../contexts/LookupsContext';
 import { UserContext } from '../../../../contexts/UserContext';
@@ -12,7 +12,7 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
 export default function MainEasyRegisterProviderPage() {
     const { categories, subCategories } = useContext(LookupsContext);
-    const location = useLocation();
+    // const location = useLocation();
     const { updateUser } = useContext(UserContext);
 
     const navigate = useNavigate();

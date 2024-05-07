@@ -1,4 +1,4 @@
-import { FormControl, FormLabel, IconButton, Input, InputGroup, InputRightElement, Radio, RadioGroup, Select, SimpleGrid, Stack } from '@chakra-ui/react';
+import { FormControl, FormLabel, IconButton, Input, InputGroup, InputRightElement, Select, SimpleGrid } from '@chakra-ui/react';
 import useRegisterServiceProviderPersonalInfo from './useRegisterServiceProviderPersonalInfo';
 import usePasswordVisibility from '../../../../hooks/usePasswordVisibility';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';

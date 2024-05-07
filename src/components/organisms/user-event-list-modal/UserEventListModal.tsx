@@ -1,4 +1,4 @@
-import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, VStack, Text, Flex, Box, Image } from '@chakra-ui/react';
+import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, VStack, Text, Flex, Box } from '@chakra-ui/react';
 import userServices from '../../../services/userServices';
 import useCustomToast from '../../../hooks/useCustomToast';
 

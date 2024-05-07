@@ -25,6 +25,7 @@ const Footer = () => {
         };
         try {
             const res = await userServices.getListProviders(payload);
+            console.log(res);
         } catch (error) {
             updateUser(null);
             navigate('/');
@@ -36,6 +37,7 @@ const Footer = () => {
         };
         try {
             const res = await providerServices.getProviderEvents(payload);
+            console.log(res);
         } catch (error) {
             updateUser(null);
             navigate('/');

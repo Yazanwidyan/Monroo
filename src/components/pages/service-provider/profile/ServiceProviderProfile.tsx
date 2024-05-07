@@ -8,7 +8,7 @@ import MusicGenreLookup from '../../../molecules/music-genre-lookup/MusicGenreLo
 import MusicalInstrumentLookup from '../../../molecules/musical-instrument-lookup/MusicalInstrumentLookup';
 import VisaTypeLookup from '../../../molecules/visa-type-lookup/VisaTypeLookup';
 import AudiosGallery from '../../../organisms/audios-gallery/AudiosGallery';
-import userServices from '../../../../services/userServices';
+// import userServices from '../../../../services/userServices';
 import { useContext, useEffect, useState } from 'react';
 import StarRating from '../../../molecules/star-rating/StarRating';
 import { UserContext } from '../../../../contexts/UserContext';
@@ -127,7 +127,6 @@ const PersonalInfo = ({ dob, email, phone, nationality, countryOfResidence, gend
 const AdditionalInfo = ({
     education,
     introductionVideoLink,
-    youtubelink,
     visaType,
     openToWorkInCountry,
     spokenLanguage,
@@ -336,7 +335,6 @@ const ServiceProviderProfileView = () => {
                             introductionVideoLink={introductionVideoLink}
                             openToWorkInCountry={openToWorkInCountry}
                             visaType={visaType}
-                            youtubelink={youtubelink}
                             spokenLanguage={spokenLanguage}
                             specialSkills={specialSkills}
                             averageRatePerHour={averageRatePerHour}

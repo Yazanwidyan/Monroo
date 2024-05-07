@@ -1,29 +1,29 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { Box, VStack, Input, Button, Text, Flex, Icon, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, Divider } from '@chakra-ui/react';
+import { Box, VStack, Input, Button, Text, Flex, Icon, Modal, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, Divider } from '@chakra-ui/react';
 import { UserContext } from '../../../../../contexts/UserContext';
 import providerServices from '../../../../../services/providerServices';
 import userServices from '../../../../../services/userServices';
 import useCustomToast from '../../../../../hooks/useCustomToast';
-import { FaCcVisa, FaMoneyBill, FaPaperPlane } from 'react-icons/fa';
+import { FaCcVisa, FaPaperPlane } from 'react-icons/fa';
 import { FaHandshake } from 'react-icons/fa'; // Importing handshake icon from react-icons library
 
 import { useNavigate } from 'react-router-dom';
 import paymentService from '../../../../../services/paymentServices';
 
-const getStatusText = (status) => {
-    switch (status) {
-        case 0:
-            return 'Pending';
-        case 1:
-            return 'Booked';
-        case 2:
-            return 'Done';
-        case 3:
-            return 'Purchased';
-        default:
-            return 'Unknown';
-    }
-};
+// const getStatusText = (status) => {
+//     switch (status) {
+//         case 0:
+//             return 'Pending';
+//         case 1:
+//             return 'Booked';
+//         case 2:
+//             return 'Done';
+//         case 3:
+//             return 'Purchased';
+//         default:
+//             return 'Unknown';
+//     }
+// };
 
 const Messaging = ({ selectedRoom }) => {
     const { showToast } = useCustomToast();
@@ -64,6 +64,8 @@ const Messaging = ({ selectedRoom }) => {
         };
         try {
             const res = await userServices.makeDeal(payload);
+            console.log(res);
+
             fetchData();
         } catch (error) {}
         setDealPrice('');
@@ -77,6 +79,8 @@ const Messaging = ({ selectedRoom }) => {
         };
         try {
             const res = await paymentService.checkoutSim(payload);
+            console.log(res);
+
             showToast('payment is successful', { status: 'success' });
             approvePermissionAfterPaymentSucceed();
         } catch (error) {
@@ -104,6 +108,8 @@ const Messaging = ({ selectedRoom }) => {
         };
         try {
             const res = await userServices.getPermission(payload);
+            console.log(res);
+
             setIsSendAllowed(true);
             // showToast('send allowed', { status: 'success' });
         } catch (error) {
@@ -121,6 +127,8 @@ const Messaging = ({ selectedRoom }) => {
         };
         try {
             const res = await userServices.approvePermission(payload);
+            console.log(res);
+
             fetchData();
         } catch (error) {
             showToast(error, { status: 'error' });
@@ -194,6 +202,8 @@ const Messaging = ({ selectedRoom }) => {
         };
         try {
             const res = await userServices.approvePermission(payload);
+            console.log(res);
+
             fetchData();
             showToast('request approved successfuly', { status: 'success' });
         } catch (error) {
@@ -211,6 +221,8 @@ const Messaging = ({ selectedRoom }) => {
 
         try {
             const res = await userServices.approveDeal(payload);
+            console.log(res);
+
             await fetchData();
         } catch (error) {
             showToast(error, { status: 'error' });
@@ -245,6 +257,9 @@ const Messaging = ({ selectedRoom }) => {
                 } else {
                     res = await providerServices.sendMessage(payload);
                 }
+
+                console.log(res);
+
                 setNewMessage('');
                 await fetchData();
             } catch (error) {

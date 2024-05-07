@@ -141,7 +141,6 @@ const Reviews = ({ reviews, openModal }) => (
 const AdditionalInfo = ({
     education,
     introductionVideoLink,
-    youtubelink,
     visaType,
     openToWorkInCountry,
     spokenLanguage,
@@ -354,7 +353,6 @@ const ServiceProviderProfileView = () => {
                             introductionVideoLink={introductionVideoLink}
                             openToWorkInCountry={openToWorkInCountry}
                             visaType={visaType}
-                            youtubelink={youtubelink}
                             spokenLanguage={spokenLanguage}
                             specialSkills={specialSkills}
                             averageRatePerHour={averageRatePerHour}

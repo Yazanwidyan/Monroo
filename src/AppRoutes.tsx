@@ -2,7 +2,7 @@ import { Route } from 'react-router-dom';
 
 import RegisterUserPage from './components/pages/auth/register-user/RegisterUser';
 import RegisterEmployerPage from './components/pages/auth/register-employer/RegisterEmployer';
-import RegisterServiceProvider from './components/pages/auth/register-service-provider/RegisterServiceProvider';
+// import RegisterServiceProvider from './components/pages/auth/register-service-provider/RegisterServiceProvider';
 import PrivateRoutes from './components/molecules/private-routes/PrivateRoutes';
 import HomeUser from './components/pages/user/home-user/HomeUser';
 import AuthLayout from './components/layout/auth-layout/AuthLayout';
