@@ -1,7 +1,7 @@
 import { useContext, useMemo, useState } from 'react';
 import { FormControl, FormLabel, Input, Button, Container, SimpleGrid, Box, InputGroup, InputRightElement, IconButton } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import countryList from '../../../../constants/countries.json';
 import { Select as MultiSelect } from 'chakra-react-select';
 import { LookupsContext } from '../../../../contexts/LookupsContext';

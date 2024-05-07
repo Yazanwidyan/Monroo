@@ -143,6 +143,8 @@ const Messaging = ({ selectedRoom }) => {
         };
         try {
             const res = await userServices.approvePermission(payload);
+            console.log(res);
+
             fetchData();
             showToast('request approved successfuly', { status: 'success' });
         } catch (error) {

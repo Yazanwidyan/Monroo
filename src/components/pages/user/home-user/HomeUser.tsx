@@ -19,11 +19,11 @@ const HomeUser = () => {
     const { categories } = useContext(LookupsContext);
     const [providersList, setListProviders] = useState<any>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [searchQuery, setSearchQuery] = useState('');
+    const [searchQuery] = useState('');
     const [selectedCategory, setSelectedCategory] = useState([]);
     const [selectedGender, setSelectedGender] = useState([]);
     const [selectedEducation, setSelectedEducation] = useState([]);
-    const [selectedExperience, setSelectedExperience] = useState([0, 25]); // Default experience range
+    const [selectedExperience] = useState([0, 25]); // Default experience range
 
     const handleCategoryChange = (selectedCategoryIds) => {
         setSelectedCategory(selectedCategoryIds);
