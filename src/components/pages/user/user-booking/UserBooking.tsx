@@ -72,7 +72,7 @@ const UserBooking = () => {
                                                 description={event.desc}
                                                 cost={event.dealCost}
                                                 date={event.eventDate}
-                                                location={event.location}
+                                                location={event.country}
                                                 duration={event.duration}
                                                 status={event.status}
                                                 onCancel={handleCancel} // handleCancel function to cancel the event
@@ -99,7 +99,7 @@ const UserBooking = () => {
                                                 description={event.desc}
                                                 cost={event.dealCost}
                                                 date={event.eventDate}
-                                                location={event.location}
+                                                location={event.country}
                                                 duration={event.duration}
                                                 status={event.status}
                                                 onCancel={handleCancel} // handleCancel function to cancel the event
