@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import LoginUser from '../../pages/auth/login-user/LoginUser';
 import LoginProvider from '../../pages/auth/login-provider/LoginProvider';
+import { useTranslation } from 'react-i18next';
 
 const LoginModal = ({ isOpen, onClose }) => {
     const [selectedTab, setSelectedTab] = useState('user');
+    const { t } = useTranslation();
 
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
@@ -18,10 +20,10 @@ const LoginModal = ({ isOpen, onClose }) => {
                     <Tabs isFitted index={selectedTab === 'user' ? 0 : 1} onChange={(index) => setSelectedTab(index === 0 ? 'user' : 'provider')}>
                         <TabList>
                             <Tab _selected={{ color: 'primary.500' }} color={'gray.500'}>
-                                User
+                                {t('common.scout')}
                             </Tab>
                             <Tab _selected={{ color: 'primary.500' }} color={'gray.500'}>
-                                Provider
+                                {t('common.star')}
                             </Tab>
                         </TabList>
                         <TabPanels>

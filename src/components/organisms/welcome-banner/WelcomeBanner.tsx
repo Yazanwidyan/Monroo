@@ -38,7 +38,7 @@ const WelcomeBanner = () => {
                         alt="Welcome to UAE Staffing"
                         objectFit="cover"
                         w="100vw"
-                        h="calc(100vh - 18vh)"
+                        h="calc(100vh - 24vh)"
                         opacity={fadeIn ? 1 : 0.4} // Set opacity based on fade animation state
                     />
 

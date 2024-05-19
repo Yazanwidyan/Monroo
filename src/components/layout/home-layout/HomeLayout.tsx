@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Flex, Box, Link as ChakraLink, Button, Container, Spacer } from '@chakra-ui/react';
+import { Flex, Box, Link as ChakraLink, Button, Container, Spacer, Image } from '@chakra-ui/react';
 import { Outlet, Link as RouterLink, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../../contexts/UserContext';
 import Footer from '../footer/Footer';
@@ -27,8 +27,8 @@ const HomeLayout = () => {
 
     return (
         <Flex minHeight="100vh" flexDirection="column">
-            <Box borderBottomWidth={1} bg="white.100" py="3" px="4">
-                <Container maxW="5xl">
+            <Box borderBottomWidth={1} bg="white.100">
+                <Container maxW="5xl" px={0}>
                     <Flex alignItems="center" fontSize="sm" fontWeight="bold" textTransform={'uppercase'} justifyContent={'space-between'}>
                         <ChakraLink
                             as={RouterLink}
@@ -39,7 +39,7 @@ const HomeLayout = () => {
                             textDecoration="none"
                             _hover={{ textDecoration: 'none' }}
                         >
-                            Monroo
+                            <Image src={'/assets/images/logo.png'} alt={'cc'} boxSize="80px" borderRadius="md" />
                         </ChakraLink>
                         <LanguageSwitcher />
                         <Spacer />

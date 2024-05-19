@@ -1,4 +1,4 @@
-import { Box, Text, Button, Avatar, Flex, Divider } from '@chakra-ui/react';
+import { Box, Text, Button, Avatar, Flex, Divider, Image } from '@chakra-ui/react';
 import { useContext, useState } from 'react';
 import UserEventListModal from '../user-event-list-modal/UserEventListModal';
 import userServices from '../../../services/userServices';
@@ -40,45 +40,45 @@ const ServiceProviderCard = ({ experience, nationality, gender, bio, image, name
     };
 
     return (
-        <Box borderColor="#CBD5E0" p={3} borderWidth="2px" borderRadius={'md'} maxW="md" overflow="hidden">
-            <Flex gap={4} alignItems={'center'}>
-                <Avatar cursor={'pointer'} onClick={handleShowProfile} name={name} src={image || '/assets/images/userprofile.jpg'} />
-                <Text fontSize="md" mb={2}>
-                    {name}
+        <Box borderColor="#CBD5E0" borderWidth="2px" borderRadius={'md'} maxW="md" overflow="hidden">
+            <Box height={'280'}>
+                <Image src={image || '/assets/images/userprofile.jpg'} alt={name} style={{ cursor: 'pointer' }} boxSize={'100%'} onClick={handleShowProfile} />
+            </Box>
+            <Box p={3}>
+                <Text fontSize="md">{name}</Text>
+                <Text minH="3rem" fontSize="xs" color="gray.600">
+                    {bio?.length > 66 ? bio?.substring(0, 60) + '...' : bio}
                 </Text>
-            </Flex>
-            <Text minH="3rem" fontSize="xs" color="gray.600" mt={4} mb={2}>
-                {bio?.length > 60 ? bio?.substring(0, 110) + '...' : bio}
-            </Text>
-            <Divider my={2} />
+                <Divider />
 
-            <Flex align="center" justify="space-between" fontSize="sm" color="gray.500">
-                <Flex direction="column" align="center">
-                    <Text fontSize={'xs'} fontWeight="bold">
-                        experience
-                    </Text>
-                    <Text> {experience ? experience : 'N/A'}</Text>
-                </Flex>
-                <Flex direction="column" align="center">
-                    <Text fontSize={'xs'} fontWeight="bold">
-                        Nationality
-                    </Text>
-                    <Text> {nationality ? nationality : 'N/A'}</Text>
-                </Flex>
-                <Flex direction="column" align="center">
-                    <Text fontSize={'xs'} fontWeight="bold">
-                        Gender
-                    </Text>
-                    <Text> {gender == 1 ? 'Male' : gender == 2 ? 'Female' : 'N/A'}</Text>
-                </Flex>
-            </Flex>
-            <Divider my={3} />
+                <Box fontSize="sm" color="gray.500">
+                    <Flex align="center" gap={2}>
+                        <Text fontSize={'xs'} fontWeight="bold">
+                            experience:
+                        </Text>
+                        <Text> {experience ? experience : 'N/A'}</Text>
+                    </Flex>
+                    <Flex align="center" gap={2}>
+                        <Text fontSize={'xs'} fontWeight="bold">
+                            Nationality:
+                        </Text>
+                        <Text> {nationality ? nationality : 'N/A'}</Text>
+                    </Flex>
+                    <Flex align="center" gap={2}>
+                        <Text fontSize={'xs'} fontWeight="bold">
+                            Gender:
+                        </Text>
+                        <Text> {gender == 1 ? 'Male' : gender == 2 ? 'Female' : 'N/A'}</Text>
+                    </Flex>
+                </Box>
+                <Divider my={3} />
 
-            <Box>
-                <Button width={'100%'} variant={'outline'} textTransform={'uppercase'} fontSize="x-small" colorScheme="primary" mb="0" onClick={handleRequestPrivateEvent}>
-                    Request Private Event
-                </Button>
-                <UserEventListModal providerID={providerID} isOpen={isModalOpen} onClose={closeModal} events={userEvents} />
+                <Box>
+                    <Button width={'100%'} variant={'outline'} textTransform={'uppercase'} fontSize="x-small" colorScheme="primary" mb="0" onClick={handleRequestPrivateEvent}>
+                        Request Private Event
+                    </Button>
+                    <UserEventListModal providerID={providerID} isOpen={isModalOpen} onClose={closeModal} events={userEvents} />
+                </Box>
             </Box>
         </Box>
     );

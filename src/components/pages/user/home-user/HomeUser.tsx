@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Grid, GridItem, SkeletonText, Stack, Box, Container, Skeleton, Text, FormControl } from '@chakra-ui/react'; // Import Slider components from Chakra UI
+import { Grid, GridItem, SkeletonText, Stack, Box, Container, Skeleton, Text, FormControl, Flex } from '@chakra-ui/react'; // Import Slider components from Chakra UI
 import { debounce } from 'lodash';
 import { Select as MultiSelect } from 'chakra-react-select';
 import ServiceProviderCard from '../../../organisms/service-provider-card/ServiceProviderCard';
@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import styles from './HomeUser.module.scss';
 import { LookupsContext } from '../../../../contexts/LookupsContext';
 import educationOptions from '../../../../constants/education.json';
+import { FaFilter } from 'react-icons/fa';
 
 const HomeUser = () => {
     const { user } = useContext(UserContext);
@@ -100,16 +101,16 @@ const HomeUser = () => {
 
     return (
         <>
-            <Box p={4}>
-                <Container maxW="5xl">
-                    <Text color={'gray.600'} textTransform={'capitalize'}>
-                        Hi, {user.name}
-                    </Text>
-                </Container>
-            </Box>
             <Container maxW="5xl" style={{ display: 'flex' }}>
-                <Box flex="1">
-                    <Box mb={8} padding={4} borderRadius={10} bg={'gray.100'}>
+                <Box flex="1" mt={8}>
+                    <Text fontSize={'5xl'} fontWeight={900} mb={4}>
+                        {/* Find Local Talent for Hire */}
+                    </Text>
+                    <Box mb={8} padding={4} borderRadius={10} borderWidth={1} borderColor={'gray.300'} borderStyle={'solid'}>
+                        <Flex gap={2} mb={5} alignItems={'center'}>
+                            <FaFilter />
+                            <Text>Filter Results</Text>
+                        </Flex>
                         {/* <InputGroup mb={4} bg="white" borderRadius={10}>
                             <Input
                                 placeholder="Search by name or description"
@@ -205,7 +206,7 @@ const HomeUser = () => {
                                 ))}
                             </Grid>
                         ) : providersList.length ? (
-                            <Grid templateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={4}>
+                            <Grid templateColumns="repeat(auto-fill, minmax(240px, 1fr))" gap={4}>
                                 {providersList.map((userProfile, index) => (
                                     <GridItem key={index}>
                                         <ServiceProviderCard
