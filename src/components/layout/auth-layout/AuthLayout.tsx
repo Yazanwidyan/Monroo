@@ -15,8 +15,8 @@ const AuthLayout = () => {
 
     return (
         <Flex minHeight="100vh" flexDirection="column">
-            <Box borderBottomWidth={1} bg="white.100" py="2" px="4">
-                <Container maxW={'5xl'}>
+            <Box bg="white.100" py="2" px="4">
+                <Container maxW={'7xl'}>
                     <Flex alignItems="center" fontSize="sm" fontWeight="bold" textTransform={'uppercase'} justifyContent={'space-between'}>
                         <ChakraLink as={RouterLink} to={'/'} fontSize="lg" fontWeight="bold" color={'black'} textDecoration="none" _hover={{ textDecoration: 'none' }}>
                             <Image src={'/assets/images/logo.png'} alt={'cc'} boxSize="80px" borderRadius="md" />
