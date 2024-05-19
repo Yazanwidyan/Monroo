@@ -6,23 +6,23 @@ const BigCard = ({ image, title, points, buttonText }) => {
     const navigate = useNavigate();
 
     return (
-        <Box display={'flex'} flexDirection={'column'} justifyContent={'flex-start'} flex={1} overflow="hidden" textAlign="center" bg={'white'}>
-            <Box h="500px" overflow="hidden">
+        <Box display={'flex'} flexDirection={'column'} justifyContent={'flex-start'} flex={1} overflow="hidden" textAlign="center" bg={'white'} borderRadius="md" boxShadow="lg">
+            <Box h="300px" overflow="hidden">
                 <Image src={image} alt={title} objectFit="cover" w="100%" h="100%" />
             </Box>
-            <Box p="14">
-                <Text fontWeight={'500'} fontSize="3xl" mb="10">
+            <Box p="6">
+                <Text fontWeight={'600'} fontSize="2xl" mb="6">
                     {title}
                 </Text>
-                <VStack align="start" spacing="2" mb={10}>
+                <VStack align="start" spacing="4" mb={8}>
                     {points.map((point, index) => (
-                        <Flex mb={'5'} textAlign={'start'} fontSize={'sm'} key={index} justifyContent={'start'}>
-                            <CheckIcon color="primary.300" mr="2" />
-                            <Text fontSize={'sm'}>{point}</Text>
+                        <Flex key={index} textAlign={'start'} fontSize={'md'} align="center">
+                            <CheckIcon color="primary.500" mr="2" />
+                            <Text>{point}</Text>
                         </Flex>
                     ))}
                 </VStack>
-                <Button onClick={() => navigate('register')} variant={'outline'} colorScheme="primary.500" mt="4" mx="auto">
+                <Button onClick={() => navigate('register')} variant={'outline'} colorScheme="primary" mt="4" mx="auto">
                     {buttonText}
                 </Button>
             </Box>
@@ -55,9 +55,9 @@ const ApplyBanner = () => {
     ];
 
     return (
-        <Box bg="primary.50" pt="4">
+        <Box bg="primary.50" pt="8" pb="8">
             <Container maxW={'7xl'}>
-                <Flex p={10} gap={'2rem'} justifyContent={'space-between'}>
+                <Flex p={8} gap={'4rem'} justifyContent={'space-between'} flexWrap="wrap">
                     {cardData.map((card, index) => (
                         <BigCard key={index} {...card} />
                     ))}

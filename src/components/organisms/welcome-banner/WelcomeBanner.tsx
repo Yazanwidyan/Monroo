@@ -26,14 +26,12 @@ const WelcomeBanner = () => {
                 p="4"
             >
                 <Box maxW={'3xl'}>
-                    <Text lineHeight={'1'} mb={4} fontWeight={'900'} fontSize="8xl">
-                        <span style={{ fontSize: '50px' }}>WELCOME TO</span>
+                    <Text lineHeight={'1'} mb={4} fontWeight={'900'} fontSize="7xl">
+                        <span style={{ fontSize: '42px' }}>Discover Your Next Opportunity with</span>
                         <br />
-                        MONROO
+                        Monroo
                     </Text>
-                    <Text fontSize="md">
-                        Postulet declarant senserit convincere T quisque emolumenti declarant senserit convincere T quisque emolumenti convenire esset severa vidit Romanum postremo postulet vos.
-                    </Text>
+                    <Text fontSize="md">Spark Your Passion. Own The Spotlight.</Text>
                 </Box>
             </Box>
         </Box>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Flex, Box, Spacer, Link as ChakraLink, Button, Container } from '@chakra-ui/react';
+import { Flex, Box, Spacer, Link as ChakraLink, Button, Container, Image } from '@chakra-ui/react';
 import LanguageSwitcher from '../../../Localization/LanguageSwitcher';
 import { Outlet, Link as RouterLink, useNavigate } from 'react-router-dom';
 import LoginModal from '../../organisms/login-modal/LoginModal';
@@ -15,11 +15,11 @@ const AuthLayout = () => {
 
     return (
         <Flex minHeight="100vh" flexDirection="column">
-            <Box borderBottomWidth={1} bg="white.100" py="3" px="4">
+            <Box borderBottomWidth={1} bg="white.100" py="2" px="4">
                 <Container maxW={'5xl'}>
                     <Flex alignItems="center" fontSize="sm" fontWeight="bold" textTransform={'uppercase'} justifyContent={'space-between'}>
                         <ChakraLink as={RouterLink} to={'/'} fontSize="lg" fontWeight="bold" color={'black'} textDecoration="none" _hover={{ textDecoration: 'none' }}>
-                            Monroo
+                            <Image src={'/assets/images/logo.png'} alt={'cc'} boxSize="80px" borderRadius="md" />
                         </ChakraLink>
 
                         <Spacer />

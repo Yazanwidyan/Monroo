@@ -6,7 +6,10 @@
       "back": "عودة",
       "join_us": "تسجيل جديد",
       "login": "تسجيل الدخول",
-      "how_it_works": "كيف يعمل موقعنا"
+      "scout": "سكاوت",
+      "star": "ستار",
+      "how_it_works": "كيف يعمل موقعنا",
+      "getting_started": "ابدأ"
     },
     "form": {},
     "login": {
@@ -22,6 +25,8 @@
       "dont_have_account": "ليس لديك حساب؟"
     },
     "register": {
+      "scouts": "سكاوت",
+      "become_a_star": "ستار",
       "whoAreYou": "اختر نوع الحساب",
       "username": "اسم المستخدم",
       "profilepic": "الصورة الشخصية",

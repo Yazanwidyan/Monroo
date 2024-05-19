@@ -21,6 +21,11 @@ import UserBooking from './components/pages/user/user-booking/UserBooking';
 import EasyRegisterUserPage from './components/pages/auth/easy-register-user/EasyRegisterUser';
 import EasyRegisterProviderPage from './components/pages/auth/easy-register-provider/EasyRegisterProvider';
 import MainEasyRegisterProviderPage from './components/pages/auth/main-easy-register-provider/MainEasyRegisterProvider';
+import ContactUs from './components/pages/common/contact-us/ContactUs';
+import AboutUs from './components/pages/common/about-us/AboutUs';
+import TermsOfUse from './components/pages/common/terms/Terms';
+import Privacy from './components/pages/common/privacy/Privacy';
+import FAQs from './components/pages/common/FAQ/FAQ';
 
 export const AppRoutes = () => (
     <>
@@ -28,6 +33,11 @@ export const AppRoutes = () => (
             <Route path="/" element={<AuthLayout />}>
                 <Route path="/" element={<Landing />} />
                 <Route path="/how-it-works" element={<HowItWorks />} />
+                <Route path="/contact-us" element={<ContactUs />} />
+                <Route path="/about-us" element={<AboutUs />} />
+                <Route path="/terms-of-use" element={<TermsOfUse />} />
+                <Route path="/privacy-policy" element={<Privacy />} />
+                <Route path="/FAQs" element={<FAQs />} />
                 <Route path="register" element={<RegisterUserPage />} />
                 <Route path="register/user" element={<RegisterEmployerPage />} />
                 <Route path="register/service-provider" element={<MainEasyRegisterProviderPage />} />

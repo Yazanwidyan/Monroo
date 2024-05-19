@@ -4,12 +4,15 @@
             "submit": "Submit",
             "next": "Next",
             "back": "Back",
-            "join_us": "Join us",
-            "login": "Login",
-            "how_it_works": "How it works"
+            "join_us": "Join Monroo",
+            "login": "Sign in",
+            "scout": "Scout",
+            "star": "Star",
+            "how_it_works": "How it works",
+            "getting_started": "Getting started"
         },
         "login": {
-            "login": "Login",
+            "login": "Sign in",
             "username": "Username",
             "email": "Email",
             "password": "Password",
@@ -21,6 +24,8 @@
             "dont_have_account": "Dont have account?"
         },
         "register": {
+            "scouts": "Scouts",
+            "become_a_star": "Become a star",
             "whoAreYou": "Who are you ?",
             "username": "Username",
             "profilepic": "Profile picture",

@@ -6,7 +6,10 @@
       "back": "назад",
       "join_us": "Присоединиться",
       "login": "Войти",
-      "how_it_works": "Как это работает"
+      "scout": "разведчик",
+      "star": "звезда",
+      "how_it_works": "Как это работает",
+      "getting_started": "начиная"
     },
     "login": {
       "login": "авторизоваться",
@@ -20,6 +23,8 @@
       "create_account": "Зарегистрироваться"
     },
     "register": {
+      "scouts": "Скауты",
+      "become_a_star": "Стать звездой",
       "whoAreYou": "Кто вы?",
       "username": "Имя пользователя",
       "profilepic": "Изображение профиля",
