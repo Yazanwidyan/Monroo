@@ -76,7 +76,8 @@ export default function useEditServiceProviderForm(props) {
                 state3.demoReelFile,
                 state3.portfolioFile,
                 state3.videosFile,
-                state3.audiosFile
+                state3.audiosFile,
+                state3.picFile
             );
     }
 

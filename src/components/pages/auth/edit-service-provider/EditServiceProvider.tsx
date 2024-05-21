@@ -23,7 +23,8 @@ export default function EditServiceProvider({ providerProfile, onClose }) {
                     demoReelFile,
                     portfolioFile,
                     videosFile,
-                    audiosFile
+                    audiosFile,
+                    picFile
                 ) => {
                     const data = new FormData();
                     const otherData = {
@@ -48,6 +49,7 @@ export default function EditServiceProvider({ providerProfile, onClose }) {
                         data.append(`audios`, file);
                     });
                     data.append('onevideo', oneMinuteVideoFile[0]);
+                    data.append('profilePic', picFile[0]);
                     data.append('reel', demoReelFile[0]);
                     data.append('portfolio', portfolioFile[0]);
                     data.append('data', JSON.stringify(otherData));

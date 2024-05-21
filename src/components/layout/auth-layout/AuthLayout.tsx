@@ -54,11 +54,11 @@ const AuthLayout = () => {
 
     return (
         <Flex minHeight="100vh" flexDirection="column">
-            <Box bg="white.100" px="4">
-                <Container maxW={'7xl'} px={0}>
+            <Box bg="white.100" px="4" py="2">
+                <Container maxW={'7xl'}>
                     <Flex alignItems="center" fontSize="sm" fontWeight="bold" justifyContent={'space-between'}>
                         <ChakraLink as={RouterLink} to={'/'} fontSize="lg" fontWeight="bold" color={'black'} textDecoration="none" _hover={{ textDecoration: 'none' }}>
-                            <Image src={'/assets/images/logo.png'} alt={'cc'} boxSize="80px" borderRadius="md" />
+                            <Image src={'/assets/images/logo.png'} alt={'cc'} height={'75px'} width={'45px'} borderRadius="md" />
                         </ChakraLink>
 
                         <Menu>

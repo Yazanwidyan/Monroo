@@ -12,7 +12,7 @@ export default function CreateEventPage({ isOpen, onClose }) {
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent minW={1200}>
-                <ModalHeader>Create Event</ModalHeader>
+                <ModalHeader>Post an Event</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
                     <CreateEventForm

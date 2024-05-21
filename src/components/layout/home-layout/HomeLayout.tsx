@@ -27,8 +27,8 @@ const HomeLayout = () => {
 
     return (
         <Flex minHeight="100vh" flexDirection="column">
-            <Box borderBottomWidth={1} bg="white.100">
-                <Container maxW="5xl" px={0}>
+            <Box bg="white.100">
+                <Container maxW="5xl" px={4} py={2}>
                     <Flex alignItems="center" fontSize="sm" fontWeight="bold" textTransform={'uppercase'} justifyContent={'space-between'}>
                         <ChakraLink
                             as={RouterLink}
@@ -39,7 +39,7 @@ const HomeLayout = () => {
                             textDecoration="none"
                             _hover={{ textDecoration: 'none' }}
                         >
-                            <Image src={'/assets/images/logo.png'} alt={'cc'} boxSize="80px" borderRadius="md" />
+                            <Image src={'/assets/images/logo.png'} alt={'cc'} height={'75px'} width={'45px'} borderRadius="md" />
                         </ChakraLink>
                         <LanguageSwitcher />
                         <Spacer />
@@ -51,16 +51,13 @@ const HomeLayout = () => {
                                         mx={'1rem'}
                                         onClick={openDialog}
                                         leftIcon={<FaPlusCircle size={20} color={'primary.500'} />}
-                                        fontSize={'small'}
-                                        size={'sm'}
-                                        fontWeight={500}
                                         color={'white'}
                                         bg={'black'}
                                         _hover={{
                                             bg: 'primary.500',
                                         }}
                                     >
-                                        Create Event
+                                        Post an Event
                                     </Button>
                                 </>
                             )}
@@ -83,7 +80,7 @@ const HomeLayout = () => {
                                     <FaUserAlt />
                                 </ChakraLink>
                             )}
-                            <Button onClick={handleLogout} mx="0.5rem" colorScheme="primary.500" size="sm" variant={'ghost'} leftIcon={<FaSignOutAlt />}></Button>
+                            <Button onClick={handleLogout} px={0} colorScheme="primary.500" size="sm" variant={'ghost'} leftIcon={<FaSignOutAlt />}></Button>
                         </Flex>
                     </Flex>
                     <CreateEventPage isOpen={isDialogOpen} onClose={closeDialog} />
