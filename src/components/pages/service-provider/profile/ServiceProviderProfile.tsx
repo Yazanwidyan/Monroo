@@ -290,7 +290,7 @@ const ServiceProviderProfileView = () => {
                     <GridItem colSpan={1}>
                         <Box>
                             <Image
-                                height={260}
+                                height={300}
                                 width={'100%'}
                                 borderRadius={'xl'}
                                 src={profilePic || 'https://www.zica.co.zm/wp-content/uploads/2021/02/dummy-profile-image.png'}

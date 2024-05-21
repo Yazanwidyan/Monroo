@@ -41,7 +41,7 @@ const ServiceProviderCard = ({ experience, nationality, gender, bio, image, name
 
     return (
         <Box borderColor="#CBD5E0" borderWidth="2px" borderRadius={'md'} maxW="md" overflow="hidden">
-            <Box height={'280'}>
+            <Box height={'260'}>
                 <Image src={image || '/assets/images/userprofile.jpg'} alt={name} style={{ cursor: 'pointer' }} boxSize={'100%'} onClick={handleShowProfile} />
             </Box>
             <Box p={3}>
