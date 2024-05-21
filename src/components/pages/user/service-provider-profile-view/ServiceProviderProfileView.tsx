@@ -303,7 +303,7 @@ const ServiceProviderProfileView = () => {
 
     return (
         <Box bg="primary.50" p="4" pb={8} minHeight={minHeight}>
-            <Container maxW={'5xl'}>
+            <Container maxW={'6xl'}>
                 <Grid templateColumns="1fr 3fr" gap={8}>
                     <GridItem colSpan={1}>
                         <Box>

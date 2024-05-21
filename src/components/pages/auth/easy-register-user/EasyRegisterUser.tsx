@@ -84,7 +84,7 @@ export default function EasyRegisterUserPage() {
     };
 
     return (
-        <Container maxW={'5xl'} mt={10}>
+        <Container maxW={'6xl'} mt={10}>
             <form onSubmit={handleSubmit}>
                 <GridItem colSpan={2}>
                     <FormControl isRequired mb={4}>

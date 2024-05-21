@@ -55,7 +55,7 @@ const Inbox = () => {
     };
 
     return (
-        <Container maxW="5xl" style={{ display: 'flex' }}>
+        <Container maxW="6xl" style={{ display: 'flex' }}>
             <Box flex={4}>
                 <Box w="100%" maxW="600px" mx="auto" mt={8}>
                     <Input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search rooms" mb={4} />

@@ -20,7 +20,7 @@ export default function CreateEventForm(props: CreateEventFormProps) {
 
     return (
         <form onSubmit={state.handleSubmit}>
-            <SimpleGrid columns={{ base: 1, md: 2 }} rowGap="20px" columnGap="20px">
+            <SimpleGrid columns={{ base: 1, md: 3 }} rowGap="20px" columnGap="20px">
                 <FormControl>
                     <FormLabel>Select Category</FormLabel>
                     <MultiSelect

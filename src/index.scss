@@ -1,18 +1,19 @@
 @use "./variables.scss"as v;
 @import url("https://fonts.googleapis.com/css?family=Poppins");
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   transition: all 150ms ease-in-out;
-  font-family: "Poppins";
+  font-family: "Roboto";
 }
 
 body {
   background-color: v.$background-color !important;
   margin: 0;
-  font-family: "Poppins";
+  font-family: "Roboto";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;

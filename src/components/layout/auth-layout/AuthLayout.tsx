@@ -58,7 +58,7 @@ const AuthLayout = () => {
                 <Container maxW={'7xl'}>
                     <Flex alignItems="center" fontSize="sm" fontWeight="bold" justifyContent={'space-between'}>
                         <ChakraLink as={RouterLink} to={'/'} fontSize="lg" fontWeight="bold" color={'black'} textDecoration="none" _hover={{ textDecoration: 'none' }}>
-                            <Image src={'/assets/images/logo.png'} alt={'cc'} height={'75px'} width={'45px'} borderRadius="md" />
+                            <Image src={'/assets/images/logo.png'} alt={'cc'} height={'70px'} width={'40px'} borderRadius="md" />
                         </ChakraLink>
 
                         <Menu>
@@ -84,6 +84,9 @@ const AuthLayout = () => {
                             </MenuList>
                         </Menu>
 
+                        <ChakraLink mx={'1rem'} as={RouterLink} to={'/register'} textDecoration="none" _hover={{ textDecoration: 'none' }}>
+                            {t('common.for_talent')}
+                        </ChakraLink>
                         <ChakraLink mx={'1rem'} as={RouterLink} to={'/how-it-works'} textDecoration="none" _hover={{ textDecoration: 'none' }}>
                             {t('common.how_it_works')}
                         </ChakraLink>

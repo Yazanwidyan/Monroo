@@ -6,7 +6,7 @@ function Benefits() {
 
     return (
         <Box bg="primary.50" p={8} borderRadius="lg" boxShadow="md" textAlign="center">
-            <Container maxW={'5xl'}>
+            <Container maxW={'6xl'}>
                 <Text fontSize="lg" fontWeight="bold" mb={8}>
                     We connect you with clients near you or internationally!
                 </Text>
@@ -32,7 +32,7 @@ function Benefits() {
                         </Text>
                     </Flex>
                 </VStack>
-                <Button onClick={() => navigate('register')} colorScheme="primary" size="md" mt={10}>
+                <Button onClick={() => navigate('register')} colorScheme="primary" size="lg" mt={10}>
                     Start Now!
                 </Button>
             </Container>

@@ -33,7 +33,7 @@ const Events = () => {
     };
 
     return (
-        <Container maxW={'5xl'}>
+        <Container maxW={'6xl'} px={0}>
             <Box mt={5}>
                 <Tabs variant="soft-rounded" colorScheme="primary">
                     <TabList>

@@ -2,7 +2,7 @@ export const themes = {
     styles: {
         global: {
             label: {
-                fontSize: '14px',
+                fontSize: '15px',
             },
         },
     },
@@ -15,23 +15,23 @@ export const themes = {
             },
             sizes: {
                 sm: {
-                    fontSize: '11px',
+                    fontSize: '14px',
                 },
                 md: {
-                    fontSize: '14px',
+                    fontSize: '15px',
                 },
             },
         },
         Button: {
             sizes: {
                 sm: {
-                    h: '40px',
-                    fontSize: '16px',
-                    px: '12px',
+                    h: '42px',
+                    fontSize: '17px',
+                    px: '16px',
                 },
                 md: {
-                    h: '40px',
-                    fontSize: '16px',
+                    h: '42px',
+                    fontSize: '17px',
                     px: '16px',
                 },
                 lg: {
@@ -49,10 +49,11 @@ export const themes = {
         Input: {
             baseStyle: {
                 field: {
+                    borderRadius: '17',
                     h: '44px',
-                    fontSize: '16px',
+                    fontSize: '17px',
                     _placeholder: {
-                        fontSize: '16px', // Customize placeholder font size here
+                        fontSize: '17px', // Customize placeholder font size here
                         color: 'gray.500', // Optional: Customize placeholder color
                     },
                 },
@@ -61,10 +62,11 @@ export const themes = {
         Select: {
             baseStyle: {
                 field: {
+                    borderRadius: '17',
                     h: '44px',
-                    fontSize: '16px',
+                    fontSize: '17px',
                     _placeholder: {
-                        fontSize: '16px', // Customize Select placeholder font size here
+                        fontSize: '17px', // Customize Select placeholder font size here
                         color: 'gray.500', // Optional: Customize Select placeholder color
                     },
                 },

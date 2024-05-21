@@ -24,7 +24,7 @@ interface StepperProps extends ChakraStepperProps {
 
 export default function Stepper({ steps, useStepReturn, ...props }: StepperProps) {
     return (
-        <Container maxW={'5xl'}>
+        <Container maxW={'6xl'}>
             <ChakraStepper colorScheme={'primary'} {...props} index={useStepReturn.activeStep - 1} {...props}>
                 {steps.map((step, index) => (
                     <ChakraStep key={index}>

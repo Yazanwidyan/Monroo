@@ -110,7 +110,7 @@ export default function MainEasyRegisterProviderPage() {
     };
 
     return (
-        <Container maxW={'5xl'} mt={10}>
+        <Container maxW={'6xl'} mt={10}>
             <form onSubmit={handleSubmit}>
                 <FormControl isRequired mb={4}>
                     <FormLabel>{t('Profile Picture')}</FormLabel>

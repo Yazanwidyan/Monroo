@@ -1,5 +1,6 @@
-import { Box, Text, Flex, Divider, Button, Avatar, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Grid } from '@chakra-ui/react';
+import { Box, Text, Flex, Divider, Button, Avatar, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Grid, TagLabel, Tag } from '@chakra-ui/react';
 import { useState } from 'react';
+import { FaChevronRight } from 'react-icons/fa';
 
 const EventTimelineCard = ({ image, title, userName, duration, posted, description, country, eventDate, averageCost, onMessage }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,8 +40,33 @@ const EventTimelineCard = ({ image, title, userName, duration, posted, descripti
     };
 
     return (
-        <Box onClick={handleShowEvent} cursor={'pointer'} borderColor={'gray.300'} borderWidth={1} p={4} borderRadius={8}>
-            <Flex gap={4}>
+        <Box onClick={handleShowEvent} cursor={'pointer'} borderColor={'gray.300'} borderWidth={1} px={6} py={5} borderRadius={14}>
+            <Flex pb={4} align="center" flexWrap={'wrap'} gap={2} justify="flex-start" fontSize="sm" color="gray.500">
+                <Flex direction="column" align="center">
+                    <Text fontSize={'xs'} fontWeight="bold"></Text>
+                    <Tag size="sm" variant="subtle" colorScheme="blue" color={'white'} bg={'black'} borderRadius={20}>
+                        <TagLabel fontSize={'xs'} fontWeight="bold">
+                            Posted {formatDate(posted)}
+                        </TagLabel>
+                    </Tag>
+                </Flex>
+                <Flex direction="column" align="center">
+                    <Tag size="sm" variant="subtle" colorScheme="primary" borderRadius={20}>
+                        <TagLabel fontSize={'xs'} fontWeight="bold">
+                            Date {formatDate(eventDate)}
+                        </TagLabel>
+                    </Tag>
+                </Flex>
+                <Flex direction="column" align="center">
+                    <Tag size="sm" variant="subtle" colorScheme="primary" borderRadius={20}>
+                        <TagLabel fontSize={'xs'} fontWeight="bold">
+                            Duration {duration} hrs
+                        </TagLabel>
+                    </Tag>
+                </Flex>
+            </Flex>
+
+            <Flex gap={4} borderTopColor={'gray.300'} borderTopWidth={0} paddingTop={3}>
                 <Box textAlign="center">
                     <Avatar mb={2} name={userName} src={image || '/assets/images/userprofile.jpg'} />
                     <Text fontSize="xs" mb={2}>
@@ -48,34 +74,17 @@ const EventTimelineCard = ({ image, title, userName, duration, posted, descripti
                     </Text>
                 </Box>
                 <Box>
-                    <Text fontSize="lg" fontWeight="semibold" mb={2}>
+                    <Text fontSize="xl" fontWeight="semibold" mb={2}>
                         {title}
                     </Text>
-                    <Text minH="3rem" fontSize="sm" color="gray.600" mb={2}>
+                    <Text fontSize="sm" color="gray.600" mb={2}>
                         {description?.length > 60 ? description?.substring(0, 60) + '...' : description}
                     </Text>
                 </Box>
             </Flex>
-            <Flex align="center" borderTopColor={'gray.300'} borderTopWidth={2} paddingTop={3} justify="space-between" fontSize="sm" color="gray.500">
-                <Flex direction="column" align="center">
-                    <Text fontSize={'xs'} fontWeight="bold">
-                        Posted
-                    </Text>
-                    <Text>{formatDate(posted)}</Text>
-                </Flex>
-                <Flex direction="column" align="center">
-                    <Text fontSize={'xs'} fontWeight="bold">
-                        Event Date
-                    </Text>
-                    <Text>{formatDate(eventDate)}</Text>
-                </Flex>
-                <Flex direction="column" align="center">
-                    <Text fontSize={'xs'} fontWeight="bold">
-                        Duration
-                    </Text>
-                    <Text>{duration} hrs</Text>
-                </Flex>
-            </Flex>
+            <Button mt={8} variant={'link'} colorScheme={'blue'}>
+                <Text mx={2}>View and apply</Text> <FaChevronRight size={'14'} />
+            </Button>
 
             {/* <Flex mt={3} justify="space-between">
                 <Button size="sm" colorScheme="primary" onClick={handleShowEvent}>
@@ -84,7 +93,7 @@ const EventTimelineCard = ({ image, title, userName, duration, posted, descripti
             </Flex> */}
             <Modal isOpen={isModalOpen} onClose={closeModal}>
                 <ModalOverlay />
-                <ModalContent minW={1200}>
+                <ModalContent minW={800}>
                     <ModalHeader>Event Details</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
@@ -162,7 +171,7 @@ const EventTimelineCard = ({ image, title, userName, duration, posted, descripti
 
                     <ModalFooter>
                         <Button size="sm" colorScheme="primary" onClick={requestConnection}>
-                            Request Contact
+                            Apply
                         </Button>
                     </ModalFooter>
                 </ModalContent>

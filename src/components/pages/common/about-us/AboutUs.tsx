@@ -9,9 +9,6 @@ const AboutUs = () => {
                         About Us
                     </Heading>
                     <VStack spacing={8}>
-                        <Center>
-                            <Image src="/about-image.jpg" alt="About Us" borderRadius="full" boxSize="200px" objectFit="cover" />
-                        </Center>
                         <Text fontSize="lg" textAlign="center">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae mauris augue. Sed sed turpis nec tortor rutrum gravida. Nulla facilisi. Phasellus vestibulum, arcu et
                             aliquet iaculis, sem ipsum vestibulum nulla, non finibus tortor justo et est.

@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Grid, GridItem, SkeletonText, Stack, Box, Container, Skeleton, Text, FormControl, Flex, Tag, TagLabel, InputGroup, Input, Button } from '@chakra-ui/react';
-import { debounce } from 'lodash';
+import { Grid, GridItem, SkeletonText, Box, Container, Skeleton, Text, FormControl, Flex, Tag, TagLabel, InputGroup, Input, Button, VStack } from '@chakra-ui/react';
 import { Select as MultiSelect } from 'chakra-react-select';
 import ServiceProviderCard from '../../../organisms/service-provider-card/ServiceProviderCard';
 import { UserContext } from '../../../../contexts/UserContext';
@@ -11,12 +10,14 @@ import styles from './HomeUser.module.scss';
 import { LookupsContext } from '../../../../contexts/LookupsContext';
 import educationOptions from '../../../../constants/education.json';
 import { FaGripHorizontal } from 'react-icons/fa';
+import CreateEventPage from '../create-event/CreateEvent';
 
 const HomeUser = () => {
     const { user } = useContext(UserContext);
     const { showToast } = useCustomToast();
     const { i18n } = useTranslation();
 
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
     const { categories } = useContext(LookupsContext);
     const [providersList, setListProviders] = useState<any>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -36,6 +37,14 @@ const HomeUser = () => {
                 return [...prevSelectedCategory, categoryId];
             }
         });
+    };
+
+    const openDialog = () => {
+        setIsDialogOpen(true);
+    };
+
+    const closeDialog = () => {
+        setIsDialogOpen(false);
     };
 
     const handleGenderChange = (selectedGender) => {
@@ -71,10 +80,14 @@ const HomeUser = () => {
 
         filteredProviders = filteredProviders.filter((provider) => provider.experience >= experienceRange.min && provider.experience <= experienceRange.max);
 
+        if (searchQuery.trim()) {
+            filteredProviders = filteredProviders.filter((provider) => `${provider.fname} ${provider.lname}`.toLowerCase().includes(searchQuery.toLowerCase()));
+        }
+
         return filteredProviders;
     };
 
-    const searchProviders = async () => {
+    const searchProviders = () => {
         setIsLoading(true);
         const filteredProviders = filterProviders();
         setListProviders(filteredProviders);
@@ -97,7 +110,6 @@ const HomeUser = () => {
 
     const handleFilterSubmit = () => {
         setFilterTriggered(true);
-        searchProviders();
     };
 
     const handleClearFilters = () => {
@@ -113,17 +125,46 @@ const HomeUser = () => {
         if (filterTriggered) {
             searchProviders();
             setFilterTriggered(false);
-        } else {
-            fetchData();
         }
     }, [filterTriggered]);
 
+    useEffect(() => {
+        fetchData();
+    }, []);
+
     return (
         <>
-            <Container maxW="5xl" style={{ display: 'flex' }}>
-                <Box flex="1" mt={8}>
-                    <Text fontSize={'5xl'} fontWeight={900} mb={4}>
-                        {/* Find Local Talent for Hire */}
+            <Container maxW="6xl" style={{ display: 'flex' }}>
+                <Box flex="1">
+                    <Box
+                        maxW="full"
+                        mx="auto"
+                        mt={8}
+                        mb={8}
+                        borderRadius="lg"
+                        boxShadow="lg"
+                        bgRepeat={'no-repeat'}
+                        bgImage="/assets/images/image-voiceover.png"
+                        bgSize="contain"
+                        bgColor={'primary.800'}
+                        bgPosition="right"
+                        color="white"
+                        textAlign="center"
+                    >
+                        <VStack spacing={4} align={'flex-start'} bg="rgba(0, 0, 0, 0.1)" p={6} py={8} borderRadius="lg">
+                            <Text fontSize="2xl" fontWeight="bold">
+                                Need to hire talent for your next project?
+                            </Text>
+                            <Text textAlign={'initial'} fontSize={'sm'} maxW={'2xl'}>
+                                Connect with the perfect creative for your next project with direct access to the largest network of actors, models, voice artists, creative freelancers, and crew.
+                            </Text>
+                            <Button onClick={openDialog} colorScheme="primary" size="md">
+                                Post an Event
+                            </Button>
+                        </VStack>
+                    </Box>
+                    <Text fontSize={'4xl'} fontWeight={900} mb={4}>
+                        Connect with Local Talent and Professionals
                     </Text>
                     <Box mb={8} padding={4} borderRadius={14} borderWidth={1} borderColor={'gray.300'} borderStyle={'solid'}>
                         <Flex gap={2} mb={5} alignItems={'center'}>
@@ -164,7 +205,6 @@ const HomeUser = () => {
                                         onChange={(e) => setSearchQuery(e.target.value)}
                                         bg="transparent"
                                         size={'sm'}
-                                        borderRadius={7}
                                         borderColor="gray.300"
                                         _focus={{ borderColor: 'gray.400', boxShadow: 'none' }}
                                         _placeholder={{ color: 'gray.500' }}
@@ -183,6 +223,10 @@ const HomeUser = () => {
                                         onChange={(genders) => handleGenderChange(genders.map((gender) => gender.value))}
                                         placeholder="Gender"
                                         name="gender"
+                                        value={selectedGender.map((gender) => ({
+                                            label: gender === 1 ? 'Male' : gender === 2 ? 'Female' : 'Not specified',
+                                            value: gender,
+                                        }))}
                                         options={[
                                             { label: 'Not specified', value: 0 },
                                             { label: 'Male', value: 1 },
@@ -201,6 +245,10 @@ const HomeUser = () => {
                                         onChange={(educations) => handleEducationChange(educations.map((education) => education.value))}
                                         placeholder="Education"
                                         name="education"
+                                        value={selectedEducation.map((education) => ({
+                                            label: i18n?.language?.includes('en') ? education : i18n?.language?.includes('ar') ? education : education,
+                                            value: education,
+                                        }))}
                                         options={educationOptions.map((option) => ({
                                             label: i18n?.language?.includes('en') ? option.name : i18n?.language?.includes('ar') ? option.nameAR : option.nameRUS,
                                             value: option.name,
@@ -208,14 +256,13 @@ const HomeUser = () => {
                                     />
                                 </FormControl>
                             </GridItem>
-                            <GridItem>
+                            <GridItem display={'flex'} alignItems={'center'} gap={2}>
+                                <Text fontSize={'sm'}>Experience</Text>
                                 <FormControl>
-                                    <Input type="number" name="min" placeholder="Min Experience" value={experienceRange.min} onChange={handleExperienceChange} bg="white" size={'sm'} />
+                                    <Input type="number" name="min" placeholder="Min" value={experienceRange.min} onChange={handleExperienceChange} bg="white" size={'sm'} />
                                 </FormControl>
-                            </GridItem>
-                            <GridItem>
                                 <FormControl>
-                                    <Input type="number" name="max" placeholder="Max Experience" value={experienceRange.max} onChange={handleExperienceChange} bg="white" size={'sm'} />
+                                    <Input type="number" name="max" placeholder="Max" value={experienceRange.max} onChange={handleExperienceChange} bg="white" size={'sm'} />
                                 </FormControl>
                             </GridItem>
                         </Grid>
@@ -258,12 +305,13 @@ const HomeUser = () => {
                                 ))}
                             </Grid>
                         ) : (
-                            <Box textAlign={'center'} mt={5}>
+                            <Box minH={'12rem'} textAlign={'center'} mt={5}>
                                 <Text className="mt-5">Sorry, we found no stars matching your search criteria.</Text>
                             </Box>
                         )}
                     </Box>
                 </Box>
+                <CreateEventPage isOpen={isDialogOpen} onClose={closeDialog} />
             </Container>
         </>
     );

@@ -11,7 +11,7 @@ function ShowCategories() {
 
     return (
         <Box bg="primary.50" p={8} borderRadius="lg" boxShadow="md" textAlign="center">
-            <Container maxW={'5xl'}>
+            <Container maxW={'6xl'}>
                 <VStack spacing={10} alignItems="center">
                     <Flex flexDirection="row" justifyContent="space-around" flexWrap="wrap" w="100%">
                         {categories.map((category, index) => (

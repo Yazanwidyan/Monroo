@@ -280,7 +280,7 @@ const ServiceProviderProfileView = () => {
 
     return (
         <Box bg="primary.50" p="4" pb={8} minHeight={minHeight}>
-            <Container maxW={'5xl'}>
+            <Container maxW={'6xl'}>
                 <Box textAlign={'end'} mb={'-10'}>
                     <Button leftIcon={<FaPencilAlt />} color={'black'} bg={'white'} onClick={openEditModal}>
                         <Text fontSize={'sm'}>Edit my profile</Text>

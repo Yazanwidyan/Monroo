@@ -6,7 +6,7 @@ const UserProfile = () => {
     const { user } = useContext(UserContext);
 
     return (
-        <Container maxW={'5xl'}>
+        <Container maxW={'6xl'}>
             <Box mt={10} bg="white" borderRadius="xl">
                 <VStack align="start" spacing="4">
                     <Box>

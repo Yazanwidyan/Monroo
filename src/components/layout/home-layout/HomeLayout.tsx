@@ -28,7 +28,7 @@ const HomeLayout = () => {
     return (
         <Flex minHeight="100vh" flexDirection="column">
             <Box bg="white.100">
-                <Container maxW="5xl" px={4} py={2}>
+                <Container maxW="6xl" px={4} py={2}>
                     <Flex alignItems="center" fontSize="sm" fontWeight="bold" textTransform={'uppercase'} justifyContent={'space-between'}>
                         <ChakraLink
                             as={RouterLink}
@@ -39,7 +39,7 @@ const HomeLayout = () => {
                             textDecoration="none"
                             _hover={{ textDecoration: 'none' }}
                         >
-                            <Image src={'/assets/images/logo.png'} alt={'cc'} height={'75px'} width={'45px'} borderRadius="md" />
+                            <Image src={'/assets/images/logo.png'} alt={'cc'} height={'70px'} width={'40px'} borderRadius="md" />
                         </ChakraLink>
                         <LanguageSwitcher />
                         <Spacer />

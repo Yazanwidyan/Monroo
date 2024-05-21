@@ -46,9 +46,9 @@ const Footer = () => {
 
     return (
         <Box as="footer" py="4" bg="black" color="white">
-            <Flex maxW="5xl" mx="auto" px="4" justify="space-between" alignItems="center" flexDirection={{ base: 'column', md: 'row' }}>
+            <Flex maxW="6xl" mx="auto" px="4" justify="space-between" alignItems="center" flexDirection={{ base: 'column', md: 'row' }}>
                 <ChakraLink as={RouterLink} to={'/'} fontSize="lg" fontWeight="bold" color={'black'} textDecoration="none" _hover={{ textDecoration: 'none' }}>
-                    <Image src={'/assets/images/logo.png'} alt={'MONROO Logo'} height={'75px'} width={'45px'} borderRadius="md" />
+                    <Image src={'/assets/images/logo.png'} alt={'MONROO Logo'} height={'70px'} width={'40px'} borderRadius="md" />
                 </ChakraLink>
                 <HStack spacing="4" mt={{ base: '4', md: '0' }}>
                     <Link href="https://www.facebook.com/profile.php?id=100094690136465" target="_blank" fontSize="xl">
