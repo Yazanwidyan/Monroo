@@ -1,0 +1,15 @@
+.categoriesMultiSelect {
+  background-color: #F8F8F5;
+  border-radius: 10px;
+  text-align: start !important;
+
+  div:last-child {
+    div:last-child {
+      background-color: inherit;
+    }
+  }
+
+  hr {
+    display: none !important;
+  }
+}

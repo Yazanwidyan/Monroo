@@ -17,6 +17,21 @@ const userServices = {
                 throw error;
             });
     },
+    getListOutProviders: (payload) => {
+        const config = {
+            headers: {
+                'x-secret': 'MonrooHeaders',
+            },
+        };
+        return api
+            .post(`/monroo/apis/user/ListOutProviders`, payload, config)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                throw error;
+            });
+    },
     searchProviders: (payload) => {
         const user = JSON.parse(localStorage.getItem('user'));
         const config = {

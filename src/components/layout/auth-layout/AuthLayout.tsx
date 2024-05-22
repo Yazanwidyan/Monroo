@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Flex, Box, Spacer, Link as ChakraLink, Button, Container, Image, Menu, MenuButton, MenuList, MenuItem, Text } from '@chakra-ui/react';
 import LanguageSwitcher from '../../../Localization/LanguageSwitcher';
 import { Outlet, Link as RouterLink, useNavigate } from 'react-router-dom';
@@ -7,47 +7,42 @@ import { AiOutlineLogin, AiOutlineUserAdd } from 'react-icons/ai'; // Import Cha
 import Footer from '../footer/Footer';
 import { useTranslation } from 'react-i18next';
 import { ChevronDownIcon } from '@chakra-ui/icons';
+import { LookupsContext } from '../../../contexts/LookupsContext';
 
 const menuItems = [
     {
-        id: 'hospitality',
-        label: 'Hospitality',
         imageSrc: '/assets/images/charity.png',
         description: 'Talented individuals in hospitality.',
-        to: '/talent-category-1',
     },
     {
-        id: 'entertainment',
-        label: 'Entertainment',
         imageSrc: '/assets/images/cinema.png',
         description: 'Entertainers and performers for events.',
-        to: '/talent-category-2',
     },
     {
-        id: 'marketing',
-        label: 'Marketing',
         imageSrc: '/assets/images/marketing.png',
         description: 'Marketing experts to boost campaigns.',
-        to: '/talent-category-3',
     },
     {
-        id: 'glamour',
-        label: 'Glamour',
         imageSrc: '/assets/images/diamond.png',
         description: 'Glamour professionals for fashion and beauty.',
-        to: '/talent-category-4',
     },
     {
-        id: 'casting',
-        label: 'Casting',
         imageSrc: '/assets/images/casting.png',
         description: 'Casting talents for productions.',
-        to: '/talent-category-5',
     },
 ];
 
 const AuthLayout = () => {
     const [isLoginOpen, setLoginOpen] = useState(false);
+    const { categories } = useContext(LookupsContext);
+    console.log('categories', categories);
+
+    const newCategories = menuItems.map((menuItem, index) => {
+        const category = categories[index];
+        return { ...menuItem, ...category };
+    });
+
+    console.log(newCategories);
 
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -70,11 +65,11 @@ const AuthLayout = () => {
                                     Search our talent network to find the perfect fit
                                 </Text>
 
-                                {menuItems.map((item) => (
-                                    <MenuItem key={item.id} display={'flex'} alignItems={'center'} gap={4} as={RouterLink} to={item.to}>
-                                        <Image boxSize={'52px'} src={item.imageSrc} alt={item.label} />
+                                {newCategories.map((item) => (
+                                    <MenuItem key={item.id} display={'flex'} alignItems={'center'} gap={4} as={RouterLink} to={`/search-stars/${item.id}`}>
+                                        <Image boxSize={'52px'} src={item.imageSrc} alt={item.name} />
                                         <Box>
-                                            <Text mt={2}>{item.label}</Text>
+                                            <Text mt={2}>{item.name}</Text>
                                             <Text fontSize={'xs'} color={'gray.500'} fontWeight={400}>
                                                 {item.description}
                                             </Text>

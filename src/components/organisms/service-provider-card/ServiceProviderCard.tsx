@@ -15,7 +15,11 @@ const ServiceProviderCard = ({ experience, nationality, gender, bio, image, name
     const [userEvents, setUserEvents] = useState<any>([]);
 
     const handleRequestPrivateEvent = () => {
-        openModal();
+        if (user && user?.isMainUser) {
+            openModal();
+        } else {
+            navigate('/register');
+        }
     };
 
     const handleShowProfile = () => {

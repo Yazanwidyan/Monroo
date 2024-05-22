@@ -26,6 +26,7 @@ import AboutUs from './components/pages/common/about-us/AboutUs';
 import TermsOfUse from './components/pages/common/terms/Terms';
 import Privacy from './components/pages/common/privacy/Privacy';
 import FAQs from './components/pages/common/FAQ/FAQ';
+import SearchStars from './components/pages/common/search-stars/SearchStars';
 
 export const AppRoutes = () => (
     <>
@@ -33,6 +34,7 @@ export const AppRoutes = () => (
             <Route path="/" element={<AuthLayout />}>
                 <Route path="/" element={<Landing />} />
                 <Route path="/how-it-works" element={<HowItWorks />} />
+                <Route path="/search-stars/:id" element={<SearchStars />} />
                 <Route path="/contact-us" element={<ContactUs />} />
                 <Route path="/about-us" element={<AboutUs />} />
                 <Route path="/terms-of-use" element={<TermsOfUse />} />
