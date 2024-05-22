@@ -16,7 +16,7 @@ function ShowCategories() {
                     <Flex flexDirection="row" justifyContent="space-around" flexWrap="wrap" w="100%">
                         {categories.map((category, index) => (
                             <Flex key={index} flexDirection="column" alignItems="center" m={4} maxW="200px">
-                                <Image src={category.imgSrc} alt={category.label} boxSize="120px" borderRadius="md" mb={4} />
+                                <Image src={category.imgSrc} alt={category.label} boxSize="100px" borderRadius="md" mb={4} />
                                 <Text fontSize="xl" fontWeight="bold" mb={2}>
                                     {category.label}
                                 </Text>

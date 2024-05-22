@@ -62,7 +62,7 @@ const AuthLayout = () => {
                         </ChakraLink>
 
                         <Menu>
-                            <MenuButton as={Button} mx={'4px'} size={'sm'} fontWeight={900} variant={'ghost'} rightIcon={<ChevronDownIcon />}>
+                            <MenuButton fontSize={17.5} as={Button} size={'md'} fontWeight={700} variant={'ghost'} rightIcon={<ChevronDownIcon />}>
                                 {t('common.find_talent')}
                             </MenuButton>
                             <MenuList p={8}>
@@ -89,6 +89,9 @@ const AuthLayout = () => {
                         </ChakraLink>
                         <ChakraLink mx={'1rem'} as={RouterLink} to={'/how-it-works'} textDecoration="none" _hover={{ textDecoration: 'none' }}>
                             {t('common.how_it_works')}
+                        </ChakraLink>
+                        <ChakraLink mx={'1rem'} as={RouterLink} to={'/about-us'} textDecoration="none" _hover={{ textDecoration: 'none' }}>
+                            {t('common.about_us')}
                         </ChakraLink>
                         <Spacer />
 
