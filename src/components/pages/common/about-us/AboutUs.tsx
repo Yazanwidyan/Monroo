@@ -1,4 +1,4 @@
-import { Box, Heading, Container, Text, Image, VStack, Center, Divider } from '@chakra-ui/react';
+import { Box, Heading, Container, Text, VStack, Divider } from '@chakra-ui/react';
 
 const AboutUs = () => {
     return (

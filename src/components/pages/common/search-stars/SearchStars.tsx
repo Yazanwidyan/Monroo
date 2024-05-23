@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from 'react';
 import { Grid, GridItem, SkeletonText, Box, Container, Skeleton, Text, FormControl, Flex, Tag, TagLabel, InputGroup, Input, Button, VStack } from '@chakra-ui/react';
 import { Select as MultiSelect } from 'chakra-react-select';
 import ServiceProviderCard from '../../../organisms/service-provider-card/ServiceProviderCard';
-import { UserContext } from '../../../../contexts/UserContext';
 import userServices from '../../../../services/userServices';
 import useCustomToast from '../../../../hooks/useCustomToast';
 import { useTranslation } from 'react-i18next';
@@ -11,10 +10,8 @@ import { LookupsContext } from '../../../../contexts/LookupsContext';
 import educationOptions from '../../../../constants/education.json';
 import { FaGripHorizontal } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
-import commonService from '../../../../services/commonServices';
 
 const SearchStars = () => {
-    const { user } = useContext(UserContext);
     const { showToast } = useCustomToast();
     const { i18n } = useTranslation();
     const { id } = useParams();

@@ -1,8 +1,8 @@
-import { Button, Box, FormControl, FormLabel, Image, Text, VStack, Flex } from '@chakra-ui/react';
+import { Button, Box, FormControl, FormLabel, Image, Text, Flex } from '@chakra-ui/react';
 import { UserTypes } from '../../../../models/UserTypes';
 import useRegisterUserPage from './useRegisterUser';
 import { useTranslation } from 'react-i18next';
-import { GoogleAuthProvider, FacebookAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import authServices from '../../../../services/authServices';
 import { useContext } from 'react';
 import { UserContext } from '../../../../contexts/UserContext';
@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 export default function RegisterUserPage() {
     const auth = getAuth();
     const googleProvider = new GoogleAuthProvider();
-    const facebookProvider = new FacebookAuthProvider();
+    // const facebookProvider = new FacebookAuthProvider();
     const { updateUser } = useContext(UserContext);
     const navigate = useNavigate();
 
@@ -48,14 +48,14 @@ export default function RegisterUserPage() {
         }
     };
 
-    const logFacebookUser = async () => {
-        try {
-            const response = await signInWithPopup(auth, facebookProvider);
-            console.log(response);
-        } catch (error) {
-            console.error(error.message);
-        }
-    };
+    // const logFacebookUser = async () => {
+    //     try {
+    //         const response = await signInWithPopup(auth, facebookProvider);
+    //         console.log(response);
+    //     } catch (error) {
+    //         console.error(error.message);
+    //     }
+    // };
 
     return (
         <Box p={4} maxW="600px" mt={7} mx="auto">
@@ -66,7 +66,10 @@ export default function RegisterUserPage() {
                 <Flex justifyContent="space-around" mb={4}>
                     <Button
                         variant="outline"
-                        onClick={() => state.handleUserTypeChange({ target: { value: UserTypes.User } })}
+                        onClick={() => {
+                            // @ts-ignore
+                            state.handleUserTypeChange({ target: { value: UserTypes.User } });
+                        }}
                         borderColor={state.userType === UserTypes.User ? 'primary.500' : 'gray.300'}
                         bg={state.userType === UserTypes.User ? 'primary.50' : 'white'}
                         _hover={{ bg: 'primary.100' }}
@@ -82,7 +85,10 @@ export default function RegisterUserPage() {
                     </Button>
                     <Button
                         variant="outline"
-                        onClick={() => state.handleUserTypeChange({ target: { value: UserTypes.ServiceProvider } })}
+                        onClick={() => {
+                            // @ts-ignore
+                            state.handleUserTypeChange({ target: { value: UserTypes.ServiceProvider } });
+                        }}
                         borderColor={state.userType === UserTypes.ServiceProvider ? 'primary.500' : 'gray.300'}
                         bg={state.userType === UserTypes.ServiceProvider ? 'primary.50' : 'white'}
                         _hover={{ bg: 'primary.100' }}

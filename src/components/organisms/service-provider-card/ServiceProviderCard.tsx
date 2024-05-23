@@ -1,4 +1,4 @@
-import { Box, Text, Button, Avatar, Flex, Divider, Image } from '@chakra-ui/react';
+import { Box, Text, Button, Flex, Divider, Image } from '@chakra-ui/react';
 import { useContext, useState } from 'react';
 import UserEventListModal from '../user-event-list-modal/UserEventListModal';
 import userServices from '../../../services/userServices';
