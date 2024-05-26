@@ -38,6 +38,7 @@
       "enter_username": "Введите имя пользователя",
       "enter_email": "Введите адрес электронной почты",
       "enter_emailOrusername": "Введите имя пользователя или адрес электронной почты",
+      "enter_phone_number": "Введите номер телефона",
       "enter_password": "Введите пароль",
       "first_last_name": "Имя и фамилия",
       "enter_first_last_name": "Введите имя и фамилию",
@@ -66,7 +67,8 @@
       "third_step": "Третий шаг",
       "category": "категория",
       "personal_info": "Личная информация",
-      "professional_info": "Профессиональная информация"
+      "professional_info": "Профессиональная информация",
+      "continue_registration": "Продолжить регистрацию"
     }
   }
 }

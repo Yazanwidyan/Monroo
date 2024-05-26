@@ -41,6 +41,7 @@
       "enter_email": "ادخل البريد الالكتروني",
       "enter_emailOrusername": "ادخل اسم المستخدم او البريد الالكتروني",
       "enter_password": "ادخل كلمة المرور",
+      "enter_phone_number": "ادخل رقم الهاتف",
       "first_last_name": "الاسم الاول والاخير",
       "enter_first_last_name": "ادخل الاسم الاول والاخير",
       "country": "البلد",
@@ -68,7 +69,8 @@
       "third_step": "الخطوة الثالثة",
       "category": "الفئة",
       "personal_info": "المعلومات الشخصية",
-      "professional_info": "المعلومات الاحترافية"
+      "professional_info": "المعلومات الاحترافية",
+      "continue_registration": "اكمل المعلومات"
     }
   }
 }

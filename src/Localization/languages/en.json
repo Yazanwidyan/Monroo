@@ -40,6 +40,7 @@
             "enter_email": "Enter email",
             "enter_emailOrusername": "Enter username or email",
             "enter_password": "Enter password",
+            "enter_phone_number": "Enter phone number",
             "first_last_name": "First and last name",
             "enter_first_last_name": "Enter first and last name",
             "country": "Country",
@@ -67,7 +68,8 @@
             "third_step": "Third step",
             "category": "Category",
             "personal_info": "Personal info",
-            "professional_info": "Professional info"
+            "professional_info": "Professional info",
+            "continue_registration": "Continue Registration"
         }
     }
 }

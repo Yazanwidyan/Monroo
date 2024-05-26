@@ -15,7 +15,7 @@ const DEFAULT_REGISTER_EMPLOYER: RegisterEmployer = {
     confirmPassword: '',
     about: '',
     companyName: '',
-    country: '0',
+    country: '',
     intrestedList: [],
     phone: '',
 };

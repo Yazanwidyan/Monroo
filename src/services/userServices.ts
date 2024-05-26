@@ -17,6 +17,22 @@ const userServices = {
                 throw error;
             });
     },
+    updateUser: (payload) => {
+        const config = {
+            headers: {
+                'x-secret': 'MonrooHeaders',
+                'Content-Type': 'multipart/form-data',
+            },
+        };
+        return api
+            .post(`/monroo/apis/user/UpdateUser`, payload, config)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                throw error;
+            });
+    },
     getListOutProviders: (payload) => {
         const config = {
             headers: {

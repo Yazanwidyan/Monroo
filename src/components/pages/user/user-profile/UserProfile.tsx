@@ -1,13 +1,27 @@
-import { useContext } from 'react';
-import { Box, Heading, Text, VStack, Divider, Image, Container } from '@chakra-ui/react';
+import { useContext, useState } from 'react';
+import { Box, Heading, Text, VStack, Divider, Image, Container, Button } from '@chakra-ui/react';
 import { UserContext } from '../../../../contexts/UserContext';
+import EditProfileModal from './EditProfileModal';
+import { FaPencilAlt } from 'react-icons/fa';
 
 const UserProfile = () => {
     const { user } = useContext(UserContext);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false); // State to manage modal open/close
+
+    const openEditModal = () => {
+        setIsEditModalOpen(true);
+    };
+
+    const closeEditModal = () => {
+        setIsEditModalOpen(false);
+    };
 
     return (
         <Container maxW={'6xl'}>
             <Box mt={10} bg="white" borderRadius="xl">
+                <Button leftIcon={<FaPencilAlt />} color={'black'} bg={'white'} onClick={openEditModal}>
+                    <Text fontSize={'sm'}>Edit my profile</Text>
+                </Button>
                 <VStack align="start" spacing="4">
                     <Box>
                         <Image borderRadius="2xl" boxSize="100px" src={user.profilePic} alt={user.name} />
@@ -45,6 +59,7 @@ const UserProfile = () => {
                     </VStack>
                 </VStack>
             </Box>
+            <EditProfileModal isOpen={isEditModalOpen} onClose={closeEditModal} />
         </Container>
     );
 };

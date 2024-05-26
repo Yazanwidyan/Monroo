@@ -13,10 +13,9 @@ export default function RegisterEmployerPage() {
 
     return (
         <RegisterEmployerForm
-            onSubmit={async (register: RegisterEmployer, profilePic: any) => {
+            onSubmit={async (register: RegisterEmployer) => {
                 const data = new FormData();
-                data.append('profilePic', profilePic);
-                data.append('data', JSON.stringify({ ...register, profilePic: undefined }));
+                data.append('data', JSON.stringify({ ...register }));
 
                 try {
                     const res = await authServices.registerUser(data);
