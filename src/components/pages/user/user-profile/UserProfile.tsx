@@ -1,8 +1,13 @@
 import { useContext, useState } from 'react';
-import { Box, Heading, Text, VStack, Divider, Image, Container, Button } from '@chakra-ui/react';
+import { Box, Heading, Text, VStack, Divider, Image, Container, Button, Flex } from '@chakra-ui/react';
 import { UserContext } from '../../../../contexts/UserContext';
 import EditProfileModal from './EditProfileModal';
 import { FaPencilAlt } from 'react-icons/fa';
+
+const headerHeight = 70; // Height of the header in pixels
+const footerHeight = 160; // Height of the footer in pixels
+
+const minHeight = `calc(100vh - ${headerHeight}px - ${footerHeight}px)`;
 
 const UserProfile = () => {
     const { user } = useContext(UserContext);
@@ -17,50 +22,59 @@ const UserProfile = () => {
     };
 
     return (
-        <Container maxW={'6xl'}>
-            <Box mt={10} bg="white" borderRadius="xl">
-                <Button leftIcon={<FaPencilAlt />} color={'black'} bg={'white'} onClick={openEditModal}>
-                    <Text fontSize={'sm'}>Edit my profile</Text>
-                </Button>
-                <VStack align="start" spacing="4">
-                    <Box>
-                        <Image borderRadius="2xl" boxSize="100px" src={user.profilePic} alt={user.name} />
-                        <Heading as="h2" mt={4} fontSize="3xl" fontWeight="bold">
-                            {user.name}
-                        </Heading>
-                    </Box>
-
-                    <Divider />
-
-                    <VStack align="start" spacing="4" w="100%">
-                        <Box>
-                            <Heading as="h3" fontSize="xl" mb={2}>
+        <Box bg="primary.50" minHeight={minHeight}>
+            <Container maxW="6xl" py={5}>
+                <Box borderRadius="xl" pt={6}>
+                    <Flex justify="space-between" align="center" mb={2}>
+                        <Flex align="center">
+                            <Image borderRadius="full" boxSize="120px" src={user.profilePic || '/assets/images/userprofile.jpg'} alt={user.name} />
+                            <Box ml={6}>
+                                <Heading as="h2" size="lg" fontWeight="bold">
+                                    {user.name}
+                                </Heading>
+                                <Text color="gray.500">{user.companyName}</Text>
+                            </Box>
+                        </Flex>
+                        <Button leftIcon={<FaPencilAlt />} colorScheme="primary" onClick={openEditModal}>
+                            <Text fontSize="sm">Edit Profile</Text>
+                        </Button>
+                    </Flex>
+                    <Divider mb={2} />
+                    <VStack align="start" spacing={4}>
+                        <Box w="full">
+                            <Heading as="h3" size="md" mb={2}>
                                 Personal Information
                             </Heading>
-                            <Divider />
-                            <VStack align="start" spacing="2" mt={4}>
+                            <Divider mb={4} />
+                            <VStack align="start" spacing={2}>
                                 <Text>
                                     <strong>Email:</strong> {user.email}
                                 </Text>
                                 <Text>
                                     <strong>Phone:</strong> {user.phone}
                                 </Text>
-                                <Text>
-                                    <strong>Company Name:</strong> {user.companyName}
-                                </Text>
-                                <Text>
-                                    <strong>Country:</strong> {user.country}
-                                </Text>
-                                <Text>
-                                    <strong>About:</strong> {user.about}
-                                </Text>
+                                {user.companyName && (
+                                    <Text>
+                                        <strong>Company Name:</strong> {user.companyName}
+                                    </Text>
+                                )}
+                                {user.country && (
+                                    <Text>
+                                        <strong>Country:</strong> {user.country}
+                                    </Text>
+                                )}
+                                {user.about && (
+                                    <Text>
+                                        <strong>About:</strong> {user.about}
+                                    </Text>
+                                )}
                             </VStack>
                         </Box>
                     </VStack>
-                </VStack>
-            </Box>
-            <EditProfileModal isOpen={isEditModalOpen} onClose={closeEditModal} />
-        </Container>
+                </Box>
+                <EditProfileModal title={'edit_profile'} isOpen={isEditModalOpen} onClose={closeEditModal} />
+            </Container>
+        </Box>
     );
 };
 

@@ -11,6 +11,7 @@ import { LookupsContext } from '../../../../contexts/LookupsContext';
 import educationOptions from '../../../../constants/education.json';
 import { FaGripHorizontal } from 'react-icons/fa';
 import CreateEventPage from '../create-event/CreateEvent';
+import EditProfileModal from '../user-profile/EditProfileModal';
 
 const HomeUser = () => {
     const { user } = useContext(UserContext);
@@ -18,6 +19,7 @@ const HomeUser = () => {
     const { i18n } = useTranslation();
 
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false); // State to manage modal open/close
     const { categories } = useContext(LookupsContext);
     const [providersList, setListProviders] = useState<any>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -39,10 +41,17 @@ const HomeUser = () => {
         });
     };
 
-    const openDialog = () => {
-        setIsDialogOpen(true);
+    const closeEditModal = () => {
+        setIsEditModalOpen(false);
     };
 
+    const openDialog = () => {
+        if (user?.country) {
+            setIsDialogOpen(true);
+        } else {
+            setIsEditModalOpen(true);
+        }
+    };
     const closeDialog = () => {
         setIsDialogOpen(false);
     };
@@ -311,6 +320,7 @@ const HomeUser = () => {
                         )}
                     </Box>
                 </Box>
+                <EditProfileModal title={'complete_profile'} isOpen={isEditModalOpen} onClose={closeEditModal} />
                 <CreateEventPage isOpen={isDialogOpen} onClose={closeDialog} />
             </Container>
         </>

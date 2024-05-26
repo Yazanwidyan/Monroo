@@ -1,17 +1,12 @@
-import { Flex, FormControl, FormLabel, IconButton, Input, InputGroup, InputRightElement, List, ListItem, Select, SimpleGrid, Text } from '@chakra-ui/react';
+import { Flex, FormControl, FormLabel, IconButton, Input, List, ListItem, Select, SimpleGrid, Text } from '@chakra-ui/react';
 import useEditServiceProviderProfessionalInfo from './useEditServiceProviderProfessionalInfo';
 import { useTranslation } from 'react-i18next';
-import { CloseIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import usePasswordVisibility from '../../../../hooks/usePasswordVisibility';
+import { CloseIcon } from '@chakra-ui/icons';
 import languagesList from '../../../../constants/languages.json';
 
 export default function EditServiceProviderProfessionalInfo() {
     const state = useEditServiceProviderProfessionalInfo();
     const { t, i18n } = useTranslation();
-    const [passwordVisibility, togglePasswordVisibility] = usePasswordVisibility({
-        password: false,
-        confirmPassword: false,
-    });
 
     // const removeFile = () => {
     //   Logic to remove the selected file from state
@@ -405,30 +400,6 @@ export default function EditServiceProviderProfessionalInfo() {
                     />
                 </FormControl>
             )}
-            <FormControl isRequired>
-                <FormLabel>{t('register.password')}</FormLabel>
-                <InputGroup>
-                    <Input
-                        type={passwordVisibility.password ? 'text' : 'password'}
-                        name="password"
-                        placeholder={t('register.enter_password')}
-                        value={state.professionalInfo.password}
-                        onChange={state.handleProfessionalInfoChange}
-                        maxLength={20}
-                        minLength={6}
-                        required
-                    />
-                    <InputRightElement width="2.8rem">
-                        <IconButton
-                            h="1.75rem"
-                            size="sm"
-                            onClick={() => togglePasswordVisibility('password')}
-                            icon={passwordVisibility.password ? <ViewIcon /> : <ViewOffIcon />}
-                            aria-label={passwordVisibility.password ? 'Hide password' : 'Show password'}
-                        />
-                    </InputRightElement>
-                </InputGroup>
-            </FormControl>
         </SimpleGrid>
     );
 }

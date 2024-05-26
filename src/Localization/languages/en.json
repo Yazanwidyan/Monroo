@@ -13,7 +13,9 @@
             "join_now": "Join Now",
             "find_talent": "Find Talent",
             "for_talent": "For Talent",
-            "about_us": "About Us"
+            "about_us": "About Us",
+            "complete_profile": "Please complete your profile",
+            "edit_profile": "Edit profile"
         },
         "login": {
             "login": "Sign in",

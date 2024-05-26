@@ -1,15 +1,14 @@
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton } from '@chakra-ui/react';
+import { Modal, ModalOverlay, ModalContent, ModalBody, ModalCloseButton, Container } from '@chakra-ui/react';
 import EditUser from '../../auth/edit-user/EditUser';
 
-const EditProfileModal = ({ isOpen, onClose }) => {
+const EditProfileModal = ({ isOpen, onClose, title }) => {
     return (
-        <Modal size={'full'} isOpen={isOpen} onClose={onClose}>
+        <Modal size={'5xl'} isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent>
-                <ModalHeader>Edit Profile</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    <EditUser onClose={onClose} />
+                    <EditUser onClose={onClose} title={title} />
                 </ModalBody>
             </ModalContent>
         </Modal>

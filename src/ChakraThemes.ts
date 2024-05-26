@@ -75,7 +75,7 @@ export const themes = {
     },
     colors: {
         primary: {
-            50: '#F5E6E9',
+            50: '#fcf0f2',
             100: '#E0BFC9',
             200: '#C996A5',
             300: '#B46E81',

@@ -6,11 +6,17 @@ import Footer from '../footer/Footer';
 import { FaPlusCircle, FaSignOutAlt, FaUserAlt } from 'react-icons/fa';
 import CreateEventPage from '../../pages/user/create-event/CreateEvent';
 import LanguageSwitcher from '../../../Localization/LanguageSwitcher';
+import EditProfileModal from '../../pages/user/user-profile/EditProfileModal';
 
 const HomeLayout = () => {
     const navigate = useNavigate();
     const { user, updateUser } = useContext(UserContext);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false); // State to manage modal open/close
+
+    const closeEditModal = () => {
+        setIsEditModalOpen(false);
+    };
 
     const handleLogout = () => {
         navigate('/');
@@ -18,7 +24,11 @@ const HomeLayout = () => {
     };
 
     const openDialog = () => {
-        setIsDialogOpen(true);
+        if (user?.country) {
+            setIsDialogOpen(true);
+        } else {
+            setIsEditModalOpen(true);
+        }
     };
 
     const closeDialog = () => {
@@ -83,6 +93,7 @@ const HomeLayout = () => {
                             <Button onClick={handleLogout} px={0} colorScheme="primary.500" size="sm" variant={'ghost'} leftIcon={<FaSignOutAlt />}></Button>
                         </Flex>
                     </Flex>
+                    <EditProfileModal title={'complete_profile'} isOpen={isEditModalOpen} onClose={closeEditModal} />
                     <CreateEventPage isOpen={isDialogOpen} onClose={closeDialog} />
                 </Container>
             </Box>

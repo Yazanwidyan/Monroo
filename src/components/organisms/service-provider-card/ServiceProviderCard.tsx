@@ -5,10 +5,13 @@ import userServices from '../../../services/userServices';
 import { UserContext } from '../../../contexts/UserContext';
 import useCustomToast from '../../../hooks/useCustomToast';
 import { useNavigate } from 'react-router-dom';
+import EditProfileModal from '../../pages/user/user-profile/EditProfileModal';
 
 const ServiceProviderCard = ({ experience, nationality, gender, bio, image, name, providerID }: any) => {
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false); // State to manage modal open/close
+
     const { user } = useContext(UserContext);
     const { showToast } = useCustomToast();
 
@@ -27,18 +30,25 @@ const ServiceProviderCard = ({ experience, nationality, gender, bio, image, name
     };
 
     const openModal = async () => {
-        setIsModalOpen(true);
-        const payload = {
-            userID: user.id,
-        };
-        try {
-            const res = await userServices.getUserEvents(payload);
-            setUserEvents(res.data);
-        } catch (error) {
-            showToast(error, { status: 'error' });
+        if (user?.country) {
+            setIsModalOpen(true);
+            const payload = {
+                userID: user.id,
+            };
+            try {
+                const res = await userServices.getUserEvents(payload);
+                setUserEvents(res.data);
+            } catch (error) {
+                showToast(error, { status: 'error' });
+            }
+        } else {
+            setIsEditModalOpen(true);
         }
     };
 
+    const closeEditModal = () => {
+        setIsEditModalOpen(false);
+    };
     const closeModal = () => {
         setIsModalOpen(false);
     };
@@ -81,6 +91,7 @@ const ServiceProviderCard = ({ experience, nationality, gender, bio, image, name
                     <Button width={'100%'} variant={'outline'} textTransform={'uppercase'} fontSize="x-small" colorScheme="primary" mb="0" onClick={handleRequestPrivateEvent}>
                         Request Private Event
                     </Button>
+                    <EditProfileModal title={'complete_profile'} isOpen={isEditModalOpen} onClose={closeEditModal} />
                     <UserEventListModal providerID={providerID} isOpen={isModalOpen} onClose={closeModal} events={userEvents} />
                 </Box>
             </Box>

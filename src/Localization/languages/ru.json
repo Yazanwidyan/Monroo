@@ -13,7 +13,9 @@
       "join_now": "Присоединяйся сейчас",
       "find_talent": "найти талант",
       "for_talent": "Для таланта",
-      "about_us": "О нас"
+      "about_us": "О нас",
+      "complete_profile": "Полный профиль",
+      "edit_profile": "редактировать профиль"
     },
     "login": {
       "login": "авторизоваться",
