@@ -61,7 +61,7 @@ const AuthLayout = () => {
                                 {t('common.find_talent')}
                             </MenuButton>
                             <MenuList p={8}>
-                                <Text borderBottomWidth={2} borderBottomColor={'gray.300'} borderBottomStyle={'solid'} pb={4} mb={3} fontSize={'xl'} maxW={400}>
+                                <Text borderBottomWidth={2} borderBottomColor={'gray.300'} borderBottomStyle={'solid'} pb={4} mb={3} fontSize={'xl'} minW={560}>
                                     Search our talent network to find the perfect fit
                                 </Text>
 
@@ -76,6 +76,20 @@ const AuthLayout = () => {
                                         </Box>
                                     </MenuItem>
                                 ))}
+                                <MenuItem
+                                    bg={'primary.500'}
+                                    textAlign={'center'}
+                                    justifyContent={'center'}
+                                    w={'80%'}
+                                    borderRadius={10}
+                                    color={'white'}
+                                    as={RouterLink}
+                                    to={`/search-stars/all`}
+                                    mx={5}
+                                    mt={5}
+                                >
+                                    Search Monroo Talents
+                                </MenuItem>
                             </MenuList>
                         </Menu>
 

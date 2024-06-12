@@ -54,13 +54,9 @@ const Footer = () => {
                     <Link href="https://www.facebook.com/profile.php?id=100094690136465" target="_blank" fontSize="xl">
                         <FaFacebook />
                     </Link>
-                    <Link href="#" fontSize="xl">
+                    <Link href="https://www.instagram.com/monroo.x?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" fontSize="xl">
                         <FaInstagram />
                     </Link>
-                    <Box></Box>
-                    <Box></Box>
-                    <Box></Box>
-                    <Box></Box>
                 </HStack>
                 <HStack spacing="4" mt={{ base: '4', md: '0' }} alignItems="center">
                     <ChakraLink as={RouterLink} to={'/FAQs'} fontSize="sm" textDecoration="none" _hover={{ textDecoration: 'none' }}>
@@ -79,20 +75,21 @@ const Footer = () => {
                         About
                     </ChakraLink>
                 </HStack>
+
                 <Box>
                     {/* <Box mb={2}>Get the app</Box> */}
                     <Flex gap={2}>
                         <Link href="https://www.apple.com/app-store/" target="_blank" fontSize="sm" alignItems="center">
-                            <Image src={'/assets/images/ios.svg'} alt={'iOS Download'} height={'50'} width={'170'} />
+                            <Image src={'/assets/images/ios.svg'} alt={'iOS Download'} height={'33'} width={'170'} />
                         </Link>
                         <Link href="https://www.playstore.com/app-store/" target="_blank" fontSize="sm" alignItems="center">
-                            <Image src={'/assets/images/googlePlay.png'} alt={'android Download'} borderRadius={7} height={'50'} width={'170'} />
+                            <Image src={'/assets/images/googlePlay.png'} alt={'android Download'} borderRadius={7} height={'33'} width={'170'} />
                         </Link>
                     </Flex>
                 </Box>
             </Flex>
 
-            <Text textAlign="center" color="gray.500" fontSize="sm">
+            <Text textAlign="center" color="gray.500" fontSize="xs">
                 © {new Date().getFullYear()} MONROO. All Rights Reserved
             </Text>
         </Box>

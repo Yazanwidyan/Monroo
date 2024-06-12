@@ -1,44 +1,77 @@
-import { Box, Heading, Flex, Grid, Icon, Container, Button, Text, Image } from '@chakra-ui/react';
+import { Box, Heading, Flex, Grid, Container, Button, Text, Image, Icon } from '@chakra-ui/react';
 import { FaRegEnvelope, FaRegUser, FaRegAddressCard, FaRegCreditCard, FaChevronRight } from 'react-icons/fa'; // Import icons from react-icons library
-import VerticalSteps from '../../../organisms/vertical-steps/VerticalSteps';
+import { useNavigate } from 'react-router-dom';
 
 const stepsData1 = [
     {
-        title: 'Step 1',
-        desc: 'philosophi quantumcumque quaedam iustitia proposita',
+        title: 'Create Your Profile',
+        desc: [
+            'Sign up and create a compelling profile that showcases your skills, experience, and portfolio.',
+            'Include a professional photo, a brief bio, and any relevant work samples to make your profile stand out.',
+        ],
         icon: FaRegEnvelope,
     },
     {
-        title: 'Step 2',
-        desc: 'philosophi quantumcumque quaedam iustitia proposita',
+        title: 'Set Your Rate',
+        desc: ['Define your rate per hour based on your expertise and industry standards.', 'Be competitive yet realistic to attract the right opportunities.'],
         icon: FaRegUser,
     },
     {
-        title: 'Step 3',
-        desc: 'quantumcumque quaedam parabilis delectamur iniuria iactant philosophi quantumcumque quaedam iustitia proposita',
+        title: 'Select Your Field of Expertise',
+        desc: [
+            'Choose the categories that best represent your skills, whether it is acting, modeling, artistry, or marketing.',
+            'This helps employers find you easily when they are searching for specific talents.',
+        ],
         icon: FaRegAddressCard,
     },
     {
-        title: 'Step 4',
-        desc: 'quantumcumque quaedam iustitia proposita Chrysippo parabilis delectamur iniuria iactant philosophi quantumcumque quaedam iustitia proposita',
+        title: 'Discover Opportunities',
+        desc: ['Browse through job listings posted by employers that match your expertise', 'Apply to the jobs that interest you with a personalized proposal.'],
+        icon: FaRegCreditCard,
+    },
+    {
+        title: 'Get Contacted Directly',
+        desc: ['Employers can also find and contact you directly through your profile.', 'Negotiate terms and accept job offers that align with your career goals.'],
+        icon: FaRegCreditCard,
+    },
+    {
+        title: 'Payments',
+        desc: ['With Monroo, your payment is guaranteed after the work is completed'],
+        icon: FaRegCreditCard,
+    },
+];
+const stepsData2 = [
+    {
+        title: 'Post a Job',
+        desc: ['Create a detailed job listing specifying the skills and expertise you need.', 'Include project requirements, deadlines, and your budget to attract suitable candidates.'],
+        icon: FaRegEnvelope,
+    },
+    {
+        title: 'Browse Talents',
+        desc: ['Use our advanced search filters to find freelancers that match your project needs.', 'Review profiles, portfolios, and hourly rates to select the best fit.'],
+        icon: FaRegUser,
+    },
+    {
+        title: 'Direct Contact',
+        desc: ['Reach out to freelancers directly through their profiles to discuss your project.', 'Negotiate terms and finalize the agreement with your chosen talent.'],
+
+        icon: FaRegAddressCard,
+    },
+    {
+        title: 'Hire with Confidence',
+        desc: ['Once you’ve selected a freelancer, hire them through the Monroo platform.', 'Manage all communications and transactions securely within our system.'],
+        icon: FaRegCreditCard,
+    },
+    {
+        title: 'Complete Your Project',
+        desc: ['Collaborate with your freelancer to complete the project.', 'After you are satisfied with the work, pay through Monroo.'],
         icon: FaRegCreditCard,
     },
 ];
 
-const HeadingTitle = ({ title, desc }) => {
-    return (
-        <>
-            <Heading as="h2" size="lg" mb="4">
-                {title}
-            </Heading>
-            <Box fontWeight={300} fontSize={'sm'} maxWidth={800} margin={'auto'} textAlign={'center'} mb="20" mt={8} lineHeight={2}>
-                <p>{desc}</p>
-            </Box>
-        </>
-    );
-};
-
 const HowItWorks = () => {
+    const navigate = useNavigate();
+
     return (
         <Box bg="primary.50">
             <Container maxW={'7xl'}>
@@ -49,12 +82,12 @@ const HowItWorks = () => {
                                 How It Works?
                             </Text>
                             <Box textTransform={'uppercase'} fontSize={'sm'} color={'gray.500'} fontWeight={600} letterSpacing={2} mb={8}>
-                                <p>Learn about our easy proccess</p>
+                                <p>Welcome to Monroo – Your Pathway to Exceptional Talent and Opportunities</p>
                             </Box>
                             <Box fontWeight={300} fontSize={'sm'}>
                                 <p>
-                                    Chrysippo parabilis delectamur iniuria iactant philosophi quantumcumque quaedam iustitia proposita Chrysippo parabilis delectamur iniuria iactant philosophi
-                                    quantumcumque quaedam iustitia proposita
+                                    Monroo simplifies the process of connecting talented freelancers with employers who need their skills. Whether you're a creative professional seeking your next gig
+                                    or an employer looking for the perfect talent, Monroo is designed to make the process seamless and efficient.
                                 </p>
                             </Box>
                         </Box>
@@ -65,41 +98,89 @@ const HowItWorks = () => {
                     </Flex>
 
                     <Box textAlign={'center'} mt="20">
-                        <HeadingTitle
-                            title="Talents"
-                            desc="Chrysippo parabilis delectamur iniuria iactant philosophi
-          quantumcumque quaedam iustitia proposita Chrysippo parabilis
-          delectamur iniuria iactant philosophi quantumcumque quaedam iustitia
-          proposita"
-                        />
-                        <Grid mb={6} templateColumns="repeat(4, 1fr)" gap={6}>
+                        <Grid mb={6} templateColumns="repeat(3, 1fr)" gap={6}>
                             {stepsData1.map((step, index) => (
                                 <Box key={index} textAlign="left" p={4}>
-                                    <Box display={'flex'} flexDirection={'row'} justifyContent={'space-between'}>
-                                        <Icon as={step.icon} fontSize="2xl" mb={3} />
-                                        {index !== stepsData1.length - 1 && <Icon as={FaChevronRight} fontSize="sm" mb={3} />}
-                                    </Box>
+                                    <Box display={'flex'} flexDirection={'row'} justifyContent={'space-between'}></Box>
                                     <Heading as="h3" size="md" mb={2}>
                                         {step.title}
                                     </Heading>
                                     <Box>
-                                        <p>{step.desc}</p>
+                                        {step.desc.map((item, i) => {
+                                            return <li key={i}>{item}</li>;
+                                        })}
                                     </Box>
                                 </Box>
                             ))}
                         </Grid>
-                        <Button colorScheme={'primary'}>Register as service provider</Button>
+                        <Button onClick={() => navigate('/register')} colorScheme={'primary'}>
+                            Register as Star
+                        </Button>
                     </Box>
                     <Box textAlign={'center'} mt="20">
-                        <HeadingTitle
-                            title="Business"
-                            desc="Chrysippo parabilis delectamur iniuria iactant philosophi
-         quantumcumque quaedam iustitia proposita Chrysippo parabilis
-         delectamur iniuria iactant philosophi quantumcumque quaedam iustitia
-         proposita"
-                        />
-                        <VerticalSteps />
-                        <Button colorScheme={'primary'}>Register as user</Button>
+                        <Grid mb={6} templateColumns="repeat(3, 1fr)" gap={6}>
+                            {stepsData2.map((step, index) => (
+                                <Box key={index} textAlign="left" p={4}>
+                                    <Box display={'flex'} flexDirection={'row'} justifyContent={'space-between'}></Box>
+                                    <Heading as="h3" size="md" mb={2}>
+                                        {step.title}
+                                    </Heading>
+                                    <Box>
+                                        {step.desc.map((item, i) => {
+                                            return <li key={i}>{item}</li>;
+                                        })}
+                                    </Box>
+                                </Box>
+                            ))}
+                        </Grid>
+                        <Button onClick={() => navigate('/register')} colorScheme={'primary'}>
+                            Register as Scout
+                        </Button>
+                    </Box>
+
+                    {/* Why Choose Monroo Section */}
+                    <Box textAlign={'center'} mt="20">
+                        <Box p={4}>
+                            <Heading as="h2" size="xl" mb={4}>
+                                Why Choose Monroo?
+                            </Heading>
+                            <Grid mb={6} templateColumns="repeat(2, 1fr)" gap={6} textAlign="left">
+                                <Box>
+                                    <Heading as="h4" size="md" mb={2}>
+                                        Seamless Connection
+                                    </Heading>
+                                    <Text>Our platform makes it easy for freelancers and employers to find each other, ensuring a perfect match for every project.</Text>
+                                </Box>
+                                <Box>
+                                    <Heading as="h4" size="md" mb={2}>
+                                        Transparent Rates
+                                    </Heading>
+                                    <Text>Freelancers set their rates upfront, so employers know what to expect, and negotiations are straightforward.</Text>
+                                </Box>
+                                <Box>
+                                    <Heading as="h4" size="md" mb={2}>
+                                        Diverse Talent Pool
+                                    </Heading>
+                                    <Text>Access a wide range of skilled professionals from various creative fields.</Text>
+                                </Box>
+                                <Box>
+                                    <Heading as="h4" size="md" mb={2}>
+                                        Secure Transactions
+                                    </Heading>
+                                    <Text>All payments and communications are handled securely, giving you peace of mind.</Text>
+                                </Box>
+                            </Grid>
+                            <Heading as="h2" size="xl" mb={4}>
+                                Join Monroo Today
+                            </Heading>
+                            <Text mb={4}>
+                                Start your journey with Monroo and experience a streamlined process for finding and hiring top talent. Whether you're looking to showcase your skills or find the right
+                                person for your project, Monroo is here to help you succeed.
+                            </Text>
+                            <Button onClick={() => navigate('/register')} colorScheme={'primary'}>
+                                Sign up now and become part of the Monroo community!
+                            </Button>
+                        </Box>
                     </Box>
                 </Box>
             </Container>

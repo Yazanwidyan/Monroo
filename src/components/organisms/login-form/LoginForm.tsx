@@ -113,15 +113,16 @@ export default function LoginForm(props: LoginFormProps) {
                     <Image width={5} src={'/assets/images/google.png'} />
                     {/* <Text mx={4}> Google</Text> */}
                 </Button>
-                <Button width="100%" mt={2} onClick={logFacebookUser} _hover={{ borderColor: 'gray.400', bg: 'gray.50' }} _active={{ bg: 'gray.100' }}>
-                    <Image width={5} src={'/assets/images/facebook.png'} />
-                    {/* <Text mx={4}>Facebook</Text> */}
-                </Button>
+                {/* <Button width="100%" mt={2} onClick={logFacebookUser} _hover={{ borderColor: 'gray.400', bg: 'gray.50' }} _active={{ bg: 'gray.100' }}> */}
+                {/* <Image width={5} src={'/assets/images/facebook.png'} /> */}
+                {/* <Text mx={4}>Facebook</Text> */}
+                {/* </Button> */}
             </Flex>
             <Divider />
             <Flex width="100%" justifyContent="center" mt="2">
-                <Text>{t('login.dont_have_account')}</Text>
+                <Text>{t('login.dont_have_account')} </Text>
                 <ChakraLink onClick={props.onClose} as={RouterLink} to="/register" href="/register" color="primary.500" textDecoration="none" _hover={{ textDecoration: 'underline' }}>
+                    {' '}
                     {t('login.create_account')}
                 </ChakraLink>
             </Flex>

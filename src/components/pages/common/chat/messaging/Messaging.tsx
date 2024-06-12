@@ -25,7 +25,7 @@ import paymentService from '../../../../../services/paymentServices';
 //     }
 // };
 
-const Messaging = ({ selectedRoom }) => {
+const Messaging = ({ selectedRoom, rooms }) => {
     const { showToast } = useCustomToast();
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
@@ -437,8 +437,6 @@ const Messaging = ({ selectedRoom }) => {
         }
     };
 
-    console.log('main', mainEvent);
-
     return selectedRoom ? (
         <Box p={4}>
             <VStack spacing={4} mb={4} align="stretch">
@@ -526,7 +524,7 @@ const Messaging = ({ selectedRoom }) => {
         </Box>
     ) : (
         <Box mt={9} textAlign="center" fontSize="xl">
-            Choose a room to start messaging
+            {rooms.length ? 'Choose a room to start messaging' : `You didn't start any chat yet`}
         </Box>
     );
 };

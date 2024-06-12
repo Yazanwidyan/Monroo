@@ -84,17 +84,17 @@ const SocialMediaLinks = ({ instagram, linkedin, youtubelink }) => (
         </Text>
         <Box display="flex" alignItems="center">
             {instagram && (
-                <Link href={`https://www.instagram.com/${instagram}`} target="_blank" mx={2}>
+                <Link href={`${!instagram.startsWith('http') ? '' : 'https://www.instagram.com/'}${instagram}`} target="_blank" mx={2}>
                     <FaInstagram size={24} />
                 </Link>
             )}
             {linkedin && (
-                <Link href={`https://www.linkedin.com/in/${linkedin}`} target="_blank" mx={2}>
+                <Link href={`${!linkedin.startsWith('http') ? '' : 'https://www.linkedin.com/in/'}${linkedin}`} target="_blank" mx={2}>
                     <FaLinkedin size={24} />
                 </Link>
             )}
             {youtubelink && (
-                <Link href={`https://www.youtube.com/channel/${youtubelink}`} target="_blank" mx={2}>
+                <Link href={`${!youtubelink.startsWith('http') ? '' : 'https://www.youtube.com/channel/'}${youtubelink}`} target="_blank" mx={2}>
                     <FaYoutube size={24} />
                 </Link>
             )}

@@ -55,15 +55,11 @@ const ServiceProviderCard = ({ experience, nationality, gender, bio, image, name
 
     return (
         <Box borderColor="#CBD5E0" borderWidth="2px" borderRadius={'md'} maxW="md" overflow="hidden">
-            <Box height={'260'}>
-                <Image src={image || '/assets/images/userprofile.jpg'} alt={name} style={{ cursor: 'pointer' }} boxSize={'100%'} onClick={handleShowProfile} />
+            <Box height={'300'}>
+                <Image objectFit={'cover'} src={image || '/assets/images/userprofile.jpg'} alt={name} style={{ cursor: 'pointer' }} boxSize={'100%'} onClick={handleShowProfile} />
             </Box>
             <Box p={3}>
                 <Text fontSize="md">{name}</Text>
-                <Text minH="3rem" fontSize="xs" color="gray.600">
-                    {bio?.length > 66 ? bio?.substring(0, 60) + '...' : bio}
-                </Text>
-                <Divider />
 
                 <Box fontSize="sm" color="gray.500">
                     <Flex align="center" gap={2}>
@@ -85,8 +81,11 @@ const ServiceProviderCard = ({ experience, nationality, gender, bio, image, name
                         <Text> {gender == 1 ? 'Male' : gender == 2 ? 'Female' : 'N/A'}</Text>
                     </Flex>
                 </Box>
-                <Divider my={3} />
-
+                <Divider my={2} />
+                <Text minH="2rem" fontSize="xs" color="gray.600">
+                    {bio?.length > 66 ? bio?.substring(0, 70) + '...' : bio}
+                </Text>
+                <Divider my={2} />
                 <Box>
                     <Button width={'100%'} variant={'outline'} textTransform={'uppercase'} fontSize="x-small" colorScheme="primary" mb="0" onClick={handleRequestPrivateEvent}>
                         Request Private Event

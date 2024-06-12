@@ -168,7 +168,7 @@ const HomeUser = () => {
                                 Connect with the perfect creative for your next project with direct access to the largest network of actors, models, voice artists, creative freelancers, and crew.
                             </Text>
                             <Button onClick={openDialog} colorScheme="primary" size="md">
-                                Post an Event
+                                Create an event
                             </Button>
                         </VStack>
                     </Box>
@@ -297,7 +297,7 @@ const HomeUser = () => {
                                 ))}
                             </Grid>
                         ) : providersList.length ? (
-                            <Grid templateColumns="repeat(auto-fill, minmax(240px, 1fr))" gap={4}>
+                            <Grid templateColumns="repeat(auto-fill, minmax(290px, 1fr))" gap={12}>
                                 {providersList.map((userProfile, index) => (
                                     <GridItem key={index}>
                                         <ServiceProviderCard

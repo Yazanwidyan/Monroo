@@ -129,8 +129,10 @@ const SearchStars = () => {
     useEffect(() => {
         if (dataFetched) {
             const timer = setTimeout(() => {
-                handleToggleCategory(id);
-                setFilterTriggered(true);
+                if (id !== 'all') {
+                    handleToggleCategory(id);
+                    setFilterTriggered(true);
+                }
             }, 100);
 
             return () => clearTimeout(timer);
@@ -290,7 +292,7 @@ const SearchStars = () => {
                                 ))}
                             </Grid>
                         ) : providersList.length ? (
-                            <Grid templateColumns="repeat(auto-fill, minmax(240px, 1fr))" gap={4}>
+                            <Grid templateColumns="repeat(auto-fill, minmax(290px, 1fr))" gap={12}>
                                 {providersList.map((userProfile, index) => (
                                     <GridItem key={index}>
                                         <ServiceProviderCard

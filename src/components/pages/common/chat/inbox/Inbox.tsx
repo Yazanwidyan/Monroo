@@ -83,7 +83,7 @@ const Inbox = () => {
             </Box>
             <Box flex={1}></Box>
             <Box flex={10} mt={4}>
-                <Messaging selectedRoom={selectedRoom} />
+                <Messaging selectedRoom={selectedRoom} rooms={rooms} />
             </Box>
         </Container>
     );

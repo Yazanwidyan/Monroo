@@ -67,7 +67,7 @@ const HomeLayout = () => {
                                             bg: 'primary.500',
                                         }}
                                     >
-                                        Post an Event
+                                        Create an event
                                     </Button>
                                 </>
                             )}

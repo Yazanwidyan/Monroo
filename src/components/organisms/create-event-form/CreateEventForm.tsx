@@ -1,4 +1,4 @@
-import { FormControl, FormLabel, Input, SimpleGrid, Button, Flex, Select } from '@chakra-ui/react';
+import { FormControl, FormLabel, Input, SimpleGrid, Button, Flex, Select, Textarea } from '@chakra-ui/react';
 import { Select as MultiSelect } from 'chakra-react-select';
 
 import { CreateEvent } from '../../../models/CreateEvent';
@@ -62,13 +62,10 @@ export default function CreateEventForm(props: CreateEventFormProps) {
                     />
                 </FormControl>
                 <FormControl>
-                    <FormLabel>title</FormLabel>
+                    <FormLabel>Title</FormLabel>
                     <Input type="text" name="title" placeholder="Enter title" value={state.createEvent.title} onChange={state.handleCreateEventChange} required />
                 </FormControl>
-                <FormControl>
-                    <FormLabel>description</FormLabel>
-                    <Input type="text" name="desc" placeholder="Enter description" value={state.createEvent.desc} onChange={state.handleCreateEventChange} required />
-                </FormControl>
+
                 <FormControl>
                     <FormLabel>Event budget</FormLabel>
                     <Input min={1} type="number" name="averageCost" placeholder="Enter budget" value={state.createEvent.averageCost} onChange={state.handleCreateEventChange} required />
@@ -97,7 +94,7 @@ export default function CreateEventForm(props: CreateEventFormProps) {
                     <Input type="text" name="location" placeholder="Enter location" value={state.createEvent.location} onChange={state.handleCreateEventChange} required />
                 </FormControl>
                 <FormControl>
-                    <FormLabel>start date</FormLabel>
+                    <FormLabel>Start date</FormLabel>
                     <Input
                         type="date"
                         name="eventDate"
@@ -111,7 +108,7 @@ export default function CreateEventForm(props: CreateEventFormProps) {
                     />
                 </FormControl>
                 <FormControl>
-                    <FormLabel>end date</FormLabel>
+                    <FormLabel>End date</FormLabel>
                     <Input
                         type="date"
                         name="eventEndDate"
@@ -129,6 +126,10 @@ export default function CreateEventForm(props: CreateEventFormProps) {
                     <Input min={1} type="number" name="duration" placeholder="Enter duration" value={state.createEvent.duration} onChange={state.handleCreateEventChange} required />
                 </FormControl>
             </SimpleGrid>
+            <FormControl mt={4}>
+                <FormLabel>Description</FormLabel>
+                <Textarea fontSize={17} rows={5} name="desc" placeholder="Enter description" value={state.createEvent.desc} onChange={state.handleCreateEventChange} required />
+            </FormControl>
             <Flex marginTop="38px" justifyContent="flex-end">
                 <Button fontSize="14px" colorScheme="primary" type="submit">
                     Submit
