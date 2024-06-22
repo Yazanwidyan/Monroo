@@ -19,15 +19,22 @@ export default function CreateEventPage({ isOpen, onClose }) {
                         onSubmit={async (createEvent: CreateEvent) => {
                             console.log('createEvent', createEvent);
 
-                            const { selectedCategory, selectedSubCategories, ...rest } = createEvent;
+                            const { selectedCategory, selectedSubCategories, eventDate, eventEndDate, ...rest } = createEvent;
                             const today = new Date();
+
+                            const eventDateTimestamp = Math.floor(new Date(eventDate).getTime() / 1000);
+                            const eventEndDateTimestamp = Math.floor(new Date(eventEndDate).getTime() / 1000);
+                            const todayTimestamp = Math.floor(new Date(today).getTime() / 1000);
 
                             const payload = {
                                 ...rest,
-                                createdDate: today,
+                                createdDate: todayTimestamp,
+                                eventDate: eventDateTimestamp,
+                                eventEndDate: eventEndDateTimestamp,
                                 catID: createEvent.selectedCategory.value,
                                 subCatID: createEvent.selectedSubCategories.value,
                             };
+
                             try {
                                 const res = await userServices.createEvent(payload);
                                 console.log(res);

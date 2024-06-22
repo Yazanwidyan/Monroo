@@ -1,27 +1,58 @@
-import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, VStack, Text, Flex, Box } from '@chakra-ui/react';
+import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, VStack, Text, Flex, Box, Divider, HStack } from '@chakra-ui/react';
 import userServices from '../../../services/userServices';
 import useCustomToast from '../../../hooks/useCustomToast';
 
 const EventCard = ({ event, requestPrivateEvent }) => {
+    const formatTimestamp = (timestamp) => {
+        return new Date(timestamp * 1000).toLocaleDateString();
+    };
+
     return (
-        <Box borderWidth="1px" borderRadius="lg" p={0} overflow="hidden" position="relative">
-            <Box p={2}>
-                <Flex justify="space-between" align="center" mb={2}>
-                    <Box>
-                        <Text fontWeight="bold" fontSize="medium">
-                            {event.title}
-                        </Text>
-                        <Text color="gray.500" fontSize={'sm'}>
-                            {event.desc}
-                        </Text>
-                    </Box>
-                    <Box textAlign="right" alignSelf={'end'}>
-                        <Button colorScheme={'primary'} fontWeight="bold" fontSize={'sm'} cursor="pointer" onClick={() => requestPrivateEvent(event)}>
-                            Request Event
-                        </Button>
-                    </Box>
+        <Box borderWidth="1px" borderRadius="lg" p={4} overflow="hidden" position="relative">
+            <VStack spacing={2} align="start">
+                <Flex justify="space-between" align="center" width="100%">
+                    <Text fontWeight="bold" fontSize="large">
+                        {event.title}
+                    </Text>
+                    <Button colorScheme="primary" fontWeight="bold" fontSize="sm" cursor="pointer" onClick={() => requestPrivateEvent(event)}>
+                        Request Event
+                    </Button>
                 </Flex>
-            </Box>
+                <Text color="gray.500" fontSize="sm">
+                    {event.desc}
+                </Text>
+                <Divider />
+                <HStack spacing={4}>
+                    <Text>
+                        <strong>Average Cost:</strong> ${event.averageCost}
+                    </Text>
+                    <Text>
+                        <strong>Duration:</strong> {event.duration} hrs
+                    </Text>
+                    <Text>
+                        <strong>Country:</strong> {event.country}
+                    </Text>
+                </HStack>
+                <HStack spacing={4}>
+                    <Text>
+                        <strong>Start Date:</strong> {formatTimestamp(event.eventDate)}
+                    </Text>
+                    <Text>
+                        <strong>End Date:</strong> {formatTimestamp(event.eventEndDate)}
+                    </Text>
+                </HStack>
+                <HStack spacing={4}>
+                    <Text>
+                        <strong>Languages:</strong> {event.languages}
+                    </Text>
+                    <Text>
+                        <strong>Location:</strong> {event.location}
+                    </Text>
+                </HStack>
+                <Text>
+                    <strong>Created Date:</strong> {formatTimestamp(event.createdDate)}
+                </Text>
+            </VStack>
         </Box>
     );
 };
@@ -39,7 +70,7 @@ const UserEventListModal = ({ isOpen, onClose, events, providerID }) => {
             console.log(res);
 
             onClose();
-            showToast('event requested successfuly', {
+            showToast('Event requested successfully', {
                 title: '',
                 status: 'success',
             });
@@ -62,7 +93,7 @@ const UserEventListModal = ({ isOpen, onClose, events, providerID }) => {
                     </VStack>
                 </ModalBody>
                 <ModalFooter>
-                    <Button colorScheme="primary.500" onClick={onClose}>
+                    <Button colorScheme="primary" onClick={onClose}>
                         Close
                     </Button>
                 </ModalFooter>

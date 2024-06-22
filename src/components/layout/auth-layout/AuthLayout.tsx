@@ -61,8 +61,10 @@ const AuthLayout = () => {
                                 {t('common.find_talent')}
                             </MenuButton>
                             <MenuList p={8}>
-                                <Text borderBottomWidth={2} borderBottomColor={'gray.300'} borderBottomStyle={'solid'} pb={4} mb={3} fontSize={'xl'} minW={560}>
-                                    Search our talent network to find the perfect fit
+                                <Text borderBottomWidth={2} borderBottomColor={'gray.300'} borderBottomStyle={'solid'} pb={4} mb={3} fontSize={'xl'}>
+                                    Search our talent network
+                                    <br />
+                                    to find the perfect fit
                                 </Text>
 
                                 {newCategories.map((item) => (

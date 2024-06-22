@@ -4,7 +4,7 @@ import usePasswordVisibility from '../../../../hooks/usePasswordVisibility';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useTranslation } from 'react-i18next';
 
-const maxDateFor18YearsOld = new Date(new Date().setFullYear(new Date().getFullYear() - 18)).toISOString().split('T')[0];
+const today = new Date().toISOString().split('T')[0];
 
 export default function RegisterServiceProviderPersonalInfo() {
     const { t } = useTranslation();
@@ -54,7 +54,7 @@ export default function RegisterServiceProviderPersonalInfo() {
                     placeholder={t('register.enter_date_of_birth')}
                     value={state.personalInfo.dob}
                     onChange={state.handlePersonalInfoChange}
-                    max={maxDateFor18YearsOld}
+                    max={today}
                     className="date-rtl"
                     required
                 />

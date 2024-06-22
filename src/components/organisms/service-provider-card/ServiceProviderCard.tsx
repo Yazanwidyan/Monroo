@@ -88,7 +88,7 @@ const ServiceProviderCard = ({ experience, nationality, gender, bio, image, name
                 <Divider my={2} />
                 <Box>
                     <Button width={'100%'} variant={'outline'} textTransform={'uppercase'} fontSize="x-small" colorScheme="primary" mb="0" onClick={handleRequestPrivateEvent}>
-                        Request Private Event
+                        Request Star
                     </Button>
                     <EditProfileModal title={'complete_profile'} isOpen={isEditModalOpen} onClose={closeEditModal} />
                     <UserEventListModal providerID={providerID} isOpen={isModalOpen} onClose={closeModal} events={userEvents} />

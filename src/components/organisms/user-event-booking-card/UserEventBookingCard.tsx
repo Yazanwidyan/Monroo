@@ -12,6 +12,10 @@ const UserEventBookingCard: React.FC<{
     status: number;
     onCancel?: (param: any) => void;
 }> = ({ eventID, title, description, cost, date, location, duration, status, onCancel }) => {
+    const formatTimestamp = (timestamp) => {
+        return new Date(timestamp * 1000).toLocaleDateString();
+    };
+
     return (
         <Box borderWidth="1px" mb={4} borderRadius="sm" p={4} boxShadow="base">
             <Flex justifyContent={'space-between'}>
@@ -41,7 +45,7 @@ const UserEventBookingCard: React.FC<{
                     </Text>
                 )}
                 <Text fontSize="sm">
-                    Date: <span style={{ fontWeight: 'bold' }}>{date}</span>
+                    Date: <span style={{ fontWeight: 'bold' }}>{formatTimestamp(date)}</span>
                 </Text>
             </Flex>
             <Flex align="center" justify="space-between" mb={2}>

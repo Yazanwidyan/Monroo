@@ -39,6 +39,10 @@ const Messaging = ({ selectedRoom, rooms }) => {
     const [dealPrice, setDealPrice] = useState('');
     const [mainEvent, setMainEvent] = useState(null);
 
+    const formatTimestamp = (timestamp) => {
+        return new Date(timestamp * 1000).toLocaleDateString();
+    };
+
     const openModal = (message) => {
         setEventData({ senderName: selectedRoom?.senderName, message: message });
         setIsModalOpen(true);
@@ -287,7 +291,7 @@ const Messaging = ({ selectedRoom, rooms }) => {
                                 {message.eventObj.title}
                             </Text>
                             <Text fontSize="xs">Description: {message.eventObj.desc}</Text>
-                            <Text fontSize="xs">Event Date: {message.eventObj.eventDate}</Text>
+                            <Text fontSize="xs">Event Date: {formatTimestamp(message.eventObj.eventDate)}</Text>
                             <Text fontSize="xs">Event duration: {message.eventObj.duration} hrs</Text>
                             <Text fontSize="xs">Event avg cost: {message.eventObj.averageCost}</Text>
                             {isSendAllowed && (
@@ -314,7 +318,7 @@ const Messaging = ({ selectedRoom, rooms }) => {
                                 {message.eventObj.title}
                             </Text>
                             <Text fontSize="xs">Description: {message.eventObj.desc}</Text>
-                            <Text fontSize="xs">Event Date: {message.eventObj.eventDate}</Text>
+                            <Text fontSize="xs">Event Date: {formatTimestamp(message.eventObj.eventDate)}</Text>
                             <Text fontSize="xs">Event duration: {message.eventObj.duration} hrs</Text>
                             <Text fontSize="xs">Event avg cost: {message.eventObj.averageCost}</Text>
                             {!isSendAllowed && mainEvent.eventID == message.eventID ? (
@@ -447,7 +451,7 @@ const Messaging = ({ selectedRoom, rooms }) => {
                         </Button>
                     ) : null}
                 </Box>
-                <Box borderWidth={1} borderRadius={10} h="calc(100vh - 400px)" overflowY="scroll">
+                <Box h="calc(100vh - 400px)" overflowY="scroll">
                     {messages.map((message, index) => renderMessage(message, index))}
                     <div ref={messagesEndRef}></div>
                 </Box>
@@ -499,7 +503,7 @@ const Messaging = ({ selectedRoom, rooms }) => {
                                     {eventData?.message?.eventObj?.title}
                                 </Text>
                                 <Text fontSize="xs">Description: {eventData?.message?.eventObj?.desc}</Text>
-                                <Text fontSize="xs">Event Date: {eventData?.message?.eventObj?.eventDate}</Text>
+                                <Text fontSize="xs">Event Date: {formatTimestamp(eventData?.message?.eventObj?.eventDate)}</Text>
                                 <Text fontSize="xs">Event duration: {eventData?.message?.eventObj?.duration} hrs</Text>
                                 <Text fontSize="xs">Event avg cost: {eventData?.message?.eventObj?.averageCost}</Text>
                             </Box>
@@ -523,8 +527,19 @@ const Messaging = ({ selectedRoom, rooms }) => {
             </Modal>
         </Box>
     ) : (
-        <Box mt={9} textAlign="center" fontSize="xl">
-            {rooms.length ? 'Choose a room to start messaging' : `You didn't start any chat yet`}
+        <Box mt={9} textAlign="center" display={'flex'} justifyContent={'center'} alignItems={'center'} fontSize="xl">
+            {rooms.length ? (
+                <Box>
+                    <Text mb={2} fontWeight={'500'}>
+                        No messages selected
+                    </Text>
+                    <Text fontSize={'sm'} color={'gray'}>
+                        Open a message from the left hand menu
+                    </Text>
+                </Box>
+            ) : (
+                <Text>You didn't start any chat yet</Text>
+            )}
         </Box>
     );
 };

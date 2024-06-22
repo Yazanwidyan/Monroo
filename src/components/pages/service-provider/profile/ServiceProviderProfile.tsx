@@ -1,4 +1,23 @@
-import { Box, Text, Link, Grid, GridItem, Container, Image, Flex, Button, Icon } from '@chakra-ui/react';
+import {
+    Box,
+    Text,
+    Link,
+    Grid,
+    GridItem,
+    Container,
+    Image,
+    Flex,
+    Button,
+    Icon,
+    useDisclosure,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalCloseButton,
+    ModalBody,
+    ModalFooter,
+    ModalHeader,
+} from '@chakra-ui/react';
 
 import { FaFileDownload, FaInstagram, FaLinkedin, FaPencilAlt, FaYoutube } from 'react-icons/fa'; // Import social media icons
 import PhotosGallery from '../../../organisms/photos-gallery/PhotosGallery';
@@ -79,7 +98,7 @@ const AudiosSection = ({ audios }) => (
 );
 const SocialMediaLinks = ({ instagram, linkedin, youtubelink }) => (
     <Box mt={2} mb={4}>
-        <Text fontSize={'md'} fontWeight="bold" mb={2}>
+        <Text fontSize={'xl'} color={'gray'} fontWeight="bold" mb={2}>
             Social Media
         </Text>
         <Box display="flex" alignItems="center">
@@ -102,15 +121,19 @@ const SocialMediaLinks = ({ instagram, linkedin, youtubelink }) => (
     </Box>
 );
 
+const formatTimestamp = (timestamp) => {
+    return new Date(timestamp * 1000).toLocaleDateString();
+};
+
 const PersonalInfo = ({ dob, email, phone, nationality, countryOfResidence, gender, height, weight }) => (
     <Box mb={4}>
-        <Text fontSize="md" fontWeight="bold" mb={2}>
+        <Text fontSize="xl" color={'gray'} fontWeight="bold" mb={2}>
             Personal Information
         </Text>
         <Grid templateColumns="repeat(2, 1fr)" gap={4}>
             <Box>
                 {renderOptionalField('Email', email)}
-                {renderOptionalField('Date of birth', dob)}
+                {renderOptionalField('Date of birth', formatTimestamp(dob))}
                 {renderOptionalField('Nationality', nationality)}
                 {renderOptionalField('Height', `${height}`)}
             </Box>
@@ -139,7 +162,7 @@ const AdditionalInfo = ({
     portfolio,
 }) => (
     <Box mb={4}>
-        <Text fontSize={'md'} fontWeight="bold" mb={2}>
+        <Text fontSize={'xl'} color={'gray'} fontWeight="bold" mb={2}>
             Additional Information
         </Text>
         <Grid templateColumns="repeat(2, 1fr)" gap={2}>
@@ -201,6 +224,8 @@ const ServiceProviderProfileView = () => {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false); // State to manage modal open/close
     const [providerProfile, setProviderProfile] = useState({});
     const [starsAvarage, setStarsAvarage] = useState(null);
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [selectedImage, setSelectedImage] = useState(null);
 
     const { user } = useContext(UserContext);
 
@@ -212,6 +237,10 @@ const ServiceProviderProfileView = () => {
     const closeEditModal = () => {
         setIsEditModalOpen(false);
         fetchProviderProfile();
+    };
+    const handleImageClick = (image) => {
+        setSelectedImage(image);
+        onOpen();
     };
 
     window.scrollTo(0, 0);
@@ -289,7 +318,15 @@ const ServiceProviderProfileView = () => {
                 <Grid templateColumns="1fr 3fr" gap={8}>
                     <GridItem colSpan={1}>
                         <Box>
-                            <Image height={300} width={'100%'} borderRadius={'xl'} src={profilePic || '/assets/images/userprofile.jpg'} alt={`${fname} ${lname}`} />
+                            <Image
+                                style={{ cursor: 'pointer' }}
+                                onClick={() => handleImageClick(profilePic || '/assets/images/userprofile.jpg')}
+                                height={300}
+                                width={'100%'}
+                                borderRadius={'xl'}
+                                src={profilePic || '/assets/images/userprofile.jpg'}
+                                alt={`${fname} ${lname}`}
+                            />
                         </Box>
                         {photos?.length > 0 && <PhotosSection photos={photos} />}
                         {videos?.length > 0 && <VideosSection videos={videos} />}
@@ -342,6 +379,20 @@ const ServiceProviderProfileView = () => {
                     </GridItem>
                 </Grid>
             </Container>
+            <Modal isOpen={isOpen} onClose={onClose} size="xl">
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader></ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        <Image src={selectedImage} alt={`${fname} ${lname}`} borderRadius="md" width="100%" height="auto" />
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button onClick={onClose}>Close</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
+
             <EditProfileModal isOpen={isEditModalOpen} onClose={closeEditModal} providerProfile={providerProfile} />
         </Box>
     );

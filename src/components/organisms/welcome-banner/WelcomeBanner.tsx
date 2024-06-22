@@ -3,7 +3,7 @@ import { Box, Image, Text, Button, Container } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-const images = ['/assets/images/bg.jpg', 'https://d3uscstcbhvk7k.cloudfront.net/static/images/backstage_hero_feb.jpg'];
+const images = ['/assets/images/Entertainment.jpg', '/assets/images/Glamour.jpg', '/assets/images/Hospitality.jpg', '/assets/images/Influencer.jpg', '/assets/images/Casting.jpg'];
 
 const WelcomeBanner = () => {
     const { t } = useTranslation();

@@ -57,8 +57,8 @@ const Inbox = () => {
     return (
         <Container maxW="6xl" style={{ display: 'flex' }}>
             <Box flex={4}>
-                <Box w="100%" maxW="600px" mx="auto" mt={8}>
-                    <Input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search rooms" mb={4} />
+                <Box w="100%" maxW="600px" mx="auto" mt={4}>
+                    <Input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search Messages" mb={4} />
                     <VStack spacing={4} w="100%" align="stretch">
                         {filteredRooms.map((room) => (
                             <Box
@@ -82,7 +82,7 @@ const Inbox = () => {
                 </Box>
             </Box>
             <Box flex={1}></Box>
-            <Box flex={10} mt={4}>
+            <Box borderWidth={1} borderRadius={'xl'} flex={10} mt={4} display={'flex'} justifyContent={'center'} alignItems={'center'} minH={'60vh'}>
                 <Messaging selectedRoom={selectedRoom} rooms={rooms} />
             </Box>
         </Container>

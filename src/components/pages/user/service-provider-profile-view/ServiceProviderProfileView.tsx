@@ -1,6 +1,25 @@
-import { Box, Text, Link, Grid, GridItem, Container, Image, Flex, Button, Icon, Modal, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, Divider } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
-
+import {
+    Box,
+    Text,
+    Link,
+    Grid,
+    GridItem,
+    Container,
+    Image,
+    Flex,
+    Button,
+    Icon,
+    useDisclosure,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalCloseButton,
+    ModalBody,
+    ModalFooter,
+    ModalHeader,
+    Divider,
+} from '@chakra-ui/react';
 import { FaFileDownload, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa'; // Import social media icons
 import PhotosGallery from '../../../organisms/photos-gallery/PhotosGallery';
 import VideoGallery from '../../../organisms/vidoes-gallery/VideosGallery';
@@ -18,6 +37,10 @@ const headerHeight = 70; // Height of the header in pixels
 const footerHeight = 100; // Height of the footer in pixels
 
 const minHeight = `calc(100vh - ${headerHeight}px - ${footerHeight}px)`;
+
+const formatTimestamp = (timestamp) => {
+    return new Date(timestamp * 1000).toLocaleDateString();
+};
 
 const renderOptionalField = (label, value) => {
     if (value !== undefined && value !== null && value !== 'null' && value?.length > 0 && value[0] !== null && value !== '0') {
@@ -78,7 +101,7 @@ const AudiosSection = ({ audios }) => (
 );
 const SocialMediaLinks = ({ instagram, linkedin, youtubelink }) => (
     <Box mt={2} mb={4}>
-        <Text fontSize={'md'} fontWeight="bold" mb={2}>
+        <Text fontSize={'md'} color={'gray'} fontWeight="bold" mb={2}>
             Social Media
         </Text>
         <Box display="flex" alignItems="center">
@@ -103,13 +126,13 @@ const SocialMediaLinks = ({ instagram, linkedin, youtubelink }) => (
 
 const PersonalInfo = ({ dob, email, phone, nationality, countryOfResidence, gender, height, weight }) => (
     <Box mb={4}>
-        <Text fontSize="md" fontWeight="bold" mb={2}>
+        <Text fontSize="md" color={'gray'} fontWeight="bold" mb={2}>
             Personal Information
         </Text>
         <Grid templateColumns="repeat(2, 1fr)" gap={4}>
             <Box>
                 {renderOptionalField('Email', email)}
-                {renderOptionalField('Date of birth', dob)}
+                {renderOptionalField('Date of birth', formatTimestamp(dob))}
                 {renderOptionalField('Nationality', nationality)}
                 {renderOptionalField('Height', `${height}`)}
             </Box>
@@ -153,7 +176,7 @@ const AdditionalInfo = ({
     portfolio,
 }) => (
     <Box mb={4}>
-        <Text fontSize={'md'} fontWeight="bold" mb={2}>
+        <Text fontSize={'md'} color={'gray'} fontWeight="bold" mb={2}>
             Additional Information
         </Text>
         <Grid templateColumns="repeat(2, 1fr)" gap={2}>
@@ -216,6 +239,8 @@ const ServiceProviderProfileView = () => {
     const [reviews, setReviews] = useState([]);
     const [starsAvarage, setStarsAvarage] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [selectedImage, setSelectedImage] = useState(null);
 
     const { providerID } = useParams();
 
@@ -227,6 +252,10 @@ const ServiceProviderProfileView = () => {
 
     const closeModal = () => {
         setIsModalOpen(false);
+    };
+    const handleImageClick = (image) => {
+        setSelectedImage(image);
+        onOpen();
     };
 
     const fetchProviderProfile = async () => {
@@ -308,10 +337,12 @@ const ServiceProviderProfileView = () => {
                     <GridItem colSpan={1}>
                         <Box>
                             <Image
+                                style={{ cursor: 'pointer' }}
+                                onClick={() => handleImageClick(profilePic || '/assets/images/userprofile.jpg')}
                                 height={300}
                                 width={'100%'}
                                 borderRadius={'xl'}
-                                src={profilePic || 'https://www.zica.co.zm/wp-content/uploads/2021/02/dummy-profile-image.png'}
+                                src={profilePic || '/assets/images/userprofile.jpg'}
                                 alt={`${fname} ${lname}`}
                             />
                         </Box>
@@ -367,6 +398,19 @@ const ServiceProviderProfileView = () => {
                     </GridItem>
                 </Grid>
             </Container>
+            <Modal isOpen={isOpen} onClose={onClose} size="xl">
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader></ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        <Image src={selectedImage} alt={`${fname} ${lname}`} borderRadius="md" width="100%" height="auto" />
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button onClick={onClose}>Close</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
 
             <Modal isOpen={isModalOpen} onClose={closeModal}>
                 <ModalOverlay />

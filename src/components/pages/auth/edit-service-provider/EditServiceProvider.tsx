@@ -30,6 +30,7 @@ export default function EditServiceProvider({ providerProfile, onClose }) {
                     const otherData = {
                         ...personalInfo,
                         ...professionalInfo,
+                        dob: Math.floor(new Date(personalInfo.dob).getTime() / 1000),
                         visaType: professionalInfo.visaType || 0,
                         musicalInstruments: professionalInfo.musicalInstruments || [],
                         musicGenres: professionalInfo.musicGenres || [],

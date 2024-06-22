@@ -22,23 +22,9 @@ const EventTimelineCard = ({ image, title, userName, duration, posted, descripti
         closeModal();
     };
 
-    const formatDate = (timestamp) => {
-        let date;
-        if (/^\d+$/.test(timestamp)) {
-            // If the timestamp contains only digits, assume it's a Unix timestamp
-            date = parseInt(timestamp) * 1000;
-        } else {
-            // Otherwise, assume it's in ISO format and use it directly
-            date = new Date(timestamp).getTime();
-        }
-
-        const dateObj = new Date(date); // No need to multiply by 1000 here, as it's already in milliseconds
-        const day = dateObj?.getDate()?.toString()?.padStart(2, '0');
-        const month = (dateObj?.getMonth() + 1)?.toString()?.padStart(2, '0'); // Month is zero-based
-        const year = dateObj?.getFullYear();
-        return `${day}-${month}-${year}`;
+    const formatTimestamp = (timestamp) => {
+        return new Date(timestamp * 1000).toLocaleDateString();
     };
-
     return (
         <Box onClick={handleShowEvent} cursor={'pointer'} borderColor={'gray.300'} borderWidth={1} px={6} py={5} borderRadius={14}>
             <Flex pb={4} align="center" flexWrap={'wrap'} gap={2} justify="flex-start" fontSize="sm" color="gray.500">
@@ -46,14 +32,14 @@ const EventTimelineCard = ({ image, title, userName, duration, posted, descripti
                     <Text fontSize={'xs'} fontWeight="bold"></Text>
                     <Tag size="sm" variant="subtle" colorScheme="blue" color={'white'} bg={'black'} borderRadius={20}>
                         <TagLabel fontSize={'xs'} fontWeight="bold">
-                            Posted {formatDate(posted)}
+                            Posted {formatTimestamp(posted)}
                         </TagLabel>
                     </Tag>
                 </Flex>
                 <Flex direction="column" align="center">
                     <Tag size="sm" variant="subtle" colorScheme="primary" borderRadius={20}>
                         <TagLabel fontSize={'xs'} fontWeight="bold">
-                            Date {formatDate(eventDate)}
+                            Date {formatTimestamp(eventDate)}
                         </TagLabel>
                     </Tag>
                 </Flex>
@@ -124,7 +110,7 @@ const EventTimelineCard = ({ image, title, userName, duration, posted, descripti
                                         Event Date:
                                     </Text>
                                     <Text fontSize="sm" color="gray.600" mb={4}>
-                                        {formatDate(eventDate)}
+                                        {formatTimestamp(eventDate)}
                                     </Text>
                                 </Box>
                                 <Box>

@@ -31,6 +31,7 @@ export default function RegisterServiceProvider() {
                     const otherData = {
                         ...personalInfo,
                         ...professionalInfo,
+                        dob: Math.floor(new Date(personalInfo.dob).getTime() / 1000),
                         visaType: professionalInfo.visaType || 0,
                         musicalInstruments: professionalInfo.musicalInstruments || [],
                         musicGenres: professionalInfo.musicGenres || [],
@@ -51,7 +52,6 @@ export default function RegisterServiceProvider() {
                     data.append('reel', demoReelFile[0]);
                     data.append('portfolio', portfolioFile[0]);
                     data.append('data', JSON.stringify(otherData));
-
                     try {
                         const res = await authServices.registerProvider(data);
                         console.log('res', res.data);
