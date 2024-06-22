@@ -26,7 +26,6 @@ export default function LoginForm(props: LoginFormProps) {
     const [passwordVisibility, togglePasswordVisibility] = usePasswordVisibility({
         password: false,
     });
-    const logFacebookUser = () => {};
 
     const logGoogleUser = async () => {
         const response = await signInWithPopup(auth, google_provider);

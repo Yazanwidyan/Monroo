@@ -1,5 +1,4 @@
-import React from 'react';
-import { Box, Heading, Container, Text, VStack, Divider, List, ListItem, UnorderedList } from '@chakra-ui/react';
+import { Box, Heading, Container, Text, VStack, Divider, ListItem, UnorderedList } from '@chakra-ui/react';
 
 const AboutUs = () => {
     return (

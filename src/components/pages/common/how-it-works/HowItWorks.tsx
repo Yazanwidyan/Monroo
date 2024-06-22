@@ -1,5 +1,5 @@
-import { Box, Heading, Flex, Grid, Container, Button, Text, Image, Icon } from '@chakra-ui/react';
-import { FaRegEnvelope, FaRegUser, FaRegAddressCard, FaRegCreditCard, FaChevronRight } from 'react-icons/fa'; // Import icons from react-icons library
+import { Box, Heading, Flex, Grid, Container, Button, Text, Image } from '@chakra-ui/react';
+import { FaRegEnvelope, FaRegUser, FaRegAddressCard, FaRegCreditCard } from 'react-icons/fa'; // Import icons from react-icons library
 import { useNavigate } from 'react-router-dom';
 
 const stepsData1 = [

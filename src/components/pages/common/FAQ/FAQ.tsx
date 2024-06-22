@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Heading, Container, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Text } from '@chakra-ui/react';
 
 const FAQs = () => {

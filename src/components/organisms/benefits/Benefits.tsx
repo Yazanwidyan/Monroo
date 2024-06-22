@@ -1,4 +1,4 @@
-import { Box, Text, Button, VStack, Flex, Container, Image } from '@chakra-ui/react';
+import { Box, Text, Button, Flex, Container, Image } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
 function Benefits() {
