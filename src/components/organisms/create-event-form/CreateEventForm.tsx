@@ -91,7 +91,7 @@ export default function CreateEventForm(props: CreateEventFormProps) {
         </FormControl>
 
         <FormControl>
-          <FormLabel>Event budget</FormLabel>
+          <FormLabel>Event Budget</FormLabel>
           <Input
             min={1}
             type="number"
@@ -147,7 +147,7 @@ export default function CreateEventForm(props: CreateEventFormProps) {
           />
         </FormControl>
         <FormControl>
-          <FormLabel>Start date</FormLabel>
+          <FormLabel>Start Date</FormLabel>
           <Input
             type="date"
             name="eventDate"
@@ -164,7 +164,7 @@ export default function CreateEventForm(props: CreateEventFormProps) {
           />
         </FormControl>
         <FormControl>
-          <FormLabel>End date</FormLabel>
+          <FormLabel>End Date</FormLabel>
           <Input
             type="date"
             name="eventEndDate"
@@ -184,7 +184,7 @@ export default function CreateEventForm(props: CreateEventFormProps) {
           />
         </FormControl>
         <FormControl>
-          <FormLabel>Event duration per hour</FormLabel>
+          <FormLabel>Event Duration Per Hour</FormLabel>
           <Input
             min={1}
             type="number"
