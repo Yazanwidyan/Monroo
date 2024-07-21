@@ -19,6 +19,10 @@ body {
   height: 100vh;
 }
 
+.custom-select option:first-child {
+  display: none;
+}
+
 button {
   // letter-spacing: 1.5px;
 }
